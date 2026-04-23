@@ -1474,7 +1474,145 @@
             background: var(--text-muted);
         }
         
-        .hidden { display: none !important; }
+        .selected-text {
+            background: var(--bg-secondary);
+            border-left: 3px solid var(--accent);
+            padding: 10px 12px;
+            margin-bottom: 12px;
+            font-size: 13px;
+            line-height: 1.5;
+            color: var(--text-primary);
+        }
+        
+        .annotation-list {
+            max-height: 200px;
+            overflow-y: auto;
+        }
+        
+        .annotation-item {
+            background: var(--bg-secondary);
+            border-left: 3px solid var(--accent-light);
+            padding: 8px 10px;
+            margin-bottom: 6px;
+            font-size: 12px;
+            line-height: 1.4;
+            color: var(--text-secondary);
+        }
+        
+        .annotation-item .timestamp {
+            font-size: 10px;
+            color: var(--text-muted);
+            margin-top: 4px;
+        }
+        
+        .classic-text-content {
+            background: var(--bg-card);
+            border: 1px solid var(--border-light);
+            border-radius: 10px;
+            padding: 20px;
+        }
+        
+        .classic-text-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 16px;
+            border-bottom: 1px solid var(--border-light);
+        }
+        
+        .classic-title {
+            font-family: 'Crimson Pro', serif;
+            font-size: 24px;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin: 0;
+        }
+        
+        .reading-controls {
+            display: flex;
+            gap: 8px;
+        }
+        
+        .classic-text-body {
+            font-family: 'Crimson Pro', serif;
+            font-size: 16px;
+            line-height: 1.8;
+            color: var(--text-primary);
+        }
+        
+        .sentence-highlight {
+            background: rgba(122, 92, 68, 0.08);
+            border-radius: 4px;
+            padding: 2px 4px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        
+        .sentence-highlight:hover {
+            background: rgba(122, 92, 68, 0.15);
+        }
+        
+        .sentence-selected {
+            background: rgba(255, 235, 59, 0.3) !important;
+            border: 1px solid var(--accent);
+        }
+        
+        /* Fullscreen Reading Mode */
+        .fullscreen-reading {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: var(--bg-primary);
+            z-index: 2000;
+            display: flex;
+            flex-direction: column;
+            padding: 20px;
+        }
+        
+        .fullscreen-reading.hidden {
+            display: none;
+        }
+        
+        .fullscreen-reading-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-bottom: 16px;
+            border-bottom: 1px solid var(--border);
+            margin-bottom: 20px;
+            flex-shrink: 0;
+        }
+        
+        .fullscreen-reading-content {
+            flex: 1;
+            overflow-y: auto;
+            font-size: 18px;
+            line-height: 2;
+            padding: 20px;
+            background: var(--bg-card);
+            border-radius: 10px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+        }
+        
+        .fullscreen-reading .sentence-highlight {
+            padding: 4px 8px;
+            margin: 2px 0;
+            display: inline-block;
+            border-radius: 6px;
+        }
+        
+        .fullscreen-reading .sentence-highlight:hover {
+            background: rgba(122, 92, 68, 0.12);
+        }
+        
+        .fullscreen-reading .sentence-selected {
+            background: rgba(255, 235, 59, 0.4) !important;
+            border: 2px solid var(--accent);
+            box-shadow: 0 2px 8px rgba(122, 92, 68, 0.3);
+        }
     </style>
 </head>
 <body>
@@ -1485,6 +1623,7 @@
             <nav class="nav-tabs">
                 <button class="nav-tab active" onclick="switchTab('teaching')">提交教学文档</button>
                 <button class="nav-tab" onclick="switchTab('review')">文档审核</button>
+                <button class="nav-tab" onclick="switchTab('classic')">经典阅读</button>
                 <button class="nav-tab" onclick="switchTab('knowledge')">知识库</button>
                 <button class="nav-tab" onclick="switchTab('community')">学术社区</button>
             </nav>
@@ -1495,8 +1634,31 @@
     <div class="main-wrapper">
         <div class="three-column-layout">
             <!-- Left Sidebar -->
-            <aside class="sidebar-left">
+            <aside class="sidebar-left" id="sidebarLeft">
                 <div class="sidebar-section">
+                    <div class="sidebar-title">批注笔记</div>
+                    <div id="annotationSection" style="display: none;">
+                        <div class="selected-sentence">
+                            <div class="sidebar-title" style="font-size: 11px; margin-bottom: 8px;">当前选中句子</div>
+                            <div id="selectedSentenceText" class="selected-text"></div>
+                        </div>
+                        <div class="annotation-input">
+                            <textarea id="annotationInput" class="textarea-area" placeholder="添加批注..." style="min-height: 80px; margin-bottom: 8px;"></textarea>
+                            <button onclick="saveAnnotation()" class="sidebar-btn">保存批注</button>
+                        </div>
+                        <div class="historical-annotations">
+                            <div class="sidebar-title" style="font-size: 11px; margin: 12px 0 8px 0;">历史批注</div>
+                            <div id="historicalAnnotations" class="annotation-list"></div>
+                        </div>
+                    </div>
+                    <div id="defaultAnnotationSection">
+                        <p style="font-size: 12px; color: var(--text-muted); text-align: center; padding: 20px;">
+                            选择经典阅读模式后，选中句子即可在此添加批注
+                        </p>
+                    </div>
+                </div>
+                
+                <div class="sidebar-section" id="gradingSection" style="display: none;">
                     <div class="sidebar-title">评分维度</div>
                     <div class="grading-item">
                         <span class="grading-label">文献考据 (30%)</span>
@@ -1516,7 +1678,7 @@
                     </div>
                 </div>
                 
-                <div class="sidebar-section">
+                <div class="sidebar-section" id="versionSection" style="display: none;">
                     <div class="sidebar-title">版本历史</div>
                     <div class="version-list" id="versionList">
                     </div>
@@ -1627,6 +1789,40 @@
                     </div>
                 </div>
                 
+                <!-- Classic Reading Panel -->
+                <div class="panel classic-reading-panel" id="classic-panel">
+                    <div class="content-header">
+                        <h1 class="content-title">经典阅读</h1>
+                        <div class="content-meta">
+                            <span>逐句阅读经典著作，支持批注和学术分析</span>
+                        </div>
+                    </div>
+                    
+                    <div class="instruction-box">
+                        选择经典著作进行逐句阅读，选中句子可自动进行学术分析并添加批注。
+                    </div>
+                    
+                    <div style="margin-bottom: 20px;">
+                        <label class="input-label">选择经典著作</label>
+                        <select id="classicSelector" class="doc-name-input" onchange="loadClassicText()">
+                            <option value="">请选择经典著作...</option>
+                            <option value="lunyu">论语</option>
+                            <option value="mengzi">孟子</option>
+                            <!-- 更多书籍来源将在这里添加 -->
+                        </select>
+                    </div>
+                    
+                    <div id="classicContent" class="classic-text-content" style="display: none;">
+                        <div class="classic-text-header">
+                            <h2 id="classicTitle" class="classic-title"></h2>
+                            <div class="reading-controls">
+                                <button onclick="toggleFullscreenReading()" class="primary-btn" style="background: var(--bg-secondary); border: 1px solid var(--border); color: var(--text-secondary); font-size: 13px; padding: 8px 16px;">全屏阅读</button>
+                            </div>
+                        </div>
+                        <div id="classicText" class="classic-text-body"></div>
+                    </div>
+                </div>
+                
                 <!-- Knowledge Base Panel -->
                 <div class="panel knowledge-panel" id="knowledge-panel">
                     <div class="content-header">
@@ -1681,6 +1877,19 @@
                         <h4>随文批注列表</h4>
                         <div id="annotationList" class="annotation-list"></div>
                     </div>
+                </div>
+                
+                <!-- 全屏阅读模式 -->
+                <div id="fullscreenReading" class="fullscreen-reading hidden">
+                    <div class="fullscreen-reading-header">
+                        <span id="fullscreenReadingTitle" style="font-weight: 600; font-size: 18px;"></span>
+                        <div style="display: flex; gap: 8px; align-items: center;">
+                            <button onclick="adjustReadingFontSize(-1)" style="padding: 6px 10px; border: 1px solid var(--border); border-radius: 4px; background: var(--bg-card); cursor: pointer;">A-</button>
+                            <button onclick="adjustReadingFontSize(1)" style="padding: 6px 10px; border: 1px solid var(--border); border-radius: 4px; background: var(--bg-card); cursor: pointer;">A+</button>
+                            <button onclick="exitFullscreenReading()" style="padding: 6px 12px; border: 1px solid var(--border); border-radius: 4px; background: var(--bg-card); cursor: pointer;">退出全屏</button>
+                        </div>
+                    </div>
+                    <div id="fullscreenReadingContent" class="fullscreen-reading-content"></div>
                 </div>
                 
                 <!-- Community Panel -->
@@ -1743,6 +1952,7 @@
     <div class="mobile-nav">
         <button onclick="switchTab('teaching')" class="active" data-tab="teaching">教学文档</button>
         <button onclick="switchTab('review')" data-tab="review">文档审核</button>
+        <button onclick="switchTab('classic')" data-tab="classic">经典阅读</button>
         <button onclick="switchTab('knowledge')" data-tab="knowledge">知识库</button>
         <button onclick="switchTab('community')" data-tab="community">学术社区</button>
     </div>
@@ -1980,14 +2190,21 @@
             
             const tabs = document.querySelectorAll('.nav-tab');
             if (tab === 'teaching') tabs[0].classList.add('active');
-            else if (tab === 'review') tabs[1].classList.add('active');
-            else if (tab === 'knowledge') {
+            else if (tab === 'review') {
+                tabs[1].classList.add('active');
+                updateSidebarForReview();
+            }
+            else if (tab === 'classic') {
                 tabs[2].classList.add('active');
+                updateSidebarForClassic();
+            }
+            else if (tab === 'knowledge') {
+                tabs[3].classList.add('active');
                 renderKnowledgeBase();
                 checkStorageWarning();
             }
             else if (tab === 'community') {
-                tabs[3].classList.add('active');
+                tabs[4].classList.add('active');
                 loadCommunityDocs();
             }
             
@@ -6117,6 +6334,221 @@ JSON格式：
                 panel.innerHTML += aiHtml;
             }
         }
+        
+        // 经典阅读相关功能
+        let currentClassicText = '';
+        let selectedSentence = '';
+        let currentReadingFontSize = 18;
+        
+        function updateSidebarForReview() {
+            document.getElementById('annotationSection').style.display = 'none';
+            document.getElementById('defaultAnnotationSection').style.display = 'none';
+            document.getElementById('gradingSection').style.display = 'block';
+            document.getElementById('versionSection').style.display = 'block';
+        }
+        
+        function updateSidebarForClassic() {
+            document.getElementById('annotationSection').style.display = 'block';
+            document.getElementById('defaultAnnotationSection').style.display = 'block';
+            document.getElementById('gradingSection').style.display = 'none';
+            document.getElementById('versionSection').style.display = 'none';
+        }
+        
+        function loadClassicText() {
+            const selector = document.getElementById('classicSelector');
+            const selectedValue = selector.value;
+            
+            if (!selectedValue) {
+                document.getElementById('classicContent').style.display = 'none';
+                return;
+            }
+            
+            // 这里是书籍来源的占位符，用户稍后会上传具体内容
+            // 暂时使用示例文本
+            const classicTexts = {
+                'lunyu': {
+                    title: '论语',
+                    content: `子曰：「学而时习之，不亦说乎？有朋自远方来，不亦乐乎？人不知而不愠，不亦君子乎？」\n\n子曰：「温故而知新，可以为师矣。」\n\n子曰：「吾日三省吾身：为人谋而不忠乎？与朋友交而不信乎？传不习乎？」\n\n子曰：「道千乘之国，敬事而信，节用而爱人，使民以时。」`
+                },
+                'mengzi': {
+                    title: '孟子',
+                    content: `孟子曰：「天时不如地利，地利不如人和。」\n\n孟子曰：「民为贵，社稷次之，君为轻。」\n\n孟子曰：「富贵不能淫，贫贱不能移，威武不能屈，此之谓大丈夫。」\n\n孟子曰：「大人者，言不必信，行不必果，惟义所在。」`
+                }
+            };
+            
+            const classic = classicTexts[selectedValue];
+            if (classic) {
+                document.getElementById('classicTitle').textContent = classic.title;
+                renderClassicText(classic.content);
+                document.getElementById('classicContent').style.display = 'block';
+            }
+        }
+        
+        function renderClassicText(text) {
+            currentClassicText = text;
+            const container = document.getElementById('classicText');
+            
+            // 按句子分割文本
+            const sentences = text.split(/[。！？\n]+/).filter(s => s.trim());
+            
+            let html = '';
+            sentences.forEach((sentence) => {
+                const trimmedSentence = sentence.trim();
+                if (trimmedSentence) {
+                    html += `<span class="sentence-highlight" onclick="selectSentence('${trimmedSentence.replace(/'/g, "\\'")}')">${trimmedSentence}。</span>`;
+                }
+            });
+            
+            container.innerHTML = html;
+        }
+        
+        function selectSentence(sentence) {
+            selectedSentence = sentence;
+            
+            // 清除之前的选中状态
+            document.querySelectorAll('.sentence-highlight').forEach(el => {
+                el.classList.remove('sentence-selected');
+            });
+            
+            // 设置当前选中状态 - 找到匹配的句子
+            const allSentences = document.querySelectorAll('.sentence-highlight');
+            allSentences.forEach((el) => {
+                const elText = el.textContent.replace(/[。！？]$/, '').trim();
+                if (elText === sentence) {
+                    el.classList.add('sentence-selected');
+                }
+            });
+            
+            // 更新左边栏
+            document.getElementById('selectedSentenceText').textContent = sentence;
+            document.getElementById('annotationInput').value = '';
+            
+            // 加载历史批注
+            loadHistoricalAnnotations(sentence);
+            
+            // 自动调用学术分析
+            runAutoAnalysisForSentence(sentence);
+        }
+        
+        function runAutoAnalysisForSentence(sentence) {
+            // 将选中的句子设置为reviewContent，然后调用runAutoAnalysis
+            document.getElementById('reviewContent').value = sentence;
+            runAutoAnalysis();
+        }
+        
+        function saveAnnotation() {
+            const annotation = document.getElementById('annotationInput').value.trim();
+            if (!annotation || !selectedSentence) {
+                alert('请先选择句子并输入批注内容');
+                return;
+            }
+            
+            const annotations = JSON.parse(localStorage.getItem('classicAnnotations') || '{}');
+            if (!annotations[selectedSentence]) {
+                annotations[selectedSentence] = [];
+            }
+            
+            annotations[selectedSentence].push({
+                content: annotation,
+                timestamp: new Date().toISOString(),
+                id: Date.now()
+            });
+            
+            localStorage.setItem('classicAnnotations', JSON.stringify(annotations));
+            
+            // 清空输入框
+            document.getElementById('annotationInput').value = '';
+            
+            // 重新加载历史批注
+            loadHistoricalAnnotations(selectedSentence);
+            
+            alert('批注已保存');
+        }
+        
+        function loadHistoricalAnnotations(sentence) {
+            const annotations = JSON.parse(localStorage.getItem('classicAnnotations') || '{}');
+            const sentenceAnnotations = annotations[sentence] || [];
+            
+            const container = document.getElementById('historicalAnnotations');
+            
+            if (sentenceAnnotations.length === 0) {
+                container.innerHTML = '<p style="font-size: 11px; color: var(--text-muted); text-align: center; padding: 10px;">暂无批注</p>';
+                return;
+            }
+            
+            container.innerHTML = sentenceAnnotations.map((ann, idx) => `
+                <div class="annotation-item" style="position: relative;">
+                    ${ann.content}
+                    <div class="timestamp">${new Date(ann.timestamp).toLocaleString()}</div>
+                    <button class="delete-btn" onclick="deleteAnnotation('${sentence.replace(/'/g, "\\'")}', ${idx})" title="删除批注">✕</button>
+                </div>
+            `).join('');
+        }
+        
+        function deleteAnnotation(sentence, index) {
+            if (!confirm('确定要删除这条批注吗？')) return;
+            
+            const annotations = JSON.parse(localStorage.getItem('classicAnnotations') || '{}');
+            if (annotations[sentence]) {
+                annotations[sentence].splice(index, 1);
+                if (annotations[sentence].length === 0) {
+                    delete annotations[sentence];
+                }
+                localStorage.setItem('classicAnnotations', JSON.stringify(annotations));
+                loadHistoricalAnnotations(selectedSentence);
+            }
+        }
+        
+        function toggleFullscreenReading() {
+            const fullscreenEl = document.getElementById('fullscreenReading');
+            const title = document.getElementById('classicTitle').textContent;
+            
+            document.getElementById('fullscreenReadingTitle').textContent = title;
+            renderFullscreenReadingContent(currentClassicText);
+            
+            fullscreenEl.classList.remove('hidden');
+        }
+        
+        function renderFullscreenReadingContent(text) {
+            const container = document.getElementById('fullscreenReadingContent');
+            
+            // 按句子分割文本
+            const sentences = text.split(/[。！？\n]+/).filter(s => s.trim());
+            
+            let html = '';
+            sentences.forEach((sentence) => {
+                const trimmedSentence = sentence.trim();
+                if (trimmedSentence) {
+                    html += `<span class="sentence-highlight" onclick="selectSentence('${trimmedSentence.replace(/'/g, "\\'")}')" style="font-size: ${currentReadingFontSize}px;">${trimmedSentence}。</span><br><br>`;
+                }
+            });
+            
+            container.innerHTML = html;
+        }
+        
+        function adjustReadingFontSize(delta) {
+            currentReadingFontSize = Math.max(14, Math.min(24, currentReadingFontSize + delta));
+            renderFullscreenReadingContent(currentClassicText);
+        }
+        
+        function exitFullscreenReading() {
+            document.getElementById('fullscreenReading').classList.add('hidden');
+        }
+        
+        // 初始化经典阅读
+        function initClassicReading() {
+            // 加载已保存的批注数量统计
+            const annotations = JSON.parse(localStorage.getItem('classicAnnotations') || '{}');
+            const totalAnnotations = Object.keys(annotations).length;
+            
+            // 可以在这里添加更多初始化逻辑
+            console.log(`经典阅读模块已初始化，已保存 ${totalAnnotations} 个句子的批注`);
+        }
+        
+        // 页面加载时初始化
+        document.addEventListener('DOMContentLoaded', function() {
+            initClassicReading();
+        });
     </script>
 </body>
 </html>
