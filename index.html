@@ -980,7 +980,7 @@
             width: 260px;
             min-width: 200px;
             max-width: 60%;
-            overflow: hidden;
+            overflow-y: auto;
             position: sticky;
             top: 64px;
             height: calc(100vh - 64px);
@@ -3995,46 +3995,54 @@ function analyzeCitations(content) {
                 return;
             }
             
+            // Similarity function based on character overlap
+            function getSimilarity(text1, text2) {
+                if (!text1 || !text2) return 0;
+                const s1 = text1.toLowerCase().replace(/\s+/g, '');
+                const s2 = text2.toLowerCase().replace(/\s+/g, '');
+                if (s1.length === 0 || s2.length === 0) return 0;
+                
+                // Character intersection
+                const set1 = new Set(s1.split(''));
+                const set2 = new Set(s2.split(''));
+                let overlap = 0;
+                for (const char of set1) {
+                    if (set2.has(char)) overlap++;
+                }
+                
+                // Jaccard-like similarity: overlap / max(len1, len2)
+                const maxLen = Math.max(s1.length, s2.length);
+                return (overlap / maxLen) * 100;
+            }
+            
+            // Extract a sample from content (first 100 chars, skipping punctuation) for matching
+            const contentSample = content.replace(/[，。、？！：；""''（）【】《》]/g, '').substring(0, 100);
+            
+            // Only match specific fields: scripture_content, translation, note
+            const matchFields = ['scripture_content', 'translation', 'note'];
+            
             for (let i = 0; i < refs.length; i++) {
                 const citation = refs[i];
                 if (!citation) continue;
                 
-                const keywords = [
-                    citation.classic_title,
-                    citation.chapter,
-                    citation.verse ? String(citation.verse) : '',
-                    citation.scripture_content,
-                    citation.translation,
-                    citation.note,
-                    citation.commentator,
-                    citation.note_zheng,
-                    citation.note_kong,
-                    citation.note_zhu,
-                    citation.note_jia,
-                    citation.note_su,
-                    citation.note_lu
-                ].filter(Boolean);
-            
-                let matchCount = 0;
-                for (let j = 0; j < keywords.length; j++) {
-                    const keyword = keywords[j];
-                    if (!keyword) continue;
-                    try {
-                        const pattern = new RegExp(keyword.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'gi');
-                        let match;
-                        while ((match = pattern.exec(contentLower)) !== null) {
-                            matchCount++;
-                        }
-                    } catch(e) {}
+                let maxSimilarity = 0;
+                for (const field of matchFields) {
+                    const fieldValue = citation[field];
+                    if (!fieldValue) continue;
+                    const similarity = getSimilarity(contentSample, fieldValue);
+                    if (similarity > maxSimilarity) maxSimilarity = similarity;
                 }
             
-                if (matchCount > 0) {
+                if (maxSimilarity >= 40) {
                     matches.push({
                         citation: citation,
-                        matchCount: matchCount
+                        similarity: maxSimilarity
                     });
                 }
             }
+            
+            // Sort by similarity descending
+            matches.sort((a, b) => b.similarity - a.similarity);
     
             let rightPanelHtml = '<div style="overflow-y: auto;">';
             
