@@ -148,6 +148,9 @@
 
         .sidebar-left {
             flex-shrink: 0;
+            min-width: 200px;
+            max-width: 280px;
+            width: 260px;
         }
 
         .main-content {
@@ -167,6 +170,18 @@
             position: sticky;
             top: 64px;
             height: calc(100vh - 64px);
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .sidebar-left .sidebar-section {
+            flex-shrink: 0;
+        }
+        
+        .sidebar-left .sidebar-section:last-child {
+            flex: 1;
+            min-height: 0;
             overflow-y: auto;
         }
         
@@ -466,13 +481,15 @@
         
         .textarea-area {
             width: 100%;
-            min-height: 150px;
+            min-height: 80px;
+            max-height: 200px;
             padding: 14px;
             border: 1px solid var(--border);
             border-radius: 8px;
             font-family: inherit;
             font-size: 14px;
             resize: vertical;
+            overflow-y: auto;
             background: var(--bg-card);
             color: var(--text-primary);
             line-height: 1.7;
@@ -1485,8 +1502,27 @@
         }
         
         .annotation-list {
-            max-height: 200px;
-            overflow-y: auto;
+            max-height: 150px !important;
+            overflow-y: auto !important;
+            overflow-x: hidden !important;
+            display: block !important;
+        }
+
+        .annotation-list::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .annotation-list::-webkit-scrollbar-track {
+            background: var(--bg-secondary);
+        }
+
+        .annotation-list::-webkit-scrollbar-thumb {
+            background: var(--border);
+            border-radius: 3px;
+        }
+
+        .annotation-list::-webkit-scrollbar-thumb:hover {
+            background: var(--text-muted);
         }
         
         .annotation-item {
@@ -1497,6 +1533,11 @@
             font-size: 12px;
             line-height: 1.4;
             color: var(--text-secondary);
+            display: block !important;
+            overflow: auto !important;
+            max-width: 100%;
+            box-sizing: border-box;
+            word-wrap: break-word;
         }
         
         .annotation-item .timestamp {
@@ -1619,7 +1660,7 @@
     <!-- Header -->
     <header class="header">
         <div class="header-left">
-            <div class="logo">学术审核助手</div>
+            <div class="logo">古典学园学术助手</div>
             <nav class="nav-tabs">
                 <button class="nav-tab active" onclick="switchTab('teaching')">提交教学文档</button>
                 <button class="nav-tab" onclick="switchTab('review')">文档审核</button>
@@ -1637,18 +1678,18 @@
             <aside class="sidebar-left" id="sidebarLeft">
                 <div class="sidebar-section">
                     <div class="sidebar-title">批注笔记</div>
-                    <div id="annotationSection" style="display: none;">
+                    <div id="annotationSection" style="display: none; flex-direction: column; overflow-y: auto;">
                         <div class="selected-sentence">
                             <div class="sidebar-title" style="font-size: 11px; margin-bottom: 8px;">当前选中句子</div>
                             <div id="selectedSentenceText" class="selected-text"></div>
                         </div>
-                        <div class="annotation-input">
-                            <textarea id="annotationInput" class="textarea-area" placeholder="添加批注..." style="min-height: 80px; margin-bottom: 8px;"></textarea>
+                        <div class="annotation-input" style="flex-shrink: 0;">
+                            <textarea id="annotationInput" class="textarea-area" placeholder="添加批注..." style="min-height: 80px; max-height: 120px; margin-bottom: 8px;"></textarea>
                             <button onclick="saveAnnotation()" class="sidebar-btn">保存批注</button>
                         </div>
                         <div class="historical-annotations">
                             <div class="sidebar-title" style="font-size: 11px; margin: 12px 0 8px 0;">历史批注</div>
-                            <div id="historicalAnnotations" class="annotation-list"></div>
+                            <div id="historicalAnnotations" class="annotation-list" style="max-height: 150px; overflow-y: auto; display: block; overflow-x: hidden;"></div>
                         </div>
                     </div>
                     <div id="defaultAnnotationSection">
