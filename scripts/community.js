@@ -23,6 +23,7 @@
             OWNED_DOC_IDS: 'communityOwnedDocIds',
             LAST_AUTHOR: 'communityLastAuthor'
         };
+        const COMMUNITY_DELETE_PASSWORD_HASH = '6f54f53188d3a33cb7ba279e668109925bb780886328b53c9f6c8dece6ab3899';
         
         function getOwnedCommunityDocIds() {
             try {
@@ -54,7 +55,67 @@
         function isOwnCommunityDoc(id) {
             return getOwnedCommunityDocIds().includes(String(id));
         }
+
+        async function sha256Text(text) {
+            if (!window.crypto || !window.crypto.subtle) {
+                throw new Error('当前浏览器不支持密码校验');
+            }
+            const data = new TextEncoder().encode(text);
+            const digest = await window.crypto.subtle.digest('SHA-256', data);
+            return Array.from(new Uint8Array(digest))
+                .map(byte => byte.toString(16).padStart(2, '0'))
+                .join('');
+        }
+
+        async function verifyCommunityDeletePermission(id) {
+            if (isOwnCommunityDoc(id)) {
+                return { granted: true, isOwnDoc: true };
+            }
+
+            const passwordInput = prompt('这不是你上传的内容，请输入删除密码：');
+            if (passwordInput === null) {
+                return { granted: false, isOwnDoc: false };
+            }
+
+            const passwordHash = await sha256Text(passwordInput.trim());
+            if (passwordHash !== COMMUNITY_DELETE_PASSWORD_HASH) {
+                alert('密码错误，不能删除他人上传的内容');
+                return { granted: false, isOwnDoc: false };
+            }
+
+            return { granted: true, isOwnDoc: false };
+        }
         
+        async function sha256Text(text) {
+            if (!window.crypto || !window.crypto.subtle) {
+                throw new Error('\u5f53\u524d\u6d4f\u89c8\u5668\u4e0d\u652f\u6301\u5bc6\u7801\u6821\u9a8c');
+            }
+            const data = new TextEncoder().encode(text);
+            const digest = await window.crypto.subtle.digest('SHA-256', data);
+            return Array.from(new Uint8Array(digest))
+                .map(byte => byte.toString(16).padStart(2, '0'))
+                .join('');
+        }
+
+        async function verifyCommunityDeletePermission(id) {
+            if (isOwnCommunityDoc(id)) {
+                return { granted: true, isOwnDoc: true };
+            }
+
+            const passwordInput = prompt('\u8fd9\u4e0d\u662f\u4f60\u4e0a\u4f20\u7684\u5185\u5bb9\uff0c\u8bf7\u8f93\u5165\u5220\u9664\u5bc6\u7801\uff1a');
+            if (passwordInput === null) {
+                return { granted: false, isOwnDoc: false };
+            }
+
+            const passwordHash = await sha256Text(passwordInput.trim());
+            if (passwordHash !== COMMUNITY_DELETE_PASSWORD_HASH) {
+                alert('\u5bc6\u7801\u9519\u8bef\uff0c\u4e0d\u80fd\u5220\u9664\u4ed6\u4eba\u4e0a\u4f20\u7684\u5185\u5bb9');
+                return { granted: false, isOwnDoc: false };
+            }
+
+            return { granted: true, isOwnDoc: false };
+        }
+
         function autoConnect() {
             initCommunity();
         }
@@ -1035,7 +1096,9 @@
                         <button onclick="openCommunityDocFullscreen('${doc.id}')">全屏阅读</button>
                         <button onclick="useCommunityDoc('${doc.id}')">用作教学标准</button>
                         <button onclick="viewCommunityDoc('${doc.id}')">查看详情</button>
-                        ${deleteAction}
+                        ${isOwnCommunityDoc(doc.id)
+                            ? `<button onclick="deleteCommunityDoc('${doc.id}')" title="可直接删除自己上传的内容">删除</button>`
+                            : `<button onclick="deleteCommunityDoc('${doc.id}')" title="删除他人上传的内容需要密码验证">验证删除</button>`}
                     </div>
                 </div>
             `;
@@ -1044,6 +1107,84 @@
         }
         
         async function deleteCommunityDoc(id) {
+            const permission = await verifyCommunityDeletePermission(id);
+            if (!permission.granted) {
+                return;
+            }
+
+            const confirmMessage = permission.isOwnDoc
+                ? '\u786e\u5b9a\u5220\u9664\u8fd9\u7bc7\u6587\u6863\u5417\uff1f'
+                : '\u8fd9\u7bc7\u6587\u6863\u4e0d\u662f\u4f60\u4e0a\u4f20\u7684\uff0c\u5df2\u901a\u8fc7\u5bc6\u7801\u9a8c\u8bc1\uff0c\u786e\u5b9a\u7ee7\u7eed\u5220\u9664\u5417\uff1f';
+            if (!confirm(confirmMessage)) return;
+            if (!communityClient) {
+                initCommunity();
+                alert('\u793e\u533a\u8fde\u63a5\u5c1a\u672a\u51c6\u5907\u597d\uff0c\u8bf7\u7a0d\u540e\u91cd\u8bd5');
+                return;
+            }
+
+            try {
+                const { error } = await communityClient
+                    .from('community_docs')
+                    .delete()
+                    .eq('id', id);
+
+                if (error) {
+                    alert('\u5220\u9664\u5931\u8d25: ' + error.message);
+                    return;
+                }
+
+                if (permission.isOwnDoc) {
+                    unmarkCommunityDocAsOwned(id);
+                }
+
+                alert(permission.isOwnDoc
+                    ? '\u5df2\u5220\u9664'
+                    : '\u5df2\u901a\u8fc7\u5bc6\u7801\u9a8c\u8bc1\u5e76\u5220\u9664');
+                loadCommunityDocs();
+                return;
+            } catch (e) {
+                alert('\u5220\u9664\u5931\u8d25: ' + e.message);
+                return;
+            }
+            /*
+            const permission = await verifyCommunityDeletePermission(id);
+            if (!permission.granted) {
+                return;
+            }
+
+            const confirmMessage = permission.isOwnDoc
+                ? '确定删除这篇文档吗？'
+                : '这篇文档不是你上传的，已通过密码验证，确定继续删除吗？';
+            if (!confirm(confirmMessage)) return;
+            if (!communityClient) {
+                initCommunity();
+                alert('社区连接尚未准备好，请稍后重试');
+                return;
+            }
+
+            try {
+                const { error } = await communityClient
+                    .from('community_docs')
+                    .delete()
+                    .eq('id', id);
+
+                if (error) {
+                    alert('删除失败: ' + error.message);
+                    return;
+                }
+
+                if (permission.isOwnDoc) {
+                    unmarkCommunityDocAsOwned(id);
+                }
+
+                alert(permission.isOwnDoc ? '已删除' : '已通过密码验证并删除');
+                loadCommunityDocs();
+                return;
+            } catch (e) {
+                alert('删除失败: ' + e.message);
+                return;
+            }
+            */
             if (!isOwnCommunityDoc(id)) {
                 alert('只能删除自己上传的文档');
                 return;
