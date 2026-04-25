@@ -1,3 +1,376 @@
+        function safeAnalysisHtml(value) {
+            const text = value == null ? '' : String(value);
+            if (typeof escapeHtml === 'function') {
+                return escapeHtml(text);
+            }
+            return text
+                .replace(/&/g, '&amp;')
+                .replace(/</g, '&lt;')
+                .replace(/>/g, '&gt;')
+                .replace(/"/g, '&quot;')
+                .replace(/'/g, '&#39;');
+        }
+
+        function cleanCitationDisplayText(value) {
+            return String(value || '')
+                .trim()
+                .replace(/^[“"'「『]+/, '')
+                .replace(/[”"'」』]+$/, '');
+        }
+
+        function normalizeCitationLookupText(text) {
+            return String(text || '')
+                .toLowerCase()
+                .replace(/[\s\u3000]/g, '')
+                .replace(/[，。！？；：、,.!?:;"“”'‘’`~·•…（）()《》〈〉【】\[\]{}「」『』\-—_\/\\|]+/g, '');
+        }
+
+        function splitContentIntoCitationSegments(content) {
+            const rawSegments = String(content || '')
+                .split(/[，。！？；：、,.!?:;"“”'‘’`~·•…（）()《》〈〉【】\[\]{}「」『』\n\r\t]+/g)
+                .map(segment => segment.trim())
+                .filter(Boolean);
+
+            const segments = [];
+            const seen = new Set();
+
+            rawSegments.forEach((segment, index) => {
+                const normalized = normalizeCitationLookupText(segment);
+                if (normalized.length < 3 || seen.has(normalized)) {
+                    return;
+                }
+
+                seen.add(normalized);
+                segments.push({
+                    original: segment,
+                    normalized,
+                    index
+                });
+            });
+
+            return segments;
+        }
+
+        function getCitationMatchScore(segmentNormalized, scriptureNormalized) {
+            if (!segmentNormalized || !scriptureNormalized) {
+                return 0;
+            }
+
+            if (segmentNormalized === scriptureNormalized) {
+                return 100;
+            }
+
+            if (segmentNormalized.length <= 3 || scriptureNormalized.length <= 3) {
+                return 0;
+            }
+
+            if (scriptureNormalized.includes(segmentNormalized)) {
+                const coverage = segmentNormalized.length / scriptureNormalized.length;
+                const isEdgeMatch = scriptureNormalized.startsWith(segmentNormalized) || scriptureNormalized.endsWith(segmentNormalized);
+                if (!isEdgeMatch && coverage < 0.15) {
+                    return 0;
+                }
+
+                return Math.round(82 + Math.min(16, coverage * 20));
+            }
+
+            if (segmentNormalized.includes(scriptureNormalized)) {
+                const coverage = scriptureNormalized.length / segmentNormalized.length;
+                return Math.round(72 + Math.min(16, coverage * 20));
+            }
+
+            return 0;
+        }
+
+        function buildScriptureReferenceMatches(content, refs) {
+            const segments = splitContentIntoCitationSegments(content);
+            const matches = [];
+            const dedupe = new Set();
+
+            const referenceCache = refs.map((citation, index) => ({
+                citation,
+                index,
+                normalizedScripture: normalizeCitationLookupText(citation && citation.scripture_content)
+            })).filter(item => item.normalizedScripture);
+
+            segments.forEach(segment => {
+                referenceCache.forEach(item => {
+                    const score = getCitationMatchScore(segment.normalized, item.normalizedScripture);
+                    if (!score) {
+                        return;
+                    }
+
+                    const citation = item.citation;
+                    const key = `${segment.normalized}||${item.index}`;
+
+                    if (dedupe.has(key)) {
+                        return;
+                    }
+
+                    dedupe.add(key);
+                    matches.push({
+                        segment,
+                        citation,
+                        referenceIndex: item.index,
+                        score,
+                        exact: segment.normalized === item.normalizedScripture
+                    });
+                });
+            });
+
+            matches.sort((left, right) => {
+                if (left.segment.index !== right.segment.index) {
+                    return left.segment.index - right.segment.index;
+                }
+                if (left.exact !== right.exact) {
+                    return right.exact - left.exact;
+                }
+                if (left.score !== right.score) {
+                    return right.score - left.score;
+                }
+                return (right.segment.normalized.length - left.segment.normalized.length);
+            });
+
+            return {
+                segments,
+                matches
+            };
+        }
+
+        function getPreferredCitationMatches(matches) {
+            const groupedBySegment = new Map();
+
+            matches.forEach(match => {
+                const key = match.segment.normalized;
+                if (!groupedBySegment.has(key)) {
+                    groupedBySegment.set(key, []);
+                }
+                groupedBySegment.get(key).push(match);
+            });
+
+            const preferred = [];
+            Array.from(groupedBySegment.values())
+                .sort((left, right) => left[0].segment.index - right[0].segment.index)
+                .forEach(group => {
+                    const exactMatches = group.filter(match => match.exact);
+                    if (exactMatches.length > 0) {
+                        preferred.push(...exactMatches);
+                        return;
+                    }
+
+                    const topScore = Math.max(...group.map(match => match.score));
+                    preferred.push(...group.filter(match => match.score >= topScore - 4));
+                });
+
+            return preferred;
+        }
+
+        function buildCitationDisplayGroups(matches) {
+            const preferredMatches = getPreferredCitationMatches(matches);
+            const groups = [];
+            const groupMap = new Map();
+
+            preferredMatches.forEach(match => {
+                const citation = match.citation;
+                const scriptureKey = normalizeCitationLookupText(citation.scripture_content);
+                const key = [
+                    citation.classic_title || '',
+                    citation.chapter || '',
+                    citation.verse || '',
+                    scriptureKey
+                ].join('||');
+
+                if (!groupMap.has(key)) {
+                    const group = {
+                        key,
+                        classicTitle: citation.classic_title || '经典',
+                        chapter: citation.chapter || '',
+                        verse: citation.verse || '',
+                        scriptureContent: citation.scripture_content || match.segment.original,
+                        segmentTexts: [],
+                        items: [],
+                        orderIndex: match.segment.index,
+                        hasExactMatch: match.exact
+                    };
+                    groupMap.set(key, group);
+                    groups.push(group);
+                }
+
+                const group = groupMap.get(key);
+                group.orderIndex = Math.min(group.orderIndex, match.segment.index);
+                group.hasExactMatch = group.hasExactMatch || match.exact;
+
+                if (!group.segmentTexts.includes(match.segment.original)) {
+                    group.segmentTexts.push(match.segment.original);
+                }
+
+                if (!group.items.some(item => item.referenceIndex === match.referenceIndex)) {
+                    group.items.push(match);
+                }
+            });
+
+            return groups.sort((left, right) => {
+                if (left.orderIndex !== right.orderIndex) {
+                    return left.orderIndex - right.orderIndex;
+                }
+                if (left.hasExactMatch !== right.hasExactMatch) {
+                    return right.hasExactMatch - left.hasExactMatch;
+                }
+                return left.key.localeCompare(right.key, 'zh-Hans-CN');
+            });
+        }
+
+        function getCitationGroupTitle(group) {
+            const verseInfo = group.verse ? `·${safeAnalysisHtml(group.verse)}` : '';
+            return `《${safeAnalysisHtml(group.classicTitle)}·${safeAnalysisHtml(group.chapter || '未分章')}${verseInfo}》`;
+        }
+
+        function getCitationGroupGloss(group) {
+            const translations = group.items
+                .map(item => cleanCitationDisplayText(item.citation.translation))
+                .filter(Boolean);
+
+            if (translations.length === 0) {
+                return '';
+            }
+
+            const uniqueTranslations = Array.from(new Set(translations));
+            uniqueTranslations.sort((left, right) => left.length - right.length);
+            const bestTranslation = uniqueTranslations[0];
+
+            return bestTranslation.length <= 40 ? bestTranslation : '';
+        }
+
+        function getCitationCommentaryItems(group) {
+            const items = [];
+            const seen = new Set();
+
+            const pushItem = (commentator, mainText, extraText = '') => {
+                const cleanedMainText = cleanCitationDisplayText(mainText);
+                const cleanedExtraText = cleanCitationDisplayText(extraText);
+
+                if (!cleanedMainText) {
+                    return;
+                }
+
+                const key = `${commentator}||${cleanedMainText}||${cleanedExtraText}`;
+                if (seen.has(key)) {
+                    return;
+                }
+
+                seen.add(key);
+                items.push({
+                    commentator,
+                    quote: group.scriptureContent,
+                    mainText: cleanedMainText,
+                    extraText: cleanedExtraText
+                });
+            };
+
+            group.items.forEach(item => {
+                const citation = item.citation;
+                const dedicatedNotes = [
+                    ['郑玄', citation.note_zheng],
+                    ['孔颖达', citation.note_kong],
+                    ['朱熹', citation.note_zhu],
+                    ['贾公彦', citation.note_jia],
+                    ['疏', citation.note_su],
+                    ['陆德明', citation.note_lu]
+                ].filter(([, value]) => value && String(value).trim());
+
+                if (dedicatedNotes.length > 0) {
+                    dedicatedNotes.forEach(([commentator, value]) => {
+                        pushItem(commentator, value);
+                    });
+                    return;
+                }
+
+                const commentator = citation.commentator || '原文';
+                const mainText = citation.translation || citation.note || '';
+                const normalizedMain = normalizeCitationLookupText(mainText);
+                const normalizedTranslation = normalizeCitationLookupText(citation.translation);
+                const normalizedNote = normalizeCitationLookupText(citation.note);
+                const extraText = citation.note && normalizedMain !== normalizedNote
+                    ? citation.note
+                    : '';
+
+                pushItem(commentator, mainText, extraText);
+            });
+
+            return items;
+        }
+
+        function getCitationGroupAnalysis(group) {
+            const preferredItem = group.items.find(item => item.citation.comparative_analysis)
+                || group.items.find(item => item.citation.note_zheng || item.citation.note_kong || item.citation.note_zhu)
+                || group.items[0];
+
+            return preferredItem ? preferredItem.citation.comparative_analysis : null;
+        }
+
+        function renderCitationCommentaryItem(item) {
+            const extraHtml = item.extraText
+                ? `<div class="citation-commentary-extra">${safeAnalysisHtml(item.extraText)}</div>`
+                : '';
+
+            return `
+                <div class="citation-commentary-item">
+                    <div class="citation-commentary-head">
+                        <strong>${safeAnalysisHtml(item.commentator)}</strong>："${safeAnalysisHtml(item.quote)}"
+                    </div>
+                    <div class="citation-commentary-body">→ ${safeAnalysisHtml(item.mainText)}</div>
+                    ${extraHtml}
+                </div>
+            `;
+        }
+
+        function renderCitationAnalysisBlock(group) {
+            const analysis = getCitationGroupAnalysis(group);
+            if (!analysis || typeof analysis !== 'object') {
+                return '';
+            }
+
+            const commentaryComparison = analysis.commentary_comparison ? String(analysis.commentary_comparison).trim() : '';
+            const versionPosition = analysis.version_position_analysis ? String(analysis.version_position_analysis).trim() : '';
+            const contextualSignificance = analysis.contextual_significance ? String(analysis.contextual_significance).trim() : '';
+
+            if (!commentaryComparison && !versionPosition && !contextualSignificance) {
+                return '';
+            }
+
+            return `
+                <div class="citation-analysis-block">
+                    <div class="citation-analysis-title">比对分析：</div>
+                    ${commentaryComparison ? `<div class="citation-analysis-text">${safeAnalysisHtml(commentaryComparison)}</div>` : ''}
+                    ${versionPosition ? `<div class="citation-analysis-meta"><strong>位置：</strong>${safeAnalysisHtml(versionPosition)}</div>` : ''}
+                    ${contextualSignificance ? `<div class="citation-analysis-meta"><strong>意义：</strong>${safeAnalysisHtml(contextualSignificance)}</div>` : ''}
+                </div>
+            `;
+        }
+
+        function renderCitationGroupCard(group) {
+            const commentaryItems = getCitationCommentaryItems(group);
+            const commentators = Array.from(new Set(commentaryItems.map(item => item.commentator)));
+            const commentatorLabel = commentators.length > 1 ? '多家注释' : '相关注释';
+            const gloss = getCitationGroupGloss(group);
+
+            return `
+                <div class="citation-group-card">
+                    <div class="citation-group-title">${getCitationGroupTitle(group)} 内证互参</div>
+                    <div class="citation-group-meta">${commentatorLabel}：${safeAnalysisHtml(commentators.join('、') || '待补充')}</div>
+                    ${gloss ? `<div class="citation-group-gloss">义解：${safeAnalysisHtml(gloss)}</div>` : ''}
+                    <div class="citation-scripture-banner">
+                        <span class="citation-scripture-label">[经文]</span>
+                        <span>"${safeAnalysisHtml(group.scriptureContent)}"</span>
+                    </div>
+                    <div class="citation-commentary-list">
+                        ${commentaryItems.map(renderCitationCommentaryItem).join('')}
+                    </div>
+                    ${renderCitationAnalysisBlock(group)}
+                </div>
+            `;
+        }
+
         function runAutoAnalysis() {
             const content = document.getElementById('reviewContent').value;
             if (!content.trim()) {
@@ -20,256 +393,35 @@
         
 function analyzeCitations(content) {
             const refs = getMergedReferences();
-            const matches = [];
-            const contentLower = content.toLowerCase();
             
             if (!refs || !Array.isArray(refs) || refs.length === 0) {
                 document.getElementById('citationPanelRight').innerHTML = '<p style="font-size: 12px; color: var(--accent-light); text-align: center; padding: 20px;">⚠️ 引文数据未加载</p>';
                 return;
             }
-            
-            // Similarity function based on character overlap
-            function getSimilarity(text1, text2) {
-                if (!text1 || !text2) return 0;
-                const s1 = text1.toLowerCase().replace(/\s+/g, '');
-                const s2 = text2.toLowerCase().replace(/\s+/g, '');
-                if (s1.length === 0 || s2.length === 0) return 0;
-                
-                // Character intersection
-                const set1 = new Set(s1.split(''));
-                const set2 = new Set(s2.split(''));
-                let overlap = 0;
-                for (const char of set1) {
-                    if (set2.has(char)) overlap++;
-                }
-                
-                // Jaccard-like similarity: overlap / max(len1, len2)
-                const maxLen = Math.max(s1.length, s2.length);
-                return (overlap / maxLen) * 100;
-            }
-            
-            // Extract a sample from content (first 100 chars, skipping punctuation) for matching
-            const contentSample = content.replace(/[，。、？！：；""''（）【】《》]/g, '').substring(0, 100);
-            
-            // Only match specific fields: scripture_content, translation, note
-            const matchFields = ['scripture_content', 'translation', 'note'];
-            
-            for (let i = 0; i < refs.length; i++) {
-                const citation = refs[i];
-                if (!citation) continue;
-                
-                let maxSimilarity = 0;
-                for (const field of matchFields) {
-                    const fieldValue = citation[field];
-                    if (!fieldValue) continue;
-                    const similarity = getSimilarity(contentSample, fieldValue);
-                    if (similarity > maxSimilarity) maxSimilarity = similarity;
-                }
-            
-                if (maxSimilarity >= 40) {
-                    matches.push({
-                        citation: citation,
-                        similarity: maxSimilarity
-                    });
-                }
-            }
-            
-            // Sort by similarity descending
-            matches.sort((a, b) => b.similarity - a.similarity);
-    
+
+            const { segments, matches } = buildScriptureReferenceMatches(content, refs);
             let rightPanelHtml = '<div style="overflow-y: auto;">';
             
             if (matches.length === 0) {
                 rightPanelHtml += `
                     <div style="font-size: 12px; color: var(--text-muted); text-align: center; padding: 20px;">
                         📋 未检测到任何经典引文<br>
-                        <span style="font-size: 11px; display: block; margin-top: 8px;">提示：文本中需要包含经典著作的名称、章节或内容</span>
+                        <span style="font-size: 11px; display: block; margin-top: 8px;">已断句 ${segments.length} 段，并在 <code>scripture_content</code> 中逐句检索，但没有直接命中</span>
                     </div>
                 `;
             } else {
-                // 按经文分组，用于显示内证互参
-                const groupedByVerse = {};
-                const groupedByClassic = {};
-                
-                for (const m of matches) {
-                    const c = m.citation;
-                    
-                    // 改进的分组键生成：优先使用 verse，如果没有 verse 就使用 scripture_content
-                    let verseKey;
-                    if (c.verse) {
-                        verseKey = `${c.classic_title}||${c.chapter}||verse:${c.verse}`;
-                    } else if (c.scripture_content) {
-                        // 对于没有 verse 的条目，用 scripture_content 的前20个字作为分组依据
-                        // 这样同一章的多个注释者如果引用相同内容，就能聚合
-                        verseKey = `${c.classic_title}||${c.chapter}||content:${c.scripture_content.substring(0, 20)}`;
-                    } else {
-                        continue;
-                    }
-                    
-                    if (!groupedByVerse[verseKey]) groupedByVerse[verseKey] = [];
-                    groupedByVerse[verseKey].push(c);
-                    
-                    const classicKey = c.classic_title;
-                    if (!groupedByClassic[classicKey]) groupedByClassic[classicKey] = [];
-                    groupedByClassic[classicKey].push(c);
-                }
-                
-                // 首先显示多注释者互参
-                let internalRefCount = 0;
-                const versesWithMultiCommentators = [];
-                
-                // 辅助函数：检查条目是否有多个注释字段
-                const getMultiNoteFields = (ref) => {
-                    return ['note_zheng', 'note_kong', 'note_zhu', 'note_jia', 'note_su', 'note_lu'].filter(
-                        field => ref[field] && String(ref[field]).trim()
-                    );
-                };
-                
-                const noteFieldToCommentator = {
-                    'note_zheng': '郑玄',
-                    'note_kong': '孔颖达',
-                    'note_zhu': '朱熹',
-                    'note_jia': '贾公彦',
-                    'note_su': '疏',
-                    'note_lu': '陆德明'
-                };
-                
-                for (const key in groupedByVerse) {
-                    const verseRefs = groupedByVerse[key];
-                    
-                    // 优先检查是否有包含多注释字段的条目（新格式）
-                    let hasMultiNoteFormat = false;
-                    let multiNoteRef = null;
-                    
-                    for (const ref of verseRefs) {
-                        const multiNoteFields = getMultiNoteFields(ref);
-                        if (multiNoteFields.length >= 2) {
-                            hasMultiNoteFormat = true;
-                            multiNoteRef = ref;
-                            break;  // 找到第一个多注释条目就停止
-                        }
-                    }
-                    
-                    // 如果有包含多注释字段的条目，优先显示它
-                    if (hasMultiNoteFormat && multiNoteRef) {
-                        internalRefCount++;
-                        const verseInfo = multiNoteRef.verse ? `·${multiNoteRef.verse}` : '';
-                        const multiNoteFields = getMultiNoteFields(multiNoteRef);
-                        const commentatorNames = multiNoteFields.map(f => noteFieldToCommentator[f]);
-                        
-                        rightPanelHtml += `
-                            <div style="background: var(--white); padding: 12px; border-radius: 4px; margin-bottom: 10px; border-left: 3px solid var(--accent);">
-                                <div style="font-size: 12px; font-weight: 600; color: var(--accent); margin-bottom: 8px;">
-                                    📖 《${multiNoteRef.classic_title}·${multiNoteRef.chapter}${verseInfo}》内证互参
-                                </div>
-                                <div style="font-size: 11px; color: var(--text-muted); margin-bottom: 6px;">
-                                    多家注释：${commentatorNames.join('、')}
-                                </div>
-                        `;
-                        
-                        // 显示原经文
-                        if (multiNoteRef.scripture_content) {
-                            rightPanelHtml += `
-                                <div style="font-size: 11px; color: var(--text-primary); margin-bottom: 8px; padding: 8px; background: var(--bg-secondary); border-radius: 3px; border-left: 2px solid var(--accent);">
-                                    <strong>【经文】</strong>"${multiNoteRef.scripture_content}"
-                                </div>
-                            `;
-                        }
-                        
-                        // 显示每个注释
-                        multiNoteFields.forEach(field => {
-                            const commentatorName = noteFieldToCommentator[field];
-                            const noteText = multiNoteRef[field];
-                            rightPanelHtml += `
-                                <div style="font-size: 11px; color: var(--text-primary); line-height: 1.5; margin-bottom: 6px; padding-left: 8px; border-left: 2px solid var(--border-light);">
-                                    <strong>${commentatorName}</strong>: "${noteText}"
-                                </div>
-                            `;
-                        });
-                        
-                        // 显示比对分析（如果有）
-                        if (multiNoteRef.comparative_analysis && multiNoteRef.comparative_analysis.commentary_comparison) {
-                            const analysisText = multiNoteRef.comparative_analysis.commentary_comparison;
-                            rightPanelHtml += `
-                                <div style="font-size: 10px; color: var(--text-secondary); margin-top: 8px; padding: 8px; background: var(--bg-secondary); border-radius: 3px; line-height: 1.6;">
-                                    <strong style="color: var(--accent);">📊 比对分析：</strong><br>
-                                    ${analysisText}
-                                </div>
-                            `;
-                        }
-                        
-                        rightPanelHtml += '</div>';
-                        continue;  // 显示完此条目后继续处理其他分组
-                    }
-                    
-                    // 处理传统格式：多个不同注释者的条目
-                    if (verseRefs.length < 2) continue;
-                    
-                    const commentators = [...new Set(verseRefs.map(r => r.commentator).filter(Boolean))];
-                    if (commentators.length < 2) continue;
-                    
-                    internalRefCount++;
-                    const firstRef = verseRefs[0];
-                    const verseInfo = firstRef.verse ? `·${firstRef.verse}` : '';
-                    
-                    rightPanelHtml += `
-                        <div style="background: var(--white); padding: 12px; border-radius: 4px; margin-bottom: 10px; border-left: 3px solid var(--accent);">
-                            <div style="font-size: 12px; font-weight: 600; color: var(--accent); margin-bottom: 8px;">
-                                📖 《${firstRef.classic_title}·${firstRef.chapter}${verseInfo}》内证互参
-                            </div>
-                            <div style="font-size: 11px; color: var(--text-muted); margin-bottom: 6px;">
-                                多家注释：${commentators.join('、')}
-                            </div>
-                    `;
-                    
-                    verseRefs.forEach(c => {
-                        rightPanelHtml += `
-                            <div style="font-size: 11px; color: var(--text-primary); line-height: 1.5; margin-bottom: 6px; padding-left: 8px; border-left: 2px solid var(--border-light);">
-                                <strong>${c.commentator || '原文'}</strong>: "${c.scripture_content}"
-                                ${c.translation ? `<br><span style="color: var(--text-secondary); font-style: italic;">→ ${c.translation}</span>` : ''}
-                            </div>
-                        `;
-                    });
-                    
-                    rightPanelHtml += '</div>';
-                }
-                
-                // 如果没有找到多注释者互参，显示引用的经文
-                if (internalRefCount === 0) {
-                    rightPanelHtml += `
-                        <div style="font-size: 11px; color: var(--text-muted); margin-bottom: 12px; padding: 8px; background: var(--bg-secondary); border-radius: 4px; border-left: 2px solid var(--accent);">
-                            📚 检测到 ${matches.length} 条引文，涉及 ${Object.keys(groupedByClassic).length} 部经典
-                        </div>
-                    `;
-                    
-                    // 显示引用的经文样本
-                    const sampleMatches = matches.slice(0, 8);
-                    sampleMatches.forEach(m => {
-                        const c = m.citation;
-                        const verseInfo = c.verse ? `·${c.verse}` : '';
-                        rightPanelHtml += `
-                            <div style="background: var(--white); padding: 10px; border-radius: 4px; margin-bottom: 8px; border-left: 3px solid var(--accent-light);">
-                                <div style="font-size: 11px; font-weight: 600; color: var(--accent); margin-bottom: 4px;">
-                                    《${c.classic_title}·${c.chapter}${verseInfo}》
-                                </div>
-                                <div style="font-size: 11px; color: var(--text-primary); line-height: 1.5;">
-                                    "${c.scripture_content.substring(0, 80)}${c.scripture_content.length > 80 ? '...' : ''}"
-                                </div>
-                                ${c.translation ? `<div style="font-size: 10px; color: var(--text-secondary); font-style: italic; margin-top: 3px;">→ ${c.translation.substring(0, 80)}${c.translation.length > 80 ? '...' : ''}</div>` : ''}
-                            </div>
-                        `;
-                    });
-                    
-                    if (matches.length > 8) {
-                        const remainingMatches = matches.slice(8);
-                        const expandBtnId = 'expandCitations' + Math.random().toString(36).substr(2, 9);
-                        rightPanelHtml += `
-                            <button onclick="expandCitations(this, ${JSON.stringify(remainingMatches).replace(/"/g, '&quot;')})" style="font-size: 11px; color: var(--text-muted); text-align: center; padding: 8px; background: var(--bg-secondary); border: none; border-radius: 4px; cursor: pointer; width: 100%;">
-                                ...还有 ${matches.length - 8} 条，展开查看
-                            </button>
-                        `;
-                    }
-                }
+                const displayGroups = buildCitationDisplayGroups(matches);
+                const matchedClassicCount = new Set(displayGroups.map(group => group.classicTitle).filter(Boolean)).size;
+
+                rightPanelHtml += `
+                    <div class="citation-panel-summary">
+                        已断句 ${segments.length} 段，整理出 ${displayGroups.length} 组内证互参，涉及 ${matchedClassicCount} 部经典
+                    </div>
+                `;
+
+                displayGroups.forEach(group => {
+                    rightPanelHtml += renderCitationGroupCard(group);
+                });
             }
             
             rightPanelHtml += '</div>';

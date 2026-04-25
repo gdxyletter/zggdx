@@ -146,6 +146,133 @@
         .share-btn:hover {
             background: var(--text-primary);
         }
+
+        .citation-panel-summary {
+            font-size: 11px;
+            color: var(--text-muted);
+            margin-bottom: 12px;
+            padding: 10px 12px;
+            background: rgba(122, 92, 68, 0.05);
+            border-radius: 8px;
+            border-left: 3px solid var(--accent-light);
+        }
+
+        .citation-group-card {
+            background: rgba(255, 255, 255, 0.92);
+            border: 1px solid var(--border-light);
+            border-left: 4px solid var(--accent);
+            border-radius: 12px;
+            padding: 16px;
+            margin-bottom: 16px;
+            box-shadow: 0 1px 0 rgba(122, 92, 68, 0.05);
+        }
+
+        .citation-group-title {
+            font-family: 'Crimson Pro', serif;
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--accent);
+            margin-bottom: 8px;
+        }
+
+        .citation-group-meta {
+            font-size: 12px;
+            color: var(--text-secondary);
+            margin-bottom: 6px;
+        }
+
+        .citation-group-hit {
+            font-size: 11px;
+            color: var(--text-muted);
+            margin-bottom: 10px;
+        }
+
+        .citation-group-gloss {
+            font-size: 12px;
+            color: var(--text-secondary);
+            margin-bottom: 12px;
+            padding: 8px 10px;
+            background: rgba(122, 92, 68, 0.06);
+            border-radius: 8px;
+        }
+
+        .citation-scripture-banner {
+            display: flex;
+            gap: 8px;
+            align-items: flex-start;
+            background: var(--bg-secondary);
+            border-left: 4px solid var(--accent);
+            border-radius: 8px;
+            padding: 12px 14px;
+            margin-bottom: 14px;
+            font-size: 13px;
+            color: var(--text-primary);
+            font-weight: 600;
+            line-height: 1.7;
+        }
+
+        .citation-scripture-label {
+            flex-shrink: 0;
+            font-weight: 700;
+        }
+
+        .citation-commentary-list {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .citation-commentary-item {
+            border-left: 4px solid var(--border-light);
+            padding-left: 12px;
+        }
+
+        .citation-commentary-head {
+            font-size: 12px;
+            color: var(--text-primary);
+            margin-bottom: 4px;
+            line-height: 1.6;
+        }
+
+        .citation-commentary-body {
+            font-size: 12px;
+            color: var(--text-secondary);
+            line-height: 1.75;
+        }
+
+        .citation-commentary-extra {
+            font-size: 11px;
+            color: var(--text-muted);
+            line-height: 1.7;
+            margin-top: 6px;
+        }
+
+        .citation-analysis-block {
+            margin-top: 14px;
+            background: var(--bg-secondary);
+            border-radius: 10px;
+            padding: 12px 14px;
+        }
+
+        .citation-analysis-title {
+            font-size: 13px;
+            font-weight: 700;
+            color: var(--accent);
+            margin-bottom: 8px;
+        }
+
+        .citation-analysis-text {
+            font-size: 12px;
+            color: var(--text-secondary);
+            line-height: 1.8;
+        }
+
+        .citation-analysis-meta {
+            font-size: 11px;
+            color: var(--text-secondary);
+            line-height: 1.7;
+            margin-top: 8px;
+        }
         
         /* ========== Fullscreen Viewer ========== */
         .fullscreen-viewer {
