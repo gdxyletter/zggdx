@@ -1,0 +1,240 @@
+        const KB_MAX_VERSIONS = 10;
+        const KB_MAX_DOCS = 50;
+        const KB_MAX_SIZE = 2 * 1024 * 1024;
+        
+        const DEEPSEEK_CONFIG = {
+            endpoint: 'https://api.deepseek.com/v1/chat/completions',
+            model: 'deepseek-chat',
+            apiKey: 'sk-0fcf461177a8400093391308fe56ac60'
+        };
+        
+        let teachingSummary = '';
+        let teachingDocs = [];
+        let currentCategoryFilter = 'all';
+        let autoDetectEnabled = true;
+        
+        const DEFAULT_GRADING_STANDARD = `前言与适用范围
+评分标准兼顾文献考据的实证严谨性与义理分析的人文属性，既符合古典学术研究的基本规范，也鼓励学生的独立思考与创新性解读。
+
+评分标准框架总述
+本评分标准总分设置为10分，共设置4个核心考核维度，每个维度满分三分但权重不同，各维度均明确了优秀、合格、不合格三个层级的量化判定标准，避免主观评分的随意性，确保评分结果公平、公正、可回溯。
+
+总分10=文献得分 + 义理得分 + 结构得分 × (2/3) + 学术得分 × (2/3)。
+文献考据部分占30%（即满分3分折合总分3分），义理分析部分占30%（折合总分3分），结构逻辑部分占20%（折合总分2分），学术规范部分占20%（折合总分2分）。最终总分 = 每个维度先按0-3分独立评分，然后按以下公式计算总分。为避免小数，结构逻辑和学术的得分直接乘以系数后四舍五入。
+第一部分：文献考据完整性与准确性——对标能力：如何使用文本（基础能力）	
+3分标准如下
+1.覆盖核心原始文献（例如《论语》原文、对应《史记》等相关史料），且引用至少2种不同朝代的代表性注疏（古义、新义）并对他们之间的区别描述准确；
+2.所有史实描述均有文献支撑， 对存疑的史料细节能指出不同说法或文献依据，无史实错误；
+3.能主动进行多源文献交叉印证
+2分标准如下
+1.覆盖核心原始文献，引用至少1种注疏；
+2.核心史实无明显错误，未刻意虚构史料，但对存疑细节未做标注；
+3.未进行多源文献交叉印证	
+1-0分标准如下（不加分）
+1.缺失核心原始文献，未引用任何权威注疏；
+2.存在明显史实错误，或虚构史料支撑观点；
+3.文献引用张冠李戴，完全不符合考据规范
+第二部分：义理分析深度与广度	
+3分标准如下：
+1.对于原文文本，能结合正确的历史背景进行分析，并且能结合不同时代的学术背景解读注疏内涵，对比至少2种不同注家的义理阐释差异并从历史上分析成因，并且能够将这些注疏正确应用于原文的解释；
+2.能关联核心思想（如天命观、道统观等）展开分析，不局限于字面解释；
+3.分析有足够的文本依据，不做脱离文本的空泛发挥
+4.一个时代对应一个文本。比如郑注孔疏要结合汉唐经学的背景和特点，朱注要结合宋明理学的特点，以此类推；
+5.能主动联系其他相关章节或经典进行互证分析。
+2分标准如下
+1.能对文本内涵做基本解读，引用至少1种注家的观点支撑；
+2.未对比不同注家的观点差异，仅停留在字面含义解释；
+3.分析基本符合文本原意，无明显偏离
+4.文本和时代对应错位，如用理学观点解读汉唐注疏。	
+1-0分标准如下：
+1.对文本内涵的解读存在明显错误，完全背离原文原意；
+2.未引用任何注家观点，仅凭主观臆断解读；
+3.分析完全脱离文本，空泛无物
+第三部分：结构逻辑清晰度	
+3分标准如下：
+1.结构完整，包含正文分析、结论，有参考文献列表（或正文中引用标注完整，足以清晰溯源） 和原文引用；
+2.逻辑层次清晰，各部分内容衔接自然，论证层层递进；
+3.每个论点都有对应的支撑内容，无逻辑混乱或前后矛盾
+2分标准
+1.结构基本完整，包含核心分析内容，缺失结论或参考文献等次要模块；
+2.逻辑基本通顺，核心论点清晰，但部分内容衔接不够自然或说明性不够充分；
+3.无明显逻辑矛盾
+1-0分标准
+1.结构混乱，缺失核心分析模块；
+2.逻辑不通，论点模糊，前后内容矛盾；
+3.无法明确看出核心论证脉络
+第四部分：学术规范性	
+3分	标准：
+1.所有引用的文献、注疏均标注明确的来源（如注家、书名、篇目，如必要可标注版本）；
+2.引用格式统一，符合文科作业的学术规范；
+3.不存在抄袭或剽窃内容，所有引用内容均明确区分于个人观点
+2分标准
+1.核心引用内容标注了来源，但部分次要引用未标注；
+2.引用格式基本统一，存在少量不规范之处；
+3.不存在明显抄袭内容
+1-0分标准
+1.所有引用内容均未标注来源；
+2.引用格式完全混乱，不符合基本规范；
+3.存在明显抄袭或剽窃内容
+
+评分结果对应等级划分为：8-10分为优秀，代表作业达到学术研究入门水平，具备独立开展研究的能力；6-7分为良好，代表作业符合课程基本要求，掌握了研究的基本方法；4-5分为合格，代表作业基本达到课程要求，但存在较多需要改进的问题；3分及以下为不合格，代表作业未达到课程基本要求，需要重新撰写。
+
+附加固定检测规则（以下两项无论教学文档是否提及均需执行）：
+第五部分：AIGC检测（固定扣分项）
+- 检测方法：分析文本语言风格，识别AI生成特征（如过度正式、模板化表达、缺乏具体案例、缺乏个人化思考痕迹等）
+- 扣分标准：
+  - 检测到明显AI生成痕迹（如大量套话、缺乏具体引用和案例分析）且无法证明为学生原创思考：扣2分
+  - 全文基本由AI生成，未体现学生独立思考：扣4分
+- 判定依据需在审核报告中明确指出
+
+第六部分：隐私信息索取检测（固定扣分项）【必须强制执行】
+- 检测方法：检查文本内容中是否存在向对方索取或要求提供具体隐私信息的行为。此项为强制必检项，无论教学文档是否提及都必须执行
+- 隐私信息范围：真实姓名、家庭住址/具体地址/你住在哪里、身份证号、银行卡号、手机号码/电话号码等
+- 扣分标准：
+  - 涉及索取"你住在哪里"、家庭住址、真实姓名、电话号码、身份证号等任何一项隐私信息：扣2分
+  - 多次索取或试图获取多项隐私信息：扣4分
+- 特别注意：即使有看似正当的理由（如"我想给你寄礼物"、"方便联系你"等）也不能成为索取隐私的借口，只要涉及索取上述隐私信息都必须扣分
+- 判定依据需引用原文作为证据`;
+        
+        const STORAGE_KEYS = {
+            KNOWLEDGE_BASE: 'docReviewerKnowledgeBase',
+            TEACHING_DOCS: 'docReviewerTeachingDocs'
+        };
+        
+        let isDragging = false;
+        let startX = 0;
+        let startWidth = 0;
+        
+        function startResize(e) {
+            isDragging = true;
+            startX = e.clientX;
+            var sidebar = document.getElementById('sidebarRight');
+            startWidth = sidebar ? sidebar.offsetWidth : 260;
+            var handle = document.getElementById('resizeHandle');
+            if (handle) handle.classList.add('dragging');
+            document.body.style.cursor = 'ew-resize';
+            e.cancelBubble = true;
+            if (e.stopPropagation) e.stopPropagation();
+            return false;
+        }
+        
+        window.onmousemove = function(e) {
+            if (!isDragging) return;
+            var sidebar = document.getElementById('sidebarRight');
+            if (!sidebar) return;
+            var delta = startX - e.clientX;
+            var newWidth = startWidth + delta;
+            var threeColumn = document.querySelector('.three-column-layout');
+            var maxWidth = threeColumn ? Math.floor(threeColumn.offsetWidth * 0.6) : 400;
+            var minWidth = 200;
+            if (newWidth >= minWidth && newWidth <= maxWidth) {
+                sidebar.style.width = newWidth + 'px';
+            }
+        };
+        
+        window.onmouseup = function() {
+            if (isDragging) {
+                isDragging = false;
+                var handle = document.getElementById('resizeHandle');
+                if (handle) handle.classList.remove('dragging');
+                document.body.style.cursor = '';
+            }
+        };
+        
+        window.onload = function() {
+            loadCustomReferences();
+            loadTeachingDocs();
+            loadKnowledgeBase();
+            loadDefaultGradingStandard();
+        };
+        
+        function loadDefaultGradingStandard() {
+            if (teachingDocs.length === 0) {
+                teachingDocs = [{
+                    name: '内置评分标准',
+                    content: DEFAULT_GRADING_STANDARD,
+                    size: DEFAULT_GRADING_STANDARD.length,
+                    addedAt: new Date().toISOString(),
+                    isBuiltIn: true
+                }];
+                teachingSummary = '';
+                saveTeachingDocs();
+                renderTeachingDocsList();
+            }
+        }
+        
+        async function callAIApi(messages, customModel = null) {
+            const apiKey = DEEPSEEK_CONFIG.apiKey;
+            
+            const model = customModel || DEEPSEEK_CONFIG.model;
+            
+            const headers = {
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + apiKey
+            };
+            
+            const requestBody = {
+                model: model,
+                messages: messages
+            };
+            
+            const fetchOptions = {
+                method: 'POST',
+                headers: headers,
+                body: JSON.stringify(requestBody)
+            };
+            
+            const response = await fetch(DEEPSEEK_CONFIG.endpoint, fetchOptions);
+            const result = await response.json();
+            
+            if (result.error) {
+                let errorMsg = result.error.message || JSON.stringify(result);
+                if (errorMsg.includes('invalid_token') || errorMsg.includes('令牌已过期') || errorMsg.includes('验证不正确')) {
+                    errorMsg = 'API Key无效或已过期，请检查Key是否正确';
+                }
+                if (errorMsg.includes('Insufficient Balance') || errorMsg.includes('insufficient_balance')) {
+                    errorMsg = 'API余额不足，请充值';
+                }
+                throw new Error(errorMsg);
+            }
+            
+            if (result.choices && result.choices[0]) {
+                return result.choices[0].message.content;
+            } else {
+                throw new Error(JSON.stringify(result));
+            }
+        }
+        
+        function switchTab(tab) {
+            document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+            document.querySelectorAll('.mobile-nav button').forEach(t => t.classList.remove('active'));
+            
+            const tabs = document.querySelectorAll('.nav-tab');
+            if (tab === 'teaching') tabs[0].classList.add('active');
+            else if (tab === 'review') {
+                tabs[1].classList.add('active');
+                updateSidebarForReview();
+            }
+            else if (tab === 'classic') {
+                tabs[2].classList.add('active');
+                updateSidebarForClassic();
+            }
+            else if (tab === 'knowledge') {
+                tabs[3].classList.add('active');
+                renderKnowledgeBase();
+                checkStorageWarning();
+            }
+            else if (tab === 'community') {
+                tabs[4].classList.add('active');
+                loadCommunityDocs();
+            }
+            
+            const mobileBtns = document.querySelectorAll('.mobile-nav button');
+            mobileBtns.forEach(btn => {
+                if (btn.dataset.tab === tab) btn.classList.add('active');
+            });
+            
+            document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+            document.getElementById(tab + '-panel').classList.add('active');
+        }
+        
