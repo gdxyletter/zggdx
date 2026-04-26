@@ -1,0 +1,29 @@
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        
+        :root {
+            --bg-primary: #f5f0eb;
+            --bg-secondary: #ebe5dd;
+            --bg-card: #fdfbf8;
+            --bg-sidebar: #ebe5dd;
+            --text-primary: #2c2416;
+            --text-secondary: #5a4d3a;
+            --text-muted: #8a7d6a;
+            --accent: #7a5c44;
+            --accent-light: #a67c5a;
+            --border: #d4c8b8;
+            --border-light: #e5ddd3;
+            --white: #ffffff;
+        }
+        
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+        
+        .academic-body {
+            font-family: 'Crimson Pro', 'Times New Roman', serif;
+        }
+        
