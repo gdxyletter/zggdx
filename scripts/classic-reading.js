@@ -1,7 +1,98 @@
         let currentClassicText = '';
         let selectedSentence = '';
         let currentReadingFontSize = 18;
+        let classicClient = null;
         
+        const CLASSIC_SUPABASE_URL = 'https://jvpigxbiwmwvxiawcjml.supabase.co';
+        const CLASSIC_SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imp2cGlneGJpd213dnhpYXdjam1sIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzQ0OTg5MzksImV4cCI6MjA5MDA3NDkzOX0._HuO96XxWQAyyMlVDdwst-1bxYzWW0lT2827SvGn_8w';
+        
+        const CLASSIC_DELETE_PASSWORD_HASH = '6f54f53188d3a33cb7ba279e668109925bb780886328b53c9f6c8dece6ab3899';
+        
+        async function sha256Text(text) {
+            if (!window.crypto || !window.crypto.subtle) {
+                throw new Error('当前浏览器不支持密码校验');
+            }
+            const data = new TextEncoder().encode(text);
+            const digest = await window.crypto.subtle.digest('SHA-256', data);
+            return Array.from(new Uint8Array(digest))
+                .map(byte => byte.toString(16).padStart(2, '0'))
+                .join('');
+        }
+        
+        async function verifyClassicDeletePermission(id) {
+            const passwordInput = prompt('请输入删除密码：');
+            if (passwordInput === null) {
+                return false;
+            }
+            
+            const passwordHash = await sha256Text(passwordInput.trim());
+            if (passwordHash !== CLASSIC_DELETE_PASSWORD_HASH) {
+                alert('密码错误，不能删除笔记');
+                return false;
+            }
+            
+            return true;
+        }
+        
+function openRichTextEditor() {
+            const input = document.getElementById('annotationInput');
+            const editor = document.getElementById('richTextEditor');
+            const modal = document.getElementById('richTextModal');
+            
+            let plainText = input.value.replace(/<[^>]*>/g, '');
+            editor.value = plainText;
+            document.getElementById('fontSizeSelect').value = '';
+            modal.style.display = 'flex';
+        }
+        
+        function closeRichTextEditor() {
+            document.getElementById('richTextModal').style.display = 'none';
+        }
+        
+function toggleBold() {
+            const editor = document.getElementById('richTextEditor');
+            if (!editor.value) { alert('请先输入文字'); return; }
+            editor.value = '<b>' + editor.value + '</b>';
+        }
+        
+        function toggleItalic() {
+            const editor = document.getElementById('richTextEditor');
+            if (!editor.value) { alert('请先输入文字'); return; }
+            editor.value = '<i>' + editor.value + '</i>';
+        }
+        
+        function toggleUnderline() {
+            const editor = document.getElementById('richTextEditor');
+            if (!editor.value) { alert('请先输入文字'); return; }
+            editor.value = '<u>' + editor.value + '</u>';
+        }
+        
+        function toggleFontSize(value) {
+            if (!value) return;
+            const editor = document.getElementById('richTextEditor');
+            if (!editor.value) { alert('请先输入文字'); return; }
+            const sizes = { '1': '10px', '2': '12px', '3': '14px', '4': '16px', '5': '18px', '6': '20px', '7': '24px' };
+            editor.value = '<span style="font-size:' + sizes[value] + '">' + editor.value + '</span>';
+        }
+        
+        function applyRichText() {
+            const editor = document.getElementById('richTextEditor');
+            const input = document.getElementById('annotationInput');
+            input.value = editor.value;
+            closeRichTextEditor();
+        }
+        
+        function closeRichTextEditor() {
+            document.getElementById('richTextModal').style.display = 'none';
+        }
+        
+        function getClassicClient() {
+            if (!classicClient) {
+                classicClient = window.supabase.createClient(CLASSIC_SUPABASE_URL, CLASSIC_SUPABASE_KEY);
+            }
+            return classicClient;
+        }
+
         function updateSidebarForReview() {
             document.getElementById('annotationSection').style.display = 'none';
             document.getElementById('defaultAnnotationSection').style.display = 'none';
@@ -114,7 +205,7 @@
             }
             
             container.innerHTML = html;
-        }
+}
         
         function selectSentence(sentence) {
             selectedSentence = sentence;
@@ -136,8 +227,10 @@
             // 更新左边栏
             document.getElementById('selectedSentenceText').textContent = sentence;
             document.getElementById('annotationInput').value = '';
+            document.getElementById('publishAnnotationCheckbox').checked = false;
             
-            // 加载历史批注
+            // 加载公共笔记和私人笔记
+            loadPublicAnnotations(sentence);
             loadHistoricalAnnotations(sentence);
             
             // 检查是否启用自动检测
@@ -146,20 +239,80 @@
                 runAutoAnalysisForSentence(sentence);
             }
         }
-        
+
         function runAutoAnalysisForSentence(sentence) {
             // 将选中的句子设置为reviewContent，然后调用runAutoAnalysis
             document.getElementById('reviewContent').value = sentence;
             runAutoAnalysis();
         }
+
+        async function loadPublicAnnotations(sentence) {
+            const container = document.getElementById('publicAnnotations');
+            container.innerHTML = '<p style="font-size: 11px; color: var(--text-muted); text-align: center; padding: 10px;">加载中...</p>';
+            
+            try {
+                const client = getClassicClient();
+                const { data, error } = await client
+                    .from('classic_annotations')
+                    .select('*')
+                    .eq('sentence', sentence)
+                    .eq('is_public', true)
+                    .order('created_at', { ascending: false });
+                
+                if (error) throw error;
+                
+                if (!data || data.length === 0) {
+                    container.innerHTML = '<p style="font-size: 11px; color: var(--text-muted); text-align: center; padding: 10px;">暂无公共笔记</p>';
+                    return;
+                }
+                
+                container.innerHTML = data.map(ann => `
+                    <div class="annotation-item" style="position: relative;">
+                        ${ann.content}
+                        <div class="timestamp">${new Date(ann.created_at).toLocaleString()}</div>
+                        <button class="delete-btn" onclick="deletePublicAnnotation(${ann.id})" title="删除笔记">✕</button>
+                    </div>
+                `).join('');
+            } catch (e) {
+                container.innerHTML = '<p style="font-size: 11px; color: var(--text-muted); text-align: center; padding: 10px;">加载失败</p>';
+                console.error('加载公共笔记失败:', e);
+            }
+        }
         
-        function saveAnnotation() {
+        async function deletePublicAnnotation(id) {
+            if (!confirm('确定要删除这条公共笔记吗？')) return;
+            
+            const hasPermission = await verifyClassicDeletePermission(id);
+            if (!hasPermission) return;
+            
+            try {
+                const client = getClassicClient();
+                const { error } = await client
+                    .from('classic_annotations')
+                    .delete()
+                    .eq('id', id);
+                
+                if (error) throw error;
+                
+                // 刷新显示
+                loadPublicAnnotations(selectedSentence);
+            } catch (e) {
+                alert('删除失败: ' + e.message);
+                console.error('删除公共笔记失败:', e);
+            }
+        }
+
+        async function saveAnnotation() {
             const annotation = document.getElementById('annotationInput').value.trim();
             if (!annotation || !selectedSentence) {
-                alert('请先选择句子并输入批注内容');
+                alert('请先选择句子并输入笔记内容');
                 return;
             }
             
+            const isPublicCheckbox = document.getElementById('publishAnnotationCheckbox');
+            const isPublic = isPublicCheckbox.checked;
+            
+            // 保存到 localStorage (私人笔记)
             const annotations = JSON.parse(localStorage.getItem('classicAnnotations') || '{}');
             if (!annotations[selectedSentence]) {
                 annotations[selectedSentence] = [];
@@ -173,13 +326,32 @@
             
             localStorage.setItem('classicAnnotations', JSON.stringify(annotations));
             
+            // 如果选择了公开，则同时保存到 Supabase
+            if (isPublic) {
+                try {
+                    const client = getClassicClient();
+                    await client.from('classic_annotations').insert({
+                        sentence: selectedSentence,
+                        content: annotation,
+                        is_public: true
+                    });
+                } catch (e) {
+                    console.error('保存到公共笔记失败:', e);
+                }
+            }
+            
             // 清空输入框
             document.getElementById('annotationInput').value = '';
+            document.getElementById('publishAnnotationCheckbox').checked = false;
             
-            // 重新加载历史批注
+            // 重新加载私人笔记
             loadHistoricalAnnotations(selectedSentence);
+            // 如果是公开的，也刷新公共笔记
+            if (isPublic) {
+                loadPublicAnnotations(selectedSentence);
+            }
             
-            alert('批注已保存');
+            alert(isPublic ? '笔记已保存并公开' : '私人笔记已保存');
         }
         
         function loadHistoricalAnnotations(sentence) {
@@ -189,21 +361,21 @@
             const container = document.getElementById('historicalAnnotations');
             
             if (sentenceAnnotations.length === 0) {
-                container.innerHTML = '<p style="font-size: 11px; color: var(--text-muted); text-align: center; padding: 10px;">暂无批注</p>';
+                container.innerHTML = '<p style="font-size: 11px; color: var(--text-muted); text-align: center; padding: 10px;">暂无私人笔记</p>';
                 return;
             }
             
             container.innerHTML = sentenceAnnotations.map((ann, idx) => `
                 <div class="annotation-item" style="position: relative;">
-                    ${ann.content}
+                    <div class="annotation-content">${ann.content}</div>
                     <div class="timestamp">${new Date(ann.timestamp).toLocaleString()}</div>
-                    <button class="delete-btn" onclick="deleteAnnotation('${sentence.replace(/'/g, "\\'")}', ${idx})" title="删除批注">✕</button>
+                    <button class="delete-btn" onclick="deleteAnnotation('${sentence.replace(/'/g, "\\'")}', ${idx})" title="删除笔记">✕</button>
                 </div>
             `).join('');
         }
         
         function deleteAnnotation(sentence, index) {
-            if (!confirm('确定要删除这条批注吗？')) return;
+            if (!confirm('确定要删除这条笔记吗？')) return;
             
             const annotations = JSON.parse(localStorage.getItem('classicAnnotations') || '{}');
             if (annotations[sentence]) {
@@ -254,12 +426,52 @@
         
         // 初始化经典阅读
         function initClassicReading() {
-            // 加载已保存的批注数量统计
+            // 加载已保存的笔记数量统计
             const annotations = JSON.parse(localStorage.getItem('classicAnnotations') || '{}');
             const totalAnnotations = Object.keys(annotations).length;
             
-            // 可以在这里添加更多初始化逻辑
-            console.log(`经典阅读模块已初始化，已保存 ${totalAnnotations} 个句子的批注`);
+            console.log(`经典阅读模块已初始化，已保存 ${totalAnnotations} 个句子的笔记`);
+            
+            // 初始化左边栏宽度调节
+            initSidebarResize();
+        }
+        
+        function initSidebarResize() {
+            const sidebar = document.getElementById('sidebarLeft');
+            const resizer = document.getElementById('sidebarResizer');
+            if (!sidebar || !resizer) return;
+            
+            let isResizing = false;
+            
+            resizer.addEventListener('mousedown', (e) => {
+                isResizing = true;
+                resizer.classList.add('resizing');
+                document.body.style.cursor = 'ew-resize';
+                document.body.style.userSelect = 'none';
+            });
+            
+            document.addEventListener('mousemove', (e) => {
+                if (!isResizing) return;
+                
+                const newWidth = e.clientX - sidebar.getBoundingClientRect().left;
+                const minWidth = 180;
+                const maxWidth = 400;
+                
+                if (newWidth >= minWidth && newWidth <= maxWidth) {
+                    sidebar.style.width = newWidth + 'px';
+                    sidebar.style.minWidth = newWidth + 'px';
+                    sidebar.style.maxWidth = newWidth + 'px';
+                }
+            });
+            
+            document.addEventListener('mouseup', () => {
+                if (isResizing) {
+                    isResizing = false;
+                    resizer.classList.remove('resizing');
+                    document.body.style.cursor = '';
+                    document.body.style.userSelect = '';
+                }
+            });
         }
         
         // 页面加载时初始化

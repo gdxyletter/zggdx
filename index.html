@@ -36,6 +36,7 @@
         <div class="three-column-layout">
             <!-- Left Sidebar -->
             <aside class="sidebar-left" id="sidebarLeft">
+                <div class="sidebar-resizer" id="sidebarResizer"></div>
                 <div class="sidebar-section">
                     <div class="sidebar-title">批注笔记</div>
                     <div id="annotationSection" style="display: none; flex-direction: column; overflow-y: auto;">
@@ -43,18 +44,29 @@
                             <div class="sidebar-title" style="font-size: 11px; margin-bottom: 8px;">当前选中句子</div>
                             <div id="selectedSentenceText" class="selected-text"></div>
                         </div>
-                        <div class="annotation-input" style="flex-shrink: 0;">
-                            <textarea id="annotationInput" class="textarea-area" placeholder="添加批注..." style="min-height: 80px; max-height: 120px; margin-bottom: 8px;"></textarea>
-                            <button onclick="saveAnnotation()" class="sidebar-btn">保存批注</button>
+                        <div class="public-annotations">
+                            <div class="sidebar-title" style="font-size: 11px; margin: 8px 0;">公共笔记</div>
+                            <div id="publicAnnotations" class="annotation-list" style="max-height: 120px; overflow-y: auto; display: block; overflow-x: hidden;"></div>
                         </div>
-                        <div class="historical-annotations">
-                            <div class="sidebar-title" style="font-size: 11px; margin: 12px 0 8px 0;">历史批注</div>
-                            <div id="historicalAnnotations" class="annotation-list" style="max-height: 150px; overflow-y: auto; display: block; overflow-x: hidden;"></div>
+                        <div class="annotation-input" style="flex-shrink: 0; border-top: 1px solid var(--border-color); padding-top: 8px;">
+                            <textarea id="annotationInput" class="textarea-area" placeholder="添加私人笔记..." style="min-height: 80px; max-height: 120px; margin-bottom: 8px;"></textarea>
+                            <div style="display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-bottom: 8px;">
+                                <label style="display: flex; align-items: center; gap: 4px; font-size: 11px; cursor: pointer;">
+                                    <input type="checkbox" id="publishAnnotationCheckbox">
+                                    公开此笔记
+                                </label>
+                                <button onclick="openRichTextEditor()" class="sidebar-btn" style="padding: 4px 10px; font-size: 11px;">展开</button>
+                            </div>
+                            <button onclick="saveAnnotation()" class="sidebar-btn">保存笔记</button>
+                        </div>
+                        <div class="private-annotations">
+                            <div class="sidebar-title" style="font-size: 11px; margin: 12px 0 8px 0;">私人笔记</div>
+                            <div id="historicalAnnotations" class="annotation-list" style="max-height: 120px; overflow-y: auto; display: block; overflow-x: hidden;"></div>
                         </div>
                     </div>
                     <div id="defaultAnnotationSection">
                         <p style="font-size: 12px; color: var(--text-muted); text-align: center; padding: 20px;">
-                            选择经典阅读模式后，选中句子即可在此添加批注
+                            选择经典阅读模式后，选中句子即可在此添加笔记
                         </p>
                     </div>
                 </div>
@@ -365,6 +377,36 @@
         <button onclick="switchTab('classic')" data-tab="classic">经典阅读</button>
         <button onclick="switchTab('knowledge')" data-tab="knowledge">知识库</button>
         <button onclick="switchTab('community')" data-tab="community">学术社区</button>
+    </div>
+    
+    <!-- Rich Text Editor Modal -->
+    <div id="richTextModal" class="modal" style="display: none;">
+        <div class="modal-content" style="max-width: 500px;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+                <h3 style="margin: 0; font-size: 16px;">富文本编辑</h3>
+                <button class="modal-close" onclick="closeRichTextEditor()">关闭</button>
+            </div>
+            <div style="display: flex; gap: 6px; margin-bottom: 12px; flex-wrap: wrap;">
+                <button type="button" onclick="toggleBold()" style="padding: 6px 10px; border: 1px solid var(--border); background: var(--bg-card); border-radius: 4px; cursor: pointer;"><b>B</b></button>
+                <button type="button" onclick="toggleItalic()" style="padding: 6px 10px; border: 1px solid var(--border); background: var(--bg-card); border-radius: 4px; cursor: pointer;"><i>I</i></button>
+                <button type="button" onclick="toggleUnderline()" style="padding: 6px 10px; border: 1px solid var(--border); background: var(--bg-card); border-radius: 4px; cursor: pointer;"><u>U</u></button>
+                <select id="fontSizeSelect" onchange="toggleFontSize(this.value)" style="padding: 6px 8px; border: 1px solid var(--border); border-radius: 4px;">
+                    <option value="">字号</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    <option value="6">6</option>
+                    <option value="7">7</option>
+                </select>
+            </div>
+            <textarea id="richTextEditor" style="min-height: 150px; border: 1px solid var(--border); border-radius: 8px; padding: 12px; overflow-y: auto; background: var(--bg-card); font-size: 14px; line-height: 1.6; width: 100%; box-sizing: border-box;"></textarea>
+            <div style="display: flex; gap: 8px; margin-top: 12px; justify-content: flex-end;">
+                <button onclick="closeRichTextEditor()" style="padding: 8px 16px; border: 1px solid var(--border); background: var(--bg-card); border-radius: 6px; cursor: pointer;">取消</button>
+                <button onclick="applyRichText()" style="padding: 8px 16px; background: var(--accent); color: white; border: none; border-radius: 6px; cursor: pointer;">应用</button>
+            </div>
+        </div>
     </div>
     
     <!-- Modal for community doc view -->
