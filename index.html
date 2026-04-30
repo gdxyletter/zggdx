@@ -219,10 +219,12 @@
                         <label class="input-label">选择经典著作</label>
                         <select id="classicSelector" class="doc-name-input" onchange="loadClassicText()">
                             <option value="">请选择经典著作...</option>
-                            <option value="lunyu">论语</option>
+                           
                             <option value="mengzi">孟子</option>
-                            <option value="daxue_gu">大学（郑玄古本）</option>
-                            <option value="daxue_jin">大学（朱熹今本）</option>
+                            <option value="daxue">大学</option>
+                                                        <option value="daxue_zhuzhu">大学章句集注</option>
+                            <option value="lunyu_jizhu">论语集注</option>
+                            <option value="zhongyong">中庸</option>
                             <!-- 更多书籍来源将在这里添加 -->
                         </select>
                     </div>
@@ -383,7 +385,7 @@
     <div id="richTextModal" class="modal" style="display: none;">
         <div class="modal-content" style="max-width: 500px;">
             <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
-                <h3 style="margin: 0; font-size: 16px;">富文本编辑</h3>
+                <h3 style="margin: 0; font-size: 16px;">编辑</h3>
                 <button class="modal-close" onclick="closeRichTextEditor()">关闭</button>
             </div>
             <div style="display: flex; gap: 6px; margin-bottom: 12px; flex-wrap: wrap;">
@@ -437,6 +439,7 @@
     <script src="scripts/analysis.js"></script>
     <script src="scripts/community.js"></script>
     <script src="scripts/reference-detection.js"></script>
+    <script src="scripts/classic-texts.js"></script>
     <script src="scripts/classic-reading.js"></script>
 </body>
 </html>
