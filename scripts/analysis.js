@@ -60,23 +60,30 @@
                 return 100;
             }
 
-            if (segmentNormalized.length <= 3 || scriptureNormalized.length <= 3) {
+            // 宽松匹配：只要有一段连续字符匹配即可
+            const minLen = Math.min(segmentNormalized.length, scriptureNormalized.length);
+            const checkLen = Math.max(3, Math.floor(minLen * 0.5));
+            
+            if (segmentNormalized.length <= 2 || scriptureNormalized.length <= 2) {
                 return 0;
             }
 
             if (scriptureNormalized.includes(segmentNormalized)) {
                 const coverage = segmentNormalized.length / scriptureNormalized.length;
-                const isEdgeMatch = scriptureNormalized.startsWith(segmentNormalized) || scriptureNormalized.endsWith(segmentNormalized);
-                if (!isEdgeMatch && coverage < 0.15) {
-                    return 0;
-                }
-
                 return Math.round(82 + Math.min(16, coverage * 20));
             }
 
             if (segmentNormalized.includes(scriptureNormalized)) {
                 const coverage = scriptureNormalized.length / segmentNormalized.length;
                 return Math.round(72 + Math.min(16, coverage * 20));
+            }
+
+            // 新增：检查是否包含对方的前N个字符（模糊匹配）
+            if (segmentNormalized.substring(0, checkLen) === scriptureNormalized.substring(0, checkLen)) {
+                return 60;
+            }
+            if (segmentNormalized.substring(segmentNormalized.length - checkLen) === scriptureNormalized.substring(scriptureNormalized.length - checkLen)) {
+                return 60;
             }
 
             return 0;
@@ -242,61 +249,33 @@
         }
 
         function getCitationCommentaryItems(group) {
-            const items = [];
-            const seen = new Set();
-
-            const pushItem = (commentator, mainText, extraText = '') => {
-                const cleanedMainText = cleanCitationDisplayText(mainText);
-                const cleanedExtraText = cleanCitationDisplayText(extraText);
-
-                if (!cleanedMainText) {
-                    return;
-                }
-
-                const key = `${commentator}||${cleanedMainText}||${cleanedExtraText}`;
-                if (seen.has(key)) {
-                    return;
-                }
-
-                seen.add(key);
-                items.push({
-                    commentator,
-                    quote: group.scriptureContent,
-                    mainText: cleanedMainText,
-                    extraText: cleanedExtraText
-                });
+            var items = [];
+            var seen = new Set();
+            var commentatorMap = {
+                note_heyan: '何晏',
+                note_zhuxi: '朱熹',
+                note_liubaonan: '刘宝楠',
+                note_zheng: '郑玄',
+                note_kong: '孔颖达',
+                note_jia: '贾公彦',
+                note_su: '疏',
+                note_lu: '陆德明'
             };
-
-            group.items.forEach(item => {
-                const citation = item.citation;
-                const dedicatedNotes = [
-                    ['郑玄', citation.note_zheng],
-                    ['孔颖达', citation.note_kong],
-                    ['朱熹', citation.note_zhu],
-                    ['贾公彦', citation.note_jia],
-                    ['疏', citation.note_su],
-                    ['陆德明', citation.note_lu]
-                ].filter(([, value]) => value && String(value).trim());
-
-                if (dedicatedNotes.length > 0) {
-                    dedicatedNotes.forEach(([commentator, value]) => {
-                        pushItem(commentator, value);
-                    });
-                    return;
+            for (var i = 0; i < group.items.length; i++) {
+                var item = group.items[i];
+                var citation = item.citation;
+                for (var key in citation) {
+                    if (key.substring(0, 5) === 'note_' && citation[key]) {
+                        var txt = String(citation[key]).trim();
+                        if (!txt) continue;
+                        var name = commentatorMap[key] || key.replace('note_', '').replace(/_/g, ' ');
+                        var k2 = name + '||' + txt;
+                        if (seen.has(k2)) continue;
+                        seen.add(k2);
+                        items.push({ commentator: name, quote: group.scriptureContent, mainText: txt, extraText: '' });
+                    }
                 }
-
-                const commentator = citation.commentator || '原文';
-                const mainText = citation.translation || citation.note || '';
-                const normalizedMain = normalizeCitationLookupText(mainText);
-                const normalizedTranslation = normalizeCitationLookupText(citation.translation);
-                const normalizedNote = normalizeCitationLookupText(citation.note);
-                const extraText = citation.note && normalizedMain !== normalizedNote
-                    ? citation.note
-                    : '';
-
-                pushItem(commentator, mainText, extraText);
-            });
-
+            }
             return items;
         }
 
@@ -348,28 +327,59 @@
             `;
         }
 
-        function renderCitationGroupCard(group) {
-            const commentaryItems = getCitationCommentaryItems(group);
-            const commentators = Array.from(new Set(commentaryItems.map(item => item.commentator)));
-            const commentatorLabel = commentators.length > 1 ? '多家注释' : '相关注释';
-            const gloss = getCitationGroupGloss(group);
+         function renderCitationGroupCard(group) {
+             // 直接从 group.items 提取所有 note_* 注释，避免 getCitationCommentaryItems 遗漏
+             const allNoteItems = [];
+             const seenNotes = new Set();
+             const commentatorMap = {
+                 note_heyan: '何晏',
+                 note_zhuxi: '朱熹',
+                 note_liubaonan: '刘宝楠',
+                 note_zheng: '郑玄',
+                 note_kong: '孔颖达',
+                 note_jia: '贾公彦',
+                 note_su: '疏',
+                 note_lu: '陆德明'
+             };
 
-            return `
-                <div class="citation-group-card">
-                    <div class="citation-group-title">${getCitationGroupTitle(group)} 内证互参</div>
-                    <div class="citation-group-meta">${commentatorLabel}：${safeAnalysisHtml(commentators.join('、') || '待补充')}</div>
-                    ${gloss ? `<div class="citation-group-gloss">义解：${safeAnalysisHtml(gloss)}</div>` : ''}
-                    <div class="citation-scripture-banner">
-                        <span class="citation-scripture-label">[经文]</span>
-                        <span>"${safeAnalysisHtml(group.scriptureContent)}"</span>
-                    </div>
-                    <div class="citation-commentary-list">
-                        ${commentaryItems.map(renderCitationCommentaryItem).join('')}
-                    </div>
-                    ${renderCitationAnalysisBlock(group)}
-                </div>
-            `;
-        }
+             group.items.forEach(item => {
+                 const citation = item.citation;
+                 if (!citation) return;
+                 Object.keys(citation).forEach(key => {
+                     if (key.startsWith('note_') && citation[key]) {
+                         const txt = String(citation[key]).trim();
+                         if (!txt) return;
+                         const name = commentatorMap[key] || key.replace('note_', '').replace(/_/g, ' ');
+                         const key2 = name + '||' + txt;
+                         if (seenNotes.has(key2)) return;
+                         seenNotes.add(key2);
+                         allNoteItems.push({ commentator: name, quote: group.scriptureContent, mainText: txt, extraText: '' });
+                     }
+                 });
+             });
+
+             const commentators = Array.from(new Set(allNoteItems.map(item => item.commentator)));
+             const commentatorLabel = commentators.length > 1 ? '多家注释' : '相关注释';
+             const gloss = getCitationGroupGloss(group);
+
+             return `
+                 <div class="citation-group-card">
+                     <div class="citation-group-title">${getCitationGroupTitle(group)} 内证互参</div>
+                     <div class="citation-group-meta">${commentatorLabel}：${safeAnalysisHtml(commentators.join('、') || '待补充')}</div>
+                     ${gloss ? `<div class="citation-group-gloss">义解：${safeAnalysisHtml(gloss)}</div>` : ''}
+                     <div class="citation-scripture-banner">
+                         <span class="citation-scripture-label">[经文]</span>
+                         <span>"${safeAnalysisHtml(group.scriptureContent)}"</span>
+                     </div>
+                     <div class="citation-commentary-list">
+                         ${allNoteItems.length > 0 
+                             ? allNoteItems.map(item => renderCitationCommentaryItem(item)).join('') 
+                             : '<div style="font-size: 12px; color: var(--text-muted); padding: 8px;">暂无注释</div>'}
+                     </div>
+                     ${renderCitationAnalysisBlock(group)}
+                 </div>
+             `;
+         }
 
         function runAutoAnalysis() {
             const content = document.getElementById('reviewContent').value;
