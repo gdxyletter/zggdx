@@ -246,17 +246,11 @@
 
         // 主函数: 自动识别参考文献
         async function autoDetectReferences(text) {
-            if (!text || text.length < 2) return [];
+            if (!text || text.length < 10) return [];
             
             // 步骤1: 正则识别
-            let citations = detectCitationFormats(text);
+            const citations = detectCitationFormats(text);
             console.log('正则识别结果:', citations);
-            
-            // 步骤1.5: 正则未匹配到，尝试根据经文内容匹配
-            if (citations.length === 0) {
-                citations = detectScriptureByContent(text);
-                console.log('经文内容匹配结果:', citations);
-            }
             
             if (citations.length === 0) return [];
             
@@ -273,28 +267,22 @@
                     source: 'unknown'
                 };
                 
-                // 优先使用经文内容匹配到的完整注释数据
-                if (citation.matchedRef) {
+                // 查询本地
+                const localData = queryLocalReferences(
+                    citation.classicName, 
+                    citation.aiChapter || citation.chapter,
+                    citation.aiVerse || citation.verse
+                );
+                
+                if (localData && localData.length > 0) {
                     data.source = 'local';
-                    data.localRefs = [citation.matchedRef];
+                    data.localRefs = localData;
                 } else {
-                    // 查询本地
-                    const localData = queryLocalReferences(
-                        citation.classicName, 
-                        citation.aiChapter || citation.chapter,
-                        citation.aiVerse || citation.verse
-                    );
-                    
-                    if (localData && localData.length > 0) {
-                        data.source = 'local';
-                        data.localRefs = localData;
-                    } else {
-                        // 尝试外部API
-                        const externalData = await fetchExternalAPIData(citation.classicName);
-                        if (externalData) {
-                            data.source = 'external';
-                            data.externalData = externalData;
-                        }
+                    // 尝试外部API
+                    const externalData = await fetchExternalAPIData(citation.classicName);
+                    if (externalData) {
+                        data.source = 'external';
+                        data.externalData = externalData;
                     }
                 }
                 
@@ -314,44 +302,6 @@
             return result;
         }
 
-        // 根据经文内容在references.js中查找匹配
-        function detectScriptureByContent(text) {
-            const refs = getMergedReferences?.() || [];
-            if (!text || text.length < 2) return [];
-            
-            const results = [];
-            const seen = new Set();
-            
-            // 清理输入文本：去掉标点、空格、引号等
-            const cleanText = text.replace(/[，。！？、；：""''《》（）\s\-·]/g, '').trim();
-            if (cleanText.length < 2) return [];
-            
-            for (const ref of refs) {
-                if (!ref.scripture_content) continue;
-                const cleanScripture = ref.scripture_content.replace(/[，。！？、；：""''《》（）\s\-·]/g, '').trim();
-                
-                // 模糊匹配：经文内容包含选中文本，或选中文本包含经文内容（至少匹配4个字符）
-                if (cleanScripture.includes(cleanText) || cleanText.includes(cleanScripture) ||
-                    (cleanText.length >= 4 && cleanScripture.includes(cleanText.substring(0, 4))) ||
-                    (cleanScripture.length >= 4 && cleanText.includes(cleanScripture.substring(0, 4)))) {
-                    const key = ref.classic_title + '|' + ref.chapter + '|' + ref.scripture_content;
-                    if (!seen.has(key)) {
-                        seen.add(key);
-                        results.push({
-                            raw: text,
-                            classicName: ref.classic_title,
-                            chapter: ref.chapter,
-                            scripture_content: ref.scripture_content,
-                            matchType: 'content',
-                            matchedRef: ref  // 直接携带匹配的完整注释数据
-                        });
-                    }
-                }
-            }
-            
-            return results;
-        }
-
         // ========== AI驱动的内证互参和跨文献关联 ==========
 
         // AI分析内证互参 - 找出语义相关的引用（改进版）
@@ -363,11 +313,7 @@
             if (!apiKey) return null;
 
             // 提取用户引用的经典
-            let citedClassics = detectCitationFormats(content);
-            // 正则未匹配到，尝试根据经文内容匹配
-            if (citedClassics.length === 0) {
-                citedClassics = detectScriptureByContent(content);
-            }
+            const citedClassics = detectCitationFormats(content);
             if (citedClassics.length === 0) return null;
 
             const prompt = `分析以下学术文本，找出其中引用的经典之间的语义关联（内证互参）。
@@ -415,11 +361,7 @@ ${citedClassics.filter(c => c.chapter).map(c => `${c.classicName}·${c.chapter}`
             const apiKey = DEEPSEEK_CONFIG?.apiKey;
             if (!apiKey) return null;
 
-            let citedClassics = detectCitationFormats(content);
-            // 正则未匹配到，尝试根据经文内容匹配
-            if (citedClassics.length === 0) {
-                citedClassics = detectScriptureByContent(content);
-            }
+            const citedClassics = detectCitationFormats(content);
             if (citedClassics.length < 2) return null;
 
             const prompt = `分析以下学术文本中不同经典之间的思想关联（跨文献关联）。
@@ -474,11 +416,7 @@ JSON返回格式：
             const apiKey = DEEPSEEK_CONFIG?.apiKey;
             if (!apiKey) return [];
 
-            let citedClassics = detectCitationFormats(content);
-            // 正则未匹配到，尝试根据经文内容匹配
-            if (citedClassics.length === 0) {
-                citedClassics = detectScriptureByContent(content);
-            }
+            const citedClassics = detectCitationFormats(content);
             if (citedClassics.length === 0) return [];
 
             const prompt = `基于以下学术文本，推荐可能相关的其他经典章句。推荐应与文本讨论主题相关。

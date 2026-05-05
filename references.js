@@ -6385,17 +6385,7 @@ const CLASSICS_REFERENCES = [
         "note": "严乎，言可畏敬也。"
     },
     {
-        "classic_title": "礼记",
-        "chapter": "大学",
-        "verse": null,
-        "scripture_content": "心广体胖",
-        "commentator": "孔颖达",
-        "commentary_title": "礼记正义",
-        "dynasty": "唐",
-        "translation": "言内心宽广，则外体胖大。言为之于中，必形见于外也。",
-        "note": "胖，犹大也。三者，言有实于内，显见于外。"
-    },
-    {
+        
         "classic_title": "礼记",
         "chapter": "大学",
         "verse": null,
