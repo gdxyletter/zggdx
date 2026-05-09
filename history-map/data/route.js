@@ -26,8 +26,8 @@ window.historyMapRouteSteps = [
         locationId: "lu_state",
         prompt: "鲁定公十三年（前497），你五十五岁。季桓子接受了齐国送来的女乐，三日不听朝政。你感到政治理想无法在鲁国实现，决定离开这片生于斯长于斯的土地。带着子路、子贡、颜回等弟子，你踏上了未知的周游列国之旅。",
         unlockLocationIds: ["lu_state"],
-        unlockCharacterIds: ["char_kongzi", "char_zi_lu", "char_zi_gong", "char_yan_hui"],
-        unlockEventIds: ["event_depart_lu"]
+        unlockCharacterIds: ["char_kongzi", "char_zi_lu", "char_zi_gong", "char_yan_hui", "char_xiang_xu", "char_yang_hu", "char_ji_huan_zi", "char_nangong_jingshu", "char_tan_zi"],
+        unlockEventIds: ["event_depart_lu", "event_mibing_alliance", "event_ask_laozi"]
     },
     {
         id: 2,
@@ -36,8 +36,8 @@ window.historyMapRouteSteps = [
         locationId: "wei_state",
         prompt: "离开鲁国后，你首先来到了卫国。卫灵公以礼相待，按你在鲁国时的俸禄标准供养你。你住在贤大夫蘧伯玉家中，观察卫国的政事。卫灵公问你军事，你却只愿意谈论礼乐。你还见了卫灵公的夫人南子，这引起了子路的不满……",
         unlockLocationIds: ["wei_state"],
-        unlockCharacterIds: ["char_wei_ling_gong", "char_nan_zi", "char_qu_bo_yu"],
-        unlockEventIds: ["event_arrive_wei"]
+        unlockCharacterIds: ["char_wei_ling_gong", "char_nan_zi", "char_qu_bo_yu", "char_kong_wen_zi"],
+        unlockEventIds: ["event_arrive_wei", "event_jia_gu"]
     },
     {
         id: 3,
@@ -56,7 +56,7 @@ window.historyMapRouteSteps = [
         locationId: "pu",
         prompt: "经过蒲地时，正值公叔氏叛乱。蒲人担心你帮助他们平叛，阻止你通行，强迫你盟誓不再去卫国。你被迫盟誓后出了蒲地东门，却依然决定前往卫国。子贡对此不解，你说：'要盟也，神不听。'——被迫订立的盟约，神明是不会听的。",
         unlockLocationIds: ["pu"],
-        unlockCharacterIds: [],
+        unlockCharacterIds: ["char_gongliang_ru"],
         unlockEventIds: ["event_pu_blocked"]
     },
     {
@@ -86,7 +86,7 @@ window.historyMapRouteSteps = [
         locationId: "zheng_state",
         prompt: "你离开宋国后到达郑国，途中与弟子们一度失散，独自一人站在郑国都城的东门。有一个郑国人形容你'累累若丧家之狗'。你听后不但不恼，反而笑着说：'然哉！然哉！'——确实如此啊！",
         unlockLocationIds: ["zheng_state"],
-        unlockCharacterIds: [],
+        unlockCharacterIds: ["char_zi_chan"],
         unlockEventIds: ["event_zheng_separated"]
     },
     {
@@ -97,7 +97,7 @@ window.historyMapRouteSteps = [
         prompt: "你来到了陈国，在这里居住了约三年，是周游期间停留最久的国家之一。你继续教授弟子，与陈国君臣交往。在陈国的日子相对平静，你得以继续讲学和思考。",
         unlockLocationIds: ["chen_state"],
         unlockCharacterIds: [],
-        unlockEventIds: []
+        unlockEventIds: ["event_wei_succession"]
     },
     {
         id: 9,
@@ -106,7 +106,7 @@ window.historyMapRouteSteps = [
         locationId: "cai_ye",
         prompt: "你来到了楚国的边邑叶地。叶公沈诸梁向你请教为政之道，你回答：'近者说，远者来。'叶公又问关于'直'（正直）的问题，你回答：'父为子隐，子为父隐，直在其中矣。'这段对话成为儒家伦理思想的经典表述。",
         unlockLocationIds: ["cai_ye"],
-        unlockCharacterIds: ["char_ye_gong"],
+        unlockCharacterIds: ["char_ye_gong", "char_he_diao_zhangren"],
         unlockEventIds: ["event_ye_gong_asks"]
     },
     {
@@ -126,7 +126,7 @@ window.historyMapRouteSteps = [
         locationId: "chu_state",
         prompt: "楚昭王听说你在陈蔡之间，派人迎请你，打算封给你七百里书社之地。这是你周游以来获得的最优厚邀请。然而楚国令尹子西以你的才能和弟子们的贤能会威胁楚国大臣地位为由，劝阻了楚昭王。你最终未能入楚。不久之后，楚昭王去世了。",
         unlockLocationIds: ["chu_state"],
-        unlockCharacterIds: ["char_chu_zhao_wang", "char_zi_xi"],
+        unlockCharacterIds: ["char_chu_zhao_wang", "char_zi_xi", "char_jie_yu"],
         unlockEventIds: ["event_chu_zhao_wang_invites"]
     },
     {
@@ -136,7 +136,7 @@ window.historyMapRouteSteps = [
         locationId: "return_lu",
         prompt: "鲁哀公十一年（前484），在周游列国十四年之后，你终于回到了鲁国。你被尊为'国老'，不再求仕，将精力投入到整理六经（诗、书、礼、乐、易、春秋）和教授弟子的工作中。这些工作对中国文化的传承产生了深远影响。五年后，你离开了人世，享年七十三岁。",
         unlockLocationIds: ["return_lu"],
-        unlockCharacterIds: [],
-        unlockEventIds: ["event_return_lu"]
+        unlockCharacterIds: ["char_ji_kang_zi"],
+        unlockEventIds: ["event_return_lu", "event_hunt_lin"]
     }
 ];

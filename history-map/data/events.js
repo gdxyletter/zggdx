@@ -128,5 +128,55 @@ window.historyMapEvents = [
         characterIds: ["char_kongzi", "char_zi_gong", "char_yan_hui"],
         source: "《史记·孔子世家》",
         unlockStep: 12
+    },
+    {
+        id: "event_mibing_alliance",
+        name: "弭兵之盟",
+        locationId: "song_state",
+        summary: "向戌弭兵，晋楚息战，开启春秋后期新格局",
+        detail: "鲁襄公二十七年（前546），孔子出生前五年，在宋国大夫向戌的主持下，晋、楚两国及十四个诸侯国于宋都举行了向戌弭兵之盟，约定停止战争，除齐、秦外各国须向晋、楚同时朝贡。弭兵会盟极大地改变了中原诸侯国的处境：它们不再需要频繁在晋楚之间选边站队，生存压力有所缓解。然而，晋楚两极争霸的结束并不意味着天下走向和平——恰恰相反，晋国内部卿大夫权力膨胀，吴、越崛起挤压南方，新的不稳定因素开始浮现。这是孔子周游列国最重要的宏观历史背景。",
+        characterIds: ["char_xiang_xu"],
+        source: "《左传·襄公二十七年》《史记·十二诸侯年表》",
+        unlockStep: 1
+    },
+    {
+        id: "event_wei_succession",
+        name: "卫父子争国",
+        locationId: "wei_state",
+        summary: "卫灵公卒，蒯聩与辄父子争位，晋赵鞅介入",
+        detail: "卫灵公太子蒯聩因谋杀南子未遂，出奔于晋。卫灵公未及重新册立太子便薨逝，遂由蒯聩之子辄继位，是为卫出公。晋国赵鞅旋即护送流亡的蒯聩返卫夺位，驻于戚邑，形成父子争国的僵局。孔子此时正在卫国，子路问：'卫君待子而为政，子将奚先？'孔子答曰：'必也正名乎！'认为卫国君位不正是一切问题的根源。这场父子争位最终导致子路在蒯聩之乱中殉难。",
+        characterIds: ["char_wei_ling_gong", "char_wei_chu_gong", "char_kuai_kui", "char_zhao_yang", "char_kongzi", "char_zi_lu"],
+        source: "《左传·定公十四年》《左传·哀公二年》《论语·子路》",
+        unlockStep: 8
+    },
+    {
+        id: "event_ask_laozi",
+        name: "适周问礼",
+        locationId: "chengzhou",
+        summary: "孔子与南宫敬叔适周，问礼于老子",
+        detail: "鲁昭公二十四年（前518年），孔子年三十四岁。南宫敬叔言于鲁君，请与孔子适周。鲁君与之一乘车、两马、一竖子俱，适周问礼，见老子。老子送孔子曰：'吾闻富贵者送人以财，仁人者送人以言。吾不能富贵，窃仁人之号，送子以言：聪明深察而近于死者，好议人者也。博辩广大危其身者，发人之恶者也。为人子者毋以有己，为人臣者毋以有己。'孔子自周返鲁后，弟子稍益进。",
+        characterIds: ["char_kongzi", "char_nangong_jingshu", "char_lao_zi"],
+        source: "《史记·孔子世家》",
+        unlockStep: 1
+    },
+    {
+        id: "event_jia_gu",
+        name: "夹谷会盟",
+        locationId: "lu_state",
+        summary: "孔子摄相事，以礼退齐兵，收复失地",
+        detail: "鲁定公十年（前500年），孔子五十二岁。齐鲁会于夹谷，孔子摄行相事。孔子以'有文事者必有武备'之策，具左右司马随行。会盟时齐人奏夷狄之乐、优倡侏儒为戏，孔子历阶登坛斥退曰：'匹夫而营惑诸侯者罪当诛！'齐景公惧而动，知义不若。后齐侯乃归所侵鲁之郓、汶阳、龟阴之田以谢过。此为孔子政治生涯最辉煌的外交成就。",
+        characterIds: ["char_kongzi", "char_lu_ding_gong", "char_qi_jing_gong"],
+        source: "《史记·孔子世家》《左传·定公十年》",
+        unlockStep: 2
+    },
+    {
+        id: "event_hunt_lin",
+        name: "西狩获麟",
+        locationId: "lu_state",
+        summary: "叔孙氏获麟，孔子叹'吾道穷矣'，春秋绝笔",
+        detail: "鲁哀公十四年（前481年），孔子七十一岁。叔孙氏在大野泽猎获一兽，以为不祥。孔子视之，曰：'麟也。'感叹麟出非时，悲泣：'河不出图，洛不出书，吾已矣夫！'又曰：'吾道穷矣！'子贡问：'何为莫知子？'孔子曰：'不怨天，不尤人，下学而上达，知我者其天乎！'孔子所修《春秋》至此绝笔。同年，颜回去世，孔子恸曰：'天丧予！'",
+        characterIds: ["char_kongzi", "char_yan_hui"],
+        source: "《史记·孔子世家》",
+        unlockStep: 12
     }
 ];
