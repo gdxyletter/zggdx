@@ -219,13 +219,16 @@
                 tabs[2].classList.add('active');
                 updateSidebarForClassic();
             }
-            else if (tab === 'knowledge') {
+            else if (tab === 'historyMap') {
                 tabs[3].classList.add('active');
+            }
+            else if (tab === 'knowledge') {
+                tabs[4].classList.add('active');
                 renderKnowledgeBase();
                 checkStorageWarning();
             }
             else if (tab === 'community') {
-                tabs[4].classList.add('active');
+                tabs[5].classList.add('active');
                 loadCommunityDocs();
             }
             
@@ -236,5 +239,12 @@
             
             document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
             document.getElementById(tab + '-panel').classList.add('active');
+
+            var wrapper = document.querySelector('.main-wrapper');
+            if (tab === 'historyMap') {
+                wrapper.classList.add('hm-fullscreen');
+            } else {
+                wrapper.classList.remove('hm-fullscreen');
+            }
         }
         

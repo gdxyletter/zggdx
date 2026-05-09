@@ -25,6 +25,7 @@
                 <button class="nav-tab active" onclick="switchTab('teaching')">提交教学文档</button>
                 <button class="nav-tab" onclick="switchTab('review')">文档审核</button>
                 <button class="nav-tab" onclick="switchTab('classic')">经典阅读</button>
+                <button class="nav-tab" onclick="switchTab('historyMap')">孔子行迹</button>
                 <button class="nav-tab" onclick="switchTab('knowledge')">知识库</button>
                 <button class="nav-tab" onclick="switchTab('community')">学术社区</button>
             </nav>
@@ -247,6 +248,127 @@
                     </div>
                 </div>
                 
+                <!-- History Map Panel -->
+                <div class="panel history-map-panel" id="historyMap-panel">
+                    <div class="content-header">
+                        <h1 class="content-title">孔子行迹</h1>
+                        <div class="content-meta">
+                            <span>跟随孔子周游列国，解锁春秋地图、地点事件与人物故事</span>
+                        </div>
+                    </div>
+
+                        <div class="hm-landing" id="hmLanding">
+                            <div class="instruction-box">
+                                通过互动地图、第一视角游历和人物图鉴，重走孔子周游列国之路。
+                            </div>
+
+                            <div class="feature-cards">
+                                <div class="feature-card" role="button" tabindex="0" onclick="startHistoryMapJourney('free')" onkeydown="if(event.key==='Enter')startHistoryMapJourney('free')">
+                                    <h3 class="feature-card-title">春秋列国地图</h3>
+                                    <p class="feature-card-desc">探索孔子足迹，了解春秋时期地理与列国分布</p>
+                                    <span class="feature-card-action">进入地图 →</span>
+                                </div>
+                                <div class="feature-card" role="button" tabindex="0" onclick="startHistoryMapJourney('journey')" onkeydown="if(event.key==='Enter')startHistoryMapJourney('journey')">
+                                    <h3 class="feature-card-title">第一视角游历</h3>
+                                    <p class="feature-card-desc">跟随孔子路线逐站推进，解锁地点事件与人物故事</p>
+                                    <span class="feature-card-action">开始游历 →</span>
+                                </div>
+                                <div class="feature-card" role="button" tabindex="0" onclick="startHistoryMapJourney('atlas')" onkeydown="if(event.key==='Enter')startHistoryMapJourney('atlas')">
+                                    <h3 class="feature-card-title">人物图鉴</h3>
+                                    <p class="feature-card-desc">结识孔子及其弟子、诸侯，解锁人物档案</p>
+                                    <span class="feature-card-action">查看图鉴 →</span>
+                                </div>
+                            </div>
+
+                            <button id="hmContinueBtn" class="primary-btn hm-btn-continue" onclick="startHistoryMapJourney('journey')">开始游历</button>
+                        </div>
+
+                    <div class="hm-workspace hidden" id="hmWorkspace">
+                        <div class="hm-subnav">
+                            <button class="hm-subnav-tab active" data-hm-tab="map" onclick="hmSwitchTab('map')">地图探索</button>
+                            <button class="hm-subnav-tab" data-hm-tab="journey" onclick="hmSwitchTab('journey')">第一视角游历</button>
+                            <button class="hm-subnav-tab" data-hm-tab="atlas" onclick="hmSwitchTab('atlas')">人物图鉴</button>
+                            <button class="hm-subnav-tab" data-hm-tab="about" onclick="hmSwitchTab('about')">项目说明</button>
+                            <button class="hm-subnav-back" onclick="backToHistoryMapLanding()">返回</button>
+                        </div>
+                        <div class="hm-content-wrapper">
+                            <div class="hm-map-area" id="hmMapArea">
+                                <div id="hmLayerControls" class="hm-layer-controls"></div>
+                                <div class="hm-zoom-controls">
+                                    <button class="hm-zoom-btn" onclick="hmZoomIn()" title="放大">+</button>
+                                    <button class="hm-zoom-btn" onclick="hmZoomOut()" title="缩小">−</button>
+                                    <button class="hm-zoom-btn hm-zoom-reset" onclick="hmZoomReset()" title="重置">⟲</button>
+                                    <span class="hm-zoom-level" id="hmZoomLevel">100%</span>
+                                </div>
+                                <svg id="hmSvg" class="hm-svg" viewBox="0 0 100 100" preserveAspectRatio="xMinYMid meet">
+                                </svg>
+                                <div id="hmTooltip" class="hm-tooltip hidden"></div>
+                                <div id="hmLegend" class="hm-legend"></div>
+                                <div id="hmDetailContent" class="hm-detail-content hm-detail-overlay">
+                                    <p class="hm-detail-hint">点击地图上的点位，查看地点详情</p>
+                                </div>
+                            </div>
+                            <div class="hm-tab-overlay active" id="hmTabMap">
+                                <div id="hmDisclaimerMap" class="hm-disclaimer"></div>
+                            </div>
+                            <div class="hm-tab-overlay" id="hmTabJourney">
+                                <div class="hm-journey-bar">
+                                    <div id="hmJourneyCard" class="hm-journey-card">
+                                        <div class="hm-journey-header">
+                                            <span id="hmJourneyStepLabel" class="hm-journey-step-label"></span>
+                                            <h3 id="hmJourneyTitle" class="hm-journey-title">离鲁 · 旅程开始</h3>
+                                        </div>
+                                        <p id="hmJourneyPrompt" class="hm-journey-prompt"></p>
+                                        <div id="hmJourneyNewContent" class="hm-journey-new-content"></div>
+                                        <div class="hm-journey-actions">
+                                            <button id="hmBtnPrev" class="hm-journey-btn" onclick="hmJourneyPrev()">上一站</button>
+                                            <button id="hmBtnNext" class="hm-journey-btn hm-journey-btn-primary" onclick="hmJourneyNext()">继续前进</button>
+                                            <button id="hmBtnReset" class="hm-journey-btn hm-journey-btn-reset" onclick="hmJourneyReset()">重置旅程</button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="hm-route-overview" id="hmRouteOverview"></div>
+                                <div id="hmDisclaimerJourney" class="hm-disclaimer"></div>
+                            </div>
+                            <div class="hm-tab-overlay" id="hmTabAtlas">
+                                <div class="hm-atlas-header">
+                                    <div class="hm-atlas-progress">
+                                        <span class="hm-atlas-progress-label">已解锁人物</span>
+                                        <span class="hm-atlas-progress-count" id="hmAtlasProgressCount"></span>
+                                        <div class="hm-atlas-progress-bar">
+                                            <div class="hm-atlas-progress-fill" id="hmAtlasProgressFill" style="width: 0%;"></div>
+                                        </div>
+                                    </div>
+                                    <p class="hm-atlas-hint">跟随孔子周游列国，逐步解锁相遇的人物档案。</p>
+                                </div>
+                                <div class="hm-atlas-toolbar">
+                                    <div class="hm-atlas-filters" id="hmAtlasFilters"></div>
+                                    <input type="text" class="hm-atlas-search" id="hmAtlasSearch" placeholder="搜索人物名称、别名、称号…" oninput="_hmRenderAtlas()">
+                                </div>
+                                <div class="hm-atlas-grid" id="hmAtlasGrid"></div>
+                            </div>
+                            <div class="hm-tab-overlay" id="hmTabAbout">
+                                <div class="hm-about-content">
+                                    <h3>关于「孔子周游列国」历史地理模块</h3>
+                                    <p>本模块基于《史记·孔子世家》《孔子家语》等历史文献，以互动地图和游历的形式呈现孔子周游列国的十四年历程。</p>
+                                    <h4>功能说明</h4>
+                                    <ul>
+                                        <li><strong>地图探索</strong>：自由浏览春秋列国地图，点击地点查看相关历史事件</li>
+                                        <li><strong>第一视角游历</strong>：跟随孔子路线逐站推进，逐步解锁地点、事件和人物</li>
+                                        <li><strong>人物图鉴</strong>：查看游历途中遇见的各色人物及其档案</li>
+                                    </ul>
+                                    <h4>数据来源</h4>
+                                    <ul>
+                                        <li>地点坐标基于谭其骧《中国历史地图集》春秋时期相关图幅</li>
+                                        <li>事件内容参考《史记》《左传》《国语》等</li>
+                                        <li>人物关系基于历史文献综合整理</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
                 <!-- Knowledge Base Panel -->
                 <div class="panel knowledge-panel" id="knowledge-panel">
                     <div class="content-header">
@@ -377,6 +499,7 @@
         <button onclick="switchTab('teaching')" class="active" data-tab="teaching">教学文档</button>
         <button onclick="switchTab('review')" data-tab="review">文档审核</button>
         <button onclick="switchTab('classic')" data-tab="classic">经典阅读</button>
+        <button onclick="switchTab('historyMap')" data-tab="historyMap">孔子行迹</button>
         <button onclick="switchTab('knowledge')" data-tab="knowledge">知识库</button>
         <button onclick="switchTab('community')" data-tab="community">学术社区</button>
     </div>
@@ -441,5 +564,11 @@
     <script src="scripts/reference-detection.js"></script>
     <script src="scripts/classic-texts.js"></script>
     <script src="scripts/classic-reading.js"></script>
+    <script src="history-map/data/locations.js"></script>
+    <script src="history-map/data/characters.js"></script>
+    <script src="history-map/data/events.js"></script>
+    <script src="history-map/data/route.js"></script>
+    <script src="history-map/utils/data-helpers.js"></script>
+    <script src="scripts/history-map.js"></script>
 </body>
 </html>

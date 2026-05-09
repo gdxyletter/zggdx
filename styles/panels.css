@@ -701,4 +701,1513 @@
             padding: 60px;
             color: var(--text-muted);
         }
+
+        /* ========== History Map Panel ========== */
+        .feature-cards {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px;
+            margin: 24px 0;
+        }
+
+        .feature-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-light);
+            border-radius: 10px;
+            padding: 24px 20px;
+            transition: all 0.2s;
+            cursor: pointer;
+        }
+
+        .feature-card:hover,
+        .feature-card:focus-visible {
+            border-color: var(--accent);
+            box-shadow: 0 4px 12px rgba(122, 92, 68, 0.1);
+            transform: translateY(-2px);
+            outline: none;
+        }
+
+        .feature-card-title {
+            font-family: 'Crimson Pro', serif;
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin: 0 0 8px;
+        }
+
+        .feature-card-desc {
+            font-size: 13px;
+            color: var(--text-secondary);
+            margin: 0 0 12px;
+            line-height: 1.5;
+        }
+
+        .feature-card-action {
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--accent);
+            display: block;
+            text-align: right;
+            opacity: 0;
+            transition: opacity 0.2s;
+        }
+
+        .feature-card:hover .feature-card-action,
+        .feature-card:focus-visible .feature-card-action {
+            opacity: 1;
+        }
+
+        .hm-landing.hidden,
+        .hm-workspace.hidden {
+            display: none;
+        }
+
+        .hm-workspace {
+            display: flex;
+            flex-direction: column;
+            margin-top: 16px;
+            min-height: 500px;
+        }
+
+        .hm-content-wrapper {
+            position: relative;
+            flex: 1;
+            min-height: 400px;
+            overflow: hidden;
+            display: flex;
+        }
+
+        .hm-tab-overlay {
+            position: absolute;
+            inset: 0;
+            z-index: 1;
+            display: none;
+            overflow-y: auto;
+            pointer-events: none;
+        }
+
+        .hm-tab-overlay.active {
+            display: block;
+        }
+
+        .hm-tab-overlay .hm-journey-bar,
+        .hm-tab-overlay .hm-route-overview,
+        .hm-tab-overlay .hm-atlas-header,
+        .hm-tab-overlay .hm-atlas-toolbar,
+        .hm-tab-overlay .hm-atlas-grid,
+        .hm-tab-overlay .hm-disclaimer,
+        .hm-tab-overlay .hm-about-content {
+            pointer-events: auto;
+        }
+
+        .hm-disclaimer {
+            font-size: 11px;
+            color: var(--text-muted);
+            text-align: center;
+            padding: 10px 16px;
+            background: rgba(122, 92, 68, 0.04);
+            border-radius: 4px;
+            border: 1px dashed #d4c8a8;
+            line-height: 1.5;
+        }
+
+        .hm-map-area {
+            position: relative;
+            flex: 1;
+            min-width: 0;
+            z-index: 0;
+            background: #f4edd8;
+            border: 2px solid #d4c8a8;
+            border-radius: 4px;
+            padding: 12px;
+            display: flex;
+            align-items: stretch;
+            box-shadow: inset 0 0 30px rgba(160, 140, 100, 0.08), 0 2px 12px rgba(0, 0, 0, 0.06);
+            overflow: hidden;
+        }
+
+        .hm-map-area::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: repeating-linear-gradient(
+                0deg,
+                transparent,
+                transparent 3px,
+                rgba(160, 140, 100, 0.02) 3px,
+                rgba(160, 140, 100, 0.02) 4px
+            );
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .hm-layer-controls {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+            z-index: 5;
+            background: rgba(244, 237, 216, 0.95);
+            padding: 8px 10px;
+            border-radius: 6px;
+            border: 1px solid #d4c8a8;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+        }
+
+        .hm-layer-toggle {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            cursor: pointer;
+            font-size: 12px;
+            color: var(--text-secondary);
+            user-select: none;
+        }
+
+        .hm-layer-toggle:hover {
+            color: var(--text-primary);
+        }
+
+        .hm-layer-toggle input[type="checkbox"] {
+            width: 14px;
+            height: 14px;
+            accent-color: var(--accent);
+            cursor: pointer;
+        }
+
+        .hm-zoom-controls {
+            position: absolute;
+            top: 12px;
+            left: 12px;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            z-index: 5;
+            background: rgba(244, 237, 216, 0.95);
+            padding: 4px 6px;
+            border-radius: 6px;
+            border: 1px solid #d4c8a8;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+        }
+
+        .hm-zoom-btn {
+            width: 28px;
+            height: 28px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid #d4c8a8;
+            border-radius: 4px;
+            background: var(--bg-card);
+            color: var(--text-secondary);
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 600;
+            line-height: 1;
+            padding: 0;
+            transition: all 0.15s;
+            font-family: inherit;
+        }
+
+        .hm-zoom-btn:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+            background: var(--white);
+        }
+
+        .hm-zoom-btn:active {
+            transform: scale(0.92);
+        }
+
+        .hm-zoom-reset {
+            font-size: 14px;
+        }
+
+        .hm-zoom-level {
+            font-size: 11px;
+            color: var(--text-muted);
+            min-width: 36px;
+            text-align: center;
+            user-select: none;
+        }
+
+        .hm-legend {
+            position: absolute;
+            bottom: 12px;
+            left: 12px;
+            z-index: 5;
+            background: rgba(244, 237, 216, 0.95);
+            padding: 8px 12px;
+            border-radius: 6px;
+            border: 1px solid #d4c8a8;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .hm-legend-title {
+            font-size: 11px;
+            font-weight: 600;
+            color: var(--text-muted);
+            margin-bottom: 2px;
+            padding-bottom: 4px;
+            border-bottom: 1px solid var(--border-light);
+        }
+
+        .hm-legend-item {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 11px;
+            color: var(--text-secondary);
+        }
+
+        .hm-legend-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            flex-shrink: 0;
+        }
+
+        .hm-legend-dot-state {
+            background: radial-gradient(circle, #c0392b, #8b0000);
+        }
+
+        .hm-legend-dot-city {
+            background: radial-gradient(circle, #b8860b, #8b6914);
+        }
+
+        .hm-legend-dot-event {
+            background: radial-gradient(circle, #d4a017, #b8860b);
+        }
+
+        .hm-legend-dot-geo {
+            background: radial-gradient(circle, #8a7d6a, #6b5e4f);
+            opacity: 0.5;
+        }
+
+        .hm-legend-line {
+            align-items: center;
+        }
+
+        .hm-legend-line-seg {
+            width: 16px;
+            height: 2px;
+            background: #d4a017;
+            border-radius: 1px;
+            flex-shrink: 0;
+        }
+
+        .hm-svg {
+            width: 100%;
+            height: 100%;
+            flex: 1;
+            position: relative;
+            z-index: 2;
+        }
+
+        .hm-tooltip {
+            position: absolute;
+            background: #fdfbf8;
+            border: 1px solid var(--accent);
+            border-radius: 4px;
+            padding: 6px 12px;
+            font-size: 12px;
+            color: var(--text-primary);
+            box-shadow: 0 4px 12px rgba(122, 92, 68, 0.15);
+            pointer-events: none;
+            white-space: nowrap;
+            z-index: 10;
+            max-width: 200px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .hm-tooltip.hidden {
+            display: none;
+        }
+
+        .hm-detail-hint {
+            font-size: 13px;
+            color: var(--text-muted);
+            text-align: center;
+            padding: 20px 0;
+        }
+
+        .hm-detail-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 14px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid var(--border-light);
+        }
+
+        .hm-detail-title {
+            font-family: 'Crimson Pro', serif;
+            font-size: 20px;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin: 0;
+        }
+
+        .hm-detail-type {
+            font-size: 11px;
+            color: var(--accent);
+            background: rgba(122, 92, 68, 0.1);
+            padding: 2px 8px;
+            border-radius: 4px;
+            white-space: nowrap;
+        }
+
+        .hm-detail-desc {
+            font-size: 13px;
+            color: var(--text-secondary);
+            line-height: 1.7;
+            margin: 0 0 16px;
+        }
+
+        .hm-detail-section {
+            margin-bottom: 16px;
+        }
+
+        .hm-detail-section-title {
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin: 0 0 8px;
+            padding-bottom: 6px;
+            border-bottom: 1px solid var(--border-light);
+        }
+
+        .hm-character-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+        }
+
+        .hm-character-chip {
+            display: inline-flex;
+            flex-direction: column;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-light);
+            border-radius: 6px;
+            padding: 6px 10px;
+            min-width: 60px;
+        }
+
+        .hm-character-chip-name {
+            font-size: 13px;
+            font-weight: 500;
+            color: var(--text-primary);
+        }
+
+        .hm-character-chip-alias {
+            font-size: 10px;
+            color: var(--text-muted);
+            margin-top: 2px;
+        }
+
+        .hm-event-list {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .hm-event-item {
+            background: var(--bg-secondary);
+            border-left: 3px solid var(--accent);
+            border-radius: 0 6px 6px 0;
+            padding: 8px 12px;
+        }
+
+        .hm-event-name {
+            display: block;
+            font-size: 13px;
+            font-weight: 500;
+            color: var(--text-primary);
+            margin-bottom: 2px;
+        }
+
+        .hm-event-summary {
+            font-size: 12px;
+            color: var(--text-secondary);
+            line-height: 1.4;
+        }
+
+        .hm-detail-actions {
+            margin-top: 20px;
+            padding-top: 14px;
+            border-top: 1px solid var(--border-light);
+        }
+
+        .hm-back-btn {
+            padding: 8px 16px;
+            font-size: 12px;
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            background: var(--bg-secondary);
+            color: var(--text-secondary);
+            cursor: pointer;
+            transition: all 0.2s;
+            font-family: inherit;
+        }
+
+        .hm-back-btn:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+        }
+
+        .hm-detail-no-data {
+            font-size: 12px;
+            color: var(--text-muted);
+            text-align: center;
+            padding: 16px 0;
+        }
+
+        .hm-breadcrumb {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            flex-wrap: wrap;
+            margin-bottom: 14px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid var(--border-light);
+        }
+
+        .hm-breadcrumb-link {
+            font-size: 12px;
+            color: var(--accent);
+            background: none;
+            border: none;
+            padding: 0;
+            cursor: pointer;
+            font-family: inherit;
+            text-decoration: none;
+        }
+
+        .hm-breadcrumb-link:hover {
+            text-decoration: underline;
+        }
+
+        .hm-breadcrumb-sep {
+            font-size: 11px;
+            color: var(--text-muted);
+        }
+
+        .hm-breadcrumb-current {
+            font-size: 12px;
+            color: var(--text-primary);
+            font-weight: 500;
+        }
+
+        .hm-detail-short-tip {
+            font-size: 13px;
+            color: var(--accent);
+            background: rgba(122, 92, 68, 0.08);
+            border-left: 3px solid var(--accent);
+            padding: 8px 12px;
+            border-radius: 0 6px 6px 0;
+            margin: 0 0 14px;
+            line-height: 1.5;
+        }
+
+        .hm-core-badge {
+            font-size: 11px;
+            color: #d4a017;
+            background: rgba(212, 160, 23, 0.12);
+            padding: 2px 8px;
+            border-radius: 4px;
+            white-space: nowrap;
+            border: 1px solid rgba(212, 160, 23, 0.3);
+        }
+
+        .hm-event-item-clickable {
+            cursor: pointer;
+            transition: all 0.15s;
+        }
+
+        .hm-event-item-clickable:hover {
+            background: rgba(122, 92, 68, 0.06);
+            border-left-color: var(--accent);
+        }
+
+        .hm-character-chip-clickable {
+            cursor: pointer;
+            transition: all 0.15s;
+        }
+
+        .hm-character-chip-clickable:hover {
+            border-color: var(--accent);
+            background: rgba(122, 92, 68, 0.08);
+        }
+
+        .hm-character-chip-identity {
+            font-size: 10px;
+            color: var(--text-muted);
+            margin-top: 1px;
+        }
+
+        .hm-source-text {
+            font-size: 12px;
+            color: var(--text-secondary);
+            font-family: 'Crimson Pro', serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 8px 12px;
+            background: var(--bg-secondary);
+            border-radius: 6px;
+        }
+
+        .hm-character-detail-title {
+            font-size: 11px;
+            color: var(--text-muted);
+            background: var(--bg-secondary);
+            padding: 2px 8px;
+            border-radius: 4px;
+            white-space: nowrap;
+        }
+
+        .hm-character-detail-alias {
+            font-size: 13px;
+            color: var(--text-muted);
+            margin: 0 0 12px;
+            font-family: 'Crimson Pro', serif;
+        }
+
+        .hm-journey-controls {
+            margin-bottom: 4px;
+        }
+
+        .hm-journey-mode {
+            font-size: 12px;
+            color: var(--text-muted);
+        }
+
+        .hm-journey-card {
+            background: #f8f4e8;
+            border: 1px solid #d4c8a8;
+            border-radius: 4px;
+            padding: 20px 24px;
+            margin-top: 12px;
+            transition: all 0.3s;
+        }
+
+        .hm-journey-card.hidden {
+            display: none;
+        }
+
+        .hm-journey-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 10px;
+        }
+
+        .hm-journey-step-label {
+            font-size: 11px;
+            color: var(--accent);
+            background: rgba(122, 92, 68, 0.1);
+            padding: 2px 8px;
+            border-radius: 4px;
+            white-space: nowrap;
+            font-weight: 500;
+        }
+
+        .hm-journey-title {
+            font-family: 'Crimson Pro', serif;
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin: 0;
+        }
+
+        .hm-journey-prompt {
+            font-size: 13px;
+            color: var(--text-secondary);
+            line-height: 1.7;
+            margin: 0 0 14px;
+            padding-left: 14px;
+            border-left: 3px solid var(--accent);
+        }
+
+        .hm-journey-new-content {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 14px;
+        }
+
+        .hm-new-section {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            flex-wrap: wrap;
+            margin-right: 12px;
+        }
+
+        .hm-new-section-label {
+            font-size: 11px;
+            color: var(--text-muted);
+            font-weight: 500;
+        }
+
+        .hm-new-item {
+            font-size: 12px;
+            padding: 3px 10px;
+            border-radius: 4px;
+            border: none;
+            cursor: pointer;
+            transition: all 0.15s;
+            font-family: inherit;
+        }
+
+        .hm-new-location {
+            background: rgba(122, 92, 68, 0.08);
+            color: var(--text-primary);
+            border: 1px solid var(--border-light);
+            cursor: default;
+        }
+
+        .hm-new-character {
+            background: rgba(212, 160, 23, 0.1);
+            color: #8b6914;
+            border: 1px solid rgba(212, 160, 23, 0.3);
+        }
+
+        .hm-new-character:hover {
+            background: rgba(212, 160, 23, 0.2);
+        }
+
+        .hm-new-event {
+            background: rgba(192, 57, 43, 0.08);
+            color: #8b0000;
+            border: 1px solid rgba(192, 57, 43, 0.2);
+        }
+
+        .hm-new-event:hover {
+            background: rgba(192, 57, 43, 0.15);
+        }
+
+        .hm-journey-actions {
+            display: flex;
+            gap: 10px;
+            padding-top: 12px;
+            border-top: 1px solid #d4c8a8;
+        }
+
+        .hm-journey-btn {
+            padding: 8px 18px;
+            font-size: 13px;
+            border: 1px solid #d4c8a8;
+            border-radius: 4px;
+            background: var(--bg-secondary);
+            color: var(--text-secondary);
+            cursor: pointer;
+            transition: all 0.2s;
+            font-family: inherit;
+            font-weight: 500;
+        }
+
+        .hm-journey-btn:hover:not(:disabled) {
+            border-color: var(--accent);
+            color: var(--accent);
+        }
+
+        .hm-journey-btn:focus-visible {
+            outline: 2px solid var(--accent);
+            outline-offset: 2px;
+        }
+
+        .hm-journey-btn:disabled {
+            opacity: 0.35;
+            cursor: not-allowed;
+            text-decoration: line-through;
+        }
+
+        .hm-journey-btn-primary {
+            background: var(--accent);
+            color: var(--white);
+            border-color: var(--accent);
+        }
+
+        .hm-journey-btn-primary:hover:not(:disabled) {
+            background: var(--text-primary);
+            color: var(--white);
+        }
+
+        .hm-journey-btn-reset {
+            margin-left: auto;
+            background: transparent;
+            border-color: #d4c8a8;
+            color: var(--text-muted);
+            font-size: 12px;
+        }
+
+        .hm-journey-btn-reset:hover:not(:disabled) {
+            border-color: #c0392b;
+            color: #c0392b;
+        }
+
+        .hm-btn-journey {
+            margin-top: 12px;
+            background: transparent;
+            border: 1px solid var(--accent);
+            color: var(--accent);
+        }
+
+        .hm-route-overview {
+            overflow-x: auto;
+            padding: 4px 0;
+        }
+
+        .hm-route-overview-inner {
+            display: flex;
+            align-items: flex-start;
+            gap: 0;
+            min-width: max-content;
+        }
+
+        .hm-route-step {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+            cursor: pointer;
+            position: relative;
+            flex-shrink: 0;
+        }
+
+        .hm-route-step[data-status="locked"] {
+            cursor: default;
+        }
+
+        .hm-route-dot {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 11px;
+            font-weight: 600;
+            transition: all 0.2s;
+            z-index: 1;
+        }
+
+        .hm-route-step[data-status="done"] .hm-route-dot {
+            background: var(--accent);
+            color: #fff;
+        }
+
+        .hm-route-step[data-status="current"] .hm-route-dot {
+            background: #d4a017;
+            color: #fff;
+            box-shadow: 0 0 0 3px rgba(212, 160, 23, 0.25);
+        }
+
+        .hm-route-step[data-status="locked"] .hm-route-dot {
+            background: var(--bg-secondary);
+            color: var(--text-muted);
+            border: 1px solid var(--border);
+        }
+
+        .hm-route-step:hover[data-status]:not([data-status="locked"]) .hm-route-dot {
+            transform: scale(1.15);
+        }
+
+        .hm-route-label {
+            font-size: 11px;
+            color: var(--text-secondary);
+            white-space: nowrap;
+            text-align: center;
+            max-width: 56px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .hm-route-step[data-status="current"] .hm-route-label {
+            color: #d4a017;
+            font-weight: 600;
+        }
+
+        .hm-route-step[data-status="locked"] .hm-route-label {
+            color: var(--text-muted);
+        }
+
+        .hm-route-line {
+            position: absolute;
+            top: 11px;
+            left: 24px;
+            width: calc(100% - 24px);
+            height: 2px;
+            z-index: 0;
+        }
+
+        .hm-route-line[data-status="done"] {
+            background: var(--accent);
+        }
+
+        .hm-route-line[data-status="locked"] {
+            background: var(--border);
+        }
+
+        .hm-btn-journey:hover {
+            background: var(--accent);
+            color: var(--white);
+        }
+
+        .hm-detail-content {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .hm-detail-overlay {
+            position: absolute;
+            bottom: 12px;
+            right: 12px;
+            width: 260px;
+            max-height: 45%;
+            background: rgba(248, 244, 232, 0.95);
+            border: 1px solid #d4c8a8;
+            border-radius: 4px;
+            padding: 10px 12px;
+            overflow-y: auto;
+            z-index: 10;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+            font-size: 12px;
+        }
+
+        .hm-detail-close {
+            position: absolute;
+            top: 4px;
+            right: 6px;
+            width: 22px;
+            height: 22px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: none;
+            border: none;
+            border-radius: 3px;
+            color: var(--text-muted);
+            font-size: 16px;
+            line-height: 1;
+            cursor: pointer;
+            padding: 0;
+            transition: all 0.15s;
+            z-index: 1;
+        }
+
+        .hm-detail-close:hover {
+            background: rgba(0, 0, 0, 0.06);
+            color: var(--text-primary);
+        }
+
+        .hm-detail-overlay .hm-back-btn {
+            padding: 4px 10px;
+            font-size: 11px;
+            margin-bottom: 8px;
+        }
+
+        .hm-detail-toggle-btn {
+            display: block;
+            width: 100%;
+            margin-top: 8px;
+            text-align: center;
+            font-size: 12px;
+            color: var(--accent);
+            background: transparent;
+            border: 1px dashed var(--border);
+        }
+
+        .hm-subnav {
+            grid-column: 1 / -1;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            padding: 8px 0;
+            border-bottom: 1px solid #d4c8a8;
+            margin-bottom: 8px;
+        }
+
+        .hm-subnav-tab {
+            padding: 8px 16px;
+            font-size: 13px;
+            font-weight: 500;
+            color: var(--text-muted);
+            background: none;
+            border: none;
+            border-radius: 4px 4px 0 0;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-family: inherit;
+        }
+
+        .hm-subnav-tab:hover {
+            color: var(--text-primary);
+            background: rgba(122, 92, 68, 0.05);
+        }
+
+        .hm-subnav-tab:focus-visible {
+            outline: 2px solid var(--accent);
+            outline-offset: -2px;
+        }
+
+        .hm-subnav-tab.active {
+            color: var(--accent);
+            background: rgba(122, 92, 68, 0.08);
+        }
+
+        .hm-subnav-back {
+            margin-left: auto;
+            padding: 6px 12px;
+            font-size: 12px;
+            border: 1px solid #d4c8a8;
+            border-radius: 4px;
+            background: var(--bg-secondary);
+            color: var(--text-secondary);
+            cursor: pointer;
+            transition: all 0.2s;
+            font-family: inherit;
+        }
+
+        .hm-subnav-back:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+        }
+
+        .hm-subnav-back:focus-visible {
+            outline: 2px solid var(--accent);
+            outline-offset: 2px;
+        }
+
+        .hm-atlas-header {
+            margin-bottom: 20px;
+        }
+
+        .hm-atlas-progress {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 12px;
+        }
+
+        .hm-atlas-progress-label {
+            font-size: 13px;
+            color: var(--text-secondary);
+            flex-shrink: 0;
+        }
+
+        .hm-atlas-progress-count {
+            font-weight: 600;
+            color: var(--accent);
+            font-size: 15px;
+            flex-shrink: 0;
+        }
+
+        .hm-atlas-progress-bar {
+            flex: 1;
+            height: 6px;
+            background: var(--bg-secondary);
+            border-radius: 3px;
+            overflow: hidden;
+        }
+
+        .hm-atlas-progress-fill {
+            height: 100%;
+            background: var(--accent);
+            border-radius: 3px;
+            transition: width 0.4s ease;
+        }
+
+        .hm-atlas-hint {
+            font-size: 13px;
+            color: var(--text-muted);
+            margin: 0 0 16px;
+        }
+
+        .hm-atlas-toolbar {
+            display: flex;
+            gap: 12px;
+            align-items: center;
+            flex-wrap: wrap;
+            margin-bottom: 16px;
+        }
+
+        .hm-atlas-filters {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+
+        .hm-atlas-filter-group {
+            display: flex;
+            gap: 4px;
+            background: var(--bg-secondary);
+            border-radius: 8px;
+            padding: 3px;
+        }
+
+        .hm-atlas-filter-btn {
+            padding: 5px 14px;
+            border: none;
+            border-radius: 6px;
+            background: transparent;
+            color: var(--text-secondary);
+            font-size: 13px;
+            cursor: pointer;
+            transition: all 0.15s;
+            font-family: inherit;
+            white-space: nowrap;
+        }
+
+        .hm-atlas-filter-btn:hover {
+            color: var(--text-primary);
+            background: rgba(0,0,0,0.04);
+        }
+
+        .hm-atlas-filter-btn.active {
+            background: var(--white);
+            color: var(--accent);
+            font-weight: 600;
+            box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+        }
+
+        .hm-atlas-search {
+            flex: 1;
+            min-width: 180px;
+            padding: 7px 14px;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            font-size: 13px;
+            font-family: inherit;
+            background: var(--bg-card);
+            color: var(--text-primary);
+            outline: none;
+            transition: border-color 0.15s;
+        }
+
+        .hm-atlas-search:focus {
+            border-color: var(--accent);
+        }
+
+        .hm-atlas-search::placeholder {
+            color: var(--text-muted);
+        }
+
+        .hm-atlas-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            gap: 16px;
+        }
+
+        .hm-atlas-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-light);
+            border-radius: 10px;
+            padding: 16px;
+            transition: all 0.2s;
+            cursor: pointer;
+        }
+
+        .hm-atlas-card:hover {
+            border-color: var(--accent);
+            box-shadow: 0 4px 12px rgba(122, 92, 68, 0.1);
+            transform: translateY(-2px);
+        }
+
+        .hm-atlas-card.locked {
+            opacity: 0.5;
+            cursor: default;
+            filter: grayscale(0.8);
+        }
+
+        .hm-atlas-card.locked:hover {
+            border-color: var(--border-light);
+            box-shadow: none;
+            transform: none;
+        }
+
+        .hm-atlas-card-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+
+        .hm-atlas-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+            font-weight: 600;
+            font-family: 'Crimson Pro', serif;
+            flex-shrink: 0;
+        }
+
+        .hm-atlas-card.unlocked .hm-atlas-avatar {
+            background: rgba(122, 92, 68, 0.1);
+            color: var(--accent);
+        }
+
+        .hm-atlas-card.locked .hm-atlas-avatar {
+            background: var(--bg-secondary);
+            color: var(--text-muted);
+        }
+
+        .hm-atlas-card-info {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .hm-atlas-card-name {
+            font-size: 15px;
+            font-weight: 600;
+            color: var(--text-primary);
+            font-family: 'Crimson Pro', serif;
+        }
+
+        .hm-atlas-card.locked .hm-atlas-card-name {
+            color: var(--text-muted);
+        }
+
+        .hm-atlas-card-alias {
+            font-size: 11px;
+            color: var(--text-muted);
+            margin-top: 2px;
+        }
+
+        .hm-atlas-card-title {
+            font-size: 11px;
+            color: var(--accent);
+            background: rgba(122, 92, 68, 0.1);
+            padding: 2px 6px;
+            border-radius: 3px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            max-width: 100%;
+        }
+
+        .hm-atlas-card-identity {
+            font-size: 12px;
+            color: var(--text-secondary);
+            margin-top: 4px;
+        }
+
+        .hm-atlas-card-locked-hint {
+            font-size: 12px;
+            color: var(--text-muted);
+            margin-top: 8px;
+            padding: 6px 10px;
+            background: var(--bg-secondary);
+            border-radius: 4px;
+            text-align: center;
+        }
+
+        .hm-atlas-card-locked-hint::before {
+            content: '🔒 ';
+        }
+
+        .hm-atlas-detail {
+            display: none;
+        }
+
+        .hm-atlas-detail.active {
+            display: block;
+        }
+
+        .hm-atlas-back-btn {
+            padding: 8px 16px;
+            font-size: 12px;
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            background: var(--bg-secondary);
+            color: var(--text-secondary);
+            cursor: pointer;
+            transition: all 0.2s;
+            font-family: inherit;
+            margin-bottom: 16px;
+        }
+
+        .hm-atlas-back-btn:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+        }
+
+        .hm-atlas-detail-header {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 20px;
+            padding-bottom: 16px;
+            border-bottom: 1px solid var(--border-light);
+        }
+
+        .hm-atlas-detail-avatar {
+            width: 64px;
+            height: 64px;
+            border-radius: 50%;
+            background: rgba(122, 92, 68, 0.1);
+            color: var(--accent);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            font-weight: 600;
+            font-family: 'Crimson Pro', serif;
+            flex-shrink: 0;
+        }
+
+        .hm-atlas-detail-info h3 {
+            font-size: 22px;
+            font-weight: 600;
+            color: var(--text-primary);
+            font-family: 'Crimson Pro', serif;
+            margin: 0 0 4px;
+        }
+
+        .hm-atlas-detail-info .hm-atlas-detail-alias {
+            font-size: 13px;
+            color: var(--text-muted);
+            margin: 0 0 4px;
+        }
+
+        .hm-atlas-detail-info .hm-atlas-detail-title {
+            font-size: 12px;
+            color: var(--accent);
+            background: rgba(122, 92, 68, 0.1);
+            padding: 2px 8px;
+            border-radius: 4px;
+            display: inline-block;
+        }
+
+        .hm-atlas-detail-desc {
+            font-size: 14px;
+            color: var(--text-secondary);
+            line-height: 1.8;
+            margin-bottom: 20px;
+        }
+
+        .hm-atlas-detail-section {
+            margin-bottom: 16px;
+        }
+
+        .hm-atlas-detail-section-title {
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin: 0 0 8px;
+            padding-bottom: 6px;
+            border-bottom: 1px solid var(--border-light);
+        }
+
+        .hm-atlas-detail-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+        }
+
+        .hm-atlas-detail-link {
+            padding: 4px 10px;
+            font-size: 12px;
+            border-radius: 4px;
+            border: 1px solid var(--border-light);
+            background: var(--bg-secondary);
+            color: var(--text-secondary);
+            cursor: pointer;
+            transition: all 0.15s;
+            font-family: inherit;
+        }
+
+        .hm-atlas-detail-link:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+        }
+
+        .hm-atlas-detail-link.hm-link-location {
+            background: rgba(122, 92, 68, 0.08);
+            color: var(--text-primary);
+        }
+
+        .hm-atlas-detail-link.hm-link-event {
+            background: rgba(192, 57, 43, 0.08);
+            color: #8b0000;
+        }
+
+        .hm-atlas-unlock-step {
+            font-size: 12px;
+            color: var(--text-muted);
+            padding: 8px 12px;
+            background: var(--bg-secondary);
+            border-radius: 6px;
+            margin-top: 16px;
+        }
+
+        .hm-tab-overlay#hmTabJourney.active,
+        .hm-tab-overlay#hmTabAtlas.active,
+        .hm-tab-overlay#hmTabAbout.active {
+            position: relative;
+            width: 44%;
+            min-width: 360px;
+            max-width: 500px;
+            flex-shrink: 0;
+            background: rgba(248, 244, 232, 0.97);
+            border-left: 2px solid #d4c8a8;
+            z-index: 5;
+            padding: 20px 24px;
+            box-shadow: -6px 0 20px rgba(0, 0, 0, 0.08);
+            pointer-events: auto;
+        }
+
+        .hm-about-content {
+            max-width: 800px;
+        }
+
+        .hm-about-title {
+            font-family: 'Crimson Pro', serif;
+            font-size: 22px;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin: 0 0 12px;
+        }
+
+        .hm-about-desc {
+            font-size: 14px;
+            color: var(--text-secondary);
+            line-height: 1.7;
+            margin: 0 0 24px;
+        }
+
+        .hm-about-section {
+            margin-bottom: 24px;
+            padding-bottom: 16px;
+            border-bottom: 1px solid var(--border-light);
+        }
+
+        .hm-about-section:last-child {
+            border-bottom: none;
+        }
+
+        .hm-about-section-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin: 0 0 12px;
+            font-family: 'Crimson Pro', serif;
+        }
+
+        .hm-about-list {
+            margin: 0;
+            padding-left: 20px;
+        }
+
+        .hm-about-list li {
+            font-size: 13px;
+            color: var(--text-secondary);
+            line-height: 1.7;
+            margin-bottom: 8px;
+        }
+
+        .hm-about-text {
+            font-size: 13px;
+            color: var(--text-secondary);
+            line-height: 1.7;
+            margin: 0;
+        }
+
+        .hm-btn-secondary,
+        .hm-btn-tertiary {
+            margin-top: 12px;
+            background: transparent;
+            border: 1px solid var(--border);
+            color: var(--text-secondary);
+        }
+
+        .hm-btn-secondary:hover,
+        .hm-btn-tertiary:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+        }
+
+        .hm-btn-continue {
+            display: block;
+            width: auto;
+            min-width: 320px;
+            margin: 20px auto 0;
+            padding: 14px 32px;
+            background: var(--accent);
+            color: var(--white);
+            border: none;
+            border-radius: 10px;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-family: inherit;
+            text-align: center;
+        }
+
+        .hm-btn-continue:hover {
+            background: #1f3d7a;
+            transform: translateY(-1px);
+            box-shadow: 0 4px 16px rgba(34, 80, 170, 0.25);
+        }
+
+        @keyframes hm-dot-pulse {
+            0% { opacity: 0.7; r: 2.5; }
+            50% { opacity: 0.3; r: 3.5; }
+            100% { opacity: 0.7; r: 2.5; }
+        }
+
+        .hm-current-pulse {
+            animation: hm-dot-pulse 2s ease-in-out infinite;
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .hm-current-pulse {
+                animation: none;
+                opacity: 0.7;
+            }
+
+            .feature-card,
+            .hm-atlas-card,
+            .hm-journey-btn,
+            .hm-subnav-tab {
+                transition: none;
+            }
+        }
+
+        .hm-location-dot:focus {
+            outline: none;
+        }
+
+        .hm-location-dot {
+            transition: filter 0.15s ease;
+        }
+
+        .hm-location-dot:hover {
+            filter: brightness(1.15);
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .hm-location-dot {
+                transition: none;
+            }
+        }
         

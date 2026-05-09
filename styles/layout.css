@@ -263,4 +263,13 @@
             border-color: var(--accent);
             color: var(--white);
         }
+
+        .hm-fullscreen .sidebar-left,
+        .hm-fullscreen .sidebar-right {
+            display: none;
+        }
+
+        .hm-fullscreen .main-content {
+            max-width: 100%;
+        }
         
