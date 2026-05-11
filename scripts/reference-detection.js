@@ -109,9 +109,8 @@
         async function identifyCitationDetails(text, citations) {
             if (!citations || citations.length === 0) return citations;
             
-            const apiKey = DEEPSEEK_CONFIG?.apiKey;
-            if (!apiKey) {
-                console.warn('未配置API Key，无法使用AI识别');
+            if (typeof callAIApi !== 'function') {
+                console.warn('AI Adapter 未加载，无法使用AI识别');
                 return citations;
             }
 
@@ -309,8 +308,7 @@
             const refs = getMergedReferences?.() || [];
             if (!refs.length) return null;
             
-            const apiKey = DEEPSEEK_CONFIG?.apiKey;
-            if (!apiKey) return null;
+            if (typeof callAIApi !== 'function') return null;
 
             // 提取用户引用的经典
             const citedClassics = detectCitationFormats(content);
@@ -358,8 +356,7 @@ ${citedClassics.filter(c => c.chapter).map(c => `${c.classicName}·${c.chapter}`
 
         // AI分析跨文献关联 - 智能推断不同经典间的关联（改进版）
         async function analyzeCrossRefAI(content) {
-            const apiKey = DEEPSEEK_CONFIG?.apiKey;
-            if (!apiKey) return null;
+            if (typeof callAIApi !== 'function') return null;
 
             const citedClassics = detectCitationFormats(content);
             if (citedClassics.length < 2) return null;
@@ -413,8 +410,7 @@ JSON返回格式：
             const refs = getMergedReferences?.() || [];
             if (!refs.length) return [];
             
-            const apiKey = DEEPSEEK_CONFIG?.apiKey;
-            if (!apiKey) return [];
+            if (typeof callAIApi !== 'function') return [];
 
             const citedClassics = detectCitationFormats(content);
             if (citedClassics.length === 0) return [];

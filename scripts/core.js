@@ -3,9 +3,8 @@
         const KB_MAX_SIZE = 2 * 1024 * 1024;
         
         const DEEPSEEK_CONFIG = {
-            endpoint: 'https://api.deepseek.com/v1/chat/completions',
-            model: 'deepseek-chat',
-            apiKey: 'sk-0fcf461177a8400093391308fe56ac60'
+            endpoint: '/api/deepseek/chat',
+            model: 'deepseek-chat'
         };
         
         let teachingSummary = '';
@@ -164,71 +163,42 @@
         }
         
         async function callAIApi(messages, customModel = null) {
-            const apiKey = DEEPSEEK_CONFIG.apiKey;
-            
-            const model = customModel || DEEPSEEK_CONFIG.model;
-            
-            const headers = {
-                'Content-Type': 'application/json',
-                'Authorization': 'Bearer ' + apiKey
-            };
-            
-            const requestBody = {
-                model: model,
-                messages: messages
-            };
-            
-            const fetchOptions = {
-                method: 'POST',
-                headers: headers,
-                body: JSON.stringify(requestBody)
-            };
-            
-            const response = await fetch(DEEPSEEK_CONFIG.endpoint, fetchOptions);
-            const result = await response.json();
-            
-            if (result.error) {
-                let errorMsg = result.error.message || JSON.stringify(result);
-                if (errorMsg.includes('invalid_token') || errorMsg.includes('令牌已过期') || errorMsg.includes('验证不正确')) {
-                    errorMsg = 'API Key无效或已过期，请检查Key是否正确';
-                }
-                if (errorMsg.includes('Insufficient Balance') || errorMsg.includes('insufficient_balance')) {
-                    errorMsg = 'API余额不足，请充值';
-                }
-                throw new Error(errorMsg);
+            if (typeof callDeepSeekChat !== 'function') {
+                throw new Error('AI Adapter 未加载，无法调用 DeepSeek。');
             }
-            
-            if (result.choices && result.choices[0]) {
-                return result.choices[0].message.content;
-            } else {
-                throw new Error(JSON.stringify(result));
-            }
+            return callDeepSeekChat(messages, {
+                endpoint: DEEPSEEK_CONFIG.endpoint,
+                model: customModel || DEEPSEEK_CONFIG.model
+            });
         }
         
         function switchTab(tab) {
             document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
             document.querySelectorAll('.mobile-nav button').forEach(t => t.classList.remove('active'));
             
-            const tabs = document.querySelectorAll('.nav-tab');
-            if (tab === 'teaching') tabs[0].classList.add('active');
-            else if (tab === 'review') {
-                tabs[1].classList.add('active');
+            const activeTab = Array.from(document.querySelectorAll('.nav-tab')).find(button => {
+                return button.dataset.tab === tab || (button.getAttribute('onclick') || '').includes(`switchTab('${tab}')`);
+            });
+            if (activeTab) {
+                activeTab.classList.add('active');
+            }
+
+            if (tab === 'review' && typeof updateSidebarForReview === 'function') {
                 updateSidebarForReview();
             }
-            else if (tab === 'classic') {
-                tabs[2].classList.add('active');
+            else if (tab === 'classic' && typeof updateSidebarForClassic === 'function') {
                 updateSidebarForClassic();
             }
+            else if (tab === 'autoNotes' && typeof updateSidebarForAutoNotes === 'function') {
+                updateSidebarForAutoNotes();
+            }
             else if (tab === 'historyMap') {
-                tabs[3].classList.add('active');
             }
             else if (tab === 'knowledge') {
-                tabs[4].classList.add('active');
                 renderKnowledgeBase();
                 checkStorageWarning();
             }
             else if (tab === 'community') {
-                tabs[5].classList.add('active');
                 loadCommunityDocs();
             }
             
@@ -238,7 +208,10 @@
             });
             
             document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
-            document.getElementById(tab + '-panel').classList.add('active');
+            const panel = document.getElementById(tab + '-panel');
+            if (panel) {
+                panel.classList.add('active');
+            }
 
             var wrapper = document.querySelector('.main-wrapper');
             if (tab === 'historyMap') {

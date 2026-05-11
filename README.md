@@ -43,6 +43,51 @@
 
 ## 使用方式
 
+### 带 DeepSeek 后端的本地启动
+
+札记自动梳理和 AI 审核需要通过本地 Node 后端转发 DeepSeek 请求。前端不会保存任何 DeepSeek API Key。
+
+1. 安装 Node.js 18 或更高版本。
+2. 复制 `.env.example` 为 `.env`。
+3. 在 `.env` 中填写：
+
+```env
+DEEPSEEK_API_KEY=your_deepseek_api_key_here
+PORT=3000
+```
+
+4. 启动服务：
+
+```bash
+npm start
+```
+
+5. 浏览器打开：
+
+```text
+http://localhost:3000
+```
+
+可用下面的命令检查后端接口是否联通：
+
+```bash
+curl -X POST http://localhost:3000/api/auto-notes/llm \
+  -H "Content-Type: application/json" \
+  -d "{\"taskType\":\"generate_reading_note\",\"payload\":{\"baseText\":\"学而时习之\",\"locale\":\"zh-CN\"}}"
+```
+
+如果未配置 `DEEPSEEK_API_KEY`，接口会返回：
+
+```json
+{
+  "ok": false,
+  "error": {
+    "code": "MISSING_DEEPSEEK_API_KEY",
+    "message": "后端未配置 DeepSeek API Key"
+  }
+}
+```
+
 1. 直接打开 `index.html`。
 2. 上传教学文档，或直接粘贴教学标准内容。
 3. 点击“理解文档”，生成教学标准摘要。

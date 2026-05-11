@@ -145,7 +145,8 @@
             });
             
             const teachingDocs_filter = filtered.filter(d => d.type === 'teaching');
-            const reviewDocs_filter = filtered.filter(d => d.type !== 'teaching');
+            const autoNotesDocs_filter = filtered.filter(d => d.type === 'auto_notes_project');
+            const reviewDocs_filter = filtered.filter(d => d.type !== 'teaching' && d.type !== 'auto_notes_project');
             
             document.getElementById('kbDocCount').textContent = filtered.length;
             document.getElementById('kbVersionCount').textContent = totalVersions;
@@ -175,6 +176,28 @@
                     `).join('')}
                 </div>`;
             }
+
+            if (autoNotesDocs_filter.length > 0) {
+                html += `<div class="kb-review-section">
+                    <div class="kb-section-title">札记自动梳理项目 (${autoNotesDocs_filter.length})</div>
+                    ${autoNotesDocs_filter.map(doc => `
+                        <div class="kb-item">
+                            <div>
+                                <div class="kb-name">${escapeHtml(doc.projectTitle || doc.name)}</div>
+                                <div class="kb-meta">
+                                    研究问题：${escapeHtml(doc.researchQuestion || '（未填写）')} |
+                                    札记 ${doc.noteCount || 0} 条 | 卡片 ${doc.cardCount || 0} 张 |
+                                    创建: ${formatDate(doc.createdAt)}
+                                </div>
+                            </div>
+                            <div class="kb-actions">
+                                <button onclick="loadAutoNotesFromKb('${doc.id}')">打开</button>
+                                <button class="btn-danger" onclick="deleteDocFromKb('${doc.id}')">删除</button>
+                            </div>
+                        </div>
+                    `).join('')}
+                </div>`;
+            }
             
             if (reviewDocs_filter.length > 0) {
                 html += `<div class="kb-review-section">
@@ -198,6 +221,30 @@
             }
             
             list.innerHTML = html;
+        }
+
+        function loadAutoNotesFromKb(docId) {
+            const kb = getKnowledgeBase();
+            const doc = kb.find(d => d.id === docId);
+            if (!doc || !doc.versions || doc.versions.length === 0) return;
+            const latest = doc.versions[doc.versions.length - 1];
+            const data = latest.data;
+            if (!data) {
+                alert('该札记项目缺少可加载的数据');
+                return;
+            }
+            if (typeof validateAutoNotesImport === 'function') {
+                const result = validateAutoNotesImport(data);
+                if (!result.valid) {
+                    alert('札记项目数据无效：' + result.message);
+                    return;
+                }
+            }
+            window.autoNotesState = createAutoNotesProject(data);
+            saveAutoNotesProject();
+            switchTab('autoNotes');
+            if (typeof startAutoNotes === 'function') startAutoNotes();
+            if (typeof anRefreshAutoNotesUI === 'function') anRefreshAutoNotesUI();
         }
         
         function loadTeachingFromKb(docId) {
