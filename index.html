@@ -1,0 +1,937 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>文档审核助手</title>
+    <script src="https://cdn.jsdelivr.net/npm/jszip@3.10.1/dist/jszip.min.js"></script>
+    <script src="references.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles/base.css">
+    <link rel="stylesheet" href="styles/layout.css">
+    <link rel="stylesheet" href="styles/panels.css">
+    <link rel="stylesheet" href="styles/auto-notes.css">
+    <link rel="stylesheet" href="styles/reader.css">
+    <link rel="stylesheet" href="styles/responsive.css">
+</head>
+
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-left">
+            <div class="logo">古典学园数字兰台</div>
+            <nav class="nav-tabs">
+                <button class="nav-tab active" onclick="switchTab('teaching')">提交教学文档</button>
+                <button class="nav-tab" onclick="switchTab('review')">文档审核</button>
+                <button class="nav-tab" onclick="switchTab('classic')">经典阅读</button>
+                <button class="nav-tab" onclick="switchTab('autoNotes')">札记自动梳理</button>
+                <button class="nav-tab" onclick="switchTab('historyMap')">孔子行迹</button>
+                <button class="nav-tab" onclick="switchTab('knowledge')">知识库</button>
+                <button class="nav-tab" onclick="switchTab('community')">学术社区</button>
+            </nav>
+        </div>
+    </header>
+    
+    <!-- Main Content -->
+    <div class="main-wrapper">
+        <div class="three-column-layout">
+            <!-- Left Sidebar -->
+            <aside class="sidebar-left" id="sidebarLeft">
+                <div class="sidebar-resizer" id="sidebarResizer"></div>
+                <div class="sidebar-section">
+                    <div class="sidebar-title">批注笔记</div>
+                    <div id="annotationSection" style="display: none; flex-direction: column; overflow-y: auto;">
+                        <div class="selected-sentence">
+                            <div class="sidebar-title" style="font-size: 11px; margin-bottom: 8px;">当前选中句子</div>
+                            <div id="selectedSentenceText" class="selected-text"></div>
+                        </div>
+                        <div class="public-annotations">
+                            <div class="sidebar-title" style="font-size: 11px; margin: 8px 0;">公共笔记</div>
+                            <div id="publicAnnotations" class="annotation-list" style="max-height: 120px; overflow-y: auto; display: block; overflow-x: hidden;"></div>
+                        </div>
+                        <div class="annotation-input" style="flex-shrink: 0; border-top: 1px solid var(--border-color); padding-top: 8px;">
+                            <textarea id="annotationInput" class="textarea-area" placeholder="添加私人笔记..." style="min-height: 80px; max-height: 120px; margin-bottom: 8px;"></textarea>
+                            <div style="display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-bottom: 8px;">
+                                <label style="display: flex; align-items: center; gap: 4px; font-size: 11px; cursor: pointer;">
+                                    <input type="checkbox" id="publishAnnotationCheckbox">
+                                    公开此笔记
+                                </label>
+                                <button onclick="openRichTextEditor()" class="sidebar-btn" style="padding: 4px 10px; font-size: 11px;">展开</button>
+                            </div>
+                            <button onclick="saveAnnotation()" class="sidebar-btn">保存笔记</button>
+                        </div>
+                        <div class="private-annotations">
+                            <div class="sidebar-title" style="font-size: 11px; margin: 12px 0 8px 0;">私人笔记</div>
+                            <div id="historicalAnnotations" class="annotation-list" style="max-height: 120px; overflow-y: auto; display: block; overflow-x: hidden;"></div>
+                        </div>
+                    </div>
+                    <div id="defaultAnnotationSection">
+                        <p style="font-size: 12px; color: var(--text-muted); text-align: center; padding: 20px;">
+                            选择经典阅读模式后，选中句子即可在此添加笔记
+                        </p>
+                    </div>
+                </div>
+                
+                <div class="sidebar-section" id="gradingSection" style="display: none;">
+                    <div class="sidebar-title">评分维度</div>
+                    <div class="grading-item">
+                        <span class="grading-label">文献考据 (30%)</span>
+                        <span class="grading-score" id="semScore">--</span>
+                    </div>
+                    <div class="grading-item">
+                        <span class="grading-label">义理分析 (30%)</span>
+                        <span class="grading-score" id="etyScore">--</span>
+                    </div>
+                    <div class="grading-item">
+                        <span class="grading-label">结构逻辑 (20%)</span>
+                        <span class="grading-score" id="argScore">--</span>
+                    </div>
+                    <div class="grading-item">
+                        <span class="grading-label">学术规范 (20%)</span>
+                        <span class="grading-score" id="refScore">--</span>
+                    </div>
+                </div>
+                
+                <div class="sidebar-section" id="versionSection" style="display: none;">
+                    <div class="sidebar-title">版本历史</div>
+                    <div class="version-list" id="versionList">
+                    </div>
+                </div>
+            </aside>
+            
+            <!-- Center Content -->
+            <main class="main-content">
+                <!-- Teaching Panel -->
+                <div class="panel teaching-panel active" id="teaching-panel">
+                    <div class="content-header">
+                        <h1 class="content-title">提交教学标准</h1>
+                        <div class="content-meta">
+                            <span>上传参考文档，AI将理解其中的学术标准</span>
+                        </div>
+                    </div>
+                    
+                    <div class="instruction-box">
+                        提交教学文档，AI会理解并消化其中的观点和理念，作为后续审核的参考标准。
+                    </div>
+                    
+                    <div class="file-upload-area" onclick="document.getElementById('teachingFile').click()">
+                        <input type="file" id="teachingFile" accept=".pdf,.docx,.doc,.txt,.md,.jpg,.jpeg,.png,.gif,.bmp,.webp" multiple onchange="handleTeachingFiles(this)">
+                        <p>点击上传教学文档（支持多选）</p>
+                        <p class="hint">支持 PDF、Word（自动识别颜色和字体大小）、图片（OCR识别）、文本、Markdown</p>
+                    </div>
+                    
+                    <div id="teachingDocsList" class="teaching-docs-list"></div>
+                    
+                    <div id="teachingPreview" class="formatted-preview" style="display:none;"></div>
+                    
+                    <textarea id="teachingContent" class="textarea-area" placeholder="或者直接粘贴文档内容..."></textarea>
+                    
+                    <div id="teachingDocsSummary" class="teaching-docs-summary hidden">
+                        <span id="teachingDocsCount">0</span> 个教学文档已加载
+                    </div>
+                    
+                    <button class="primary-btn" onclick="submitTeachingDoc()">理解文档</button>
+                    
+                    <div style="display: flex; gap: 12px; margin-top: 12px;">
+                        <button class="primary-btn" style="flex: 1; background: var(--bg-card); border: 1px solid var(--accent); color: var(--accent);" onclick="uploadTeachingToKnowledgeBase()">上传到知识库</button>
+                        <button class="primary-btn" style="flex: 1; background: var(--bg-card); border: 1px solid var(--accent-light); color: var(--accent-light);" onclick="uploadTeachingToCommunity()">上传到社区</button>
+                    </div>
+                    
+                    <div id="teaching-result" class="result-box hidden"></div>
+                </div>
+                
+                <!-- Review Panel -->
+                <div class="panel review-panel" id="review-panel">
+                    <div class="content-header">
+                        <h1 class="content-title">AI 学术审核</h1>
+                        <div class="content-meta">
+                            <span id="docIteration">第 1 版</span>
+                        </div>
+                    </div>
+                    
+                    <div class="instruction-box">
+                        提交待审核文档，AI将运用已学习的教学文档知识进行评价。
+                    </div>
+                    
+                    <div class="doc-input-section">
+                        <label class="input-label">文档名称</label>
+                        <input type="text" id="docName" class="doc-name-input" placeholder="输入文档名称">
+                        <p class="doc-name-hint">相同名称的文档会被视为同一文档的迭代版本</p>
+                    </div>
+                    
+                    <div class="file-upload-area" onclick="document.getElementById('reviewFile').click()">
+                        <input type="file" id="reviewFile" accept=".pdf,.docx,.doc,.txt,.md,.jpg,.jpeg,.png,.gif,bmp,webp" onchange="handleFileSelect(this, 'review')">
+                        <p>点击上传审核文档</p>
+                        <p class="hint">支持 PDF、Word（自动识别颜色和字体大小）、图片（OCR识别）</p>
+                    </div>
+                    
+                    <div id="reviewPreview" class="formatted-preview" style="display:none;"></div>
+                    
+                    <textarea id="reviewContent" class="textarea-area academic-body" placeholder="或者直接粘贴待审核的文档内容..." style="min-height: 250px;"></textarea>
+                    
+                    <div id="versionListMain" class="version-list"></div>
+                    
+                    <div class="score-section" id="aiScoreSection" style="display: none;">
+                        <div class="score-label">AI 评分</div>
+                        <div class="score-value" id="scoreValue">-</div>
+                    </div>
+                    
+                    <div class="progress-section hidden" id="progressSection">
+                        <h4>版本迭代对比</h4>
+                        <div id="progressContent"></div>
+                    </div>
+                    
+                    <button class="primary-btn" onclick="submitReviewDoc()">审核文档</button>
+                    <button class="primary-btn" style="background: transparent; border: 1px solid var(--accent); color: var(--accent);" onclick="uploadToCommunity()">上传到社区</button>
+                    <button class="primary-btn" style="background: var(--bg-secondary); border: 1px solid var(--border); color: var(--text-secondary);" onclick="openCurrentDocFullscreen()">全屏阅读</button>
+                    
+                    <div id="review-result" class="result-box hidden"></div>
+                    
+                    <div class="analysis-section">
+                        <h2 class="section-title">AI 学术审核分析</h2>
+                        
+                        <div class="analysis-buttons">
+                            <button class="analysis-btn" onclick="generateQuestions()">核心论点质疑</button>
+                            <button class="analysis-btn" onclick="findWeakPoints()">薄弱环节检测</button>
+                            <button class="analysis-btn" onclick="analyzePosition()">学术立场分析</button>
+                        </div>
+                        
+                        <div id="analysisResult" class="analysis-result"></div>
+                        <div id="clearAnalysisBtn" class="clear-btn hidden">
+                            <button onclick="clearAnalysisResults()">清除分析结果</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Classic Reading Panel -->
+                <div class="panel classic-reading-panel" id="classic-panel">
+                    <div class="content-header">
+                        <h1 class="content-title">经典阅读</h1>
+                        <div class="content-meta">
+                            <span>逐句阅读经典著作，支持批注和学术分析</span>
+                        </div>
+                    </div>
+                    
+                    <div class="instruction-box">
+                        选择经典著作进行逐句阅读，选中句子可自动进行学术分析并添加批注。
+                    </div>
+                    
+                    <div style="margin-bottom: 20px;">
+                        <label class="input-label">选择经典著作</label>
+                        <select id="classicSelector" class="doc-name-input" onchange="loadClassicText()">
+                            <option value="">请选择经典著作...</option>
+                           
+                            <option value="mengzi">孟子</option>
+                            <option value="daxue">大学</option>
+                                                        <option value="daxue_zhuzhu">大学章句集注</option>
+                            <option value="lunyu_jizhu">论语集注</option>
+                            <option value="zhongyong">中庸</option>
+                            <!-- 更多书籍来源将在这里添加 -->
+                        </select>
+                    </div>
+
+                    <div id="classicAutoDetectOption" style="margin-bottom: 16px; display: none;">
+                        <label style="display: flex; align-items: center; gap: 8px; font-size: 13px; color: var(--text-secondary); cursor: pointer;">
+                            <input type="checkbox" id="autoDetectCheckbox" checked style="width: 16px; height: 16px; accent-color: var(--accent);">
+                            选中句子时自动检测
+                        </label>
+                    </div>
+                    
+                    <div id="classicContent" class="classic-text-content" style="display: none;">
+                        <div class="classic-text-header">
+                            <h2 id="classicTitle" class="classic-title"></h2>
+                            <div class="reading-controls">
+                                <button onclick="toggleFullscreenReading()" class="primary-btn" style="background: var(--bg-secondary); border: 1px solid var(--border); color: var(--text-secondary); font-size: 13px; padding: 8px 16px;">全屏阅读</button>
+                            </div>
+                        </div>
+                        <div id="classicText" class="classic-text-body"></div>
+                    </div>
+                </div>
+
+                <!-- Auto Notes Panel -->
+                <div class="panel auto-notes-panel" id="autoNotes-panel">
+                    <div class="content-header">
+                        <h1 class="content-title">札记自动梳理</h1>
+                        <div class="content-meta">
+                            <span>面向中国古典学的多源材料对齐与可溯源札记生成</span>
+                        </div>
+                    </div>
+
+                    <div class="auto-notes-intro">
+                        上传或粘贴古籍原文、注疏、校勘记、现代论文和个人札记，系统将进行文本规范化、材料对齐、证据包构建和札记生成。
+                    </div>
+
+                    <div class="auto-notes-cards">
+                        <div class="auto-notes-card">
+                            <h3>多源材料输入</h3>
+                            <p>汇入原文、注疏、论文与个人札记，保留不同材料的来源边界。</p>
+                        </div>
+                        <div class="auto-notes-card">
+                            <h3>文本单元与证据对齐</h3>
+                            <p>把段落、句读、注释和札记线索对齐到可追踪的文本单元。</p>
+                        </div>
+                        <div class="auto-notes-card">
+                            <h3>可溯源札记生成</h3>
+                            <p>基于证据包生成札记草稿，并为每条判断保留材料依据。</p>
+                        </div>
+                    </div>
+
+                    <button class="primary-btn auto-notes-start-btn" onclick="startAutoNotes()">开始梳理</button>
+
+                    <div id="autoNotesWorkspace" class="auto-notes-workspace hidden">
+                        <div class="auto-notes-flow" aria-label="札记自动梳理流程">
+                            <button type="button" class="auto-notes-step active" data-an-step="1" onclick="switchAutoNotesStep(1)">
+                                <span>1</span>材料输入
+                            </button>
+                            <button type="button" class="auto-notes-step" data-an-step="2" onclick="switchAutoNotesStep(2)">
+                                <span>2</span>规范化切分
+                            </button>
+                            <button type="button" class="auto-notes-step" data-an-step="3" onclick="switchAutoNotesStep(3)">
+                                <span>3</span>证据对齐
+                            </button>
+                            <button type="button" class="auto-notes-step" data-an-step="4" onclick="switchAutoNotesStep(4)">
+                                <span>4</span>札记生成
+                            </button>
+                            <button type="button" class="auto-notes-step" data-an-step="5" onclick="switchAutoNotesStep(5)">
+                                <span>5</span>卡片与导出
+                            </button>
+                        </div>
+
+                        <section class="auto-notes-step-panel active" data-an-step-panel="1">
+                            <div class="auto-notes-section-head">
+                                <h2 class="section-title">材料输入</h2>
+                                <p>汇入基础文本、研究问题和多源材料，先保留来源边界。</p>
+                            </div>
+
+                            <div class="auto-notes-field-grid">
+                                <div class="auto-notes-field">
+                                    <label class="input-label" for="anBaseText">古籍原文</label>
+                                    <textarea id="anBaseText" class="textarea-area academic-body auto-notes-textarea" placeholder="粘贴古籍原文，如《论语》《孟子》《史记》片段..."></textarea>
+                                </div>
+                                <div class="auto-notes-field auto-notes-field-stack">
+                                    <label class="input-label" for="anResearchQuestion">研究问题</label>
+                                    <textarea id="anResearchQuestion" class="textarea-area auto-notes-question" placeholder="请输入你的研究问题，如：此处‘仁义’在注疏传统中如何解释？"></textarea>
+                                    <label class="input-label" for="anKeywordOrConcept">核心概念 / 检索词 / 原文输入</label>
+                                    <textarea id="anKeywordOrConcept" class="textarea-area auto-notes-keyword" placeholder="输入核心理论、句子、概念或检索词，如：仁、克己复礼、为政以德..."></textarea>
+                                </div>
+                            </div>
+
+                            <div class="auto-notes-section-head compact">
+                                <h3>多源材料</h3>
+                                <p>每条材料记录类型、标题和正文，后续用于候选证据对齐。</p>
+                            </div>
+                            <div id="anSourcesList" class="auto-notes-source-list"></div>
+
+                            <div class="auto-notes-upload">
+                                <input type="file" id="anFileUpload" accept=".txt,.md,.pdf,.docx,.jpg,.jpeg,.png" multiple onchange="anHandleFileUpload(this)">
+                                <div>
+                                    <strong>文件上传区</strong>
+                                    <p>支持 .txt, .md, .pdf, .docx, .jpg, .png；PDF、DOCX 与图片会优先复用现有解析器。</p>
+                                </div>
+                            </div>
+
+                            <div class="auto-notes-actions">
+                                <button type="button" class="analysis-btn" onclick="anAddSource()">添加材料</button>
+                                <button type="button" class="analysis-btn" onclick="saveAutoNotesProject()">保存草稿</button>
+                                <button type="button" class="primary-btn" id="anGenerateFirstDraftBtn" onclick="generateFirstReadingNote()">生成第一版读书会札记</button>
+                            </div>
+
+                            <div class="auto-notes-result-card auto-notes-first-draft-card">
+                                <div class="auto-notes-result-head">
+                                    <h3>第一版札记预览 / 编辑区</h3>
+                                    <span id="anFirstDraftStatus" class="auto-notes-status"></span>
+                                </div>
+                                <textarea id="anFirstDraftNote" class="textarea-area academic-body auto-notes-first-draft" placeholder="生成后可在这里校对、修改、确认第一版读书会札记。"></textarea>
+                            </div>
+
+                            <div class="auto-notes-actions">
+                                <button type="button" class="analysis-btn" onclick="exportFirstReadingNoteMarkdown()">导出第一版 Markdown</button>
+                                <button type="button" class="primary-btn" onclick="confirmFirstReadingNote()">确认第一版札记，进入碎片化处理</button>
+                                <button type="button" class="primary-btn" onclick="switchAutoNotesStep(2)">下一步：规范化切分</button>
+                            </div>
+                        </section>
+
+                        <section class="auto-notes-step-panel" data-an-step-panel="2">
+                            <div class="auto-notes-section-head">
+                                <h2 class="section-title">规范化切分</h2>
+                                <p>设置基础规范化规则，并把原文拆为可编辑的 Canonical Text Units。</p>
+                            </div>
+
+                            <div class="auto-notes-options">
+                                <div class="auto-notes-option-group">
+                                    <h3>文本规范化选项</h3>
+                                    <label><input type="checkbox" id="anTrimWhitespace" checked> 去除多余空白</label>
+                                    <label><input type="checkbox" id="anNormalizePunctuation" checked> 统一标点</label>
+                                    <label><input type="checkbox" id="anTraditionalCompatible"> 简繁兼容处理</label>
+                                    <label><input type="checkbox" id="anKeepOriginal" checked> 保留原文</label>
+                                </div>
+                                <div class="auto-notes-option-group">
+                                    <h3>切分方式</h3>
+                                    <label><input type="radio" name="anSplitMode" value="punctuation" checked> 按标点切分</label>
+                                    <label><input type="radio" name="anSplitMode" value="newline"> 按换行切分</label>
+                                    <label><input type="radio" name="anSplitMode" value="manual"> 手动切分</label>
+                                </div>
+                                <div class="auto-notes-option-group">
+                                    <h3>碎片化策略</h3>
+                                    <label><input type="radio" name="anFragmentStrategy" value="auto" checked> 自动判断</label>
+                                    <label><input type="radio" name="anFragmentStrategy" value="semantic"> 按语义</label>
+                                    <label><input type="radio" name="anFragmentStrategy" value="annotation"> 按注解层级</label>
+                                    <label><input type="radio" name="anFragmentStrategy" value="concept"> 按核心概念</label>
+                                    <label><input type="radio" name="anFragmentStrategy" value="paragraph"> 按段落</label>
+                                    <label><input type="radio" name="anFragmentStrategy" value="punctuation"> 按标点</label>
+                                </div>
+                            </div>
+
+                            <div class="auto-notes-result-card">
+                                <div class="auto-notes-result-head">
+                                    <h3>碎片化札记</h3>
+                                    <div class="auto-notes-inline-actions">
+                                        <button type="button" class="analysis-btn" onclick="generateNoteFragments()">生成碎片化札记</button>
+                                        <button type="button" class="analysis-btn" onclick="addNoteFragment()">新增 fragment</button>
+                                    </div>
+                                </div>
+                                <div id="anFragmentsList" class="auto-notes-fragment-list"></div>
+                            </div>
+
+                            <div class="auto-notes-result-card">
+                                <div class="auto-notes-result-head">
+                                    <h3>Canonical Text Units</h3>
+                                    <button type="button" class="analysis-btn" onclick="renderTextUnits()">开始规范化与切分</button>
+                                </div>
+                                <div id="anCanonicalUnits" class="auto-notes-unit-list"></div>
+                            </div>
+
+                            <div class="auto-notes-actions">
+                                <button type="button" class="analysis-btn" onclick="switchAutoNotesStep(1)">上一步</button>
+                                <button type="button" class="analysis-btn" onclick="exportNoteFragmentsJSON()">导出 fragments JSON</button>
+                                <button type="button" class="analysis-btn" onclick="exportNoteFragmentsMarkdown()">导出 fragments Markdown</button>
+                                <button type="button" class="primary-btn" onclick="confirmNoteFragments()">确认碎片化札记，进入第三阶段</button>
+                                <button type="button" class="primary-btn" onclick="switchAutoNotesStep(3)">下一步：证据对齐</button>
+                            </div>
+                        </section>
+
+                        <section class="auto-notes-step-panel" data-an-step-panel="3">
+                            <div class="auto-notes-section-head">
+                                <h2 class="section-title">证据对齐</h2>
+                                <p>选择建档或分析模式；建档模式会把碎片化札记转换为数据库可插入前的标准 JSON。</p>
+                            </div>
+
+                            <div class="auto-notes-result-card">
+                                <div class="auto-notes-result-head">
+                                    <h3>第三阶段模式</h3>
+                                    <div class="auto-notes-mode-switch">
+                                        <label><input type="radio" name="anStageThreeMode" value="database" checked onchange="switchAutoNotesStageThreeMode(this.value)"> 数据库建档者模式</label>
+                                        <label><input type="radio" name="anStageThreeMode" value="analysis" onchange="switchAutoNotesStageThreeMode(this.value)"> 深度分析使用者模式</label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div id="anDatabaseModePanel" class="auto-notes-db-panel">
+                                <div class="auto-notes-result-card">
+                                    <div class="auto-notes-result-head">
+                                        <h3>数据库模板输入区</h3>
+                                        <span class="auto-notes-status">可选；留空则使用默认 schema。</span>
+                                    </div>
+                                    <textarea id="anDatabaseTemplate" class="textarea-area auto-notes-db-template" placeholder="可粘贴你的数据库 JSON 模板，例如字段名、嵌套结构或示例记录。"></textarea>
+                                    <div class="auto-notes-default-schema">
+                                        <strong>默认模板说明</strong>
+                                        <pre>{
+  "classic_title": "",
+  "chapter": "",
+  "scripture_content": "",
+  "note_heyan": "",
+  "note_zhuxi": "",
+  "note_liubaonan": "",
+  "modern_interpretation": "",
+  "keywords": [],
+  "source_refs": [],
+  "fragments": [],
+  "created_at": "",
+  "updated_at": ""
+}</pre>
+                                    </div>
+                                    <div class="auto-notes-actions">
+                                        <button type="button" class="primary-btn" id="anGenerateDatabaseJsonBtn" onclick="generateDatabaseJSON()">生成数据库 JSON</button>
+                                    </div>
+                                </div>
+
+                                <div class="auto-notes-result-card">
+                                    <div class="auto-notes-result-head">
+                                        <h3>JSON 预览编辑器</h3>
+                                        <span id="anDatabaseJsonStatus" class="auto-notes-status"></span>
+                                    </div>
+                                    <textarea id="anDatabaseJsonPreview" class="textarea-area auto-notes-json-editor" placeholder="生成后的数据库 JSON 会显示在这里，可手动修正后再校验或导出。"></textarea>
+                                    <div class="auto-notes-actions">
+                                        <button type="button" class="analysis-btn" onclick="validateDatabaseJSON()">JSON 校验</button>
+                                        <button type="button" class="analysis-btn" onclick="copyDatabaseJSON()">复制 JSON</button>
+                                        <button type="button" class="analysis-btn" onclick="exportDatabaseJSON()">导出 JSON</button>
+                                        <button type="button" class="primary-btn" onclick="saveAutoNotesToKnowledgeBase()">保存到本地知识库</button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div id="anAnalysisModePanel" class="auto-notes-analysis-mode hidden">
+                                <div class="auto-notes-result-card">
+                                    <div class="auto-notes-result-head">
+                                        <h3>深度分析使用者模式</h3>
+                                        <span id="anAnalysisStatus" class="auto-notes-status"></span>
+                                    </div>
+                                    <div class="auto-notes-analysis-controls">
+                                        <label><input type="radio" name="anAnalysisType" value="word_cloud" checked onchange="switchAutoNotesAnalysisType(this.value)"> 词云：抓取核心概念</label>
+                                        <label><input type="radio" name="anAnalysisType" value="comparison_table" onchange="switchAutoNotesAnalysisType(this.value)"> 表格：比较解释</label>
+                                        <label><input type="radio" name="anAnalysisType" value="mind_map" onchange="switchAutoNotesAnalysisType(this.value)"> 思维导图：知识结构</label>
+                                        <label><input type="radio" name="anAnalysisType" value="argument_structure" onchange="switchAutoNotesAnalysisType(this.value)"> 结构图：义理逻辑或论证结构</label>
+                                        <label><input type="radio" name="anAnalysisType" value="knowledge_graph" onchange="switchAutoNotesAnalysisType(this.value)"> 知识图谱：关系网络</label>
+                                    </div>
+                                    <div id="anKnowledgeGraphOptions" class="auto-notes-kg-options hidden">
+                                        <label><input type="radio" name="anKnowledgeGraphMode" value="simple" checked> 简单关系库：人物关系、事件因果</label>
+                                        <label><input type="radio" name="anKnowledgeGraphMode" value="complex"> 复杂关系库：关键词、正文与多层属性关系</label>
+                                    </div>
+                                    <div class="auto-notes-actions">
+                                        <button type="button" class="analysis-btn" onclick="generateWordCloudData()">生成词云数据</button>
+                                        <button type="button" class="analysis-btn" onclick="generateComparisonTable()">生成对比表</button>
+                                        <button type="button" class="analysis-btn" onclick="generateMindMapData()">生成思维导图</button>
+                                        <button type="button" class="analysis-btn" onclick="generateArgumentStructure()">生成结构图</button>
+                                        <button type="button" class="analysis-btn" onclick="generateKnowledgeGraph()">生成知识图谱</button>
+                                        <button type="button" class="primary-btn" onclick="exportAnalysisResultJSON()">导出当前分析 JSON</button>
+                                    </div>
+                                </div>
+                                <div class="auto-notes-result-card">
+                                    <div class="auto-notes-result-head">
+                                        <h3>结构化结果预览</h3>
+                                        <span class="auto-notes-status">保留模型原始 JSON，可导出复用。</span>
+                                    </div>
+                                    <div id="anAnalysisPreview" class="auto-notes-analysis-preview"></div>
+                                    <textarea id="anAnalysisRawJson" class="textarea-area auto-notes-json-editor auto-notes-analysis-raw" placeholder="模型原始 JSON 会保留在这里。"></textarea>
+                                </div>
+                            </div>
+
+                            <div class="auto-notes-align-grid">
+                                <div class="auto-notes-result-card">
+                                    <h3>文本单元列表</h3>
+                                    <div id="anAlignUnits" class="auto-notes-unit-list compact"></div>
+                                </div>
+                                <div class="auto-notes-result-card">
+                                    <div class="auto-notes-result-head">
+                                        <h3>候选证据列表</h3>
+                                        <div class="auto-notes-inline-actions">
+                                            <label class="auto-notes-low-confidence"><input type="checkbox" id="anShowLowConfidence" onchange="toggleLowConfidenceEvidence(this.checked)"> 显示低置信度证据</label>
+                                            <button type="button" class="analysis-btn" onclick="buildAlignmentsForAllUnits()">开始证据对齐</button>
+                                            <button type="button" class="analysis-btn" onclick="buildEvidencePacks()">构建证据包</button>
+                                        </div>
+                                    </div>
+                                    <div id="anEvidenceCandidates" class="auto-notes-evidence-list"></div>
+                                </div>
+                            </div>
+
+                            <div class="auto-notes-result-card">
+                                <div class="auto-notes-result-head">
+                                    <h3>Evidence Pack 预览</h3>
+                                </div>
+                                <div id="anEvidencePackPreview" class="auto-notes-card-list"></div>
+                            </div>
+
+                            <div class="auto-notes-actions">
+                                <button type="button" class="analysis-btn" onclick="switchAutoNotesStep(2)">上一步</button>
+                                <button type="button" class="primary-btn" onclick="switchAutoNotesStep(4)">下一步：札记生成</button>
+                            </div>
+                        </section>
+
+                        <section class="auto-notes-step-panel" data-an-step-panel="4">
+                            <div class="auto-notes-section-head">
+                                <h2 class="section-title">札记生成</h2>
+                                <p>选择札记类型，生成可编辑的札记预览，并保留证据引用。</p>
+                            </div>
+
+                            <div class="auto-notes-generate-grid">
+                                <div class="auto-notes-result-card">
+                                    <label class="input-label" for="anNoteType">札记类型</label>
+                                    <select id="anNoteType" class="doc-name-input">
+                                        <option value="auto">自动判断</option>
+                                        <option value="exegesis">训诂札记</option>
+                                        <option value="collation">校勘札记</option>
+                                        <option value="commentary">注疏札记</option>
+                                        <option value="philosophy">义理札记</option>
+                                        <option value="institution">制度札记</option>
+                                        <option value="person">人物札记</option>
+                                        <option value="geography">地理札记</option>
+                                        <option value="allusion">典故札记</option>
+                                        <option value="edition">版本札记</option>
+                                    </select>
+                                    <button type="button" class="primary-btn" onclick="generateNotesFromEvidencePacks()">生成札记</button>
+                                </div>
+                                <div class="auto-notes-result-card">
+                                    <h3>札记预览区</h3>
+                                    <textarea id="anNotePreview" class="textarea-area academic-body auto-notes-preview" placeholder="点击“生成札记”后显示札记草稿摘要。"></textarea>
+                                    <div id="anGeneratedNotes" class="auto-notes-card-list"></div>
+                                </div>
+                                <div class="auto-notes-result-card">
+                                    <h3>证据引用区</h3>
+                                    <div id="anEvidenceCitations" class="auto-notes-evidence-list"></div>
+                                </div>
+                            </div>
+
+                            <div class="auto-notes-actions">
+                                <button type="button" class="analysis-btn" onclick="switchAutoNotesStep(3)">上一步</button>
+                                <button type="button" class="primary-btn" onclick="switchAutoNotesStep(5)">下一步：卡片与导出</button>
+                            </div>
+                        </section>
+
+                        <section class="auto-notes-step-panel" data-an-step-panel="5">
+                            <div class="auto-notes-section-head">
+                                <h2 class="section-title">卡片与导出</h2>
+                                <p>把札记整理为结构化卡片，并预留导出与保存入口。</p>
+                            </div>
+
+                            <div class="auto-notes-result-card">
+                                <div class="auto-notes-result-head">
+                                    <h3>结构化札记卡片</h3>
+                                    <button type="button" class="analysis-btn" onclick="createCardsFromNotes()">生成卡片</button>
+                                </div>
+                                <div id="anNoteCards" class="auto-notes-card-list"></div>
+                            </div>
+
+                            <div class="auto-notes-actions">
+                                <button type="button" class="analysis-btn" onclick="switchAutoNotesStep(4)">上一步</button>
+                                <input type="file" id="anImportJsonFile" accept=".json,application/json" class="auto-notes-import-input" onchange="importAutoNotesFromJSONFile(this)">
+                                <button type="button" class="analysis-btn" onclick="document.getElementById('anImportJsonFile').click()">导入 JSON</button>
+                                <button type="button" class="analysis-btn" onclick="exportAutoNotesAsJSON()">导出 JSON</button>
+                                <button type="button" class="analysis-btn" onclick="exportAutoNotesAsMarkdown()">导出 Markdown</button>
+                                <button type="button" class="primary-btn" onclick="saveAutoNotesToKnowledgeBase()">保存到本地知识库</button>
+                            </div>
+                        </section>
+                    </div>
+                </div>
+                
+                <!-- History Map Panel -->
+                <div class="panel history-map-panel" id="historyMap-panel">
+                    <div class="content-header">
+                        <h1 class="content-title">孔子行迹</h1>
+                        <div class="content-meta">
+                            <span>跟随孔子周游列国，解锁春秋地图、地点事件与人物故事</span>
+                        </div>
+                    </div>
+
+                        <div class="hm-landing" id="hmLanding">
+                            <div class="instruction-box">
+                                通过互动地图、第一视角游历和人物图鉴，重走孔子周游列国之路。
+                            </div>
+
+                            <div class="feature-cards">
+                                <div class="feature-card" role="button" tabindex="0" onclick="startHistoryMapJourney('free')" onkeydown="if(event.key==='Enter')startHistoryMapJourney('free')">
+                                    <h3 class="feature-card-title">春秋列国地图</h3>
+                                    <p class="feature-card-desc">探索孔子足迹，了解春秋时期地理与列国分布</p>
+                                    <span class="feature-card-action">进入地图 →</span>
+                                </div>
+                                <div class="feature-card" role="button" tabindex="0" onclick="startHistoryMapJourney('journey')" onkeydown="if(event.key==='Enter')startHistoryMapJourney('journey')">
+                                    <h3 class="feature-card-title">第一视角游历</h3>
+                                    <p class="feature-card-desc">跟随孔子路线逐站推进，解锁地点事件与人物故事</p>
+                                    <span class="feature-card-action">开始游历 →</span>
+                                </div>
+                                <div class="feature-card" role="button" tabindex="0" onclick="startHistoryMapJourney('atlas')" onkeydown="if(event.key==='Enter')startHistoryMapJourney('atlas')">
+                                    <h3 class="feature-card-title">人物图鉴</h3>
+                                    <p class="feature-card-desc">结识孔子及其弟子、诸侯，解锁人物档案</p>
+                                    <span class="feature-card-action">查看图鉴 →</span>
+                                </div>
+                            </div>
+
+                            <button id="hmContinueBtn" class="primary-btn hm-btn-continue" onclick="startHistoryMapJourney('journey')">开始游历</button>
+                        </div>
+
+                    <div class="hm-workspace hidden" id="hmWorkspace">
+                        <div class="hm-subnav">
+                            <button class="hm-subnav-tab active" data-hm-tab="map" onclick="hmSwitchTab('map')">地图探索</button>
+                            <button class="hm-subnav-tab" data-hm-tab="journey" onclick="hmSwitchTab('journey')">第一视角游历</button>
+                            <button class="hm-subnav-tab" data-hm-tab="atlas" onclick="hmSwitchTab('atlas')">人物图鉴</button>
+                            <button class="hm-subnav-tab" data-hm-tab="about" onclick="hmSwitchTab('about')">项目说明</button>
+                            <button class="hm-subnav-back" onclick="backToHistoryMapLanding()">返回</button>
+                        </div>
+                        <div class="hm-content-wrapper">
+                            <div class="hm-map-area" id="hmMapArea">
+                                <div id="hmLayerControls" class="hm-layer-controls"></div>
+                                <div class="hm-zoom-controls">
+                                    <button class="hm-zoom-btn" onclick="hmZoomIn()" title="放大">+</button>
+                                    <button class="hm-zoom-btn" onclick="hmZoomOut()" title="缩小">−</button>
+                                    <button class="hm-zoom-btn hm-zoom-reset" onclick="hmZoomReset()" title="重置">⟲</button>
+                                    <span class="hm-zoom-level" id="hmZoomLevel">100%</span>
+                                </div>
+                                <svg id="hmSvg" class="hm-svg" viewBox="0 0 100 100" preserveAspectRatio="xMinYMid meet">
+                                </svg>
+                                <div id="hmTooltip" class="hm-tooltip hidden"></div>
+                                <div id="hmLegend" class="hm-legend"></div>
+                                <div id="hmDetailContent" class="hm-detail-content hm-detail-overlay">
+                                    <p class="hm-detail-hint">点击地图上的点位，查看地点详情</p>
+                                </div>
+                            </div>
+                            <div class="hm-tab-overlay active" id="hmTabMap">
+                                <div id="hmDisclaimerMap" class="hm-disclaimer"></div>
+                            </div>
+                            <div class="hm-tab-overlay" id="hmTabJourney">
+                                <div class="hm-journey-bar">
+                                    <div id="hmJourneyCard" class="hm-journey-card">
+                                        <div class="hm-journey-header">
+                                            <span id="hmJourneyStepLabel" class="hm-journey-step-label"></span>
+                                            <h3 id="hmJourneyTitle" class="hm-journey-title">离鲁 · 旅程开始</h3>
+                                        </div>
+                                        <p id="hmJourneyPrompt" class="hm-journey-prompt"></p>
+                                        <div id="hmJourneyNewContent" class="hm-journey-new-content"></div>
+                                        <div class="hm-journey-actions">
+                                            <button id="hmBtnPrev" class="hm-journey-btn" onclick="hmJourneyPrev()">上一站</button>
+                                            <button id="hmBtnNext" class="hm-journey-btn hm-journey-btn-primary" onclick="hmJourneyNext()">继续前进</button>
+                                            <button id="hmBtnReset" class="hm-journey-btn hm-journey-btn-reset" onclick="hmJourneyReset()">重置旅程</button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="hm-route-overview" id="hmRouteOverview"></div>
+                                <div id="hmDisclaimerJourney" class="hm-disclaimer"></div>
+                            </div>
+                            <div class="hm-tab-overlay" id="hmTabAtlas">
+                                <div class="hm-atlas-header">
+                                    <div class="hm-atlas-progress">
+                                        <span class="hm-atlas-progress-label">已解锁人物</span>
+                                        <span class="hm-atlas-progress-count" id="hmAtlasProgressCount"></span>
+                                        <div class="hm-atlas-progress-bar">
+                                            <div class="hm-atlas-progress-fill" id="hmAtlasProgressFill" style="width: 0%;"></div>
+                                        </div>
+                                    </div>
+                                    <p class="hm-atlas-hint">跟随孔子周游列国，逐步解锁相遇的人物档案。</p>
+                                </div>
+                                <div class="hm-atlas-toolbar">
+                                    <div class="hm-atlas-filters" id="hmAtlasFilters"></div>
+                                    <input type="text" class="hm-atlas-search" id="hmAtlasSearch" placeholder="搜索人物名称、别名、称号…" oninput="_hmRenderAtlas()">
+                                </div>
+                                <div class="hm-atlas-grid" id="hmAtlasGrid"></div>
+                            </div>
+                            <div class="hm-tab-overlay" id="hmTabAbout">
+                                <div class="hm-about-content">
+                                    <h3>关于「孔子周游列国」历史地理模块</h3>
+                                    <p>本模块基于《史记·孔子世家》《孔子家语》等历史文献，以互动地图和游历的形式呈现孔子周游列国的十四年历程。</p>
+                                    <h4>功能说明</h4>
+                                    <ul>
+                                        <li><strong>地图探索</strong>：自由浏览春秋列国地图，点击地点查看相关历史事件</li>
+                                        <li><strong>第一视角游历</strong>：跟随孔子路线逐站推进，逐步解锁地点、事件和人物</li>
+                                        <li><strong>人物图鉴</strong>：查看游历途中遇见的各色人物及其档案</li>
+                                    </ul>
+                                    <h4>数据来源</h4>
+                                    <ul>
+                                        <li>地点坐标基于谭其骧《中国历史地图集》春秋时期相关图幅</li>
+                                        <li>事件内容参考《史记》《左传》《国语》等</li>
+                                        <li>人物关系基于历史文献综合整理</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Knowledge Base Panel -->
+                <div class="panel knowledge-panel" id="knowledge-panel">
+                    <div class="content-header">
+                        <h1 class="content-title">知识库</h1>
+                        <div class="content-meta">
+                            <span>保存所有已上传的文档，支持版本对比</span>
+                        </div>
+                    </div>
+                    
+                    <div id="storageWarning" class="storage-warning hidden">
+                        存储空间即将用尽，建议清理旧文档
+                    </div>
+                    
+                    <div class="kb-stats">
+                        <div class="stat-card">
+                            <div class="stat-value" id="kbDocCount">0</div>
+                            <div class="stat-label">文档数</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-value" id="kbVersionCount">0</div>
+                            <div class="stat-label">总版本数</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-value" id="kbStorageUsed">0KB</div>
+                            <div class="stat-label">已用空间</div>
+                        </div>
+                    </div>
+                    
+                    <div class="kb-search-bar">
+                        <input type="text" id="kbSearch" placeholder="搜索文档..." oninput="renderKnowledgeBase()">
+                        <button onclick="exportKnowledgeBase()">导出</button>
+                        <button onclick="confirmClearKnowledgeBase()">清理</button>
+                    </div>
+                    
+                    <div id="kbList"></div>
+                </div>
+                
+                <!-- 全屏阅读模式 -->
+                <div id="fullscreenViewer" class="fullscreen-viewer hidden">
+                    <div class="fullscreen-header">
+                        <span id="fullscreenTitle" style="font-weight: 600; font-size: 16px;"></span>
+                        <div style="display: flex; gap: 8px; align-items: center;">
+                            <span id="formatIndicator" style="font-size: 11px; color: var(--text-muted); display: none;">含格式</span>
+                            <button onclick="addTextAnnotation()" style="padding: 6px 12px; border: 1px solid var(--accent); border-radius: 4px; background: var(--accent); color: white; cursor: pointer;">添加批注</button>
+                            <button onclick="adjustFontSize(-1)" style="padding: 6px 10px; border: 1px solid var(--border); border-radius: 4px; background: var(--bg-card); cursor: pointer;">A-</button>
+                            <button onclick="adjustFontSize(1)" style="padding: 6px 10px; border: 1px solid var(--border); border-radius: 4px; background: var(--bg-card); cursor: pointer;">A+</button>
+                            <button onclick="toggleFullscreen()" style="padding: 6px 12px; border: 1px solid var(--border); border-radius: 4px; background: var(--bg-card); cursor: pointer;">关闭</button>
+                        </div>
+                    </div>
+                    <div id="fullscreenContent" class="fullscreen-content selectable" onmouseup="handleTextSelection()"></div>
+                    <div class="fullscreen-annotation">
+                        <h4>随文批注列表</h4>
+                        <div id="annotationList" class="annotation-list"></div>
+                    </div>
+                </div>
+                
+                <!-- 全屏阅读模式 -->
+                <div id="fullscreenReading" class="fullscreen-reading hidden">
+                    <div class="fullscreen-reading-header">
+                        <span id="fullscreenReadingTitle" style="font-weight: 600; font-size: 18px;"></span>
+                        <div style="display: flex; gap: 8px; align-items: center;">
+                            <button onclick="adjustReadingFontSize(-1)" style="padding: 6px 10px; border: 1px solid var(--border); border-radius: 4px; background: var(--bg-card); cursor: pointer;">A-</button>
+                            <button onclick="adjustReadingFontSize(1)" style="padding: 6px 10px; border: 1px solid var(--border); border-radius: 4px; background: var(--bg-card); cursor: pointer;">A+</button>
+                            <button onclick="exitFullscreenReading()" style="padding: 6px 12px; border: 1px solid var(--border); border-radius: 4px; background: var(--bg-card); cursor: pointer;">退出全屏</button>
+                        </div>
+                    </div>
+                    <div id="fullscreenReadingContent" class="fullscreen-reading-content"></div>
+                </div>
+                
+                <!-- Community Panel -->
+                <div class="panel community-panel" id="community-panel">
+                    <div class="content-header">
+                        <h1 class="content-title">学术社区</h1>
+                        <div class="content-meta">
+                            <span>查看和分享审核结果供他人使用</span>
+                        </div>
+                    </div>
+                    
+                    <div id="communityStatus" class="community-status">正在连接...</div>
+                    
+                    <div style="display: flex; gap: 8px; margin-bottom: 16px;">
+                        <button onclick="filterCategory('all')" id="filterAll" style="padding: 6px 12px; font-size: 12px; border: 1px solid var(--border); border-radius: 5px; cursor: pointer; background: var(--accent); color: white;">全部</button>
+                        <button onclick="filterCategory('teaching')" id="filterTeaching" style="padding: 6px 12px; font-size: 12px; border: 1px solid var(--border); border-radius: 5px; cursor: pointer; background: var(--white); color: var(--text-secondary);">教学文档</button>
+                        <button onclick="filterCategory('review')" id="filterReview" style="padding: 6px 12px; font-size: 12px; border: 1px solid var(--border); border-radius: 5px; cursor: pointer; background: var(--white); color: var(--text-secondary);">审核文档</button>
+                    </div>
+                    
+                    <div id="communityDocs"></div>
+                </div>
+            </main>
+            
+            <!-- Right Sidebar -->
+            <aside class="sidebar-right" id="sidebarRight">
+                <div class="resize-handle" id="resizeHandle" onmousedown="startResize(event)"></div>
+                <button class="share-btn" onclick="runAutoAnalysis()" style="margin-bottom: 16px;">手动检测文本</button>
+                
+                <div class="right-card">
+                    <div class="right-card-title">内证互参</div>
+                    <div id="citationPanelRight">
+                        <p style="font-size: 12px; color: var(--text-muted); text-align: center; padding: 20px;">
+                            审核文档后点击上方按钮检测
+                        </p>
+                    </div>
+                </div>
+                
+                <div class="right-card">
+                    <div class="right-card-title">训诂释义</div>
+                    <div id="etymologyPanel">
+                        <p style="font-size: 12px; color: var(--text-muted); text-align: center; padding: 20px;">
+                            审核文档后点击上方按钮检测
+                        </p>
+                    </div>
+                </div>
+                
+                <div class="right-card">
+                    <div class="right-card-title">跨文献关联</div>
+                    <div id="crossRefPanel">
+                        <p style="font-size: 12px; color: var(--text-muted); text-align: center; padding: 20px;">
+                            审核文档后点击上方按钮检测
+                        </p>
+                    </div>
+                </div>
+            </aside>
+        </div>
+    </div>
+    
+    <!-- Mobile Navigation -->
+    <div class="mobile-nav">
+        <button onclick="switchTab('teaching')" class="active" data-tab="teaching">教学文档</button>
+        <button onclick="switchTab('review')" data-tab="review">文档审核</button>
+        <button onclick="switchTab('classic')" data-tab="classic">经典阅读</button>
+        <button onclick="switchTab('autoNotes')" data-tab="autoNotes">札记梳理</button>
+        <button onclick="switchTab('historyMap')" data-tab="historyMap">孔子行迹</button>
+        <button onclick="switchTab('knowledge')" data-tab="knowledge">知识库</button>
+        <button onclick="switchTab('community')" data-tab="community">学术社区</button>
+    </div>
+    
+    <!-- Rich Text Editor Modal -->
+    <div id="richTextModal" class="modal" style="display: none;">
+        <div class="modal-content" style="max-width: 500px;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+                <h3 style="margin: 0; font-size: 16px;">编辑</h3>
+                <button class="modal-close" onclick="closeRichTextEditor()">关闭</button>
+            </div>
+            <div style="display: flex; gap: 6px; margin-bottom: 12px; flex-wrap: wrap;">
+                <button type="button" onclick="toggleBold()" style="padding: 6px 10px; border: 1px solid var(--border); background: var(--bg-card); border-radius: 4px; cursor: pointer;"><b>B</b></button>
+                <button type="button" onclick="toggleItalic()" style="padding: 6px 10px; border: 1px solid var(--border); background: var(--bg-card); border-radius: 4px; cursor: pointer;"><i>I</i></button>
+                <button type="button" onclick="toggleUnderline()" style="padding: 6px 10px; border: 1px solid var(--border); background: var(--bg-card); border-radius: 4px; cursor: pointer;"><u>U</u></button>
+                <select id="fontSizeSelect" onchange="toggleFontSize(this.value)" style="padding: 6px 8px; border: 1px solid var(--border); border-radius: 4px;">
+                    <option value="">字号</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    <option value="6">6</option>
+                    <option value="7">7</option>
+                </select>
+            </div>
+            <textarea id="richTextEditor" style="min-height: 150px; border: 1px solid var(--border); border-radius: 8px; padding: 12px; overflow-y: auto; background: var(--bg-card); font-size: 14px; line-height: 1.6; width: 100%; box-sizing: border-box;"></textarea>
+            <div style="display: flex; gap: 8px; margin-top: 12px; justify-content: flex-end;">
+                <button onclick="closeRichTextEditor()" style="padding: 8px 16px; border: 1px solid var(--border); background: var(--bg-card); border-radius: 6px; cursor: pointer;">取消</button>
+                <button onclick="applyRichText()" style="padding: 8px 16px; background: var(--accent); color: white; border: none; border-radius: 6px; cursor: pointer;">应用</button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Modal for community doc view -->
+<div id="docModal" class="modal">
+        <div class="modal-content" style="max-width: 600px;">
+            <button class="modal-close" onclick="document.getElementById('docModal').style.display='none'">关闭</button>
+            <h3 id="modalTitle"></h3>
+            <div id="modalContent" style="background: var(--bg-secondary); padding: 14px; border-radius: 8px; max-height: 300px; overflow-y: auto; white-space: pre-wrap;"></div>
+            
+            <div style="border-top: 1px solid var(--border-light); padding-top: 16px; margin-top: 16px;">
+                <h4 style="font-size: 14px; margin-bottom: 10px; color: var(--text-secondary);">评论</h4>
+                <div id="docComments" style="margin-bottom: 14px;"></div>
+                <div style="display: flex; gap: 8px;">
+                    <input type="text" id="docCommentAuthor" placeholder="您的昵称" style="padding: 8px 12px; border: 1px solid var(--border); border-radius: 6px; font-size: 13px; width: 120px;">
+                    <input type="text" id="docCommentInput" placeholder="写下您的评论..." style="flex: 1; padding: 8px 12px; border: 1px solid var(--border); border-radius: 6px; font-size: 13px;">
+                    <button onclick="submitDocComment()" style="padding: 8px 16px; background: var(--accent); color: white; border: none; border-radius: 6px; cursor: pointer; font-size: 13px;">发送</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+    
+    <script src="scripts/ai-adapter.js"></script>
+    <script src="scripts/core.js"></script>
+    <script src="scripts/file-processing.js"></script>
+    <script src="scripts/knowledge-base.js"></script>
+    <script src="scripts/teaching.js"></script>
+    <script src="scripts/review.js"></script>
+    <script src="scripts/analysis.js"></script>
+    <script src="scripts/community.js"></script>
+    <script src="scripts/reference-detection.js"></script>
+    <script src="scripts/classic-texts.js"></script>
+    <script src="scripts/classic-reading.js"></script>
+    <script src="scripts/auto-notes-data.js"></script>
+    <script src="scripts/auto-notes-engine.js"></script>
+    <script src="scripts/auto-notes.js"></script>
+    <script src="history-map/data/locations.js"></script>
+    <script src="history-map/data/characters.js"></script>
+    <script src="history-map/data/events.js"></script>
+    <script src="history-map/data/route.js"></script>
+    <script src="history-map/utils/data-helpers.js"></script>
+    <script src="scripts/history-map.js"></script>
+</body>
+</html>
