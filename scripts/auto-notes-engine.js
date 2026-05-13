@@ -984,6 +984,13 @@
             el.classList.toggle('error', !!isError);
         }
 
+        function anSetAnalysisStatus(message, isError) {
+            const el = document.getElementById('anAnalysisStatus');
+            if (!el) return;
+            el.textContent = message || '';
+            el.classList.toggle('error', !!isError);
+        }
+
         async function generateWordCloudData() {
             return anGenerateAnalysisResult('word_cloud', 'analyze_word_cloud');
         }
@@ -1098,6 +1105,644 @@
             };
         }
 
+        let anCurrentEChartsInstance = null;
+
+        function anDisposeECharts() {
+            if (anCurrentEChartsInstance) {
+                try {
+                    anCurrentEChartsInstance.dispose();
+                } catch (e) {}
+                anCurrentEChartsInstance = null;
+            }
+        }
+
+        function anResizeECharts() {
+            if (anCurrentEChartsInstance) {
+                try {
+                    anCurrentEChartsInstance.resize();
+                } catch (e) {}
+            }
+        }
+
+        function anGetAnalysisTypeLabel(type) {
+            const labels = {
+                word_cloud: '词云',
+                comparison_table: '对比表',
+                mind_map: '思维导图',
+                argument_structure: '结构图',
+                knowledge_graph: '知识图谱'
+            };
+            return labels[type] || type;
+        }
+
+        function anExportAnalysisImage(format = 'png') {
+            if (!anCurrentEChartsInstance) {
+                alert('暂无可视化图表可导出。');
+                return null;
+            }
+
+            try {
+                const type = anGetSetting('analysisType', 'word_cloud');
+                const typeLabel = anGetAnalysisTypeLabel(type);
+                const timestamp = new Date().toISOString().slice(0, 10);
+                const filename = `${typeLabel}_${timestamp}.${format}`;
+
+                const dataUrl = anCurrentEChartsInstance.getDataURL({
+                    type: format === 'jpg' ? 'jpeg' : 'png',
+                    pixelRatio: 2,
+                    backgroundColor: '#fff'
+                });
+
+                const link = document.createElement('a');
+                link.download = filename;
+                link.href = dataUrl;
+                link.click();
+
+                return dataUrl;
+            } catch (error) {
+                console.error('导出图片失败:', error);
+                alert('导出图片失败：' + (error.message || error));
+                return null;
+            }
+        }
+
+        function anExportAnalysisImagePNG() {
+            return anExportAnalysisImage('png');
+        }
+
+        function anExportAnalysisImageJPG() {
+            return anExportAnalysisImage('jpg');
+        }
+
+        function anExportAnalysisMarkdown() {
+            const type = anGetSetting('analysisType', 'word_cloud');
+            const result = window.autoNotesState && window.autoNotesState.analysisResults
+                ? window.autoNotesState.analysisResults[type]
+                : null;
+
+            if (!result) {
+                alert('暂无分析结果可导出。');
+                return null;
+            }
+
+            const typeLabel = anGetAnalysisTypeLabel(type);
+            const timestamp = new Date().toISOString().slice(0, 10);
+            const filename = `${typeLabel}_${timestamp}.md`;
+
+            let imageDataUrl = null;
+            if (anCurrentEChartsInstance) {
+                try {
+                    imageDataUrl = anCurrentEChartsInstance.getDataURL({
+                        type: 'png',
+                        pixelRatio: 2,
+                        backgroundColor: '#fff'
+                    });
+                } catch (e) {}
+            }
+
+            const projectTitle = window.autoNotesState ? (window.autoNotesState.projectTitle || typeLabel) : typeLabel;
+            const generatedAt = result.generatedAt || new Date().toISOString();
+
+            let dataSummary = '';
+            if (result.data) {
+                if (type === 'word_cloud' && result.data.terms) {
+                    dataSummary = '### 词云数据\n\n';
+                    dataSummary += '| 关键词 | 权重 | 分类 |\n';
+                    dataSummary += '|--------|------|------|\n';
+                    const terms = result.data.terms.slice(0, 30);
+                    terms.forEach(term => {
+                        dataSummary += `| ${term.text || ''} | ${term.weight || 1} | ${term.category || '-'} |\n`;
+                    });
+                } else if (type === 'comparison_table' && result.data.columns) {
+                    dataSummary = '### 对比表数据\n\n';
+                    dataSummary += '| ' + result.data.columns.join(' | ') + ' |\n';
+                    dataSummary += '| ' + result.data.columns.map(() => '---').join(' | ') + ' |\n';
+                    if (result.data.rows) {
+                        result.data.rows.forEach(row => {
+                            const cells = Array.isArray(row) ? row : result.data.columns.map(col => row && row[col]);
+                            dataSummary += '| ' + cells.map(c => (c == null ? '' : String(c))).join(' | ') + ' |\n';
+                        });
+                    }
+                } else if (type === 'mind_map' && result.data.root) {
+                    dataSummary = '### 思维导图数据\n\n';
+                    function renderTree(node, depth = 0) {
+                        if (!node) return '';
+                        const prefix = '  '.repeat(depth) + '- ';
+                        let output = prefix + (node.label || node.id || '节点') + '\n';
+                        const children = Array.isArray(node.children) ? node.children : [];
+                        children.forEach(child => {
+                            output += renderTree(child, depth + 1);
+                        });
+                        return output;
+                    }
+                    dataSummary += renderTree(result.data.root);
+                } else if ((type === 'knowledge_graph' || type === 'argument_structure') && result.data.nodes) {
+                    const title = type === 'knowledge_graph' ? '知识图谱' : '结构图';
+                    dataSummary = `### ${title}数据\n\n`;
+                    if (result.data.nodes && result.data.nodes.length > 0) {
+                        dataSummary += '#### 节点列表\n\n';
+                        dataSummary += '| ID/名称 | 类型 |\n';
+                        dataSummary += '|----------|------|\n';
+                        result.data.nodes.forEach(node => {
+                            dataSummary += `| ${node.label || node.id || '-'} | ${node.type || 'node'} |\n`;
+                        });
+                    }
+                    if (result.data.edges && result.data.edges.length > 0) {
+                        dataSummary += '\n#### 关系列表\n\n';
+                        dataSummary += '| 源 | 目标 | 关系 |\n';
+                        dataSummary += '|-----|------|------|\n';
+                        result.data.edges.forEach(edge => {
+                            dataSummary += `| ${edge.source || '-'} | ${edge.target || '-'} | ${edge.relation || edge.label || '-'} |\n`;
+                        });
+                    }
+                }
+            }
+
+            let markdownContent = `# ${typeLabel}分析报告\n\n`;
+            markdownContent += `> 生成时间：${generatedAt}\n\n`;
+
+            if (imageDataUrl) {
+                markdownContent += `## 可视化图表\n\n`;
+                markdownContent += `![${typeLabel}](${imageDataUrl})\n\n`;
+            }
+
+            if (dataSummary) {
+                markdownContent += `## 数据明细\n\n`;
+                markdownContent += dataSummary + '\n';
+            }
+
+            markdownContent += `---\n\n`;
+            markdownContent += `*由古典学园数字兰台文档审核助手生成*\n`;
+
+            const blob = new Blob([markdownContent], { type: 'text/markdown;charset=utf-8' });
+            const url = URL.createObjectURL(blob);
+            const link = document.createElement('a');
+            link.download = filename;
+            link.href = url;
+            link.click();
+            URL.revokeObjectURL(url);
+
+            return {
+                filename,
+                markdownContent,
+                imageDataUrl
+            };
+        }
+
+        function anExportAnalysisWordDoc() {
+            const type = anGetSetting('analysisType', 'word_cloud');
+            const result = window.autoNotesState && window.autoNotesState.analysisResults
+                ? window.autoNotesState.analysisResults[type]
+                : null;
+
+            if (!result) {
+                alert('暂无分析结果可导出。');
+                return null;
+            }
+
+            const typeLabel = anGetAnalysisTypeLabel(type);
+            const timestamp = new Date().toISOString().slice(0, 10);
+            const filename = `${typeLabel}_${timestamp}.doc`;
+
+            let imageDataUrl = null;
+            if (anCurrentEChartsInstance) {
+                try {
+                    imageDataUrl = anCurrentEChartsInstance.getDataURL({
+                        type: 'png',
+                        pixelRatio: 2,
+                        backgroundColor: '#fff'
+                    });
+                } catch (e) {}
+            }
+
+            const projectTitle = window.autoNotesState ? (window.autoNotesState.projectTitle || typeLabel) : typeLabel;
+            const generatedAt = result.generatedAt || new Date().toISOString();
+
+            let dataSummaryHtml = '';
+            if (result.data) {
+                if (type === 'word_cloud' && result.data.terms) {
+                    dataSummaryHtml += '<h3>词云数据</h3>';
+                    dataSummaryHtml += '<table border="1" cellpadding="8" cellspacing="0" style="border-collapse:collapse; width:80%;">';
+                    dataSummaryHtml += '<thead><tr style="background-color:#f0f0f0;"><th>关键词</th><th>权重</th><th>分类</th></tr></thead>';
+                    dataSummaryHtml += '<tbody>';
+                    const terms = result.data.terms.slice(0, 30);
+                    terms.forEach(term => {
+                        dataSummaryHtml += `<tr><td>${term.text || ''}</td><td>${term.weight || 1}</td><td>${term.category || '-'}</td></tr>`;
+                    });
+                    dataSummaryHtml += '</tbody></table>';
+                } else if (type === 'comparison_table' && result.data.columns) {
+                    dataSummaryHtml += '<h3>对比表数据</h3>';
+                    dataSummaryHtml += '<table border="1" cellpadding="8" cellspacing="0" style="border-collapse:collapse; width:100%;">';
+                    dataSummaryHtml += '<thead><tr style="background-color:#f0f0f0;">';
+                    result.data.columns.forEach(col => {
+                        dataSummaryHtml += `<th>${col}</th>`;
+                    });
+                    dataSummaryHtml += '</tr></thead>';
+                    dataSummaryHtml += '<tbody>';
+                    if (result.data.rows) {
+                        result.data.rows.forEach(row => {
+                            dataSummaryHtml += '<tr>';
+                            const cells = Array.isArray(row) ? row : result.data.columns.map(col => row && row[col]);
+                            cells.forEach(cell => {
+                                dataSummaryHtml += `<td>${cell == null ? '' : String(cell)}</td>`;
+                            });
+                            dataSummaryHtml += '</tr>';
+                        });
+                    }
+                    dataSummaryHtml += '</tbody></table>';
+                } else if (type === 'mind_map' && result.data.root) {
+                    dataSummaryHtml += '<h3>思维导图数据</h3>';
+                    function renderTreeHtml(node, depth = 0) {
+                        if (!node) return '';
+                        const indent = depth * 20;
+                        let output = `<div style="margin-left:${indent}px; padding:4px 0;">• ${node.label || node.id || '节点'}</div>`;
+                        const children = Array.isArray(node.children) ? node.children : [];
+                        children.forEach(child => {
+                            output += renderTreeHtml(child, depth + 1);
+                        });
+                        return output;
+                    }
+                    dataSummaryHtml += renderTreeHtml(result.data.root);
+                } else if ((type === 'knowledge_graph' || type === 'argument_structure') && result.data.nodes) {
+                    const title = type === 'knowledge_graph' ? '知识图谱' : '结构图';
+                    dataSummaryHtml += `<h3>${title}数据</h3>`;
+                    if (result.data.nodes && result.data.nodes.length > 0) {
+                        dataSummaryHtml += '<h4>节点列表</h4>';
+                        dataSummaryHtml += '<table border="1" cellpadding="8" cellspacing="0" style="border-collapse:collapse; width:60%;">';
+                        dataSummaryHtml += '<thead><tr style="background-color:#f0f0f0;"><th>ID/名称</th><th>类型</th></tr></thead>';
+                        dataSummaryHtml += '<tbody>';
+                        result.data.nodes.forEach(node => {
+                            dataSummaryHtml += `<tr><td>${node.label || node.id || '-'}</td><td>${node.type || 'node'}</td></tr>`;
+                        });
+                        dataSummaryHtml += '</tbody></table>';
+                    }
+                    if (result.data.edges && result.data.edges.length > 0) {
+                        dataSummaryHtml += '<h4 style="margin-top:20px;">关系列表</h4>';
+                        dataSummaryHtml += '<table border="1" cellpadding="8" cellspacing="0" style="border-collapse:collapse; width:80%;">';
+                        dataSummaryHtml += '<thead><tr style="background-color:#f0f0f0;"><th>源</th><th>目标</th><th>关系</th></tr></thead>';
+                        dataSummaryHtml += '<tbody>';
+                        result.data.edges.forEach(edge => {
+                            dataSummaryHtml += `<tr><td>${edge.source || '-'}</td><td>${edge.target || '-'}</td><td>${edge.relation || edge.label || '-'}</td></tr>`;
+                        });
+                        dataSummaryHtml += '</tbody></table>';
+                    }
+                }
+            }
+
+            const htmlContent = `
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>${typeLabel}分析报告</title>
+    <style>
+        body { font-family: 'SimSun', 'Microsoft YaHei', serif; font-size: 14px; line-height: 1.8; padding: 20px; }
+        h1 { font-size: 24px; color: #2d3748; border-bottom: 2px solid #5470c6; padding-bottom: 10px; }
+        h2 { font-size: 18px; color: #2d3748; margin-top: 25px; }
+        h3 { font-size: 16px; color: #4a5568; margin-top: 20px; }
+        h4 { font-size: 14px; color: #4a5568; margin-top: 15px; }
+        .meta { color: #718096; font-size: 12px; margin-bottom: 20px; }
+        .chart-container { text-align: center; margin: 20px 0; }
+        .chart-container img { max-width: 100%; border: 1px solid #ddd; }
+        hr { border: none; border-top: 1px solid #ddd; margin: 30px 0; }
+        .footer { color: #718096; font-size: 12px; text-align: center; }
+    </style>
+</head>
+<body>
+    <h1>${typeLabel}分析报告</h1>
+    <div class="meta">
+        <strong>项目：</strong>${projectTitle}<br>
+        <strong>生成时间：</strong>${generatedAt}
+    </div>
+
+    ${imageDataUrl ? `
+    <h2>可视化图表</h2>
+    <div class="chart-container">
+        <img src="${imageDataUrl}" alt="${typeLabel}">
+    </div>
+    ` : ''}
+
+    ${dataSummaryHtml ? `<h2>数据明细</h2>${dataSummaryHtml}` : ''}
+
+    <hr>
+    <div class="footer">由古典学园数字兰台文档审核助手生成</div>
+</body>
+</html>
+            `.trim();
+
+            const blob = new Blob([htmlContent], { type: 'application/msword;charset=utf-8' });
+            const downloadUrl = URL.createObjectURL(blob);
+            const downloadLink = document.createElement('a');
+            downloadLink.download = filename;
+            downloadLink.href = downloadUrl;
+            downloadLink.click();
+            URL.revokeObjectURL(downloadUrl);
+
+            return {
+                filename,
+                htmlContent,
+                imageDataUrl
+            };
+        }
+
+        function anRenderExportButtons(container) {
+            const type = anGetSetting('analysisType', 'word_cloud');
+            const echartsTypes = ['word_cloud', 'mind_map', 'argument_structure', 'knowledge_graph'];
+            const hasEChartsChart = echartsTypes.includes(type) && anCurrentEChartsInstance;
+
+            if (!hasEChartsChart) {
+                return '';
+            }
+
+            return `
+                <div class="auto-notes-export-toolbar">
+                    <span class="auto-notes-export-label">导出：</span>
+                    <button type="button" class="auto-notes-export-btn" onclick="anExportAnalysisImagePNG()" title="导出为 PNG 图片">
+                        📷 PNG
+                    </button>
+                    <button type="button" class="auto-notes-export-btn" onclick="anExportAnalysisImageJPG()" title="导出为 JPG 图片">
+                        📷 JPG
+                    </button>
+                    <button type="button" class="auto-notes-export-btn primary" onclick="anExportAnalysisMarkdown()" title="导出为 Markdown 文档">
+                        📄 Markdown
+                    </button>
+                </div>
+            `;
+        }
+
+        function anRenderWordCloudECharts(container, data) {
+            const terms = Array.isArray(data && data.terms) ? data.terms : [];
+            if (!terms.length) {
+                container.innerHTML = '<div class="auto-notes-empty">暂无词云数据。</div>';
+                return null;
+            }
+
+            container.innerHTML = '<div class="auto-notes-echarts-container" id="auto-notes-wordcloud"></div>';
+            const chartDom = document.getElementById('auto-notes-wordcloud');
+            if (!chartDom || typeof echarts === 'undefined') {
+                return anRenderWordCloud(data);
+            }
+
+            const chart = echarts.init(chartDom);
+            const wordCloudData = terms.map(term => ({
+                name: term.text || '',
+                value: Math.max(1, Math.min(100, Number(term.weight || 1) * 5)),
+                category: term.category || ''
+            }));
+
+            const categories = [...new Set(terms.map(t => t.category || '默认').filter(c => c))];
+            const colorPalette = ['#5470c6', '#91cc75', '#fac858', '#ee6666', '#73c0de', '#3ba272', '#fc8452', '#9a60b4', '#ea7ccc'];
+            const categoryColors = {};
+            categories.forEach((cat, i) => {
+                categoryColors[cat] = colorPalette[i % colorPalette.length];
+            });
+
+            const option = {
+                tooltip: {
+                    trigger: 'item',
+                    formatter: function(params) {
+                        return `<strong>${params.name}</strong><br/>权重: ${Math.round(params.value / 5)}${params.data.category ? '<br/>分类: ' + params.data.category : ''}`;
+                    }
+                },
+                series: [{
+                    type: 'wordCloud',
+                    gridSize: 8,
+                    sizeRange: [14, 60],
+                    rotationRange: [-45, 45],
+                    rotationStep: 15,
+                    shape: 'cardioid',
+                    drawOutOfBound: false,
+                    textStyle: {
+                        fontFamily: 'Inter, "Crimson Pro", serif',
+                        fontWeight: 'bold',
+                        color: function(params) {
+                            if (params.data && params.data.category && categoryColors[params.data.category]) {
+                                return categoryColors[params.data.category];
+                            }
+                            const colors = ['#2d3748', '#4a5568', '#718096', '#5470c6', '#91cc75', '#ee6666'];
+                            return colors[Math.floor(Math.random() * colors.length)];
+                        }
+                    },
+                    emphasis: {
+                        textStyle: {
+                            shadowBlur: 10,
+                            shadowColor: 'rgba(0, 0, 0, 0.3)'
+                        }
+                    },
+                    data: wordCloudData
+                }]
+            };
+
+            chart.setOption(option);
+            return chart;
+        }
+
+        function anRenderMindMapECharts(container, data) {
+            const root = data && data.root ? data.root : null;
+            if (!root) {
+                container.innerHTML = '<div class="auto-notes-empty">暂无思维导图数据。</div>';
+                return null;
+            }
+
+            container.innerHTML = '<div class="auto-notes-echarts-container" id="auto-notes-mindmap"></div>';
+            const chartDom = document.getElementById('auto-notes-mindmap');
+            if (!chartDom || typeof echarts === 'undefined') {
+                return anRenderMindMap(data);
+            }
+
+            const chart = echarts.init(chartDom);
+
+            function convertTreeData(node) {
+                if (!node) return null;
+                const children = Array.isArray(node.children) ? node.children : [];
+                return {
+                    name: node.label || node.id || '节点',
+                    children: children.length ? children.map(convertTreeData) : undefined
+                };
+            }
+
+            const treeData = convertTreeData(root);
+            if (!treeData) return null;
+
+            const option = {
+                tooltip: {
+                    trigger: 'item',
+                    formatter: '{b}'
+                },
+                series: [{
+                    type: 'tree',
+                    data: [treeData],
+                    layout: 'orthogonal',
+                    orient: 'LR',
+                    symbol: 'rect',
+                    symbolSize: [120, 40],
+                    label: {
+                        show: true,
+                        position: 'inside',
+                        verticalAlign: 'middle',
+                        align: 'center',
+                        fontSize: 13,
+                        fontFamily: 'Inter, "Crimson Pro", serif',
+                        color: '#fff'
+                    },
+                    itemStyle: {
+                        color: '#5470c6',
+                        borderColor: '#fff',
+                        borderWidth: 2
+                    },
+                    lineStyle: {
+                        color: '#ccc',
+                        width: 2,
+                        curveness: 0.5
+                    },
+                    emphasis: {
+                        focus: 'descendant'
+                    },
+                    expandAndCollapse: true,
+                    initialTreeDepth: 3,
+                    leaves: {
+                        label: {
+                            position: 'right',
+                            verticalAlign: 'middle',
+                            align: 'left',
+                            color: '#2d3748'
+                        },
+                        itemStyle: {
+                            color: '#91cc75'
+                        }
+                    }
+                }]
+            };
+
+            chart.setOption(option);
+            return chart;
+        }
+
+        function anRenderGraphECharts(container, data, title) {
+            const nodes = Array.isArray(data && data.nodes) ? data.nodes : [];
+            const edges = Array.isArray(data && data.edges) ? data.edges : [];
+
+            if (!nodes.length && !edges.length) {
+                container.innerHTML = '<div class="auto-notes-empty">暂无图谱数据。</div>';
+                return null;
+            }
+
+            container.innerHTML = '<div class="auto-notes-echarts-container" id="auto-notes-graph"></div>';
+            const chartDom = document.getElementById('auto-notes-graph');
+            if (!chartDom || typeof echarts === 'undefined') {
+                return anRenderGraphList(data, title);
+            }
+
+            const chart = echarts.init(chartDom);
+
+            const nodeIdMap = {};
+            const chartNodes = nodes.map((node, index) => {
+                const id = node.id || node.label || `node_${index}`;
+                nodeIdMap[id] = index;
+                return {
+                    id: id,
+                    name: node.label || node.id || '',
+                    symbolSize: 50,
+                    category: node.type || 'node',
+                    draggable: true
+                };
+            });
+
+            const chartLinks = edges.map(edge => ({
+                source: edge.source || '',
+                target: edge.target || '',
+                label: {
+                    show: true,
+                    formatter: edge.relation || edge.label || '',
+                    fontSize: 11,
+                    color: '#666'
+                },
+                lineStyle: {
+                    curveness: 0.2
+                }
+            }));
+
+            const categories = [...new Set(chartNodes.map(n => n.category))];
+            const chartCategories = categories.map(cat => ({ name: cat }));
+
+            const colorPalette = ['#5470c6', '#91cc75', '#fac858', '#ee6666', '#73c0de', '#3ba272', '#fc8452', '#9a60b4'];
+            const categoryColorMap = {};
+            categories.forEach((cat, i) => {
+                categoryColorMap[cat] = colorPalette[i % colorPalette.length];
+            });
+
+            const option = {
+                title: {
+                    text: title || '知识图谱',
+                    left: 'center',
+                    top: 10,
+                    textStyle: {
+                        fontSize: 16,
+                        fontWeight: 'bold',
+                        color: '#2d3748',
+                        fontFamily: 'Inter, "Crimson Pro", serif'
+                    }
+                },
+                tooltip: {
+                    trigger: 'item',
+                    formatter: function(params) {
+                        if (params.dataType === 'edge') {
+                            return `${params.data.source} → ${params.data.target}<br/>关系: ${params.data.label && params.data.label.formatter ? params.data.label.formatter : ''}`;
+                        }
+                        return `<strong>${params.name}</strong><br/>类型: ${params.data.category || 'node'}`;
+                    }
+                },
+                legend: {
+                    data: chartCategories.map(c => c.name),
+                    left: 'center',
+                    top: 40
+                },
+                animation: true,
+                animationDuration: 1500,
+                animationEasingUpdate: 'quinticInOut',
+                series: [{
+                    type: 'graph',
+                    layout: 'force',
+                    roam: true,
+                    draggable: true,
+                    data: chartNodes.map(node => ({
+                        ...node,
+                        itemStyle: {
+                            color: categoryColorMap[node.category] || '#5470c6'
+                        }
+                    })),
+                    links: chartLinks,
+                    categories: chartCategories,
+                    label: {
+                        show: true,
+                        position: 'bottom',
+                        fontSize: 12,
+                        fontFamily: 'Inter, "Crimson Pro", serif',
+                        color: '#2d3748'
+                    },
+                    lineStyle: {
+                        color: 'source',
+                        curveness: 0.3,
+                        width: 2
+                    },
+                    emphasis: {
+                        focus: 'adjacency',
+                        lineStyle: {
+                            width: 4
+                        }
+                    },
+                    force: {
+                        repulsion: 400,
+                        edgeLength: 120,
+                        gravity: 0.1
+                    }
+                }]
+            };
+
+            chart.setOption(option);
+            return chart;
+        }
+
         function renderAnalysisResult() {
             const type = anGetSetting('analysisType', 'word_cloud');
             const kgOptions = document.getElementById('anKnowledgeGraphOptions');
@@ -1110,11 +1755,28 @@
             if (raw) raw.value = result ? result.rawJson || JSON.stringify(result.data || {}, null, 2) : '';
             const preview = document.getElementById('anAnalysisPreview');
             if (!preview) return;
+
+            anDisposeECharts();
+
             if (!result) {
                 preview.innerHTML = '<div class="auto-notes-empty">请选择一种分析方式并生成结构化结果。</div>';
                 return;
             }
-            preview.innerHTML = anRenderAnalysisPreview(type, result.data);
+
+            const echartsTypes = ['word_cloud', 'mind_map', 'argument_structure', 'knowledge_graph'];
+            if (echartsTypes.includes(type) && typeof echarts !== 'undefined') {
+                if (type === 'word_cloud') {
+                    anCurrentEChartsInstance = anRenderWordCloudECharts(preview, result.data);
+                } else if (type === 'mind_map') {
+                    anCurrentEChartsInstance = anRenderMindMapECharts(preview, result.data);
+                } else if (type === 'argument_structure') {
+                    anCurrentEChartsInstance = anRenderGraphECharts(preview, result.data, '结构图');
+                } else if (type === 'knowledge_graph') {
+                    anCurrentEChartsInstance = anRenderGraphECharts(preview, result.data, '知识图谱');
+                }
+            } else {
+                preview.innerHTML = anRenderAnalysisPreview(type, result.data);
+            }
         }
 
         function anRenderAnalysisPreview(type, data) {
@@ -2845,6 +3507,15 @@
         window.anSaveAutoNotesToKnowledgeBase = saveAutoNotesToKnowledgeBase;
         window.anImportAutoNotesFromJSONFile = importAutoNotesFromJSONFile;
         window.anValidateAutoNotesImport = validateAutoNotesImport;
+        window.generateWordCloudData = generateWordCloudData;
+        window.generateComparisonTable = generateComparisonTable;
+        window.generateMindMapData = generateMindMapData;
+        window.generateArgumentStructure = generateArgumentStructure;
+        window.generateKnowledgeGraph = generateKnowledgeGraph;
+        window.anExportAnalysisImagePNG = anExportAnalysisImagePNG;
+        window.anExportAnalysisImageJPG = anExportAnalysisImageJPG;
+        window.anExportAnalysisMarkdown = anExportAnalysisMarkdown;
+        window.anExportAnalysisWordDoc = anExportAnalysisWordDoc;
 
         function anFirstMeaningfulLine(text) {
             return String(text || '')

@@ -341,3 +341,21 @@
             ensureAutoNotesSource();
             bindAutoNotesAutosave();
         });
+
+        let anEChartsResizeTimer = null;
+        window.addEventListener('resize', function() {
+            if (anEChartsResizeTimer) {
+                window.clearTimeout(anEChartsResizeTimer);
+            }
+            anEChartsResizeTimer = window.setTimeout(function() {
+                if (typeof anResizeECharts === 'function') {
+                    anResizeECharts();
+                }
+            }, 200);
+        });
+
+        window.addEventListener('beforeunload', function() {
+            if (typeof anDisposeECharts === 'function') {
+                anDisposeECharts();
+            }
+        });

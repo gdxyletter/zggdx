@@ -1,8 +1,4 @@
-const CORS_HEADERS = {
-  'Access-Control-Allow-Origin': '*',
-  'Access-Control-Allow-Methods': 'POST, OPTIONS',
-  'Access-Control-Allow-Headers': 'Content-Type, Authorization, apikey',
-}
+import { corsHeaders } from 'npm:@supabase/supabase-js/cors'
 
 const DEEPSEEK_API_URL = 'https://api.deepseek.com/chat/completions'
 
@@ -19,119 +15,86 @@ const AUTO_NOTES_TASK_PROMPTS: Record<string, string> = {
 }
 
 Deno.serve(async (req) => {
-  console.log('Function started')
-
   if (req.method === 'OPTIONS') {
-    return new Response('ok', { headers: CORS_HEADERS })
+    return new Response('ok', { headers: corsHeaders })
   }
 
   const apiKey = Deno.env.get('DEEPSEEK_API_KEY')
-  console.log('---DEBUG KEY---', apiKey ? apiKey.slice(0, 10) + '...' : 'undefined')
-
   if (!apiKey) {
-    return new Response(
-      JSON.stringify({ ok: false, error: { code: 'MISSING_DEEPSEEK_API_KEY', message: '后端未配置 DeepSeek API Key' } }),
-      { headers: { ...CORS_HEADERS, 'Content-Type': 'application/json' }, status: 500 },
-    )
+    return new Response(JSON.stringify({ error: 'API Key not configured' }), {
+      headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+      status: 500,
+    })
   }
 
   try {
     const body = await req.json()
 
     if (body.taskType) {
-      const taskType = String(body.taskType || '')
-      const payload = (body.payload || {}) as Record<string, unknown>
+      return await handleAutoNotes(apiKey, body)
+    }
 
-      if (!AUTO_NOTES_TASK_PROMPTS[taskType]) {
-        return new Response(
-          JSON.stringify({ ok: false, error: { code: 'UNSUPPORTED_AUTO_NOTES_TASK', message: `不支持的札记任务类型：${taskType}` } }),
-          { headers: { ...CORS_HEADERS, 'Content-Type': 'application/json' }, status: 400 },
-        )
-      }
-
-      const userPrompt = [
-        AUTO_NOTES_TASK_PROMPTS[taskType],
-        payload && payload.promptInstructions ? `\n补充要求：\n${payload.promptInstructions}` : '',
-        '\n用户材料 JSON：',
-        JSON.stringify(payload || {}, null, 2),
-      ].join('\n')
-
-      const messages = [
-        { role: 'system', content: '你是"古典学园数字兰台"的中国古典学研究助手。请严格遵循用户指定的数据结构，尽量返回合法 JSON，不要伪造来源。' },
-        { role: 'user', content: userPrompt },
-      ]
-
-      const data = await callDeepSeek(apiKey, { model: String(body.model || 'deepseek-chat'), messages })
-      return new Response(JSON.stringify(data), { headers: { ...CORS_HEADERS, 'Content-Type': 'application/json' }, status: 200 })
+    if (body.prompt) {
+      const deepseekRes = await fetch(DEEPSEEK_API_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${apiKey}` },
+        body: JSON.stringify({ model: 'deepseek-chat', messages: [{ role: 'user', content: body.prompt }] }),
+      })
+      const data = await deepseekRes.json()
+      return new Response(JSON.stringify(data), { headers: { ...corsHeaders, 'Content-Type': 'application/json' }, status: 200 })
     }
 
     const messages = Array.isArray(body.messages) ? body.messages : []
     if (messages.length === 0) {
-      return new Response(
-        JSON.stringify({ ok: false, error: { code: 'INVALID_MESSAGES', message: '请求缺少 messages' } }),
-        { headers: { ...CORS_HEADERS, 'Content-Type': 'application/json' }, status: 400 },
-      )
+      return new Response(JSON.stringify({ error: '缺少 messages' }), {
+        headers: { ...corsHeaders, 'Content-Type': 'application/json' }, status: 400,
+      })
     }
 
-    const data = await callDeepSeek(apiKey, {
-      model: String(body.model || 'deepseek-chat'),
-      messages,
-      temperature: body.temperature as number | undefined,
-      response_format: body.response_format as Record<string, unknown> | undefined,
-    })
+    const deepseekBody: Record<string, unknown> = { model: body.model || 'deepseek-chat', messages }
+    if (body.temperature !== undefined) deepseekBody.temperature = body.temperature
+    if (body.response_format !== undefined) deepseekBody.response_format = body.response_format
 
-    return new Response(JSON.stringify(data), { headers: { ...CORS_HEADERS, 'Content-Type': 'application/json' }, status: 200 })
+    const deepseekRes = await fetch(DEEPSEEK_API_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${apiKey}` },
+      body: JSON.stringify(deepseekBody),
+    })
+    const data = await deepseekRes.json()
+    return new Response(JSON.stringify(data), { headers: { ...corsHeaders, 'Content-Type': 'application/json' }, status: 200 })
   } catch (error) {
-    return new Response(
-      JSON.stringify({ ok: false, error: { code: 'INTERNAL_ERROR', message: error instanceof Error ? error.message : String(error) } }),
-      { headers: { ...CORS_HEADERS, 'Content-Type': 'application/json' }, status: 500 },
-    )
+    return new Response(JSON.stringify({ error: error instanceof Error ? error.message : String(error) }), {
+      headers: { ...corsHeaders, 'Content-Type': 'application/json' }, status: 500,
+    })
   }
 })
 
-async function callDeepSeek(apiKey: string, requestBody: {
-  model: string
-  messages: Array<Record<string, unknown>>
-  temperature?: number
-  response_format?: Record<string, unknown>
-}): Promise<Record<string, unknown>> {
-  const body: Record<string, unknown> = { model: requestBody.model || 'deepseek-chat', messages: requestBody.messages || [] }
-  if (requestBody.temperature !== undefined) body.temperature = requestBody.temperature
-  if (requestBody.response_format !== undefined) body.response_format = requestBody.response_format
+async function handleAutoNotes(apiKey: string, body: Record<string, unknown>) {
+  const taskType = String(body.taskType || '')
+  const payload = (body.payload || {}) as Record<string, unknown>
 
-  try {
-    const response = await fetch(DEEPSEEK_API_URL, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${apiKey}` },
-      body: JSON.stringify(body),
+  if (!AUTO_NOTES_TASK_PROMPTS[taskType]) {
+    return new Response(JSON.stringify({ error: `不支持的札记任务类型：${taskType}` }), {
+      headers: { ...corsHeaders, 'Content-Type': 'application/json' }, status: 400,
     })
-
-    const text = await response.text()
-    console.log('---DEEPSEEK RESPONSE---', response.status, text.slice(0, 200))
-
-    let data: Record<string, unknown>
-    try {
-      data = text ? JSON.parse(text) : {}
-    } catch {
-      return { ok: false, error: { code: 'DEEPSEEK_INVALID_JSON', message: 'DeepSeek API 返回了非 JSON 内容', raw: text.slice(0, 1000) } }
-    }
-
-    if (!response.ok) {
-      return { ok: false, error: { code: 'DEEPSEEK_API_ERROR', message: extractDeepSeekError(data) || `HTTP ${response.status}`, detail: data } }
-    }
-
-    return data
-  } catch (error) {
-    return { ok: false, error: { code: 'DEEPSEEK_NETWORK_ERROR', message: '后端请求 DeepSeek API 失败', detail: error instanceof Error ? error.message : String(error) } }
   }
-}
 
-function extractDeepSeekError(data: Record<string, unknown>): string {
-  if (!data) return ''
-  if (typeof data.error === 'string') return data.error as string
-  if (data.error && typeof data.error === 'object' && (data.error as Record<string, unknown>).message) {
-    return (data.error as Record<string, unknown>).message as string
-  }
-  if (data.message) return data.message as string
-  return ''
+  const userPrompt = [
+    AUTO_NOTES_TASK_PROMPTS[taskType],
+    payload.promptInstructions ? `\n补充要求：\n${payload.promptInstructions}` : '',
+    '\n用户材料 JSON：', JSON.stringify(payload, null, 2),
+  ].join('\n')
+
+  const messages = [
+    { role: 'system', content: '你是"古典学园数字兰台"的中国古典学研究助手。请严格遵循用户指定的数据结构，尽量返回合法 JSON，不要伪造来源。' },
+    { role: 'user', content: userPrompt },
+  ]
+
+  const deepseekRes = await fetch(DEEPSEEK_API_URL, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${apiKey}` },
+    body: JSON.stringify({ model: String(body.model || 'deepseek-chat'), messages }),
+  })
+  const data = await deepseekRes.json()
+  return new Response(JSON.stringify(data), { headers: { ...corsHeaders, 'Content-Type': 'application/json' }, status: 200 })
 }
