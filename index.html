@@ -9,6 +9,8 @@
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script src="https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/echarts@5.5.1/dist/echarts.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/echarts-wordcloud@2.1.0/dist/echarts-wordcloud.min.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles/base.css">
     <link rel="stylesheet" href="styles/layout.css">
@@ -497,6 +499,12 @@
                                         <button type="button" class="analysis-btn" onclick="generateArgumentStructure()">生成结构图</button>
                                         <button type="button" class="analysis-btn" onclick="generateKnowledgeGraph()">生成知识图谱</button>
                                         <button type="button" class="primary-btn" onclick="exportAnalysisResultJSON()">导出当前分析 JSON</button>
+                                    </div>
+                                    <div class="auto-notes-actions auto-notes-export-actions" style="margin-top: 8px;">
+                                        <span style="font-size: 12px; color: var(--text-secondary); margin-right: 8px;">导出图表：</span>
+                                        <button type="button" class="analysis-btn" onclick="anExportAnalysisImagePNG()">📷 PNG</button>
+                                        <button type="button" class="analysis-btn" onclick="anExportAnalysisImageJPG()">📷 JPG</button>
+                                        <button type="button" class="primary-btn" style="background: #91cc75; border-color: #91cc75;" onclick="anExportAnalysisWordDoc()">📄 Word (DOC)</button>
                                     </div>
                                 </div>
                                 <div class="auto-notes-result-card">

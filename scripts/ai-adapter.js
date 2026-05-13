@@ -15,8 +15,9 @@
             chatEndpoint: '/api/deepseek/chat',
             autoNotesEndpoint: '/api/auto-notes/llm',
             localBackendOrigin: 'http://localhost:3000',
+            supabaseEndpoint: 'https://jvpigxbiwmwvxiawcjml.supabase.co/functions/v1/deepseek-chat',
             model: 'deepseek-chat',
-            timeoutMs: 45000
+            timeoutMs: 120000
         };
 
         window.LantaiAIAdapter = window.LantaiAIAdapter || {
@@ -89,7 +90,7 @@
             try {
                 const response = await fetch(requestEndpoint, {
                     method: 'POST',
-                    headers: { 'Content-Type': 'application/json; charset=utf-8' },
+                    headers: lantaiBuildAIHeaders(requestEndpoint),
                     body: JSON.stringify(body),
                     signal: controller.signal
                 });
@@ -135,6 +136,18 @@
                 return origin + value;
             }
             return value;
+        }
+
+        function lantaiBuildAIHeaders(endpoint) {
+            const headers = { 'Content-Type': 'application/json; charset=utf-8' };
+            if (String(endpoint || '').includes('supabase.co/functions')) {
+                const sbKey = localStorage.getItem('sbKey') || '';
+                if (sbKey) {
+                    headers.apikey = sbKey;
+                    headers.Authorization = 'Bearer ' + sbKey;
+                }
+            }
+            return headers;
         }
 
         function lantaiNormalizeAutoNotesResponse(data) {
@@ -202,6 +215,9 @@
             const isLocalHost = ['localhost', '127.0.0.1'].includes(window.location.hostname);
             if (isLocalHost && String(endpoint || '').startsWith('/api/')) {
                 return '后端未启动或端口不一致：请确认已运行 npm start，并从同一地址打开页面。';
+            }
+            if (String(endpoint || '').includes('supabase.co/functions')) {
+                return 'Supabase Function 请求失败：请确认已部署 deepseek-chat 函数，并配置 DEEPSEEK_API_KEY 环境变量。';
             }
 
             return '网络或 CORS 错误：浏览器无法连接后端接口，请检查后端服务、代理和跨域配置。';
