@@ -1098,6 +1098,13 @@
             };
         }
 
+        function anSetAnalysisStatus(message, isError) {
+            const preview = document.getElementById('anAnalysisPreview');
+            if (!preview) return;
+            const text = anEscapeHtml(String(message || ''));
+            preview.innerHTML = `<div class="auto-notes-status ${isError ? 'is-error' : ''}">${text}</div>`;
+        }
+
         function renderAnalysisResult() {
             const type = anGetSetting('analysisType', 'word_cloud');
             const kgOptions = document.getElementById('anKnowledgeGraphOptions');

@@ -14,6 +14,7 @@
             // 前端只调用站内接口，不保存、不拼接任何 DeepSeek API Key。
             chatEndpoint: '/api/deepseek/chat',
             autoNotesEndpoint: '/api/auto-notes/llm',
+            localBackendOrigin: 'http://localhost:3000',
             model: 'deepseek-chat',
             timeoutMs: 45000
         };
@@ -79,15 +80,16 @@
         }
 
         async function lantaiAIRequest(endpoint, body, options = {}) {
+            const requestEndpoint = lantaiResolveAIEndpoint(endpoint);
             const timeoutMs = Number(options.timeoutMs || window.LantaiAIAdapter.endpoints.timeoutMs || 45000);
             const controller = new AbortController();
             const timer = window.setTimeout(() => controller.abort(), timeoutMs);
             lantaiSetAILoading(true, options.loadingMessage || 'AI 请求中');
 
             try {
-                const response = await fetch(endpoint, {
+                const response = await fetch(requestEndpoint, {
                     method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
+                    headers: { 'Content-Type': 'application/json; charset=utf-8' },
                     body: JSON.stringify(body),
                     signal: controller.signal
                 });
@@ -98,7 +100,7 @@
                     data = rawText ? JSON.parse(rawText) : {};
                 } catch (error) {
                     if (!response.ok && response.status === 404) {
-                        throw new Error(`后端接口不存在：${endpoint}`);
+                        throw new Error(`后端接口不存在：${requestEndpoint}`);
                     }
                     if (!response.ok) {
                         throw new Error(`后端接口返回了非 JSON 错误：HTTP ${response.status}`);
@@ -116,13 +118,23 @@
                 window.LantaiAIAdapter.lastError = null;
                 return data;
             } catch (error) {
-                const message = lantaiDescribeAIError(error, endpoint);
+                const message = lantaiDescribeAIError(error, requestEndpoint);
                 window.LantaiAIAdapter.lastError = message;
                 throw new Error(message);
             } finally {
                 window.clearTimeout(timer);
                 lantaiSetAILoading(false);
             }
+        }
+
+        function lantaiResolveAIEndpoint(endpoint) {
+            const value = String(endpoint || '');
+            if (/^https?:\/\//i.test(value)) return value;
+            if (window.location.protocol === 'file:' && value.startsWith('/api/')) {
+                const origin = (window.LantaiAIAdapter.endpoints.localBackendOrigin || 'http://localhost:3000').replace(/\/+$/, '');
+                return origin + value;
+            }
+            return value;
         }
 
         function lantaiNormalizeAutoNotesResponse(data) {
@@ -184,7 +196,7 @@
             }
 
             if (window.location.protocol === 'file:') {
-                return '后端未启动：请通过本地服务打开页面，不要直接双击 index.html。';
+                return '本地 API 未连通：请先双击 start-local.bat，再刷新当前页面。';
             }
 
             const isLocalHost = ['localhost', '127.0.0.1'].includes(window.location.hostname);
