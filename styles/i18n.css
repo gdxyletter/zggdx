@@ -1,0 +1,184 @@
+/* ========== International Student Language Mode ========== */
+.language-switcher {
+    display: inline-flex;
+    align-items: center;
+    gap: 2px;
+    padding: 3px;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    background: var(--bg-secondary);
+    flex-shrink: 0;
+}
+
+.language-switcher button {
+    border: none;
+    border-radius: 6px;
+    background: transparent;
+    color: var(--text-secondary);
+    cursor: pointer;
+    font-family: inherit;
+    font-size: 12px;
+    font-weight: 600;
+    line-height: 1.2;
+    padding: 6px 10px;
+    transition: background 0.2s, color 0.2s, box-shadow 0.2s;
+    white-space: nowrap;
+}
+
+.language-switcher button:hover {
+    color: var(--text-primary);
+    background: rgba(255, 255, 255, 0.45);
+}
+
+.language-switcher button.active {
+    background: var(--accent);
+    color: var(--white);
+    box-shadow: 0 1px 3px rgba(44, 36, 22, 0.14);
+}
+
+.i18n-bilingual {
+    min-width: 0;
+}
+
+.i18n-zh-main {
+    display: inline;
+}
+
+.i18n-en-subtitle {
+    display: block;
+    margin-top: 2px;
+    color: var(--text-muted);
+    font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+    font-size: 11px;
+    font-weight: 400;
+    line-height: 1.25;
+    letter-spacing: 0;
+    text-transform: none;
+    opacity: 0.88;
+}
+
+.i18n-en-subtitle.is-unavailable {
+    opacity: 0.55;
+}
+
+html[data-ui-language-mode="zh"] .i18n-en-subtitle {
+    display: none !important;
+}
+
+button.i18n-bilingual,
+.primary-btn.i18n-bilingual,
+.analysis-btn.i18n-bilingual,
+.sidebar-btn.i18n-bilingual,
+.share-btn.i18n-bilingual,
+.nav-tab.i18n-bilingual,
+.mobile-nav button.i18n-bilingual {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1px;
+    min-width: 0;
+}
+
+button .i18n-en-subtitle,
+.primary-btn .i18n-en-subtitle,
+.analysis-btn .i18n-en-subtitle,
+.sidebar-btn .i18n-en-subtitle,
+.share-btn .i18n-en-subtitle,
+.nav-tab .i18n-en-subtitle,
+.mobile-nav button .i18n-en-subtitle {
+    font-size: 10px;
+    line-height: 1.15;
+    margin-top: 1px;
+    max-width: 100%;
+    opacity: 0.75;
+    overflow: hidden;
+    pointer-events: none;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+html[data-ui-language-mode="bilingual"] .nav-tabs {
+    gap: 2px;
+    min-width: 0;
+}
+
+html[data-ui-language-mode="bilingual"] .nav-tab {
+    max-width: 128px;
+    padding: 6px 10px;
+}
+
+html[data-ui-language-mode="bilingual"] .nav-tab .i18n-en-subtitle {
+    max-width: 108px;
+}
+
+.sidebar-title .i18n-en-subtitle,
+.right-card-title .i18n-en-subtitle,
+.section-title .i18n-en-subtitle,
+.input-label .i18n-en-subtitle,
+.content-title .i18n-en-subtitle,
+.feature-card-title .i18n-en-subtitle,
+.hm-detail-section-title .i18n-en-subtitle,
+.hm-atlas-detail-section-title .i18n-en-subtitle {
+    font-size: 10px;
+}
+
+.content-meta .i18n-en-subtitle,
+.hint .i18n-en-subtitle,
+.doc-name-hint .i18n-en-subtitle,
+.feature-card-desc .i18n-en-subtitle,
+.hm-journey-prompt .i18n-en-subtitle,
+.hm-atlas-hint .i18n-en-subtitle {
+    font-size: 11px;
+}
+
+.grading-item .i18n-en-subtitle,
+.stat-card .i18n-en-subtitle,
+.kb-meta .i18n-en-subtitle,
+.community-doc-meta .i18n-en-subtitle {
+    font-size: 10px;
+}
+
+@media (max-width: 992px) {
+    .language-switcher {
+        gap: 1px;
+        padding: 2px;
+    }
+
+    .language-switcher button {
+        font-size: 11px;
+        padding: 5px 7px;
+    }
+
+    html[data-ui-language-mode="bilingual"] .main-wrapper {
+        padding-bottom: 74px;
+    }
+
+    html[data-ui-language-mode="bilingual"] .mobile-nav {
+        padding: 6px 4px;
+    }
+
+    html[data-ui-language-mode="bilingual"] .mobile-nav button {
+        flex: 1;
+        font-size: 10px;
+        line-height: 1.15;
+        min-width: 0;
+        padding: 5px 2px;
+    }
+
+    html[data-ui-language-mode="bilingual"] .mobile-nav button .i18n-en-subtitle {
+        font-size: 8px;
+        max-width: 46px;
+    }
+}
+
+@media (max-width: 480px) {
+    .logo {
+        font-size: 20px;
+    }
+
+    .language-switcher button {
+        font-size: 10px;
+        padding: 5px 6px;
+    }
+}

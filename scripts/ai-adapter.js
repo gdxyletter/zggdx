@@ -131,11 +131,35 @@
         function lantaiResolveAIEndpoint(endpoint) {
             const value = String(endpoint || '');
             if (/^https?:\/\//i.test(value)) return value;
+            if (value.startsWith('/api/') && shouldUseConfiguredLocalAIOrigin()) {
+                const origin = (window.LantaiAIAdapter.endpoints.localBackendOrigin || 'http://localhost:3000').replace(/\/+$/, '');
+                return origin + value;
+            }
             if (window.location.protocol === 'file:' && value.startsWith('/api/')) {
                 const origin = (window.LantaiAIAdapter.endpoints.localBackendOrigin || 'http://localhost:3000').replace(/\/+$/, '');
                 return origin + value;
             }
             return value;
+        }
+
+        function shouldUseConfiguredLocalAIOrigin() {
+            if (!window.location || window.location.protocol === 'file:') return false;
+            const endpointOrigin = (window.LantaiAIAdapter.endpoints.localBackendOrigin || 'http://localhost:3000').replace(/\/+$/, '');
+            let parsedOrigin;
+            try {
+                parsedOrigin = new URL(endpointOrigin);
+            } catch {
+                return false;
+            }
+
+            const localHosts = ['localhost', '127.0.0.1', '0.0.0.0'];
+            const pageIsLocal = localHosts.includes(window.location.hostname);
+            const backendIsLocal = localHosts.includes(parsedOrigin.hostname);
+            if (!pageIsLocal || !backendIsLocal) return false;
+
+            const pagePort = window.location.port || (window.location.protocol === 'https:' ? '443' : '80');
+            const backendPort = parsedOrigin.port || (parsedOrigin.protocol === 'https:' ? '443' : '80');
+            return pagePort !== backendPort;
         }
 
         function lantaiBuildAIHeaders(endpoint) {

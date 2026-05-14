@@ -11,6 +11,20 @@
                 .replace(/'/g, '&#39;');
         }
 
+        function refreshAnalysisI18n(target) {
+            const element = typeof target === 'string' ? document.getElementById(target) : target;
+            if (!element) return;
+
+            if (typeof window.refreshLantaiI18n === 'function') {
+                window.refreshLantaiI18n(element, 0);
+                return;
+            }
+
+            if (typeof window.applyI18nToPage === 'function') {
+                window.setTimeout(() => window.applyI18nToPage(element), 0);
+            }
+        }
+
         function cleanCitationDisplayText(value) {
             return String(value || '')
                 .trim()
@@ -398,6 +412,7 @@ function analyzeCitations(content) {
             
             if (!refs || !Array.isArray(refs) || refs.length === 0) {
                 document.getElementById('citationPanelRight').innerHTML = '<p style="font-size: 12px; color: var(--accent-light); text-align: center; padding: 20px;">⚠️ 引文数据未加载</p>';
+                refreshAnalysisI18n('citationPanelRight');
                 return;
             }
 
@@ -428,6 +443,7 @@ function analyzeCitations(content) {
             
             rightPanelHtml += '</div>';
             document.getElementById('citationPanelRight').innerHTML = rightPanelHtml;
+            refreshAnalysisI18n('citationPanelRight');
         }
 
 function expandCitations(btn, remainingMatches) {
@@ -453,6 +469,7 @@ function expandCitations(btn, remainingMatches) {
     });
     
     btn.insertAdjacentHTML('beforebegin', html);
+    refreshAnalysisI18n(container);
     btn.remove();
 }
         
@@ -462,6 +479,7 @@ function expandCitations(btn, remainingMatches) {
             
             if (!exegesisData || Object.keys(exegesisData).length === 0) {
                 document.getElementById('etymologyPanel').innerHTML = '<p style="font-size: 12px; color: var(--text-muted); text-align: center; padding: 20px;">⚠️ 训诂数据未加载</p>';
+                refreshAnalysisI18n('etymologyPanel');
                 return;
             }
             
@@ -531,8 +549,10 @@ function expandCitations(btn, remainingMatches) {
                 
                 etymologyHtml += '</div>';
                 document.getElementById('etymologyPanel').innerHTML = etymologyHtml;
+                refreshAnalysisI18n('etymologyPanel');
             } else {
                 document.getElementById('etymologyPanel').innerHTML = '<p style="font-size: 12px; color: var(--text-muted); text-align: center; padding: 20px;">未检测到需要训诂的字词</p>';
+                refreshAnalysisI18n('etymologyPanel');
             }
         }
         
@@ -542,6 +562,7 @@ function expandCitations(btn, remainingMatches) {
             
             if (!crossRefs || !Array.isArray(crossRefs)) {
                 document.getElementById('crossRefPanel').innerHTML = '<p style="font-size: 12px; color: var(--text-muted); text-align: center; padding: 20px;">⚠️ 跨文献数据未加载</p>';
+                refreshAnalysisI18n('crossRefPanel');
                 return;
             }
             
@@ -721,6 +742,7 @@ function expandCitations(btn, remainingMatches) {
             
             crossRefHtml += '</div>';
             document.getElementById('crossRefPanel').innerHTML = crossRefHtml;
+            refreshAnalysisI18n('crossRefPanel');
         }
 
 function expandCrossRefs(btn, remainingMatches) {
@@ -745,6 +767,7 @@ function expandCrossRefs(btn, remainingMatches) {
     });
     
     btn.insertAdjacentHTML('beforebegin', html);
+    refreshAnalysisI18n(container);
     btn.remove();
 }
         
@@ -752,6 +775,7 @@ function expandCrossRefs(btn, remainingMatches) {
             const container = document.getElementById('analysisResult');
             container.innerHTML += resultHtml;
             document.getElementById('clearAnalysisBtn').classList.remove('hidden');
+            refreshAnalysisI18n(container);
         }
         
         function clearAnalysisResults() {

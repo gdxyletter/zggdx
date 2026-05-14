@@ -529,6 +529,11 @@ JSON格式：
             
             if (aiHtml) {
                 panel.innerHTML += aiHtml;
+                if (typeof window.refreshLantaiI18n === 'function') {
+                    window.refreshLantaiI18n(panel, 0);
+                } else if (typeof window.applyI18nToPage === 'function') {
+                    window.setTimeout(() => window.applyI18nToPage(panel), 0);
+                }
             }
         }
 
@@ -577,6 +582,11 @@ JSON格式：
             
             if (aiHtml) {
                 panel.innerHTML += aiHtml;
+                if (typeof window.refreshLantaiI18n === 'function') {
+                    window.refreshLantaiI18n(panel, 0);
+                } else if (typeof window.applyI18nToPage === 'function') {
+                    window.setTimeout(() => window.applyI18nToPage(panel), 0);
+                }
             }
         }
         

@@ -1,4 +1,5 @@
         let currentClassicText = '';
+        let currentClassicKey = '';
         let selectedSentence = '';
         let currentReadingFontSize = 18;
         let classicClient = null;
@@ -93,6 +94,38 @@ function toggleBold() {
             return classicClient;
         }
 
+        function escapeClassicHtml(value) {
+            return String(value || '')
+                .replace(/&/g, '&amp;')
+                .replace(/</g, '&lt;')
+                .replace(/>/g, '&gt;')
+                .replace(/"/g, '&quot;')
+                .replace(/'/g, '&#39;');
+        }
+
+        function escapeClassicAttribute(value) {
+            return escapeClassicHtml(value).replace(/`/g, '&#96;');
+        }
+
+        function renderClassicSentenceSpan(displayText, sentence, extraStyle) {
+            const styleAttr = extraStyle ? ` style="${escapeClassicAttribute(extraStyle)}"` : '';
+            return `<span class="sentence-highlight" data-sentence="${escapeClassicAttribute(sentence)}" onclick="selectSentence(this.dataset.sentence)"${styleAttr}>${escapeClassicHtml(displayText)}</span>`;
+        }
+
+        function refreshDynamicI18n(target) {
+            const element = typeof target === 'string' ? document.getElementById(target) : target;
+            if (!element) return;
+
+            if (typeof window.refreshLantaiI18n === 'function') {
+                window.refreshLantaiI18n(element, 0);
+                return;
+            }
+
+            if (typeof window.applyI18nToPage === 'function') {
+                window.setTimeout(() => window.applyI18nToPage(element), 0);
+            }
+        }
+
         function updateSidebarForReview() {
             document.getElementById('annotationSection').style.display = 'none';
             document.getElementById('defaultAnnotationSection').style.display = 'none';
@@ -110,6 +143,7 @@ function toggleBold() {
         function loadClassicText() {
             const selector = document.getElementById('classicSelector');
             const selectedValue = selector.value;
+            currentClassicKey = selectedValue;
             
             if (!selectedValue) {
                 document.getElementById('classicContent').style.display = 'none';
@@ -128,9 +162,11 @@ function toggleBold() {
             // 暂时使用示例文本
             const classic = classicTexts[selectedValue];
             if (classic) {
-                document.getElementById('classicTitle').textContent = classic.title;
+                const titleElement = document.getElementById('classicTitle');
+                titleElement.textContent = classic.title;
                 renderClassicText(classic.content);
                 document.getElementById('classicContent').style.display = 'block';
+                refreshDynamicI18n(titleElement);
             }
         }
         
@@ -167,9 +203,9 @@ function toggleBold() {
                         // 为每个片段创建可点击span，移除末尾可能的句末标点用于匹配
                         const matchText = dp.replace(/[。？！；：]$/, '').trim();
                         if (matchText) {
-                            html += `<span class="sentence-highlight" onclick="selectSentence('${matchText.replace(/'/g, "\\'")}')">${dp}</span>`;
+                            html += renderClassicSentenceSpan(dp, matchText);
                         } else if (dp) {
-                            html += dp;
+                            html += escapeClassicHtml(dp);
                         }
                     }
                     
@@ -186,6 +222,7 @@ function toggleBold() {
             }
             
             container.innerHTML = html;
+            refreshDynamicI18n(container);
 }
         
         function selectSentence(sentence) {
@@ -199,14 +236,16 @@ function toggleBold() {
             // 设置当前选中状态 - 找到匹配的句子
             const allSentences = document.querySelectorAll('.sentence-highlight');
             allSentences.forEach((el) => {
-                const elText = el.textContent.replace(/[。？！；：]$/, '').trim();
+                const elText = (el.dataset.sentence || el.textContent).replace(/[。？！；：]$/, '').trim();
                 if (elText === sentence) {
                     el.classList.add('sentence-selected');
                 }
             });
             
             // 更新左边栏
-            document.getElementById('selectedSentenceText').textContent = sentence;
+            const selectedTextElement = document.getElementById('selectedSentenceText');
+            selectedTextElement.textContent = sentence;
+            refreshDynamicI18n(selectedTextElement);
             document.getElementById('annotationInput').value = '';
             document.getElementById('publishAnnotationCheckbox').checked = false;
             
@@ -389,11 +428,12 @@ function toggleBold() {
             sentences.forEach((sentence) => {
                 const trimmedSentence = sentence.trim();
                 if (trimmedSentence) {
-                    html += `<span class="sentence-highlight" onclick="selectSentence('${trimmedSentence.replace(/'/g, "\\'")}')" style="font-size: ${currentReadingFontSize}px;">${trimmedSentence}。</span><br><br>`;
+                    html += renderClassicSentenceSpan(`${trimmedSentence}。`, trimmedSentence, `font-size: ${currentReadingFontSize}px;`) + '<br><br>';
                 }
             });
             
             container.innerHTML = html;
+            refreshDynamicI18n(container);
         }
         
         function adjustReadingFontSize(delta) {
