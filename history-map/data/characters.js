@@ -23,10 +23,14 @@ window.historyMapCharacters = [
     {
         id: "char_kongzi",
         name: "孔子",
+        nameEn: "Confucius",
         alias: "名丘，字仲尼",
+        aliasEn: "Given name Qiu, styled Zhongni",
         title: '鲁国人，后世尊为\u201C至圣先师\u201D',
+        titleEn: "Born in Lu, venerated posthumously as 'Ultimate Sage and Foremost Teacher'",
         identity: "master",
         description: "孔子（前551—前479），名丘，字仲尼，鲁国陬邑（今山东省曲阜市）人。中国古代伟大的思想家、教育家，儒家学派创始人。孔子早年贫贱，后任鲁国中都宰、司寇等职。因政治理想无法在鲁国实现，于五十五岁时离开鲁国，开始长达十四年的周游列国之旅。归鲁后专心整理六经，教授弟子，相传有弟子三千人，其中通六艺者七十二人。孔子去世后，其言论被弟子整理为《论语》一书。",
+        descriptionEn: "Confucius (551–479 BCE), given name Qiu, styled Zhongni, was born in Zouyi, Lu (modern Qufu, Shandong). A great ancient Chinese thinker, educator, and founder of Confucianism, he left Lu at age 55 on a fourteen-year journey through the states when his political ideals could not be realized. After returning to Lu, he devoted himself to editing the Six Classics and teaching, with tradition holding that he had three thousand disciples, seventy-two of whom mastered the six arts.",
         relatedLocationIds: ["lu_state", "wei_state", "kuang", "pu", "cao_state", "song_state", "zheng_state", "chen_state", "cai_ye", "chen_cai_border", "chu_state", "return_lu"],
         relatedEventIds: ["event_depart_lu", "event_arrive_wei", "event_kuang_siege", "event_pu_blocked", "event_pass_cao", "event_huan_tui_threat", "event_zheng_separated", "event_ye_gong_asks", "event_chen_cai_famine", "event_chu_zhao_wang_invites", "event_return_lu"],
         unlockStep: 1
@@ -34,10 +38,14 @@ window.historyMapCharacters = [
     {
         id: "char_zi_lu",
         name: "子路",
+        nameEn: "Zilu",
         alias: "名仲由，字子路",
+        aliasEn: "Given name Zhong You, styled Zilu",
         title: "孔子弟子",
+        titleEn: "Disciple of Confucius",
         identity: "disciple",
         description: "子路（前542—前480），名仲由，字子路，卞（今山东省泗水县）人。孔子重要弟子之一，以勇武直率著称。子路性格刚烈，好勇斗力，初见孔子时曾冒犯孔子，后被孔子感化，成为忠实弟子。在陈蔡绝粮时，子路对孔子的处境表示不满，孔子开导他说：'君子固穷，小人穷斯滥矣。'子路后在卫国孔悝之乱中殉难，临死前仍坚持'君子死，冠不免'，正冠结缨而死。",
+        descriptionEn: "Zilu (542–480 BCE), given name Zhong You, styled Zilu, was born in Bian (modern Sishui, Shandong). A key disciple of Confucius known for his courage and frankness, he originally offended Confucius with his belligerence but was later reformed and became a loyal follower. During the famine at Chen and Cai, Zilu expressed dissatisfaction with their predicament, and Confucius admonished him. He died a martyr's death in the Wei civil war, insisting on proper dress even at the moment of death.",
         relatedLocationIds: ["lu_state", "kuang", "zheng_state", "chen_state", "chen_cai_border", "return_lu"],
         relatedEventIds: ["event_depart_lu", "event_kuang_siege", "event_zheng_separated", "event_chen_cai_famine", "event_return_lu"],
         unlockStep: 1
@@ -45,10 +53,14 @@ window.historyMapCharacters = [
     {
         id: "char_zi_gong",
         name: "子贡",
+        nameEn: "Zigong",
         alias: "名端木赐，字子贡",
+        aliasEn: "Given name Duanmu Ci, styled Zigong",
         title: "孔子弟子",
+        titleEn: "Disciple of Confucius",
         identity: "disciple",
         description: "子贡（前520—?），名端木赐，字子贡，卫国人。孔子重要弟子之一，以能言善辩、精通外交著称。子贡善于经商，富致千金，是孔子弟子中最富有者。在陈蔡绝粮时，子贡质疑孔子的学说是否不够完善才导致困境，孔子以良农、良工为喻开导他。子贡后来成为著名的外交家，曾游说各国，改变了春秋末期的政治格局。",
+        descriptionEn: "Zigong (520–? BCE), given name Duanmu Ci, styled Zigong, was a native of Wei. A prominent disciple of Confucius renowned for eloquence and diplomatic skill, he was also the wealthiest among Confucius' disciples through commerce. During the Chen-Cai famine, he questioned whether Confucius' teachings were too lofty, prompting Confucius to respond with the analogy of the skilled farmer and craftsman. Zigong later became a celebrated diplomat who reshaped the political landscape of the late Spring and Autumn period.",
         relatedLocationIds: ["lu_state", "pu", "chen_state", "chen_cai_border", "chu_state", "return_lu"],
         relatedEventIds: ["event_depart_lu", "event_pu_blocked", "event_chen_cai_famine", "event_chu_zhao_wang_invites", "event_return_lu"],
         unlockStep: 1
@@ -56,10 +68,14 @@ window.historyMapCharacters = [
     {
         id: "char_yan_hui",
         name: "颜回",
+        nameEn: "Yan Hui",
         alias: "名回，字子渊",
+        aliasEn: "Given name Hui, styled Ziyuan",
         title: "孔子弟子",
+        titleEn: "Disciple of Confucius",
         identity: "disciple",
         description: "颜回（前521—前481），名回，字子渊，鲁国人。孔子最得意的弟子，以德行著称，被孔子多次称赞。孔子曰：'贤哉回也！一箪食，一瓢饮，在陋巷，人不堪其忧，回也不改其乐。'在匡地被围困时，颜回最后才赶到，孔子以为他死了，颜回说：'子在，回何敢死？'在陈蔡绝粮时，颜回对孔子的学说最为坚定，孔子问他为何如此穷困仍不改其志，颜回回答：'夫子之道至大，故天下莫能容。虽然，夫子推而行之，不容何病？'颜回早逝，孔子悲痛万分，曰：'噫！天丧予！天丧予！'",
+        descriptionEn: "Yan Hui (521–481 BCE), given name Hui, styled Ziyuan, was a native of Lu. Confucius' most beloved disciple, praised repeatedly for his virtue, he was content living in poverty with a single bamboo bowl of rice and a gourd of water. During the siege at Kuang and the Chen-Cai famine, Yan Hui remained steadfast in his faith in Confucius' teachings, declaring that the Master's Way was too great for the world to accept. His early death caused Confucius profound grief.",
         relatedLocationIds: ["lu_state", "kuang", "zheng_state", "chen_cai_border", "return_lu"],
         relatedEventIds: ["event_depart_lu", "event_kuang_siege", "event_zheng_separated", "event_chen_cai_famine", "event_return_lu"],
         unlockStep: 1
@@ -67,10 +83,14 @@ window.historyMapCharacters = [
     {
         id: "char_wei_ling_gong",
         name: "卫灵公",
+        nameEn: "Duke Ling of Wei",
         alias: "名元",
+        aliasEn: "Given name Yuan",
         title: "卫国国君（前534—前493年在位）",
+        titleEn: "Ruler of Wei (r. 534–493 BCE)",
         identity: "ruler",
         description: "卫灵公（？—前493），姬姓，名元，卫国国君。孔子周游列国时到达卫国，卫灵公对孔子以礼相待，按孔子在鲁国的俸禄标准供养他。卫灵公曾向孔子请教军事阵法，孔子回答：'俎豆之事则尝闻之矣，军旅之事未之学也。'次日便离开了卫国。卫灵公虽尊孔子，但未能真正重用他。",
+        descriptionEn: "Duke Ling of Wei (d. 493 BCE), given name Yuan, was the ruler of Wei. When Confucius arrived in Wei during his travels, Duke Ling received him with courtesy and provided him with a stipend matching his Lu salary. The Duke once asked Confucius about military formations; Confucius replied that he had studied sacrificial vessels but never military affairs, and left the next day. Although the Duke honored Confucius, he never truly put him in a position of influence.",
         relatedLocationIds: ["wei_state"],
         relatedEventIds: ["event_arrive_wei"],
         unlockStep: 2
@@ -78,10 +98,13 @@ window.historyMapCharacters = [
     {
         id: "char_nan_zi",
         name: "南子",
+        nameEn: "Nanzi",
         alias: "",
         title: "卫灵公夫人",
+        titleEn: "Consort of Duke Ling of Wei",
         identity: "other",
         description: "南子，卫灵公夫人，宋国宗女。南子把持卫国朝政，名声不好，但要求见孔子。孔子起初不愿意见她，但南子坚持，孔子最终去见。子路对此很不高兴，孔子发誓说：'予所否者，天厌之！天厌之！'（如果我做了不正当的事，让天厌弃我吧！）此事成为孔子周游列国中的一段著名插曲。",
+        descriptionEn: "Nanzi, a daughter of the Song ruling house, was the consort of Duke Ling of Wei. She dominated Wei court politics and had a questionable reputation, yet insisted on meeting Confucius. Confucius initially refused but eventually acquiesced under her persistence, an act that displeased Zilu. Confucius famously swore, 'If I have done anything improper, may Heaven forsake me!' This became one of the most noted episodes of Confucius' travels.",
         relatedLocationIds: ["wei_state"],
         relatedEventIds: ["event_arrive_wei"],
         unlockStep: 2
@@ -89,10 +112,14 @@ window.historyMapCharacters = [
     {
         id: "char_qu_bo_yu",
         name: "蘧伯玉",
+        nameEn: "Qu Boyu",
         alias: "名瑗",
+        aliasEn: "Given name Yuan",
         title: "卫国大夫",
+        titleEn: "Grand Master of Wei",
         identity: "minister",
         description: "蘧伯玉，名瑗，卫国贤大夫。蘧伯玉以德行著称，孔子在卫国期间与他交往密切，对他评价很高。孔子曾称赞蘧伯玉：'君子哉蘧伯玉！邦有道则仕，邦无道则可卷而怀之。'蘧伯玉年长于孔子，孔子到卫国时曾住在他的家中。",
+        descriptionEn: "Qu Boyu, given name Yuan, was a virtuous grand master of Wei known for his moral integrity. Confucius had close dealings with him during his stay in Wei and held him in high esteem, praising him as a true gentleman who served when the state had the Way and retreated when it did not. Older than Confucius, Qu Boyu hosted Confucius during his time in Wei.",
         relatedLocationIds: ["wei_state"],
         relatedEventIds: ["event_arrive_wei"],
         unlockStep: 2
@@ -100,10 +127,14 @@ window.historyMapCharacters = [
     {
         id: "char_huan_tui",
         name: "桓魋",
+        nameEn: "Huan Tui",
         alias: "又称向魋、司马魋",
+        aliasEn: "Also known as Xiang Tui or Sima Tui",
         title: "宋国司马",
+        titleEn: "Minister of War of Song",
         identity: "minister",
         description: "桓魋（？—前481），又称向魋，宋国司马（掌管军事的大夫）。孔子途经宋国时，与弟子在大树下演习礼仪，桓魋派人砍倒大树，意图杀害孔子。孔子离开后说：'天生德于予，桓魋其如予何！'（上天赋予我德行，桓魋能把我怎么样！）桓魋后来因叛乱逃亡。",
+        descriptionEn: "Huan Tui (d. 481 BCE), also known as Xiang Tui or Sima Tui, was the Minister of War of Song. When Confucius passed through Song practicing ritual with his disciples under a large tree, Huan Tui had the tree felled in an attempt to kill Confucius. After escaping, Confucius declared, 'Heaven has endowed me with virtue—what can Huan Tui do to me?' Huan Tui later fled into exile after a failed rebellion.",
         relatedLocationIds: ["song_state"],
         relatedEventIds: ["event_huan_tui_threat"],
         unlockStep: 6
@@ -111,10 +142,14 @@ window.historyMapCharacters = [
     {
         id: "char_ye_gong",
         name: "叶公",
+        nameEn: "Lord of Ye",
         alias: "沈诸梁，字子高",
+        aliasEn: "Shen Zhuliang, styled Zigao",
         title: "楚国叶地大夫",
+        titleEn: "Grand Master of Ye in Chu",
         identity: "minister",
         description: "叶公，沈诸梁，字子高，楚国大夫，封地在叶（今河南省叶县），故称叶公。叶公曾向孔子请教为政之道，孔子回答：'近者说，远者来。'（使近处的人高兴，远处的人自然会来归附。）叶公又问孔子关于'直'（正直）的问题，提到其家乡有一个'直躬'的人，其父偷羊，儿子去告发。孔子回答：'吾党之直者异于是。父为子隐，子为父隐，直在其中矣。'",
+        descriptionEn: "The Lord of Ye, Shen Zhuliang styled Zigao, was a grand master of Chu with his fief at Ye (modern Ye County, Henan). He asked Confucius about governance and received the reply, 'Make those near happy and those far will come.' When the Lord of Ye raised a question about uprightness involving a son testifying against his thieving father, Confucius responded that in his own culture, fathers and sons concealed each other's wrongs—that was where uprightness lay.",
         relatedLocationIds: ["cai_ye"],
         relatedEventIds: ["event_ye_gong_asks"],
         unlockStep: 9
@@ -122,10 +157,14 @@ window.historyMapCharacters = [
     {
         id: "char_chu_zhao_wang",
         name: "楚昭王",
+        nameEn: "King Zhao of Chu",
         alias: "名轸",
+        aliasEn: "Given name Zhen",
         title: "楚国国君（前515—前489年在位）",
+        titleEn: "Ruler of Chu (r. 515–489 BCE)",
         identity: "ruler",
         description: "楚昭王（？—前489），芈姓，名轸，楚国国君。楚昭王听说孔子在陈蔡之间，派人迎请孔子，打算封给孔子七百里书社之地。这是孔子周游列国期间获得的最为优厚的邀请之一。然而楚国令尹子西劝阻，认为孔子才能过人，如果重用将威胁楚国大臣的地位。楚昭王最终放弃了这个打算。不久之后，楚昭王在城父去世。",
+        descriptionEn: "King Zhao of Chu (d. 489 BCE), given name Zhen, was the ruler of Chu who, upon hearing Confucius was stranded between Chen and Cai, sent an envoy to invite him, offering to enfeoff Confucius with seven hundred li of land. This was the most generous invitation Confucius received during his travels. However, Prime Minister Zixi dissuaded the King, warning that Confucius' talents would threaten the positions of Chu's ministers, and the King abandoned the plan. King Zhao died shortly thereafter at Chengfu.",
         relatedLocationIds: ["chu_state"],
         relatedEventIds: ["event_chu_zhao_wang_invites"],
         unlockStep: 11
@@ -133,10 +172,14 @@ window.historyMapCharacters = [
     {
         id: "char_zi_xi",
         name: "子西",
+        nameEn: "Zixi",
         alias: "名申",
+        aliasEn: "Given name Shen",
         title: "楚国令尹（宰相）",
+        titleEn: "Prime Minister of Chu",
         identity: "minister",
         description: "子西，名申，楚国令尹（相当于宰相）。当楚昭王打算重用孔子时，子西出面劝阻。他对楚昭王说：'王之使使诸侯有如子贡者乎？曰无有。王之辅相有如颜回者乎？曰无有。王之将率有如子路者乎？曰无有。王之官尹有如宰予者乎？曰无有。'然后指出，如果孔子再获得土地和贤才辅佐，将对楚国大臣的地位构成威胁。子西的劝阻最终使孔子未能入楚。",
+        descriptionEn: "Zixi, given name Shen, served as Prime Minister of Chu. When King Zhao of Chu planned to enfeoff Confucius, Zixi dissuaded him by pointing out that none of Chu's officials could match Confucius' disciples in ability. He argued that if Confucius were given land and talented followers, he would threaten the positions of Chu's existing ministers. Zixi's persuasion ultimately prevented Confucius from entering Chu.",
         relatedLocationIds: ["chu_state"],
         relatedEventIds: ["event_chu_zhao_wang_invites"],
         unlockStep: 11
@@ -144,10 +187,14 @@ window.historyMapCharacters = [
     {
         id: "char_lao_zi",
         name: "老子",
+        nameEn: "Laozi",
         alias: "姓李氏，名耳，字耼",
+        aliasEn: "Surname Li, given name Er, styled Dan",
         title: "周守藏室之史",
+        titleEn: "Historian and Curator of the Zhou Royal Archives",
         identity: "other",
         description: "老子，楚苦县厉乡曲仁里人，姓李氏，名耳，字耼，周守藏室之史（掌管藏书的史官）。老子修道德，其学以自隐无名为务。居周久之，见周之衰，乃遂去。孔子曾适周问礼于老子，老子对孔子说：'子所言者，其人与骨皆已朽矣，独其言在耳。'孔子归后对弟子说：'鸟，吾知其能飞；鱼，吾知其能游；兽，吾知其能走。至于龙，吾不能知其乘风云而上天。吾今日见老子，其犹龙邪！'",
+        descriptionEn: "Laozi, surname Li, given name Er, styled Dan, was the historian and curator of the Zhou royal archives. He cultivated the Way and its virtue, teaching self-concealment and namelessness. Seeing the decline of Zhou, he departed westward. Confucius once traveled to Zhou to inquire about ritual from Laozi, who told him that the men of whom he spoke had long since turned to dust. Confucius later likened Laozi to a dragon riding the wind and clouds into the heavens.",
         relatedLocationIds: ["lu_state", "zheng_state"],
         relatedEventIds: [],
         unlockStep: 2
@@ -155,10 +202,14 @@ window.historyMapCharacters = [
     {
         id: "char_qi_jing_gong",
         name: "齐景公",
+        nameEn: "Duke Jing of Qi",
         alias: "姜姓，吕氏，名杵臼",
+        aliasEn: "Jiang clan, Lü lineage, given name Chujiu",
         title: "齐国国君（前547年—前490年在位）",
+        titleEn: "Ruler of Qi (r. 547–490 BCE)",
         identity: "ruler",
         description: "齐景公（？—前490年），姜姓，吕氏，名杵臼。齐灵公之子，齐庄公之弟，春秋后期齐国国君，在位58年（前547年—前490年），是齐国在位时间最长的君主。志大识浅，善言而不能用，奢侈纵欲，不恤民力。孔子适齐，景公问政于孔子，孔子对曰：'君君，臣臣，父父，子子。'景公大悦。又欲以尼溪田封孔子，为晏婴所阻。后景公对孔子说：'吾老矣，弗能用也。'孔子遂行，返于鲁。",
+        descriptionEn: "Duke Jing of Qi (d. 490 BCE), of the Jiang clan and Lü lineage, given name Chujiu, was the ruler of Qi for 58 years, the longest reign among Qi rulers. Ambitious but shortsighted, he was fond of Confucius' advice—'Let the ruler be ruler, the minister minister, the father father, the son son'—but failed to implement it. He initially wished to enfeoff Confucius but was dissuaded by Yan Ying, and later told Confucius he was too old to use him, prompting Confucius to return to Lu.",
         relatedLocationIds: ["lu_state"],
         relatedEventIds: [],
         unlockStep: 3
@@ -166,10 +217,14 @@ window.historyMapCharacters = [
     {
         id: "char_yan_ying",
         name: "晏婴",
+        nameEn: "Yan Ying",
         alias: "晏子，名婴，字平仲",
+        aliasEn: "Yanzi, given name Ying, styled Pingzhong",
         title: "齐国大夫",
+        titleEn: "Grand Master of Qi",
         identity: "minister",
         description: "晏婴（？—前500年），名婴，字平仲，齐国大夫，春秋时期著名政治家。孔子称：'晏平仲善与人交，久而敬之。'齐景公欲封孔子以尼溪田，晏婴阻之，认为儒者'滑稽而不可轨法'、'倨傲自顺'，其礼制繁复，'累世不能殚其学，当年不能究其礼'，不宜用于齐国。晏婴辞景公赏赐时说：'吾君好治宫室，民之力弊矣；又好盘游玩好以饬女子，民之财竭矣；又好兴师，民之死近矣。'",
+        descriptionEn: "Yan Ying (d. 500 BCE), given name Ying, styled Pingzhong, was a grand master of Qi and a renowned Spring and Autumn statesman. Although Confucius praised him for befriending others well, Yan Ying opposed enfeoffing Confucius in Qi, arguing that the Ru were glib, arrogant, and that their elaborate ritual was impractical for governing a state. He also criticized Duke Jing's extravagance and military campaigns as exhausting the people.",
         relatedLocationIds: ["lu_state"],
         relatedEventIds: [],
         unlockStep: 3
@@ -177,10 +232,14 @@ window.historyMapCharacters = [
     {
         id: "char_lu_ding_gong",
         name: "鲁定公",
+        nameEn: "Duke Ding of Lu",
         alias: "姬姓，名宋",
+        aliasEn: "Ji clan, given name Song",
         title: "鲁国国君（前509年—前495年在位）",
+        titleEn: "Ruler of Lu (r. 509–495 BCE)",
         identity: "ruler",
         description: "鲁定公（公元前556年—前495年），姬姓，名宋。春秋时期鲁国第二十五任君主，鲁昭公之弟，在位15年。优柔不断，因小利而失大计。鲁定公十年，定公与齐景公会于夹谷，孔子摄行相事随行。齐人欲以兵劫持定公，孔子以礼斥退齐方所进夷狄之乐与优倡侏儒，齐景公惧而动，归还所侵鲁之郓、汶阳、龟阴之田以谢过。定公曾任命孔子为中都宰，后升任司寇，使孔子得以施展政治才能。",
+        descriptionEn: "Duke Ding of Lu (556–495 BCE), of the Ji clan, given name Song, was the twenty-fifth ruler of Lu. Indecisive and prone to valuing petty gains over grand strategy, he nevertheless appointed Confucius as Minister of Justice and once employed Confucius as acting chief minister at the Jiagu peace conference with Qi. There, Confucius used ritual protocol to shame Qi into returning occupied Lu territories. This marked the height of Confucius' political career in Lu.",
         relatedLocationIds: ["lu_state"],
         relatedEventIds: [],
         unlockStep: 2
@@ -188,10 +247,13 @@ window.historyMapCharacters = [
     {
         id: "char_shao_zheng_mao",
         name: "少正卯",
+        nameEn: "Shao Zhengmao",
         alias: "",
         title: "鲁国闻人",
+        titleEn: "Well-known figure of Lu",
         identity: "other",
         description: "少正卯，鲁之闻人也。孔子为鲁摄相，朝七日而诛少正卯。门人进问曰：'夫少正卯，鲁之闻人也，夫子为政而始诛之，得无失乎？'孔子曰：'人有恶者五，而盗窃不与焉。一曰心达而险，二曰行辟而坚，三曰言伪而辩，四曰记丑而博，五曰顺非而泽。此五者，有一于人，则不得免于君子之诛，而少正卯兼有之。故居处足以聚徒成羣，言谈足以饰邪营众，强足以反是独立，此小人之桀雄也，不可不诛也。'",
+        descriptionEn: "Shao Zhengmao was a well-known figure of Lu. When Confucius became acting chief minister of Lu, he executed Shao Zhengmao after only seven days. When questioned by his disciples, Confucius explained that Shao Zhengmao possessed five evil qualities—being cunning, obstinate, hypocritical, well-versed in scandal, and skilled at promoting falsehoods—making him a 'tyrant among petty men' who could not be spared.",
         relatedLocationIds: ["lu_state"],
         relatedEventIds: [],
         unlockStep: 3
@@ -199,10 +261,14 @@ window.historyMapCharacters = [
     {
         id: "char_ran_you",
         name: "冉有",
+        nameEn: "Ran You",
         alias: "名求，字子有",
+        aliasEn: "Given name Qiu, styled Ziyou",
         title: "孔子弟子",
+        titleEn: "Disciple of Confucius",
         identity: "disciple",
         description: "冉有（前522年—？），名求，字子有，鲁国人。孔子重要弟子之一，少孔子二十九岁，为季氏宰。冉有善于政事，多才多艺，以治赋之才著称。季康子问孔子冉求仁乎，孔子曰：'千室之邑，百乘之家，求也可使治其赋。仁则吾不知也。'冉有问闻斯行诸，孔子曰行之；而子路问同问，孔子却曰有父兄在。子华怪之，孔子曰：'求也退，故进之。由也兼人，故退之。'冉有后为季氏聚敛，孔子曰：'非吾徒也，小子鸣鼓而攻之可也。'",
+        descriptionEn: "Ran You (522–? BCE), given name Qiu, styled Ziyou, was a native of Lu and a key disciple of Confucius, twenty-nine years his junior. Skilled in governance and finance, Ran You served as steward of the Ji family. Confucius noted that Ran You was cautious, so he urged him forward, while Zilu was bold, so he held him back. Later, when Ran You collected heavy taxes for the Ji family, Confucius disowned him, telling his disciples to 'sound the drums and attack him.'",
         relatedLocationIds: ["lu_state", "chen_state"],
         relatedEventIds: [],
         unlockStep: 4
@@ -210,10 +276,14 @@ window.historyMapCharacters = [
     {
         id: "char_gongshan_bu_niu",
         name: "公山不狃",
+        nameEn: "Gongshan Buniou",
         alias: "子洩",
+        aliasEn: "Zixie",
         title: "季氏费邑宰",
+        titleEn: "Steward of Ji's Fei City",
         identity: "minister",
         description: "公山不狃，字子洩，季氏费邑宰。仲由为季氏宰，将堕三都。季氏将堕费，公山不狃与叔孙辄帅费人以袭鲁。公与三子入于季氏之宫，登武子之台。费人攻之弗克，入及公侧。仲尼命申句须、乐颀下伐之，费人北。国人追之，败诸姑蔑。二子奔齐，遂堕费。公山不狃曾召孔子，孔子欲往，因子路不悦而未果。",
+        descriptionEn: "Gongshan Buniu, styled Zixie, was the steward of the Ji family's Fei city. When the Ji family moved to dismantle the walls of Fei as part of the 'leveling the three cities' plan, Gongshan Buniu and Shusun Zhe led a rebellion, attacking the Lu capital. Confucius ordered a counterattack that drove them into exile. Gongshan Buniu once invited Confucius to join him; Confucius was tempted but ultimately did not go due to Zilu's disapproval.",
         relatedLocationIds: ["lu_state"],
         relatedEventIds: [],
         unlockStep: 3
@@ -221,10 +291,14 @@ window.historyMapCharacters = [
     {
         id: "char_yan_ke",
         name: "颜刻",
+        nameEn: "Yan Ke",
         alias: "名刻（一作产、克），字子骄",
+        aliasEn: "Given name Ke (also Chan or Ke), styled Zijiao",
         title: "孔子弟子",
+        titleEn: "Disciple of Confucius",
         identity: "disciple",
         description: "颜刻，曹姓，颜氏，名刻（一作产、克），字子骄。鲁国陶人，孔子弟子，孔门七十二贤之一。《孔子家语》载其少孔子五十岁。孔子适卫时，曾为孔子驾车。孔子至卫国，颜刻为仆。卫灵公与夫人南子同车出，使孔子为次乘，招摇过市。孔子耻之，发'未见好德如好色'之叹。",
+        descriptionEn: "Yan Ke, given name Ke (also written Chan or Ke), styled Zijiao, was a native of Lu and one of the Seventy-Two Worthies among Confucius' disciples. Fifty years younger than Confucius, he served as Confucius' charioteer during the journey to Wei. In Wei, Yan Ke drove as Duke Ling of Wei and Nanzi rode together in the same carriage, followed by Confucius in a secondary carriage—a display that prompted Confucius' lament about preferring virtue to beauty.",
         relatedLocationIds: ["lu_state", "wei_state"],
         relatedEventIds: [],
         unlockStep: 4
@@ -232,10 +306,13 @@ window.historyMapCharacters = [
     {
         id: "char_shi_xiang_zi",
         name: "师襄子",
+        nameEn: "Shixiangzi",
         alias: "",
         title: "鲁国乐师",
+        titleEn: "Music Master of Lu",
         identity: "other",
         description: "师襄子，鲁国乐师，孔子曾从其学琴。孔子学鼓琴于师襄子，十日不进。师襄子曰：'可以益矣。'孔子曰：'丘已习其曲矣，未得其数也。'有间，曰：'已习其数，可以益矣。'孔子曰：'丘未得其志也。'有间，曰：'已习其志，可以益矣。'孔子曰：'丘未得其为人也。'有间，有所穆然深思焉，有所怡然高望而远志焉，曰：'丘得其为人，黯然而黑，几然而长，眼如望羊，如王四国，非文王其谁能为此也！'师襄子辟席再拜，曰：'师盖云《文王操》也。'",
+        descriptionEn: "Shixiangzi was the Music Master of Lu, from whom Confucius learned to play the qin. When Confucius spent ten days practicing the same piece without progressing, Shixiangzi urged him to move on, but Confucius insisted on first grasping the technique, then the intent, and finally the composer's character. He eventually discerned that the piece was King Wen's 'Wen Wang Cao,' astonishing Shixiangzi, who bowed in recognition of Confucius' insight.",
         relatedLocationIds: ["lu_state"],
         relatedEventIds: [],
         unlockStep: 2
@@ -243,10 +320,14 @@ window.historyMapCharacters = [
     {
         id: "char_chen_min_gong",
         name: "陈愍公",
+        nameEn: "Duke Min of Chen",
         alias: "妫姓，名越",
+        aliasEn: "Gui clan, given name Yue",
         title: "陈国国君（前501年—前478年在位）",
+        titleEn: "Ruler of Chen (r. 501–478 BCE)",
         identity: "ruler",
         description: "陈愍公（？—前478年），妫姓，名越。春秋时期陈国最后一任君主，陈怀公之子，在位24年（前501年—前478年）。好问博物，礼待贤者。愍公遇物不知则问于孔子，得辨肃慎古矢。孔子居陈三年，陈愍公尊事孔子。后楚惠王杀陈愍公，陈国灭亡。",
+        descriptionEn: "Duke Min of Chen (d. 478 BCE), of the Gui clan, given name Yue, was the last ruler of Chen. Inquisitive and respectful toward worthy men, he would ask Confucius about things he did not understand, once receiving an explanation of ancient arrow shafts. Confucius resided in Chen for three years, treated with honor by the Duke. Duke Min was later killed by King Hui of Chu, bringing an end to the Chen state.",
         relatedLocationIds: ["chen_state"],
         relatedEventIds: [],
         unlockStep: 7
@@ -254,10 +335,14 @@ window.historyMapCharacters = [
     {
         id: "char_cai_zhao_hou",
         name: "蔡昭侯",
+        nameEn: "Marquis Zhao of Cai",
         alias: "姬姓，蔡氏，名申",
+        aliasEn: "Ji clan, Cai lineage, given name Shen",
         title: "蔡国国君（前518年—前491年在位）",
+        titleEn: "Ruler of Cai (r. 518–491 BCE)",
         identity: "ruler",
         description: "蔡昭侯（？—前491年），姬姓，蔡氏，名申。春秋末期蔡国国君，蔡悼侯之弟，在位28年（前518年—前491年）。轻信专断，疏于制衡。屡迁国都以附大国，私许吴而不与大夫谋，终致君臣离心。吴泄庸如蔡纳聘而稍纳师，蔡昭侯告大夫杀公子驷以说吴。冬，蔡迁于州来。后蔡昭侯将如吴，诸大夫恐其又迁，公孙翩逐而射之，入于家人而卒。",
+        descriptionEn: "Marquis Zhao of Cai (d. 491 BCE), of the Ji clan and Cai lineage, given name Shen, was the ruler of Cai for 28 years. Gullible and autocratic, he repeatedly moved the state capital to accommodate powerful neighbors. He secretly pledged allegiance to Wu without consulting his ministers, causing deep discord. When he planned to visit Wu, fearful ministers had him assassinated—Bogong Pian shot him dead at a private residence.",
         relatedLocationIds: ["cai_ye"],
         relatedEventIds: [],
         unlockStep: 9
@@ -265,10 +350,14 @@ window.historyMapCharacters = [
     {
         id: "char_wei_chu_gong",
         name: "卫出公",
+        nameEn: "Duke Chu of Wei",
         alias: "姬姓卫氏，名辄",
+        aliasEn: "Ji clan, Wei lineage, given name Zhe",
         title: "卫国国君（前492年—前481年在位）",
+        titleEn: "Ruler of Wei (r. 492–481 BCE)",
         identity: "ruler",
         description: "卫出公，姬姓卫氏，名辄。卫灵公之孙、太子蒯聩之子。灵公卒，夫人命子郢为太子，曰：'此灵公命也。'郢曰：'亡人太子蒯聩之子辄在也，不敢当。'于是卫乃以辄为君，是为出公。孔子在卫期间，出公在位，欲用孔子而未能。子路问孔子：'卫君待子而为政，子将奚先？'孔子曰：'必也正名乎！'",
+        descriptionEn: "Duke Chu of Wei, of the Ji clan and Wei lineage, given name Zhe, was the grandson of Duke Ling of Wei. After Duke Ling's death, the throne passed to Zhe (Duke Chu) rather than to his exiled father Kuaikui. During Confucius' stay in Wei, Duke Chu was on the throne and wished to employ Confucius but never fully did. When Zilu asked what Confucius would do first if given governance in Wei, Confucius replied, 'The first thing is to rectify names.'",
         relatedLocationIds: ["wei_state"],
         relatedEventIds: [],
         unlockStep: 8
@@ -276,10 +365,14 @@ window.historyMapCharacters = [
     {
         id: "char_kuai_kui",
         name: "蒯聩",
+        nameEn: "Kuaikui",
         alias: "卫庄公，卫灵公太子",
+        aliasEn: "Duke Zhuang of Wei, Crown Prince of Wei",
         title: "卫国太子，后为庄公",
+        titleEn: "Crown Prince of Wei, later Duke Zhuang",
         identity: "ruler",
         description: "蒯聩，卫灵公太子，姬姓。因与南子构恶，欲杀南子，事败出奔于晋。灵公卒后，其子辄被立为出公，蒯聩在晋赵鞅支持下欲返卫夺位。后蒯聩返卫即位，是为庄公，杀南子。庄公在位期间荒淫无道，后死于内乱。孔子在卫期间，正值蒯聩与出公父子争国之时，孔子弟子子路即在蒯聩之乱中殉难。",
+        descriptionEn: "Kuaikui, Crown Prince of Wei and later Duke Zhuang, was the son of Duke Ling of Wei. After attempting to kill Nanzi and failing, he fled into exile in Jin. When his father died, his son Zhe was installed as Duke Chu instead. With the support of Zhao Yang of Jin, Kuaikui later returned to seize the throne, killing Nanzi. His reign was marked by debauchery and ended in civil war—the same conflict in which Confucius' disciple Zilu met his death.",
         relatedLocationIds: ["wei_state"],
         relatedEventIds: [],
         unlockStep: 8
@@ -287,10 +380,14 @@ window.historyMapCharacters = [
     {
         id: "char_lu_ai_gong",
         name: "鲁哀公",
+        nameEn: "Duke Ai of Lu",
         alias: "姬姓，名将（一作蒋）",
+        aliasEn: "Ji clan, given name Jiang (or Jiang)",
         title: "鲁国国君（前494年—前468年在位）",
+        titleEn: "Ruler of Lu (r. 494–468 BCE)",
         identity: "ruler",
         description: "鲁哀公（？—前468年），姬姓，名将（一作蒋）。鲁定公之子，春秋时期鲁国第二十六任君主，在位27年（前494年—前468年）。君权旁落，隐忍压抑，崇尚孔子之学而用之不终。孔子归鲁后，哀公常向孔子问政问礼。哀公问于孔子曰：'寡人生于深宫之中，长于妇人之手，寡人未尝知哀也，未尝知忧也，未尝知劳也，未尝知惧也，未尝知危也。'孔子去世后，哀公诔之曰：'昊天不吊，不憖遗一老，俾屏余一人以在位，茕茕余在疚。'",
+        descriptionEn: "Duke Ai of Lu (d. 468 BCE), of the Ji clan, given name Jiang (or Jiang), was the twenty-sixth ruler of Lu. With power eroded by the Three Huan families, he admired Confucius' learning but failed to fully implement it. After Confucius returned to Lu, Duke Ai frequently consulted him on governance and ritual. Upon Confucius' death, Duke Ai composed a eulogy lamenting that Heaven had not spared the elderly sage who shielded him.",
         relatedLocationIds: ["lu_state", "return_lu"],
         relatedEventIds: [],
         unlockStep: 12
@@ -298,10 +395,13 @@ window.historyMapCharacters = [
     {
         id: "char_he_kui_zhe",
         name: "荷蒉者",
+        nameEn: "He Kui Zhe",
         alias: "",
         title: "卫国人，隐士",
+        titleEn: "Man of Wei, recluse",
         identity: "other",
         description: "荷蒉者，卫人也。避乱不仕，自匿姓名。孔子在卫国时，一日击磬，有荷蒉而过孔氏之门者，曰：'有心哉，击磬乎！'既而曰：'鄙哉，硁硁乎！莫己知也，斯已而已矣。深则厉，浅则揭。'孔子闻之曰：'果哉！末之难矣。'荷蒉者以隐士身份讥评孔子知其不可而为之的执着精神。",
+        descriptionEn: "The He Kui Zhe (Basket-Carrier) was a recluse of Wei who concealed his name to avoid worldly involvement. When Confucius was playing the stone chime in Wei, a man carrying a wicker basket passed by and commented that Confucius' stubborn chime showed he was not understood, advising him to go with the flow—'cross deep water by wading, shallow water by lifting your hem.' Confucius heard this and acknowledged the difficulty of refuting such a view.",
         relatedLocationIds: ["wei_state"],
         relatedEventIds: [],
         unlockStep: 4
@@ -309,10 +409,13 @@ window.historyMapCharacters = [
     {
         id: "char_chang_ju",
         name: "长沮",
+        nameEn: "Changju",
         alias: "",
         title: "隐士",
+        titleEn: "Recluse",
         identity: "other",
         description: "长沮，春秋末隐士，事迹见《论语·微子》。孔子周游列国时，长沮与桀溺耦而耕。孔子使子路问津焉，长沮曰：'夫执舆者为谁？'子路曰：'为孔丘。'曰：'是鲁孔丘与？'曰：'是也。'曰：'是知津矣。'长沮认为孔子周游列国、汲汲于用世，却不知天下已不可为，故以'知津'讽之。",
+        descriptionEn: "Changju was a recluse of the late Spring and Autumn period. While plowing in the fields with Jieni, he encountered Confucius' disciple Zilu seeking a ford. When Zilu identified Confucius as the driver of the carriage, Changju remarked that Confucius, who supposedly knew everything, should already know where the ford was—a sarcastic jab at Confucius' futile quest to reform a chaotic world.",
         relatedLocationIds: ["chen_state", "cai_ye"],
         relatedEventIds: [],
         unlockStep: 9
@@ -320,10 +423,13 @@ window.historyMapCharacters = [
     {
         id: "char_jie_ni",
         name: "桀溺",
+        nameEn: "Jieni",
         alias: "",
         title: "隐士",
+        titleEn: "Recluse",
         identity: "other",
         description: "桀溺，春秋末隐士，与长沮并称。孔子使子路问津，桀溺问子路曰：'子为谁？'曰：'为仲由。'曰：'是鲁孔丘之徒与？'对曰：'然。'曰：'滔滔者天下皆是也，而谁以易之？且而与其从辟人之士也，岂若从辟世之士哉？'耰而不辍。桀溺认为天下大乱、滔滔皆是，与其追随孔子这样躲避坏人的人，不如追随他们这些避开整个乱世的人。",
+        descriptionEn: "Jieni was a recluse of the late Spring and Autumn period who plowed alongside Changju. When Zilu asked for directions to the ford, Jieni told him that the world was flooded with chaos like a surging torrent, and that it would be better to follow those who withdrew from the world entirely rather than follow Confucius, who merely fled from bad people. He then continued plowing without looking up.",
         relatedLocationIds: ["chen_state", "cai_ye"],
         relatedEventIds: [],
         unlockStep: 9
@@ -331,10 +437,14 @@ window.historyMapCharacters = [
     {
         id: "char_zhao_yang",
         name: "赵鞅",
+        nameEn: "Zhao Yang",
         alias: "赵简子，名鞅",
+        aliasEn: "Zhao Jianzi, given name Yang",
         title: "晋国正卿",
+        titleEn: "Chief Minister of Jin",
         identity: "minister",
         description: "赵鞅（？—前476年），赵简子，名鞅。春秋末期晋国正卿、赵氏宗主，战国赵国奠基人。赵鞅曾邀请孔子往晋，孔子行至黄河边，闻赵鞅杀晋国贤大夫窦鸣犊、舜华，临河而叹曰：'美哉水，洋洋乎！丘之不济此，命也夫！'子贡问故，孔子曰：'窦鸣犊、舜华，晋国之贤大夫也。赵简子未得志之时，须此两人而后从政；及其已得志，杀之乃从政。君子讳伤其类者也。'遂返卫。",
+        descriptionEn: "Zhao Yang (d. 476 BCE), also known as Zhao Jianzi, was the Chief Minister of Jin and founder of the Zhao clan's hegemony that would later become the state of Zhao. He once invited Confucius to Jin, but when Confucius reached the Yellow River and learned that Zhao Yang had killed two worthy Jin grand masters, Dou Mingdu and Shun Hua, Confucius turned back, mourning that 'the superior man grieves for his own kind.'",
         relatedLocationIds: ["wei_state"],
         relatedEventIds: [],
         unlockStep: 5
@@ -342,10 +452,14 @@ window.historyMapCharacters = [
     {
         id: "char_zhou_jing_wang",
         name: "周敬王",
+        nameEn: "King Jing of Zhou",
         alias: "姬姓，名匄",
+        aliasEn: "Ji clan, given name Gai",
         title: "东周天子（前519年即位）",
+        titleEn: "Son of Heaven of the Eastern Zhou (r. from 519 BCE)",
         identity: "ruler",
         description: "周敬王（？—前476年），姬姓，名匄，东周君主，周景王之子。前519年即位，在位期间正值春秋末期，王室衰微，诸侯争霸。孔子周游列国及晚年归鲁整理六经均在周敬王在位期间。孔子曾言：'天下有道，则礼乐征伐自天子出；天下无道，则礼乐征伐自诸侯出。'",
+        descriptionEn: "King Jing of Zhou (d. 476 BCE), of the Ji clan, given name Gai, was the Son of Heaven of the Eastern Zhou. His reign spanned Confucius' travels and his later years back in Lu editing the Six Classics. By this time the Zhou royal house was in decline and real power lay with regional lords, a situation Confucius lamented when he said that rites and music and punitive expeditions should issue from the Son of Heaven, not from the lords.",
         relatedLocationIds: ["chengzhou"],
         relatedEventIds: [],
         unlockStep: 1
@@ -353,10 +467,14 @@ window.historyMapCharacters = [
     {
         id: "char_lu_zhao_gong",
         name: "鲁昭公",
+        nameEn: "Duke Zhao of Lu",
         alias: "姬姓，名裯",
+        aliasEn: "Ji clan, given name Chou",
         title: "鲁国国君（前541年—前510年在位）",
+        titleEn: "Ruler of Lu (r. 541–510 BCE)",
         identity: "ruler",
         description: "鲁昭公（？—前510年），姬姓，名裯。春秋时期鲁国第二十四任君主，鲁襄公之子，在位32年（前541年—前510年）。昭公在位期间鲁国三桓势力强大，公室卑弱。昭公欲除季氏，反被三桓联合击败，出奔齐国，后至晋国乾侯，最终客死异乡。孔子在昭公时期成长并开始从政，曾目睹昭公出奔之事。昭公曾赐孔子鲤鱼，孔子因以名其子孔鲤。",
+        descriptionEn: "Duke Zhao of Lu (d. 510 BCE), of the Ji clan, given name Chou, was the twenty-fourth ruler of Lu, reigning during Confucius' youth and early career. During his reign the Three Huan families grew so powerful that when Duke Zhao tried to eliminate the Ji family, the other two Huan families united against him, forcing him into exile in Qi and then Jin, where he died abroad. Duke Zhao once gave Confucius a carp, after whom Confucius named his son Kong Li.",
         relatedLocationIds: ["lu_state"],
         relatedEventIds: [],
         unlockStep: 1
@@ -364,10 +482,14 @@ window.historyMapCharacters = [
     {
         id: "char_lu_xiang_gong",
         name: "鲁襄公",
+        nameEn: "Duke Xiang of Lu",
         alias: "姬姓，名午",
+        aliasEn: "Ji clan, given name Wu",
         title: "鲁国国君（前572年—前542年在位）",
+        titleEn: "Ruler of Lu (r. 572–542 BCE)",
         identity: "ruler",
         description: "鲁襄公（？—前542年），姬姓，名午。春秋时期鲁国第二十三任君主，在位31年（前572年—前542年）。孔子生于鲁襄公二十二年（前551年）。襄公在位期间鲁国政局相对稳定，曾参加晋楚弭兵之会。襄公卒后，由鲁昭公继位。",
+        descriptionEn: "Duke Xiang of Lu (d. 542 BCE), of the Ji clan, given name Wu, was the twenty-third ruler of Lu. Confucius was born in the twenty-second year of Duke Xiang's reign (551 BCE). During his reign Lu enjoyed relative stability, and he participated in the Jin-Chu peace conference. Duke Xiang was succeeded by Duke Zhao.",
         relatedLocationIds: ["lu_state"],
         relatedEventIds: [],
         unlockStep: 1
@@ -375,10 +497,14 @@ window.historyMapCharacters = [
     {
         id: "char_chu_ping_wang",
         name: "楚平王",
+        nameEn: "King Ping of Chu",
         alias: "芈姓，熊氏，名弃疾",
+        aliasEn: "Mi clan, Xiong lineage, given name Qiji",
         title: "楚国国君（前528年—前516年在位）",
+        titleEn: "Ruler of Chu (r. 528–516 BCE)",
         identity: "ruler",
         description: "楚平王（？—前516年），芈姓，熊氏，名弃疾。春秋时期楚国国君，楚共王之子，楚灵王之弟，在位13年（前528年—前516年）。初名弃疾，后改名居。平王即位后灭陈、蔡等国，后复其国。平王晚年听信费无忌谗言，夺太子建之妇，杀伍奢、伍尚，逼走太子建，伍子胥奔吴，成为后来吴破楚的导火索。平王卒后由楚昭王继位。",
+        descriptionEn: "King Ping of Chu (d. 516 BCE), of the Mi clan and Xiong lineage, given name Qiji, was the ruler of Chu who initially destroyed Chen and Cai before restoring them. In his later years, he fell under the influence of the slanderer Fei Wuji, seized the wife of Crown Prince Jian, and executed the innocent Wu She and Wu Shang, forcing the Crown Prince into exile. These actions drove Wu Zixu to Wu, setting the stage for Wu's later invasion of Chu.",
         relatedLocationIds: ["chu_state"],
         relatedEventIds: [],
         unlockStep: 2
@@ -386,10 +512,14 @@ window.historyMapCharacters = [
     {
         id: "char_jin_ding_gong",
         name: "晋定公",
+        nameEn: "Duke Ding of Jin",
         alias: "姬姓，名午",
+        aliasEn: "Ji clan, given name Wu",
         title: "晋国国君（前511年即位）",
+        titleEn: "Ruler of Jin (r. from 511 BCE)",
         identity: "ruler",
         description: "晋定公（？—前475年），姬姓，名午。春秋时期晋国国君，晋顷公之子。在位期间晋国六卿（赵、韩、魏、智、范、中行）势力坐大，公室日卑。孔子周游列国时，有意前往晋国见赵鞅，行至黄河边闻窦鸣犊、舜华被杀而返。定公在位期间，晋国虽保持霸主之名，实权已尽归卿大夫。",
+        descriptionEn: "Duke Ding of Jin (d. 475 BCE), of the Ji clan, given name Wu, was the ruler of Jin during a period when real power had passed to the six ministerial clans (Zhao, Han, Wei, Zhi, Fan, Zhonghang). Confucius once considered visiting Jin to meet Zhao Yang but turned back at the Yellow River upon hearing of the killing of worthy ministers. During Duke Ding's reign, Jin maintained its nominal hegemony while its authority eroded from within.",
         relatedLocationIds: ["jin_state"],
         relatedEventIds: [],
         unlockStep: 5
@@ -397,10 +527,14 @@ window.historyMapCharacters = [
     {
         id: "char_zi_chan",
         name: "子产",
+        nameEn: "Zichan",
         alias: "名侨，字子产，谥成子",
+        aliasEn: "Given name Qiao, styled Zichan, posthumously Chengzi",
         title: "郑国大夫",
+        titleEn: "Grand Master of Zheng",
         identity: "minister",
         description: "子产（？—前522年），名侨，字子产，郑国大夫，春秋时期著名政治家。子产相郑期间推行改革，铸刑书、整顿田制，使郑国秩序井然。孔子与子产交好，闻子产卒，流涕曰：'古之遗爱也！'子产使都鄙有章，上下有服，田有封洫，庐井有伍。子产卒后，由子太叔执政，郑国逐渐衰弱。",
+        descriptionEn: "Zichan (d. 522 BCE), given name Qiao, styled Zichan, posthumously Chengzi, was a grand master of Zheng and one of the great statesmen of the Spring and Autumn period. He reformed Zheng by casting penal codes and reorganizing land and household registration, bringing order to the state. Confucius was close with Zichan and wept upon hearing of his death, calling him 'the lingering love of antiquity.' After his passing, Zheng gradually declined under his successor.",
         relatedLocationIds: ["zheng_state"],
         relatedEventIds: [],
         unlockStep: 7
@@ -408,10 +542,14 @@ window.historyMapCharacters = [
     {
         id: "char_xiang_xu",
         name: "向戌",
+        nameEn: "Xiangxu",
         alias: "子姓，向氏，名戌",
+        aliasEn: "Zi clan, Xiang lineage, given name Xu",
         title: "宋国大夫",
+        titleEn: "Grand Master of Song",
         identity: "minister",
         description: "向戌，宋国大夫。鲁襄公二十七年（前546年），在向戌的主持下，晋、楚两国及十四个诸侯国于宋都举行了弭兵之盟，约定停止战争，除齐、秦外各国须向晋、楚同时朝贡。弭兵会盟极大地改变了春秋后期的政治格局，为孔子周游列国提供了一个相对和平的宏观环境。",
+        descriptionEn: "Xiang Xu, of the Zi clan and Xiang lineage, was a grand master of Song. In 546 BCE, he convened the historic 'Weapons-Burying' peace conference in the Song capital, bringing together Jin, Chu, and fourteen other states to agree on ending hostilities. This treaty, which required all states except Qi and Qin to pay tribute to both Jin and Chu, greatly altered the late Spring and Autumn political landscape and created the relatively peaceful environment through which Confucius later traveled.",
         relatedLocationIds: ["song_state"],
         relatedEventIds: [],
         unlockStep: 1
@@ -419,10 +557,14 @@ window.historyMapCharacters = [
     {
         id: "char_kong_wen_zi",
         name: "孔文子",
+        nameEn: "Kong Wenzi",
         alias: "名圉，谥文",
+        aliasEn: "Given name Yu, posthumously Wen",
         title: "卫国大夫",
+        titleEn: "Grand Master of Wei",
         identity: "minister",
         description: "孔文子（？—前480年），名圉，卫国大夫，孔氏，谥文。孔子曾称赞他：'敏而好学，不耻下问，是以谓之文也。'孔文子在卫国势力庞大，曾攻太叔，导致卫国政局动荡。孔子晚年曾在卫国与孔文子交往。子路即在孔文子与蒯聩的内乱中殉难。",
+        descriptionEn: "Kong Wenzi (d. 480 BCE), given name Yu, posthumously Wen, was a grand master of Wei. Confucius praised him as 'quick-witted and fond of learning, not ashamed to ask his inferiors,' which is why he received the posthumous name Wen. With considerable power in Wei, Kong Wenzi was involved in conflicts that destabilized the state. His household's civil war with Kuaikui was the very conflict in which Zilu died.",
         relatedLocationIds: ["wei_state"],
         relatedEventIds: [],
         unlockStep: 4
@@ -430,10 +572,14 @@ window.historyMapCharacters = [
     {
         id: "char_yang_hu",
         name: "阳虎",
+        nameEn: "Yang Hu",
         alias: "阳货",
+        aliasEn: "Yang Huo",
         title: "季氏家臣",
+        titleEn: "Steward of the Ji Family",
         identity: "minister",
         description: "阳虎，又名阳货，鲁国季氏家臣。阳虎把持季氏家政，权势一度凌驾于季桓子之上，囚禁季桓子迫其盟誓，开了'陪臣执国政'的先例。孔子十七岁时，季氏宴请士人，阳虎将腰系丧服的孔子拒之门外。阳虎曾暴虐匡人，后孔子经过匡地时被匡人误认为阳虎而遭围困。阳虎曾劝孔子出仕，孔子虚与委蛇。后阳虎谋反失败，出奔齐国、晋国。",
+        descriptionEn: "Yang Hu, also known as Yang Huo, was a powerful steward of the Ji family in Lu who once imprisoned Ji Huanzi and dominated Lu politics, setting a precedent of 'retainers holding state power.' When Confucius was seventeen, Yang Hu barred him from a Ji family banquet because Confucius was in mourning. Yang Hu's earlier brutality toward the people of Kuang later caused Confucius to be mistaken for Yang Hu and besieged. After a failed rebellion, Yang Hu fled to Qi and then Jin.",
         relatedLocationIds: ["lu_state", "kuang"],
         relatedEventIds: [],
         unlockStep: 1
@@ -441,10 +587,14 @@ window.historyMapCharacters = [
     {
         id: "char_ji_huan_zi",
         name: "季桓子",
+        nameEn: "Ji Huanzi",
         alias: "季孙斯",
+        aliasEn: "Ji Sunsi",
         title: "鲁国大夫（季氏宗主）",
+        titleEn: "Grand Master of Lu (Head of the Ji Clan)",
         identity: "minister",
         description: "季桓子（？—前492年），季孙斯，鲁国执政大夫，三桓之一季氏宗主。季桓子继其父季平子执政，在位期间接受齐国女乐文马，三日不听政，导致孔子失望离鲁。临终时季桓子后悔，嘱其子季康子务必召回孔子。孔子闻知季桓子死，曰：'昔此国几兴矣，以吾获罪于孔子，故不兴也。'",
+        descriptionEn: "Ji Huanzi (d. 492 BCE), also known as Ji Sunsi, was the head of the Ji clan and chief minister of Lu. He accepted a gift of beautiful women and fine horses from Qi, neglecting court affairs for three days, which so disappointed Confucius that he departed Lu. On his deathbed, Ji Huanzi regretted his actions and instructed his son Ji Kangzi to recall Confucius. Confucius, hearing of his death, said the state had nearly prospered but failed because of his own falling out with Ji Huanzi.",
         relatedLocationIds: ["lu_state"],
         relatedEventIds: [],
         unlockStep: 1
@@ -452,10 +602,14 @@ window.historyMapCharacters = [
     {
         id: "char_ji_kang_zi",
         name: "季康子",
+        nameEn: "Ji Kangzi",
         alias: "季孙肥",
+        aliasEn: "Ji Sunfei",
         title: "鲁国大夫（季氏宗主）",
+        titleEn: "Grand Master of Lu (Head of the Ji Clan)",
         identity: "minister",
         description: "季康子，季孙肥，鲁国执政大夫，季桓子之子。季桓子临终嘱其召回孔子，季康子欲从，被公之鱼劝阻，转而征召冉求。后冉有为季氏将帅大败齐军，季康子问冉有军旅之才何来，冉有答学于孔子。季康子遂以厚币迎孔子归鲁，结束了孔子十四年周游列国之旅。",
+        descriptionEn: "Ji Kangzi, also known as Ji Sunfei, was the head of the Ji clan and chief minister of Lu, succeeding his father Ji Huanzi. Despite his father's deathbed wish to recall Confucius, Ji Kangzi hesitated and instead summoned Ran You. After Ran You led a victorious campaign against Qi, Ji Kangzi asked where he had learned military strategy; Ran You credited Confucius, whereupon Ji Kangzi sent lavish gifts to bring Confucius back to Lu, ending his fourteen-year journey.",
         relatedLocationIds: ["lu_state"],
         relatedEventIds: [],
         unlockStep: 12
@@ -463,10 +617,14 @@ window.historyMapCharacters = [
     {
         id: "char_nangong_jingshu",
         name: "南宫敬叔",
+        nameEn: "Nangong Jingshu",
         alias: "南宫适，名韬，字子容",
+        aliasEn: "Nangong Kuo, given name Tao, styled Zirong",
         title: "鲁国大夫",
+        titleEn: "Grand Master of Lu",
         identity: "disciple",
         description: "南宫敬叔，名韬，字子容，鲁国大夫，孟懿子之弟。孟釐子临终嘱其与孟懿子师事孔子学礼。南宫敬叔曾向鲁君请命，与孔子一同适周问礼于老子。鲁君与之一乘车、两马、一竖子俱。孔子自周返鲁后，弟子益进。南宫敬叔曾救桓僖之庙火。",
+        descriptionEn: "Nangong Jingshu, also known as Nangong Kuo, given name Tao, styled Zirong, was a grand master of Lu and younger brother of Meng Yizi. Following their father Meng Xizi's deathbed instruction, both brothers studied ritual under Confucius. Nangong Jingshu requested permission from the Lu ruler to accompany Confucius on his journey to Zhou to consult Laozi on ritual. The Lu ruler provided a carriage, two horses, and an attendant. After returning from Zhou, Confucius' following of disciples increased significantly.",
         relatedLocationIds: ["lu_state", "chengzhou"],
         relatedEventIds: [],
         unlockStep: 1
@@ -474,10 +632,13 @@ window.historyMapCharacters = [
     {
         id: "char_tan_zi",
         name: "郯子",
+        nameEn: "Viscount of Tan",
         alias: "",
         title: "郯国国君",
+        titleEn: "Ruler of Tan",
         identity: "ruler",
         description: "郯子，郯国（今山东郯城一带）国君。鲁昭公十七年（前525年），郯子来鲁国朝见，孔子时年二十七岁，向其请教古代官制。郯子详细讲述少昊氏以鸟名官的制度，孔子闻后感叹：'天子失官，学在四夷。'",
+        descriptionEn: "The Viscount of Tan was the ruler of the small state of Tan (near modern Tancheng, Shandong). In 525 BCE, when Confucius was twenty-seven, the Viscount of Tan visited Lu and Confucius inquired of him about ancient official titles. The Viscount explained the system of the Shao Hao clan, which named officials after birds. Confucius remarked afterward, 'The Son of Heaven has lost his officials, and the study of them is preserved in the far-off border tribes.'",
         relatedLocationIds: ["lu_state"],
         relatedEventIds: [],
         unlockStep: 1
@@ -485,10 +646,14 @@ window.historyMapCharacters = [
     {
         id: "char_gongliang_ru",
         name: "公良孺",
+        nameEn: "Gongliang Ru",
         alias: "名孺，字子正",
+        aliasEn: "Given name Ru, styled Zizheng",
         title: "孔子弟子",
+        titleEn: "Disciple of Confucius",
         identity: "disciple",
         description: "公良孺，名孺，字子正，陈国人，孔子弟子。公良孺为人长贤有勇力，自带五辆私车随孔子周游。过蒲地时逢公叔氏叛乱，蒲人围困孔子。公良孺奋死拼斗，曰：'吾昔从夫子遇难于匡，今又遇难于此，命也已。吾与夫子再罹难，宁斗而死。'蒲人惧，被迫放行。",
+        descriptionEn: "Gongliang Ru, given name Ru, styled Zizheng, was a native of Chen and a disciple of Confucius. Tall, virtuous, and courageous, he provided five of his own carriages for Confucius' entourage during their travels. When they were ambushed by rebels at Pu, Gongliang Ru fought desperately, declaring he would rather die fighting than endure a second disaster after Kuang. Intimidated by his ferocity, the Pu rebels released Confucius.",
         relatedLocationIds: ["lu_state", "pu"],
         relatedEventIds: [],
         unlockStep: 4
@@ -496,10 +661,13 @@ window.historyMapCharacters = [
     {
         id: "char_jie_yu",
         name: "楚狂接舆",
+        nameEn: "Jieyu",
         alias: "",
         title: "楚国隐士",
+        titleEn: "Madman of Chu, recluse",
         identity: "other",
         description: "楚狂接舆，楚国隐士，佯狂避世。孔子在楚蔡交界道路上，接舆歌而过孔子，曰：'凤兮凤兮，何德之衰！往者不可谏兮，来者犹可追也！已而已而，今之从政者殆而！'以凤鸟喻孔子，劝孔子归隐避世。孔子下车欲与之言，接舆趋而去，弗得与言。",
+        descriptionEn: "Jieyu, the 'Madman of Chu,' was a feigned lunatic and recluse of Chu. On the road between Chu and Cai, he passed Confucius' carriage singing: 'Phoenix, oh phoenix, how your virtue has declined! The past cannot be remedied, but the future may still be pursued. Give up, give up—those who govern today are in peril!' Using the phoenix as a metaphor, he urged Confucius to retire. Confucius got down wanting to speak with him, but Jieyu hurried away.",
         relatedLocationIds: ["chu_state"],
         relatedEventIds: [],
         unlockStep: 11
@@ -507,10 +675,13 @@ window.historyMapCharacters = [
     {
         id: "char_he_diao_zhangren",
         name: "荷蓧丈人",
+        nameEn: "Old Man with a Basket",
         alias: "",
         title: "隐士",
+        titleEn: "Recluse",
         identity: "other",
         description: "荷蓧丈人，春秋末隐士。子路随孔子行，落后偶遇荷蓧丈人，问：'子见夫子乎？'丈人曰：'四体不勤，五谷不分，孰为夫子！'植其杖而芸。子路以告孔子，孔子曰：'隐者也。'复往，则丈人已避世隐去。",
+        descriptionEn: "The Old Man with a Basket was a recluse of the late Spring and Autumn period. When Zilu fell behind during Confucius' travels and encountered the old man carrying a basket, Zilu asked, 'Have you seen my Master?' The old man replied, 'You do not move your four limbs nor distinguish the five grains—who is your Master?' and continued weeding. Confucius, upon hearing of this, identified the man as a recluse. When they returned to visit, the old man had vanished.",
         relatedLocationIds: ["chen_state", "cai_ye"],
         relatedEventIds: [],
         unlockStep: 9

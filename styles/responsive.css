@@ -378,3 +378,69 @@
                 padding: 14px 16px;
             }
         }
+
+        /* Concept Keyword Highlighting */
+        .concept-keyword {
+            color: #c0392b;
+            background: rgba(192, 57, 43, 0.08);
+            border-bottom: 2px solid #c0392b;
+            cursor: pointer;
+            font-weight: 700;
+            padding: 1px 4px;
+            border-radius: 3px;
+            transition: all 0.2s;
+            font-size: 1.05em;
+        }
+        .concept-keyword:hover {
+            background: rgba(192, 57, 43, 0.18);
+        }
+
+        /* Concept Card Modal */
+        .concept-card-section {
+            margin-bottom: 16px;
+        }
+        .concept-card-label {
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 6px;
+        }
+        .concept-card-text {
+            font-size: 14px;
+            line-height: 1.7;
+            color: var(--text-primary);
+        }
+        .concept-example {
+            padding: 8px 12px;
+            background: var(--bg-secondary);
+            border-radius: 6px;
+            margin-bottom: 8px;
+        }
+        .concept-example-text {
+            display: block;
+            font-size: 14px;
+            color: var(--text-primary);
+            margin-bottom: 4px;
+            font-family: 'Crimson Pro', serif;
+        }
+        .concept-example-source {
+            font-size: 11px;
+            color: var(--text-muted);
+        }
+        .concept-related-tag {
+            display: inline-block;
+            padding: 4px 12px;
+            margin: 0 6px 6px 0;
+            background: rgba(122, 92, 68, 0.08);
+            border: 1px solid var(--border-light);
+            border-radius: 14px;
+            font-size: 13px;
+            color: var(--accent);
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        .concept-related-tag:hover {
+            background: rgba(122, 92, 68, 0.18);
+        }
