@@ -4,14 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>文档审核助手</title>
-    <script src="https://cdn.jsdelivr.net/npm/jszip@3.10.1/dist/jszip.min.js"></script>
-    <script src="references.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-    <script src="https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/echarts@5.5.1/dist/echarts.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/echarts-wordcloud@2.1.0/dist/echarts-wordcloud.min.js"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,400;0,500;0,600;0,700;1,400&amp;family=Inter:wght@400;500;600;700&amp;display=swap"></noscript>
     <link rel="stylesheet" href="styles/base.css">
     <link rel="stylesheet" href="styles/layout.css">
     <link rel="stylesheet" href="styles/panels.css">
@@ -20,6 +16,32 @@
     <link rel="stylesheet" href="styles/responsive.css">
     <link rel="stylesheet" href="styles/i18n.css?v=20260514-fallback">
     <link rel="stylesheet" href="styles/international-guide.css">
+    <script src="scripts/lazy-loader.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2" defer></script>
+    <script src="references.js" defer></script>
+    <script src="scripts/ai-adapter.js?v=api-retry-fallback-20260515" defer></script>
+    <script src="scripts/core.js" defer></script>
+    <script src="scripts/file-processing.js" defer></script>
+    <script src="scripts/knowledge-base.js" defer></script>
+    <script src="scripts/teaching.js" defer></script>
+    <script src="scripts/review.js" defer></script>
+    <script src="scripts/analysis.js" defer></script>
+    <script src="scripts/community.js" defer></script>
+    <script src="scripts/reference-detection.js" defer></script>
+    <script src="scripts/classic-texts.js" defer></script>
+    <script src="scripts/classic-reading.js" defer></script>
+    <script src="scripts/auto-notes-data.js" defer></script>
+    <script src="scripts/auto-notes-engine.js" defer></script>
+    <script src="scripts/auto-notes.js" defer></script>
+    <script src="history-map/data/locations.js" defer></script>
+    <script src="history-map/data/characters.js" defer></script>
+    <script src="history-map/data/events.js" defer></script>
+    <script src="history-map/data/route.js" defer></script>
+    <script src="history-map/utils/data-helpers.js" defer></script>
+    <script src="scripts/history-map.js" defer></script>
+    <script src="scripts/i18n-dictionary.js?v=20260514-fallback" defer></script>
+    <script src="scripts/i18n.js?v=20260514-fallback" defer></script>
+    <script src="scripts/international-guide.js" defer></script>
 </head>
 
 <body>
@@ -927,29 +949,5 @@
         </div>
     </div>
     </div>
-    
-    <script src="scripts/ai-adapter.js?v=api-retry-fallback-20260515"></script>
-    <script src="scripts/core.js"></script>
-    <script src="scripts/file-processing.js"></script>
-    <script src="scripts/knowledge-base.js"></script>
-    <script src="scripts/teaching.js"></script>
-    <script src="scripts/review.js"></script>
-    <script src="scripts/analysis.js"></script>
-    <script src="scripts/community.js"></script>
-    <script src="scripts/reference-detection.js"></script>
-    <script src="scripts/classic-texts.js"></script>
-    <script src="scripts/classic-reading.js"></script>
-    <script src="scripts/auto-notes-data.js"></script>
-    <script src="scripts/auto-notes-engine.js"></script>
-    <script src="scripts/auto-notes.js"></script>
-    <script src="history-map/data/locations.js"></script>
-    <script src="history-map/data/characters.js"></script>
-    <script src="history-map/data/events.js"></script>
-    <script src="history-map/data/route.js"></script>
-    <script src="history-map/utils/data-helpers.js"></script>
-    <script src="scripts/history-map.js"></script>
-    <script src="scripts/i18n-dictionary.js?v=20260514-fallback"></script>
-    <script src="scripts/i18n.js?v=20260514-fallback"></script>
-    <script src="scripts/international-guide.js"></script>
 </body>
 </html>

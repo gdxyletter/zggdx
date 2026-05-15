@@ -227,7 +227,7 @@
             const icon = document.getElementById('teachingToggleIcon');
             if (body && icon) {
                 const isHidden = body.classList.toggle('hidden');
-                icon.textContent = isHidden ? '展开 ▸' : '收起 ▾';
+                icon.textContent = isHidden ? '[+] 展开' : '[-] 收起';
             }
         }
 
@@ -236,7 +236,7 @@
             const icon = document.getElementById('kbToggleIcon');
             if (body && icon) {
                 const isHidden = body.classList.toggle('hidden');
-                icon.textContent = isHidden ? '展开 ▸' : '收起 ▾';
+                icon.textContent = isHidden ? '[+] 展开' : '[-] 收起';
             }
         }
 
@@ -245,7 +245,7 @@
             const icon = document.getElementById('communityToggleIcon');
             if (body && icon) {
                 const isHidden = body.classList.toggle('hidden');
-                icon.textContent = isHidden ? '展开 ▸' : '收起 ▾';
+                icon.textContent = isHidden ? '[+] 展开' : '[-] 收起';
             }
         }
         

@@ -121,6 +121,7 @@
         }
 
         async function performOCR(file) {
+            await ensureTesseract();
             const worker = await Tesseract.createWorker('eng+chi_sim', 1, {
                 logger: m => {
                     if (m.status === 'recognizing text') {
@@ -139,11 +140,8 @@
             return text;
         }
 
-        if (typeof pdfjsLib !== 'undefined') {
-            pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
-        }
-
         async function parsePdf(file) {
+            await ensurePdfJs();
             if (typeof pdfjsLib === 'undefined') {
                 throw new Error('PDF.js 库未加载，请刷新页面');
             }
@@ -167,6 +165,7 @@
         }
 
         async function parseScannedPdf(file, pdfDoc) {
+            await ensureTesseract();
             if (typeof Tesseract === 'undefined') {
                 throw new Error('这是扫描件 PDF，无可提取文字，请将 PDF 页面截图后用图片 OCR 识别');
             }
@@ -209,6 +208,7 @@
         }
         
         async function parseDocx(file) {
+            await ensureJSZip();
             try {
                 const arrayBuffer = await file.arrayBuffer();
                 const zip = await JSZip.loadAsync(arrayBuffer);

@@ -1050,6 +1050,11 @@
                 anSetAnalysisStatus('DeepSeek 生成失败，已使用本地规则生成草稿：' + message, true);
             }
 
+            var echartsChartTypes = ['word_cloud', 'mind_map', 'argument_structure', 'knowledge_graph'];
+            if (echartsChartTypes.indexOf(analysisType) >= 0) {
+                await ensureECharts();
+            }
+
             saveAutoNotesProject();
             renderAnalysisResult();
             return window.autoNotesState.analysisResults[analysisType];
