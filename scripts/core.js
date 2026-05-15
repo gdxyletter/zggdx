@@ -270,6 +270,10 @@
             }
             else if (tab === 'historyMap') {
             }
+            else if (tab === 'approachingClassics') {
+                if (typeof window.initLearningPaths === 'function') window.initLearningPaths();
+                if (typeof window.initCrossCultural === 'function') window.initCrossCultural();
+            }
             else if (tab === 'community') {
                 loadCommunityDocs();
                 renderKnowledgeBase();
@@ -312,6 +316,22 @@
                 icon.textContent = isHidden ? '[+] 展开' : '[-] 收起';
             }
         }
+
+        function switchLpTab(tab) {
+            document.querySelectorAll('.lp-subnav-btn').forEach(function (btn) {
+                btn.classList.toggle('active', btn.dataset.lpTab === tab);
+            });
+            var pathsSection = document.getElementById('learningPathsSection');
+            var crossSection = document.getElementById('crossCulturalSection');
+            if (pathsSection) pathsSection.classList.toggle('active', tab === 'learning-paths');
+            if (crossSection) crossSection.classList.toggle('active', tab === 'cross-cultural');
+            if (tab === 'learning-paths' && typeof window.initLearningPaths === 'function') {
+                window.initLearningPaths();
+            } else if (tab === 'cross-cultural' && typeof window.initCrossCultural === 'function') {
+                window.initCrossCultural();
+            }
+        }
+        window.switchLpTab = switchLpTab;
 
         function toggleCommunitySection() {
             const body = document.getElementById('communitySectionBody');

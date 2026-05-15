@@ -16,6 +16,7 @@
     <link rel="stylesheet" href="styles/responsive.css">
     <link rel="stylesheet" href="styles/i18n.css?v=20260514-fallback">
     <link rel="stylesheet" href="styles/international-guide.css">
+    <link rel="stylesheet" href="styles/learning-paths.css">
     <script src="scripts/lazy-loader.js" defer></script>
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2" defer></script>
     <script src="references.js" defer></script>
@@ -31,6 +32,8 @@
     <script src="scripts/classic-texts.js" defer></script>
     <script src="scripts/concept-cards.js" defer></script>
     <script src="scripts/classic-reading.js" defer></script>
+    <script src="scripts/learning-paths.js" defer></script>
+    <script src="scripts/cross-cultural.js" defer></script>
     <script src="scripts/auto-notes-data.js" defer></script>
     <script src="scripts/auto-notes-engine.js" defer></script>
     <script src="scripts/auto-notes.js" defer></script>
@@ -54,6 +57,7 @@
                 <button class="nav-tab" onclick="switchTab('classic')">经典阅读</button>
                 <button class="nav-tab" onclick="switchTab('autoNotes')">札记梳理</button>
                 <button class="nav-tab" onclick="switchTab('historyMap')">历史地理</button>
+                <button class="nav-tab" onclick="switchTab('approachingClassics')">走进古典</button>
                 <button class="nav-tab active" onclick="switchTab('review')">文档审核</button>
                 <button class="nav-tab" onclick="switchTab('community')">学术社区</button>
             </nav>
@@ -274,6 +278,33 @@
                             </div>
                         </div>
                         <div id="classicText" class="classic-text-body"></div>
+                    </div>
+                </div>
+
+                <!-- Approaching Classics Panel -->
+                <div class="panel approaching-classics-panel" id="approachingClassics-panel">
+                    <div class="content-header">
+                        <h1 class="content-title">走进古典</h1>
+                        <div class="content-meta">
+                            <span data-i18n="面向学生的中国经典入门与跨文化比较模块">面向学生的中国经典入门与跨文化比较模块</span>
+                        </div>
+                    </div>
+
+                    <div class="lp-subnav">
+                        <button class="lp-subnav-btn active" data-lp-tab="learning-paths" onclick="window.switchLpTab('learning-paths')">
+                            <span data-i18n="学习路径">学习路径</span>
+                        </button>
+                        <button class="lp-subnav-btn" data-lp-tab="cross-cultural" onclick="window.switchLpTab('cross-cultural')">
+                            <span data-i18n="跨文化比较">跨文化比较</span>
+                        </button>
+                    </div>
+
+                    <div id="learningPathsSection" class="lp-section active">
+                        <div id="learningPathsContainer"></div>
+                    </div>
+
+                    <div id="crossCulturalSection" class="cc-section">
+                        <div id="crossCulturalContainer"></div>
                     </div>
                 </div>
 
@@ -897,6 +928,7 @@
         <button onclick="switchTab('classic')" data-tab="classic">经典阅读</button>
         <button onclick="switchTab('autoNotes')" data-tab="autoNotes">札记梳理</button>
         <button onclick="switchTab('historyMap')" data-tab="historyMap">历史地理</button>
+        <button onclick="switchTab('approachingClassics')" data-tab="approachingClassics">走进古典</button>
         <button onclick="switchTab('review')" class="active" data-tab="review">文档审核</button>
         <button onclick="switchTab('community')" data-tab="community">学术社区</button>
     </div>
