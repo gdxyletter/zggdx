@@ -7,6 +7,79 @@
             model: 'deepseek-chat'
         };
         
+        var FileTask = {
+            IDLE: 'idle',
+            PARSING: 'parsing',
+            OCR: 'ocr',
+            EXTRACTING: 'extracting',
+            DONE: 'done',
+            ERROR: 'error'
+        };
+
+        var currentFileTask = null;
+
+        function createFileTask(fileName, onProgress) {
+            if (currentFileTask) currentFileTask.cancelled = true;
+            currentFileTask = {
+                state: FileTask.IDLE,
+                cancelled: false,
+                progress: 0,
+                statusText: '',
+                fileName: fileName || '',
+                onProgress: onProgress || null
+            };
+            return currentFileTask;
+        }
+
+        function updateFileProgress(task, state, progress, statusText) {
+            if (!task || task.cancelled) return false;
+            task.state = state;
+            task.progress = progress;
+            task.statusText = statusText;
+            if (task.onProgress) task.onProgress(task);
+            return !task.cancelled;
+        }
+
+        function cancelCurrentFileTask() {
+            if (currentFileTask) {
+                currentFileTask.cancelled = true;
+                currentFileTask.state = FileTask.IDLE;
+                currentFileTask.statusText = '已取消';
+                if (currentFileTask.onProgress) currentFileTask.onProgress(currentFileTask);
+            }
+            var overlay = document.getElementById('fileTaskOverlay');
+            if (overlay) overlay.classList.add('hidden');
+        }
+
+        function showFileTaskOverlay(task) {
+            var overlay = document.getElementById('fileTaskOverlay');
+            var nameEl = document.getElementById('fileTaskName');
+            var statusEl = document.getElementById('fileTaskStatus');
+            var barEl = document.getElementById('fileTaskBarFill');
+            if (!overlay) return;
+
+            if (!task) {
+                overlay.classList.add('hidden');
+                return;
+            }
+
+            overlay.classList.remove('hidden');
+            if (nameEl) nameEl.textContent = task.fileName || '';
+            if (statusEl) statusEl.textContent = task.statusText || '';
+            if (barEl) barEl.style.width = (task.progress || 0) + '%';
+
+            if (task.onProgress !== showFileTaskOverlay) {
+                task.onProgress = function(t) {
+                    if (nameEl) nameEl.textContent = t.fileName || '';
+                    if (statusEl) statusEl.textContent = t.statusText || '';
+                    if (barEl) barEl.style.width = (t.progress || 0) + '%';
+                    if (t.state === FileTask.DONE || t.state === FileTask.ERROR || t.cancelled) {
+                        setTimeout(function() { overlay.classList.add('hidden'); }, t.state === FileTask.DONE ? 800 : 3000);
+                    }
+                };
+            }
+        }
+
         let teachingSummary = '';
         let teachingDocs = [];
         let currentCategoryFilter = 'all';

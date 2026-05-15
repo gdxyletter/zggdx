@@ -900,6 +900,16 @@
         <button onclick="switchTab('community')" data-tab="community">学术社区</button>
     </div>
     
+    <!-- File Task Progress Overlay -->
+    <div id="fileTaskOverlay" class="file-task-overlay hidden">
+        <div class="file-task-card">
+            <div class="file-task-name" id="fileTaskName"></div>
+            <div class="file-task-status" id="fileTaskStatus"></div>
+            <div class="file-task-bar"><div class="file-task-bar-fill" id="fileTaskBarFill"></div></div>
+            <button onclick="cancelCurrentFileTask()" class="file-task-cancel">取消</button>
+        </div>
+    </div>
+
     <!-- Rich Text Editor Modal -->
     <div id="richTextModal" class="modal" style="display: none;">
         <div class="modal-content" style="max-width: 500px;">

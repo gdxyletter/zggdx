@@ -133,8 +133,10 @@
             if (files.length === 0) return;
 
             for (const file of files) {
+                var task = createFileTask(file.name, showFileTaskOverlay);
                 try {
-                    const content = await anParseUploadedFile(file);
+                    const content = await anParseUploadedFile(file, task);
+                    if (task && task.cancelled) break;
                     if (!content || !content.trim()) continue;
                     anAddSource(false, {
                         type: 'other',
@@ -148,8 +150,10 @@
                         }
                     });
                     anRememberUploadedExtractedText(file, content);
+                    updateFileProgress(task, FileTask.DONE, 100, '加载完成');
                 } catch (error) {
-                    alert(`${file.name} 解析失败：${error.message || error}`);
+                    updateFileProgress(task, FileTask.ERROR, 0, '解析失败: ' + (error.message || error));
+                    alert(file.name + ' 解析失败：' + (error.message || error));
                 }
             }
 
@@ -157,15 +161,17 @@
             anRenderSources();
         }
 
-        async function anParseUploadedFile(file) {
+        async function anParseUploadedFile(file, task) {
             const extension = anGetFileExtension(file.name);
             if (extension === 'txt' || extension === 'md') {
+                updateFileProgress(task, FileTask.PARSING, 50, '正在读取文件...');
                 return anReadFileAsText(file);
             }
 
             if (extension === 'pdf') {
                 if (typeof parsePdf === 'function') {
-                    return parsePdf(file);
+                    updateFileProgress(task, FileTask.PARSING, 5, '正在解析 PDF...');
+                    return parsePdf(file, task);
                 }
                 alert('PDF 将使用已有解析器；当前解析器不可用，请先粘贴文本。');
                 return '';
@@ -173,7 +179,8 @@
 
             if (extension === 'docx') {
                 if (typeof parseDocx === 'function') {
-                    const result = await parseDocx(file);
+                    updateFileProgress(task, FileTask.EXTRACTING, 5, '正在解析 Word...');
+                    const result = await parseDocx(file, task);
                     return typeof convertToPlainText === 'function' ? convertToPlainText(result) : result;
                 }
                 alert('DOCX 将使用已有解析器；当前解析器不可用，请先粘贴文本。');
@@ -182,7 +189,8 @@
 
             if (['jpg', 'jpeg', 'png'].includes(extension)) {
                 if (typeof performOCR === 'function') {
-                    return performOCR(file);
+                    updateFileProgress(task, FileTask.OCR, 5, '正在识别图片...');
+                    return performOCR(file, task);
                 }
                 alert('图片将使用已有 OCR 解析器；当前解析器不可用，请先粘贴文本。');
                 return '';

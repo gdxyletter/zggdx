@@ -212,51 +212,70 @@
             if (files.length === 0) return;
             
             const btn = input.closest('.file-upload-area').querySelector('p');
-            btn.textContent = '正在加载文件...';
             
-            let loadedCount = 0;
-            let hasAnyFormat = false;
-            let latestFormattedContent = '';
+            var loadedCount = 0;
+            var hasAnyFormat = false;
+            var latestFormattedContent = '';
             
             for (const file of files) {
+                var task = createFileTask(file.name, showFileTaskOverlay);
                 const fileExt = file.name.split('.').pop().toLowerCase();
                 
                 let content = '';
                 let isFormatted = false;
                 
                 if (fileExt === 'txt' || fileExt === 'md') {
-                    content = await file.text();
-                } else if (fileExt === 'docx') {
+                    updateFileProgress(task, FileTask.PARSING, 50, '正在读取文件...');
                     try {
-                        content = await parseDocx(file);
+                        content = await file.text();
+                        if (task.cancelled) break;
+                    } catch(e) {
+                        updateFileProgress(task, FileTask.ERROR, 0, '读取失败: ' + e.message);
+                        alert('文件 ' + file.name + ' 读取失败: ' + e.message);
+                        continue;
+                    }
+                } else if (fileExt === 'docx') {
+                    updateFileProgress(task, FileTask.EXTRACTING, 5, '正在解析 Word 文档...');
+                    try {
+                        content = await parseDocx(file, task);
+                        if (task.cancelled) break;
                         isFormatted = content.includes('style="');
                         if (isFormatted) {
                             hasAnyFormat = true;
                             latestFormattedContent = content;
                         }
                     } catch(e) {
-                        alert(`文件 ${file.name} 解析失败: ${e.message}`);
+                        updateFileProgress(task, FileTask.ERROR, 0, '解析失败: ' + e.message);
+                        alert('文件 ' + file.name + ' 解析失败: ' + e.message);
                         continue;
                     }
                 } else if (fileExt === 'pdf') {
+                    updateFileProgress(task, FileTask.PARSING, 5, '正在解析 PDF...');
                     try {
-                        content = await parsePdf(file);
+                        content = await parsePdf(file, task);
+                        if (task.cancelled) break;
                     } catch(e) {
-                        alert(`文件 ${file.name} 解析失败: ${e.message}`);
+                        updateFileProgress(task, FileTask.ERROR, 0, '解析失败: ' + e.message);
+                        alert('文件 ' + file.name + ' 解析失败: ' + e.message);
                         continue;
                     }
                 } else if (['jpg', 'jpeg', 'png', 'gif', 'bmp', 'webp'].includes(fileExt)) {
+                    updateFileProgress(task, FileTask.OCR, 5, '正在识别图片...');
                     try {
-                        content = await performOCR(file);
+                        content = await performOCR(file, task);
+                        if (task.cancelled) break;
                     } catch(e) {
-                        alert(`文件 ${file.name} OCR识别失败: ${e.message}`);
+                        updateFileProgress(task, FileTask.ERROR, 0, 'OCR失败: ' + e.message);
+                        alert('文件 ' + file.name + ' OCR识别失败: ' + e.message);
                         continue;
                     }
                 } else {
-                    alert(`不支持的格式: ${file.name}`);
+                    updateFileProgress(task, FileTask.ERROR, 0, '不支持的格式');
+                    alert('不支持的格式: ' + file.name);
                     continue;
                 }
                 
+                updateFileProgress(task, FileTask.DONE, 100, '加载完成');
                 const plainContent = isFormatted ? convertToPlainText(content) : content;
                 
                 const existingIndex = teachingDocs.findIndex(d => d.name === file.name);
@@ -288,7 +307,7 @@
             if (previewDiv) {
                 if (hasAnyFormat) {
                     const formatInfo = extractFormatInfo(latestFormattedContent);
-                    let formatBadge = '<div style="margin-bottom: 10px; font-size: 12px; color: var(--accent);">';
+                    var formatBadge = '<div style="margin-bottom: 10px; font-size: 12px; color: var(--accent);">';
                     formatBadge += '<span style="font-weight: 600;">检测到格式信息:</span>';
                     if (formatInfo.hasColors) {
                         formatBadge += ' | <span style="color: #e74c3c;">●</span> 彩色文字';
@@ -306,7 +325,7 @@
                 }
             }
             
-            btn.textContent = `已加载 ${loadedCount} 个文件${hasAnyFormat ? ' (部分含格式)' : ''}`;
+            btn.textContent = '已加载 ' + loadedCount + ' 个文件' + (hasAnyFormat ? ' (部分含格式)' : '');
             input.value = '';
         }
         

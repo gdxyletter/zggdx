@@ -7,39 +7,46 @@
             const fileExt = file.name.split('.').pop().toLowerCase();
             const imageExts = ['jpg', 'jpeg', 'png', 'gif', 'bmp', 'webp'];
             
+            var task = createFileTask(file.name, showFileTaskOverlay);
+            
             if (fileExt === 'txt' || fileExt === 'md') {
-                const reader = new FileReader();
-                reader.onload = function(e) {
-                    document.getElementById(type + 'Content').value = e.target.result;
-                    const preview = document.getElementById(type + 'Preview');
+                updateFileProgress(task, FileTask.PARSING, 50, '正在读取文件...');
+                try {
+                    var content = await file.text();
+                    if (task.cancelled) return;
+                    document.getElementById(type + 'Content').value = content;
+                    var preview = document.getElementById(type + 'Preview');
                     if (preview) preview.innerHTML = '';
                     if (type === 'review') {
-                        const nameInput = document.getElementById('docName');
+                        var nameInput = document.getElementById('docName');
                         if (!nameInput.value) {
                             nameInput.value = file.name.replace(/\.[^.]+$/, '');
                         }
                     }
-                    btn.textContent = `已加载: ${file.name}`;
-                };
-                reader.readAsText(file);
+                    btn.textContent = '已加载: ' + file.name;
+                    updateFileProgress(task, FileTask.DONE, 100, '加载完成');
+                } catch(e) {
+                    updateFileProgress(task, FileTask.ERROR, 0, '读取失败: ' + e.message);
+                    btn.textContent = '点击上传审核文档';
+                }
             } else if (fileExt === 'docx') {
+                updateFileProgress(task, FileTask.EXTRACTING, 10, '正在解析 Word 文档...');
                 btn.textContent = '正在解析Word文档（含格式）...';
                 try {
-                    const result = await parseDocx(file);
-                    const hasFormat = result.includes('style="');
+                    var result = await parseDocx(file, task);
+                    if (task.cancelled) return;
+                    var hasFormat = result.includes('style="');
                     
                     document.getElementById(type + 'Content').value = hasFormat ? convertToPlainText(result) : result;
                     
-                    const preview = document.getElementById(type + 'Preview');
+                    var preview = document.getElementById(type + 'Preview');
                     if (preview) {
                         if (hasFormat) {
                             preview.innerHTML = '<div class="format-toggle"><button class="active" onclick="togglePreview(this, \'' + type + '\', \'formatted\')">带格式预览</button><button onclick="togglePreview(this, \'' + type + '\', \'plain\')">纯文本预览</button></div><div id="' + type + 'FormattedContent" class="formatted-preview" style="display:block;">' + result + '</div><div id="' + type + 'PlainContent" class="formatted-preview" style="display:none;">' + escapeHtml(convertToPlainText(result)) + '</div>';
                             
-                            const formatInfo = extractFormatInfo(result);
-                            let formatBadge = '<span class="format-info-badge">';
-                            if (formatInfo.hasColors) {
-                                formatBadge += '<span class="dot color"></span>彩色文字';
-                            }
+                            var formatInfo = extractFormatInfo(result);
+                            var formatBadge = '<span class="format-info-badge">';
+                            if (formatInfo.hasColors) formatBadge += '<span class="dot color"></span>彩色文字';
                             if (formatInfo.hasFontSizes) {
                                 if (formatInfo.hasColors) formatBadge += ' ';
                                 formatBadge += '<span class="dot size"></span>不同字号';
@@ -52,53 +59,64 @@
                     }
                     
                     if (type === 'review') {
-                        const nameInput = document.getElementById('docName');
+                        var nameInput = document.getElementById('docName');
                         if (!nameInput.value) {
                             nameInput.value = file.name.replace(/\.[^.]+$/, '');
                         }
                     }
-                    btn.textContent = `已加载: ${file.name}${hasFormat ? ' (含格式)' : ''}`;
+                    btn.textContent = '已加载: ' + file.name + (hasFormat ? ' (含格式)' : '');
+                    updateFileProgress(task, FileTask.DONE, 100, '解析完成');
                 } catch(e) {
+                    updateFileProgress(task, FileTask.ERROR, 0, 'Word 解析失败: ' + e.message);
                     btn.textContent = '点击上传审核文档';
                     alert('Word文档解析失败: ' + e.message + '\n请复制粘贴文档内容到下方文本框');
                 }
             } else if (imageExts.includes(fileExt)) {
+                updateFileProgress(task, FileTask.OCR, 5, '正在识别图片文字...');
                 btn.textContent = '正在进行OCR识别...';
                 try {
-                    const result = await performOCR(file);
+                    var result = await performOCR(file, task);
+                    if (task.cancelled) return;
                     document.getElementById(type + 'Content').value = result;
-                    const preview = document.getElementById(type + 'Preview');
+                    var preview = document.getElementById(type + 'Preview');
                     if (preview) preview.innerHTML = '';
                     if (type === 'review') {
-                        const nameInput = document.getElementById('docName');
+                        var nameInput = document.getElementById('docName');
                         if (!nameInput.value) {
                             nameInput.value = file.name.replace(/\.[^.]+$/, '');
                         }
                     }
-                    btn.textContent = `OCR识别完成: ${file.name}`;
+                    btn.textContent = 'OCR识别完成: ' + file.name;
+                    updateFileProgress(task, FileTask.DONE, 100, 'OCR 识别完成');
                 } catch(e) {
+                    updateFileProgress(task, FileTask.ERROR, 0, 'OCR 识别失败: ' + e.message);
                     btn.textContent = '点击上传审核文档';
                     alert('OCR识别失败: ' + e.message);
                 }
             } else if (fileExt === 'pdf') {
+                updateFileProgress(task, FileTask.PARSING, 5, '正在解析 PDF...');
                 btn.textContent = '正在解析PDF文档...';
                 try {
-                    const result = await parsePdf(file);
+                    var result = await parsePdf(file, task);
+                    if (task.cancelled) return;
                     document.getElementById(type + 'Content').value = result;
-                    const preview = document.getElementById(type + 'Preview');
+                    var preview = document.getElementById(type + 'Preview');
                     if (preview) preview.innerHTML = '';
                     if (type === 'review') {
-                        const nameInput = document.getElementById('docName');
+                        var nameInput = document.getElementById('docName');
                         if (!nameInput.value) {
                             nameInput.value = file.name.replace(/\.[^.]+$/, '');
                         }
                     }
-                    btn.textContent = `已加载: ${file.name}`;
+                    btn.textContent = '已加载: ' + file.name;
+                    updateFileProgress(task, FileTask.DONE, 100, 'PDF 解析完成');
                 } catch(e) {
+                    updateFileProgress(task, FileTask.ERROR, 0, 'PDF 解析失败: ' + e.message);
                     btn.textContent = '点击上传审核文档';
                     alert('PDF解析失败: ' + e.message);
                 }
             } else {
+                updateFileProgress(task, FileTask.ERROR, 0, '不支持的格式: ' + fileExt);
                 alert('不支持的格式: ' + fileExt + '\n文件: ' + file.name + '\n\n支持: TXT、MD、Word(.docx)、PDF、图片');
             }
         }
@@ -120,16 +138,29 @@
             }
         }
 
-        async function performOCR(file) {
+        async function performOCR(file, task) {
             await ensureTesseract();
+            if (task && task.cancelled) throw new Error('已取消');
+            updateFileProgress(task, FileTask.OCR, 10, '正在加载 OCR 引擎...');
+
             const worker = await Tesseract.createWorker('eng+chi_sim', 1, {
-                logger: m => {
-                    if (m.status === 'recognizing text') {
-                        console.log('OCR进度: ' + Math.round(m.progress * 100) + '%');
+                logger: function(m) {
+                    if (task && task.cancelled) return;
+                    if (m.status === 'loading tesseract core') {
+                        updateFileProgress(task, FileTask.OCR, 15, '加载 OCR 核心...');
+                    } else if (m.status === 'initializing api') {
+                        updateFileProgress(task, FileTask.OCR, 20, '初始化 OCR...');
+                    } else if (m.status === 'loading language traineddata') {
+                        updateFileProgress(task, FileTask.OCR, 25, '加载语言数据...');
+                    } else if (m.status === 'recognizing text') {
+                        var pct = Math.round(m.progress * 100);
+                        updateFileProgress(task, FileTask.OCR, 25 + Math.round(pct * 0.7), '正在识别文字 ' + pct + '%...');
                     }
                 }
             });
-            
+            if (task && task.cancelled) { worker.terminate(); throw new Error('已取消'); }
+
+            updateFileProgress(task, FileTask.OCR, 30, '正在识别文字...');
             const { data: { text } } = await worker.recognize(file);
             await worker.terminate();
             
@@ -140,32 +171,43 @@
             return text;
         }
 
-        async function parsePdf(file) {
+        async function parsePdf(file, task) {
             await ensurePdfJs();
+            if (task && task.cancelled) throw new Error('已取消');
             if (typeof pdfjsLib === 'undefined') {
                 throw new Error('PDF.js 库未加载，请刷新页面');
             }
+            updateFileProgress(task, FileTask.PARSING, 10, '正在加载 PDF 文档...');
             const arrayBuffer = await file.arrayBuffer();
             const loadingTask = pdfjsLib.getDocument({ data: arrayBuffer });
             const pdf = await loadingTask.promise;
+            if (task && task.cancelled) throw new Error('已取消');
+            
+            const numPages = pdf.numPages;
             let fullText = '';
             
-            for (let i = 1; i <= pdf.numPages; i++) {
+            for (var i = 1; i <= numPages; i++) {
+                if (task && task.cancelled) throw new Error('已取消');
+                updateFileProgress(task, FileTask.PARSING,
+                    Math.round((i / numPages) * 70) + 15,
+                    '正在提取 PDF 第 ' + i + '/' + numPages + ' 页...');
                 const page = await pdf.getPage(i);
                 const textContent = await page.getTextContent();
-                const pageText = textContent.items.map(item => item.str).join(' ');
+                const pageText = textContent.items.map(function(item) { return item.str; }).join(' ');
                 fullText += pageText + '\n\n';
             }
             
             if (!fullText.trim()) {
-                return await parseScannedPdf(file, pdf);
+                updateFileProgress(task, FileTask.OCR, 85, 'PDF 无可提取文字，尝试 OCR...');
+                return await parseScannedPdf(file, pdf, task);
             }
             
             return fullText;
         }
 
-        async function parseScannedPdf(file, pdfDoc) {
+        async function parseScannedPdf(file, pdfDoc, task) {
             await ensureTesseract();
+            if (task && task.cancelled) throw new Error('已取消');
             if (typeof Tesseract === 'undefined') {
                 throw new Error('这是扫描件 PDF，无可提取文字，请将 PDF 页面截图后用图片 OCR 识别');
             }
@@ -173,7 +215,11 @@
             let fullText = '';
             const numPages = pdfDoc ? pdfDoc.numPages : 1;
             
-            for (let i = 1; i <= numPages; i++) {
+            for (var i = 1; i <= numPages; i++) {
+                if (task && task.cancelled) throw new Error('已取消');
+                updateFileProgress(task, FileTask.OCR,
+                    Math.round((i / numPages) * 100),
+                    '正在 OCR 识别 PDF 第 ' + i + '/' + numPages + ' 页...');
                 let page;
                 if (pdfDoc) {
                     page = await pdfDoc.getPage(i);
@@ -191,6 +237,7 @@
                 canvas.width = viewport.width;
                 
                 await page.render({ canvasContext: context, viewport: viewport }).promise;
+                if (task && task.cancelled) throw new Error('已取消');
                 
                 const imageData = canvas.toDataURL('image/png');
                 const worker = await Tesseract.createWorker('eng+chi_sim');
@@ -207,17 +254,25 @@
             return fullText;
         }
         
-        async function parseDocx(file) {
+        async function parseDocx(file, task) {
             await ensureJSZip();
+            if (task && task.cancelled) throw new Error('已取消');
             try {
+                updateFileProgress(task, FileTask.EXTRACTING, 10, '正在读取 Word 文档...');
                 const arrayBuffer = await file.arrayBuffer();
-                const zip = await JSZip.loadAsync(arrayBuffer);
+                if (task && task.cancelled) throw new Error('已取消');
                 
+                updateFileProgress(task, FileTask.EXTRACTING, 20, '正在解压 Word 文档...');
+                const zip = await JSZip.loadAsync(arrayBuffer);
+                if (task && task.cancelled) throw new Error('已取消');
+                
+                updateFileProgress(task, FileTask.EXTRACTING, 30, '正在读取文档内容...');
                 const documentXml = await zip.file("word/document.xml")?.async("string");
                 if (!documentXml) {
                     throw new Error('无效的Word文档');
                 }
                 
+                updateFileProgress(task, FileTask.EXTRACTING, 40, '正在解析文档格式...');
                 const stylesXml = await zip.file("word/styles.xml")?.async("string");
                 
                 const parser = new DOMParser();
@@ -229,9 +284,17 @@
                 };
                 
                 const paragraphs = xmlDoc.getElementsByTagNameNS(namespaces.w, 'p');
+                var totalPars = paragraphs.length;
                 
                 const textParts = [];
-                for (let p of paragraphs) {
+                for (var pi = 0; pi < totalPars; pi++) {
+                    if (task && task.cancelled) throw new Error('已取消');
+                    if (pi % 20 === 0) {
+                        updateFileProgress(task, FileTask.EXTRACTING,
+                            Math.round((pi / totalPars) * 50) + 40,
+                            '正在提取段落 ' + (pi + 1) + '/' + totalPars + '...');
+                    }
+                    var p = paragraphs[pi];
                     const runs = p.getElementsByTagNameNS(namespaces.w, 'r');
                     let paragraphHtml = '';
                     
