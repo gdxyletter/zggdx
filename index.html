@@ -29,6 +29,7 @@
     <script src="scripts/community.js" defer></script>
     <script src="scripts/reference-detection.js" defer></script>
     <script src="scripts/classic-texts.js" defer></script>
+    <script src="scripts/concept-cards.js" defer></script>
     <script src="scripts/classic-reading.js" defer></script>
     <script src="scripts/auto-notes-data.js" defer></script>
     <script src="scripts/auto-notes-engine.js" defer></script>
@@ -50,10 +51,10 @@
         <div class="header-left">
             <div class="logo">古典学园数字兰台</div>
             <nav class="nav-tabs">
-                <button class="nav-tab active" onclick="switchTab('review')">文档审核</button>
                 <button class="nav-tab" onclick="switchTab('classic')">经典阅读</button>
-                <button class="nav-tab" onclick="switchTab('autoNotes')">札记自动梳理</button>
-                <button class="nav-tab" onclick="switchTab('historyMap')">孔子行迹</button>
+                <button class="nav-tab" onclick="switchTab('autoNotes')">札记梳理</button>
+                <button class="nav-tab" onclick="switchTab('historyMap')">历史地理</button>
+                <button class="nav-tab active" onclick="switchTab('review')">文档审核</button>
                 <button class="nav-tab" onclick="switchTab('community')">学术社区</button>
             </nav>
         </div>
@@ -137,7 +138,7 @@
                 <!-- Review Panel (merged with teaching docs) -->
                 <div class="panel review-panel active" id="review-panel">
                     <div class="content-header">
-                        <h1 class="content-title">学术审核</h1>
+                        <h1 class="content-title">文档审核</h1>
                         <div class="content-meta">
                             <span id="docIteration">第 1 版</span>
                         </div>
@@ -216,7 +217,7 @@
                     <div id="review-result" class="result-box hidden"></div>
                     
                     <div class="analysis-section">
-                        <h2 class="section-title">AI 学术审核分析</h2>
+                        <h2 class="section-title">AI 文档审核分析</h2>
                         
                         <div class="analysis-buttons">
                             <button class="analysis-btn" onclick="generateQuestions()">核心论点质疑</button>
@@ -279,7 +280,7 @@
                 <!-- Auto Notes Panel -->
                 <div class="panel auto-notes-panel" id="autoNotes-panel">
                     <div class="content-header">
-                        <h1 class="content-title">札记自动梳理</h1>
+                        <h1 class="content-title">札记梳理</h1>
                         <div class="content-meta">
                             <span>面向中国古典学的多源材料对齐与可溯源札记生成</span>
                         </div>
@@ -307,7 +308,7 @@
                     <button class="primary-btn auto-notes-start-btn" onclick="startAutoNotes()">开始梳理</button>
 
                     <div id="autoNotesWorkspace" class="auto-notes-workspace hidden">
-                        <div class="auto-notes-flow" aria-label="札记自动梳理流程">
+                        <div class="auto-notes-flow" aria-label="札记梳理流程">
                             <button type="button" class="auto-notes-step active" data-an-step="1" onclick="switchAutoNotesStep(1)">
                                 <span>1</span>材料输入
                             </button>
@@ -640,7 +641,7 @@
                 <!-- History Map Panel -->
                 <div class="panel history-map-panel" id="historyMap-panel">
                     <div class="content-header">
-                        <h1 class="content-title">孔子行迹</h1>
+                        <h1 class="content-title">历史地理</h1>
                         <div class="content-meta">
                             <span>跟随孔子周游列国，解锁春秋地图、地点事件与人物故事</span>
                         </div>
@@ -893,10 +894,10 @@
     
     <!-- Mobile Navigation -->
     <div class="mobile-nav">
-        <button onclick="switchTab('review')" class="active" data-tab="review">文档审核</button>
         <button onclick="switchTab('classic')" data-tab="classic">经典阅读</button>
         <button onclick="switchTab('autoNotes')" data-tab="autoNotes">札记梳理</button>
-        <button onclick="switchTab('historyMap')" data-tab="historyMap">孔子行迹</button>
+        <button onclick="switchTab('historyMap')" data-tab="historyMap">历史地理</button>
+        <button onclick="switchTab('review')" class="active" data-tab="review">文档审核</button>
         <button onclick="switchTab('community')" data-tab="community">学术社区</button>
     </div>
     
@@ -940,6 +941,53 @@
         </div>
     </div>
     
+    <!-- Concept Card Modal -->
+    <div id="conceptCardModal" class="modal">
+        <div class="modal-content" style="max-width: 640px;">
+            <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 16px;">
+                <div>
+                    <span id="conceptCardChinese" style="font-family: 'Crimson Pro', serif; font-size: 32px; font-weight: 700; color: var(--text-primary); margin-right: 12px;"></span>
+                    <span id="conceptCardPinyin" style="font-size: 18px; color: var(--text-muted);"></span>
+                </div>
+                <button class="modal-close" onclick="closeConceptCard()">×</button>
+            </div>
+
+            <div style="font-size: 14px; color: var(--accent); margin-bottom: 16px; padding: 8px 12px; background: rgba(122,92,68,0.08); border-radius: 6px;">
+                常见英译：<span id="conceptCardTranslations"></span>
+            </div>
+
+            <div class="concept-card-section">
+                <div class="concept-card-label">中文解释</div>
+                <div id="conceptCardExplanationZh" class="concept-card-text"></div>
+            </div>
+
+            <div class="concept-card-section">
+                <div class="concept-card-label">English Explanation</div>
+                <div id="conceptCardExplanationEn" class="concept-card-text" style="color: var(--text-secondary);"></div>
+            </div>
+
+            <div class="concept-card-section">
+                <div class="concept-card-label">经典例句</div>
+                <div id="conceptCardExamples"></div>
+            </div>
+
+            <div class="concept-card-section">
+                <div class="concept-card-label">相关概念</div>
+                <div id="conceptCardRelated"></div>
+            </div>
+
+            <div class="concept-card-section">
+                <div class="concept-card-label">常见误解</div>
+                <ul id="conceptCardMisunderstandings" style="margin: 0; padding-left: 18px; font-size: 13px; line-height: 1.7; color: var(--text-secondary);"></ul>
+            </div>
+
+            <div class="concept-card-section">
+                <div class="concept-card-label">跨文化比较</div>
+                <div id="conceptCardComparison" class="concept-card-text" style="color: var(--text-secondary); font-style: italic;"></div>
+            </div>
+        </div>
+    </div>
+
     <!-- Modal for community doc view -->
 <div id="docModal" class="modal">
         <div class="modal-content" style="max-width: 600px;">

@@ -179,7 +179,7 @@
 
             if (autoNotesDocs_filter.length > 0) {
                 html += `<div class="kb-review-section">
-                    <div class="kb-section-title">札记自动梳理项目 (${autoNotesDocs_filter.length})</div>
+                    <div class="kb-section-title">札记梳理项目 (${autoNotesDocs_filter.length})</div>
                     ${autoNotesDocs_filter.map(doc => `
                         <div class="kb-item">
                             <div>

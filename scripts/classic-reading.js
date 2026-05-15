@@ -222,6 +222,9 @@ function toggleBold() {
             }
             
             container.innerHTML = html;
+            if (typeof highlightConceptKeywords === 'function') {
+                highlightConceptKeywords(container);
+            }
             refreshDynamicI18n(container);
 }
         
@@ -433,6 +436,9 @@ function toggleBold() {
             });
             
             container.innerHTML = html;
+            if (typeof highlightConceptKeywords === 'function') {
+                highlightConceptKeywords(container);
+            }
             refreshDynamicI18n(container);
         }
         

@@ -2949,7 +2949,7 @@
         function exportAutoNotesAsMarkdown() {
             const state = anCollectInputToState();
             if (!state || !anRequireProjectReady('export')) return;
-            downloadAutoNotesFile(`${anSafeFilename(state.projectTitle || '札记自动梳理')}.md`, anBuildMarkdownExport(state), 'text/markdown');
+            downloadAutoNotesFile(`${anSafeFilename(state.projectTitle || '札记梳理')}.md`, anBuildMarkdownExport(state), 'text/markdown');
         }
 
         function downloadAutoNotesFile(filename, content, mimeType) {
@@ -3127,8 +3127,8 @@
             const knowledgeItem = {
                 id: docId,
                 type: 'auto_notes_project',
-                name: state.projectTitle || '札记自动梳理项目',
-                projectTitle: state.projectTitle || '札记自动梳理项目',
+                name: state.projectTitle || '札记梳理项目',
+                projectTitle: state.projectTitle || '札记梳理项目',
                 researchQuestion: state.researchQuestion || '',
                 noteCount: (state.notes || []).length,
                 cardCount: (state.cards || []).length,
@@ -3230,7 +3230,7 @@
             return {
                 metadata: {
                     projectId: state.projectId,
-                    title: state.projectTitle || '札记自动梳理项目',
+                    title: state.projectTitle || '札记梳理项目',
                     researchQuestion: state.researchQuestion || '',
                     createdAt: state.createdAt,
                     updatedAt: state.updatedAt,
@@ -3292,7 +3292,7 @@
 
         function anBuildMarkdownExport(state) {
             const lines = [
-                `# ${state.projectTitle || '札记自动梳理项目'}`,
+                `# ${state.projectTitle || '札记梳理项目'}`,
                 '',
                 '## 研究问题',
                 state.researchQuestion || '（未填写）',

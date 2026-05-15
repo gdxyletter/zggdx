@@ -278,14 +278,48 @@ function _hmEl(id) {
     return document.getElementById(id);
 }
 
+function _hmIsBilingual() {
+    var btn = document.querySelector('[data-language-mode].active');
+    return btn && btn.getAttribute('data-language-mode') === 'bilingual';
+}
+
+function _hmField(obj, cnField, enField) {
+    if (!obj) return '';
+    if (enField && _hmIsBilingual()) {
+        var enVal = obj[enField];
+        if (enVal) return enVal;
+    }
+    return obj[cnField] || '';
+}
+
+function _hmT(zh, en) {
+    return _hmIsBilingual() && en ? en : zh;
+}
+
+var _hmIdentityLabels = {
+    master: { zh: '先师', en: 'Master' },
+    disciple: { zh: '弟子', en: 'Disciple' },
+    ruler: { zh: '诸侯', en: 'Ruler' },
+    minister: { zh: '大夫', en: 'Minister' }
+};
+
+function _hmGetIdentityLabel(identity) {
+    var label = _hmIdentityLabels[identity];
+    if (!label) return _hmT('其他', 'Other');
+    return _hmT(label.zh, label.en);
+}
+
+var _hmTypeLabels = {
+    state: { zh: '国家', en: 'State' },
+    city: { zh: '城邑', en: 'City' },
+    event_place: { zh: '事件地点', en: 'Event Site' },
+    geo: { zh: '山河关隘', en: 'Landmark' }
+};
+
 function _hmGetTypeLabel(type) {
-    var labels = {
-        state: '国家',
-        city: '城邑',
-        event_place: '事件地点',
-        geo: '山河关隘'
-    };
-    return labels[type] || type;
+    var label = _hmTypeLabels[type];
+    if (!label) return type;
+    return _hmT(label.zh, label.en);
 }
 
 function hmToggleLayer(layerName) {
@@ -455,7 +489,9 @@ function _hmDrawBackground(svg) {
     compass.innerHTML =
         '<line x1="5" y1="6" x2="5" y2="12" stroke="#8a7d6a" stroke-width="0.3" />' +
         '<polygon points="5,5 4.6,7 5.4,7" fill="#8a7d6a" />' +
-        '<text x="5" y="4.5" text-anchor="middle" font-size="2" fill="#8a7d6a" font-family="serif">北</text>';
+        '<text x="5" y="4.5" text-anchor="middle" font-size="2" fill="#8a7d6a" font-family="serif"></text>';
+    var compassText = compass.querySelector('text');
+    if (compassText) compassText.textContent = _hmT('北', 'N');
     svg.appendChild(compass);
 }
 
@@ -728,7 +764,7 @@ function _hmDrawLocationDots(svg, locations, unlocked) {
         g.setAttribute('data-dot-state', isCurrent ? 'current' : (isUnlocked ? 'unlocked' : 'locked'));
         g.setAttribute('data-dot-type', loc.type);
         g.setAttribute('role', 'button');
-        g.setAttribute('aria-label', shortName + (isCurrent ? '（当前位置）' : (isUnlocked ? '' : '（未解锁）')));
+        g.setAttribute('aria-label', shortName + (isCurrent ? _hmT('（当前位置）', ' (Current)') : (isUnlocked ? '' : _hmT('（未解锁）', ' (Locked)'))));
         g.setAttribute('tabindex', isUnlocked ? '0' : '-1');
         g.style.cursor = isUnlocked ? 'pointer' : 'default';
 
@@ -967,9 +1003,9 @@ function _hmRenderJourneyBar() {
 
     cardEl.classList.remove('hidden');
 
-    _hmEl('hmJourneyStepLabel').textContent = '第 ' + _hmCurrentStep + ' 站 / 共 ' + total + ' 站';
-    _hmEl('hmJourneyTitle').textContent = step.title;
-    _hmEl('hmJourneyPrompt').textContent = step.prompt;
+    _hmEl('hmJourneyStepLabel').textContent = _hmT('第 ' + _hmCurrentStep + ' 站 / 共 ' + total + ' 站', 'Stop ' + _hmCurrentStep + ' of ' + total);
+    _hmEl('hmJourneyTitle').textContent = _hmField(step, 'title', 'titleEn');
+    _hmEl('hmJourneyPrompt').textContent = _hmField(step, 'prompt', 'promptEn');
 
     var btnPrev = _hmEl('hmBtnPrev');
     var btnNext = _hmEl('hmBtnNext');
@@ -979,9 +1015,9 @@ function _hmRenderJourneyBar() {
     btnNext.style.opacity = _hmCurrentStep >= total ? '0.4' : '1';
 
     if (_hmCurrentStep >= total) {
-        btnNext.textContent = '旅程结束';
+        btnNext.textContent = _hmT('旅程结束', 'Journey Complete');
     } else {
-        btnNext.textContent = '继续前进';
+        btnNext.textContent = _hmT('继续前进', 'Continue');
     }
 
     var newContentEl = _hmEl('hmJourneyNewContent');
@@ -998,11 +1034,11 @@ function _hmRenderJourneyBar() {
 
     if (step.unlockLocationIds && step.unlockLocationIds.length > 0) {
         newHtml += '<div class="hm-new-section">';
-        newHtml += '<span class="hm-new-section-label">解锁地点</span>';
+        newHtml += '<span class="hm-new-section-label">' + _hmT('解锁地点', 'New Places') + '</span>';
         for (var i = 0; i < step.unlockLocationIds.length; i++) {
             var loc = getLocationById(step.unlockLocationIds[i]);
             if (loc) {
-                newHtml += '<span class="hm-new-item hm-new-location">' + _hmEscapeHtml(loc.name) + '</span>';
+                newHtml += '<span class="hm-new-item hm-new-location">' + _hmEscapeHtml(_hmField(loc, 'name', 'nameEn')) + '</span>';
             }
         }
         newHtml += '</div>';
@@ -1010,11 +1046,11 @@ function _hmRenderJourneyBar() {
 
     if (step.unlockCharacterIds && step.unlockCharacterIds.length > 0) {
         newHtml += '<div class="hm-new-section">';
-        newHtml += '<span class="hm-new-section-label">遇见人物</span>';
+        newHtml += '<span class="hm-new-section-label">' + _hmT('遇见人物', 'People Met') + '</span>';
         for (var i = 0; i < step.unlockCharacterIds.length; i++) {
             var chr = getCharacterById(step.unlockCharacterIds[i]);
             if (chr) {
-                newHtml += '<button class="hm-new-item hm-new-character" onclick="' + chrHandler(chr.id) + '">' + _hmEscapeHtml(chr.name) + '</button>';
+                newHtml += '<button class="hm-new-item hm-new-character" onclick="' + chrHandler(chr.id) + '">' + _hmEscapeHtml(_hmField(chr, 'name', 'nameEn')) + '</button>';
             }
         }
         newHtml += '</div>';
@@ -1022,11 +1058,11 @@ function _hmRenderJourneyBar() {
 
     if (step.unlockEventIds && step.unlockEventIds.length > 0) {
         newHtml += '<div class="hm-new-section">';
-        newHtml += '<span class="hm-new-section-label">解锁事件</span>';
+        newHtml += '<span class="hm-new-section-label">' + _hmT('解锁事件', 'New Events') + '</span>';
         for (var i = 0; i < step.unlockEventIds.length; i++) {
             var evt = getEventById(step.unlockEventIds[i]);
             if (evt) {
-                newHtml += '<button class="hm-new-item hm-new-event" onclick="' + evtHandler(evt.id) + '">' + _hmEscapeHtml(evt.name) + '</button>';
+                newHtml += '<button class="hm-new-item hm-new-event" onclick="' + evtHandler(evt.id) + '">' + _hmEscapeHtml(_hmField(evt, 'name', 'nameEn')) + '</button>';
             }
         }
         newHtml += '</div>';
@@ -1053,7 +1089,7 @@ function _hmRenderRouteOverview() {
     for (var i = 0; i < steps.length; i++) {
         var step = steps[i];
         var loc = locMap[step.locationId];
-        var name = loc ? loc.name.replace(/[（(].*?[）)]/, '') : step.locationId;
+        var name = loc ? _hmField(loc, 'name', 'nameEn').replace(/[（(].*?[）)]/g, '') : step.locationId;
         var status = step.order < _hmCurrentStep ? 'done' : (step.order === _hmCurrentStep ? 'current' : 'locked');
         var label = status === 'done' ? '✓' : (status === 'current' ? '●' : '');
 
@@ -1085,7 +1121,7 @@ function _hmRenderDetailPanel() {
     var container = _hmEl('hmDetailContent');
     if (!container) return;
     if (_hmCurrentView === 'map' || !_hmCurrentView) {
-        container.innerHTML = '<p class="hm-detail-hint">点击地图上的点位，查看地点详情</p>';
+        container.innerHTML = '<p class="hm-detail-hint">' + _hmT('点击地图上的点位，查看地点详情', 'Click a location on the map to view details') + '</p>';
     } else if (_hmCurrentView === 'location' && _hmSelectedLocation) {
         _hmRenderLocationDetail(container);
     } else if (_hmCurrentView === 'event' && _hmSelectedEvent) {
@@ -1117,31 +1153,31 @@ function _hmBackToEvent() {
 function _hmRenderBreadcrumb(container) {
     var parts = [];
 
-    parts.push('<button class="hm-breadcrumb-link" onclick="backToHistoryMapLanding()">首页</button>');
+    parts.push('<button class="hm-breadcrumb-link" onclick="backToHistoryMapLanding()">' + _hmT('首页', 'Home') + '</button>');
 
     if (_hmSelectedLocation) {
         if (_hmCurrentView === 'location') {
             parts.push('<span class="hm-breadcrumb-sep">/</span>');
-            parts.push('<span class="hm-breadcrumb-current">' + _hmEscapeHtml(_hmSelectedLocation.name) + '</span>');
+            parts.push('<span class="hm-breadcrumb-current">' + _hmEscapeHtml(_hmField(_hmSelectedLocation, 'name', 'nameEn')) + '</span>');
         } else {
             parts.push('<span class="hm-breadcrumb-sep">/</span>');
-            parts.push('<button class="hm-breadcrumb-link" onclick="_hmOpenLocation(getLocationById(\'' + _hmSelectedLocation.id + '\'))">' + _hmEscapeHtml(_hmSelectedLocation.name) + '</button>');
+            parts.push('<button class="hm-breadcrumb-link" onclick="_hmOpenLocation(getLocationById(\'' + _hmSelectedLocation.id + '\'))">' + _hmEscapeHtml(_hmField(_hmSelectedLocation, 'name', 'nameEn')) + '</button>');
         }
     }
 
     if (_hmSelectedEvent && _hmCurrentView === 'event') {
         parts.push('<span class="hm-breadcrumb-sep">/</span>');
-        parts.push('<span class="hm-breadcrumb-current">' + _hmEscapeHtml(_hmSelectedEvent.name) + '</span>');
+        parts.push('<span class="hm-breadcrumb-current">' + _hmEscapeHtml(_hmField(_hmSelectedEvent, 'name', 'nameEn')) + '</span>');
     }
 
     if (_hmSelectedCharacter && _hmCurrentView === 'character') {
         if (_hmSelectedEvent) {
             parts.push('<span class="hm-breadcrumb-sep">/</span>');
-            parts.push('<button class="hm-breadcrumb-link" onclick="_hmOpenEvent(getEventById(\'' + _hmSelectedEvent.id + '\'))">' + _hmEscapeHtml(_hmSelectedEvent.name) + '</button>');
+            parts.push('<button class="hm-breadcrumb-link" onclick="_hmOpenEvent(getEventById(\'' + _hmSelectedEvent.id + '\'))">' + _hmEscapeHtml(_hmField(_hmSelectedEvent, 'name', 'nameEn')) + '</button>');
         } else if (_hmSelectedLocation) {
             parts.push('<span class="hm-breadcrumb-sep">/</span>');
             parts.push('<span class="hm-breadcrumb-sep">/</span>');
-            parts.push('<span class="hm-breadcrumb-current">' + _hmEscapeHtml(_hmSelectedCharacter.name) + '</span>');
+            parts.push('<span class="hm-breadcrumb-current">' + _hmEscapeHtml(_hmField(_hmSelectedCharacter, 'name', 'nameEn')) + '</span>');
         }
     }
 
@@ -1157,30 +1193,30 @@ function _hmRenderLocationDetail(container) {
     var html = '';
 
     html += '<div class="hm-detail-header">';
-    html += '<h3 class="hm-detail-title">' + _hmEscapeHtml(loc.name) + '</h3>';
+    html += '<h3 class="hm-detail-title">' + _hmEscapeHtml(_hmField(loc, 'name', 'nameEn')) + '</h3>';
     html += '<span class="hm-detail-type">' + _hmGetTypeLabel(loc.type) + '</span>';
     html += '</div>';
 
-    html += '<p class="hm-detail-short-tip">' + _hmEscapeHtml(loc.shortTip) + '</p>';
+    html += '<p class="hm-detail-short-tip">' + _hmEscapeHtml(_hmField(loc, 'shortTip', 'shortTipEn')) + '</p>';
 
     if (events.length > 0) {
         html += '<div class="hm-detail-section">';
-        html += '<h4 class="hm-detail-section-title">相关事件</h4>';
+        html += '<h4 class="hm-detail-section-title">' + _hmT('相关事件', 'Related Events') + '</h4>';
         html += '<div class="hm-event-list">';
         for (var i = 0; i < events.length; i++) {
             var evt = events[i];
             html += '<div class="hm-event-item hm-event-item-clickable" onclick="_hmOpenEvent(getEventById(\'' + evt.id + '\'))">';
-            html += '<span class="hm-event-name">' + _hmEscapeHtml(evt.name) + '</span>';
-            html += '<span class="hm-event-summary">' + _hmEscapeHtml(evt.summary) + '</span>';
+            html += '<span class="hm-event-name">' + _hmEscapeHtml(_hmField(evt, 'name', 'nameEn')) + '</span>';
+            html += '<span class="hm-event-summary">' + _hmEscapeHtml(_hmField(evt, 'summary', 'summaryEn')) + '</span>';
             html += '</div>';
         }
         html += '</div>';
         html += '</div>';
     } else {
-        html += '<p class="hm-detail-no-data">该地点暂无相关事件</p>';
+        html += '<p class="hm-detail-no-data">' + _hmT('该地点暂无相关事件', 'No related events for this location') + '</p>';
     }
 
-    html += '<button class="hm-back-btn hm-detail-toggle-btn" onclick="_hmShowLocationDescription()">查看详情 ∨</button>';
+    html += '<button class="hm-back-btn hm-detail-toggle-btn" onclick="_hmShowLocationDescription()">' + _hmT('查看详情 ∨', 'View Details ∨') + '</button>';
 
     container.innerHTML = html;
 }
@@ -1192,13 +1228,35 @@ function _hmShowLocationDescription() {
     if (!container) return;
 
     var html = '';
-    html += '<button class="hm-back-btn" onclick="_hmGoBackToEvents()">← 收起</button>';
+    html += '<button class="hm-back-btn" onclick="_hmGoBackToEvents()">← ' + _hmT('收起', 'Close') + '</button>';
     html += '<div class="hm-detail-header">';
-    html += '<h3 class="hm-detail-title">' + _hmEscapeHtml(loc.name) + '</h3>';
+    html += '<h3 class="hm-detail-title">' + _hmEscapeHtml(_hmField(loc, 'name', 'nameEn')) + '</h3>';
     html += '<span class="hm-detail-type">' + _hmGetTypeLabel(loc.type) + '</span>';
     html += '</div>';
-    html += '<p class="hm-detail-short-tip">' + _hmEscapeHtml(loc.shortTip) + '</p>';
-    html += '<p class="hm-detail-desc">' + _hmEscapeHtml(loc.description) + '</p>';
+    html += '<p class="hm-detail-short-tip">' + _hmEscapeHtml(_hmField(loc, 'shortTip', 'shortTipEn')) + '</p>';
+    html += '<p class="hm-detail-desc">' + _hmEscapeHtml(_hmField(loc, 'description', 'descriptionEn')) + '</p>';
+
+    if (loc.analectsPassages && loc.analectsPassages.length > 0) {
+        html += '<div class="hm-detail-section">';
+        html += '<h4 class="hm-detail-section-title">' + _hmT('相关《论语》章句', 'Related Analects Passages') + '</h4>';
+        html += '<div class="hm-analects-list">';
+        for (var api = 0; api < loc.analectsPassages.length; api++) {
+            var ap = loc.analectsPassages[api];
+            html += '<div class="hm-analects-item">';
+            html += '<p class="hm-analects-text">' + _hmEscapeHtml(ap.text) + '</p>';
+            html += '<span class="hm-analects-source">' + _hmEscapeHtml(ap.source) + '</span>';
+            html += '</div>';
+        }
+        html += '</div>';
+        html += '</div>';
+    }
+
+    if (loc.whyItMatters) {
+        html += '<div class="hm-detail-section">';
+        html += '<h4 class="hm-detail-section-title">' + _hmT('为什么重要', 'Why It Matters') + '</h4>';
+        html += '<p class="hm-detail-desc" style="font-style:italic;">' + _hmEscapeHtml(loc.whyItMatters) + '</p>';
+        html += '</div>';
+    }
 
     container.innerHTML = html;
 }
@@ -1217,38 +1275,38 @@ function _hmRenderEventDetail(container) {
 
     var html = '';
     if (evtLoc) {
-        html += '<button class="hm-back-btn" onclick="_hmBackToLocation()">← 返回</button>';
+        html += '<button class="hm-back-btn" onclick="_hmBackToLocation()">← ' + _hmT('返回', 'Back') + '</button>';
     }
 
     html += '<div class="hm-detail-header">';
-    html += '<h3 class="hm-detail-title">' + _hmEscapeHtml(evt.name) + '</h3>';
+    html += '<h3 class="hm-detail-title">' + _hmEscapeHtml(_hmField(evt, 'name', 'nameEn')) + '</h3>';
     if (evtLoc) {
-        html += '<span class="hm-detail-type">' + _hmEscapeHtml(evtLoc.name) + '</span>';
+        html += '<span class="hm-detail-type">' + _hmEscapeHtml(_hmField(evtLoc, 'name', 'nameEn')) + '</span>';
     }
     html += '</div>';
 
-    html += '<p class="hm-detail-short-tip">' + _hmEscapeHtml(evt.summary) + '</p>';
+    html += '<p class="hm-detail-short-tip">' + _hmEscapeHtml(_hmField(evt, 'summary', 'summaryEn')) + '</p>';
 
-    html += '<p class="hm-detail-desc">' + _hmEscapeHtml(evt.detail) + '</p>';
+    html += '<p class="hm-detail-desc">' + _hmEscapeHtml(_hmField(evt, 'detail', 'detailEn')) + '</p>';
 
     if (evt.source) {
         html += '<div class="hm-detail-section">';
-        html += '<h4 class="hm-detail-section-title">史料来源</h4>';
+        html += '<h4 class="hm-detail-section-title">' + _hmT('史料来源', 'Historical Source') + '</h4>';
         html += '<p class="hm-source-text">' + _hmEscapeHtml(evt.source) + '</p>';
         html += '</div>';
     }
 
     if (characters.length > 0) {
         html += '<div class="hm-detail-section">';
-        html += '<h4 class="hm-detail-section-title">涉及人物</h4>';
+        html += '<h4 class="hm-detail-section-title">' + _hmT('涉及人物', 'Figures Involved') + '</h4>';
         html += '<div class="hm-character-list">';
         for (var i = 0; i < characters.length; i++) {
             var chr = characters[i];
             html += '<div class="hm-character-chip hm-character-chip-clickable" onclick="_hmOpenCharacter(getCharacterById(\'' + chr.id + '\'))">';
-            html += '<span class="hm-character-chip-name">' + _hmEscapeHtml(chr.name) + '</span>';
-            html += '<span class="hm-character-chip-identity">' + _hmEscapeHtml(chr.identity === 'master' ? '先师' : chr.identity === 'disciple' ? '弟子' : chr.identity === 'ruler' ? '诸侯' : chr.identity === 'minister' ? '大夫' : '其他') + '</span>';
-            if (chr.title) {
-                html += '<span class="hm-character-chip-alias">' + _hmEscapeHtml(chr.title) + '</span>';
+            html += '<span class="hm-character-chip-name">' + _hmEscapeHtml(_hmField(chr, 'name', 'nameEn')) + '</span>';
+            html += '<span class="hm-character-chip-identity">' + _hmEscapeHtml(_hmGetIdentityLabel(chr.identity)) + '</span>';
+            if (chr.title || chr.titleEn) {
+                html += '<span class="hm-character-chip-alias">' + _hmEscapeHtml(_hmField(chr, 'title', 'titleEn')) + '</span>';
             }
             html += '</div>';
         }
@@ -1264,21 +1322,21 @@ function _hmRenderCharacterDetail(container) {
     if (!chr) return;
 
     var html = '';
-    html += '<button class="hm-back-btn" onclick="_hmBackToEvent()">← 返回事件</button>';
+    html += '<button class="hm-back-btn" onclick="_hmBackToEvent()">← ' + _hmT('返回事件', 'Back to Event') + '</button>';
 
     html += '<div class="hm-detail-header">';
-    html += '<h3 class="hm-detail-title">' + _hmEscapeHtml(chr.name) + '</h3>';
-    html += '<span class="hm-detail-type">' + _hmEscapeHtml(chr.identity === 'master' ? '先师' : chr.identity === 'disciple' ? '弟子' : chr.identity === 'ruler' ? '诸侯' : chr.identity === 'minister' ? '大夫' : '其他') + '</span>';
-    if (chr.title) {
-        html += '<span class="hm-character-detail-title">' + _hmEscapeHtml(chr.title) + '</span>';
+    html += '<h3 class="hm-detail-title">' + _hmEscapeHtml(_hmField(chr, 'name', 'nameEn')) + '</h3>';
+    html += '<span class="hm-detail-type">' + _hmEscapeHtml(_hmGetIdentityLabel(chr.identity)) + '</span>';
+    if (chr.title || chr.titleEn) {
+        html += '<span class="hm-character-detail-title">' + _hmEscapeHtml(_hmField(chr, 'title', 'titleEn')) + '</span>';
     }
     html += '</div>';
 
     if (chr.alias) {
-        html += '<p class="hm-character-detail-alias">' + _hmEscapeHtml(chr.alias) + '</p>';
+        html += '<p class="hm-character-detail-alias">' + _hmEscapeHtml(_hmField(chr, 'alias', 'aliasEn')) + '</p>';
     }
 
-    html += '<p class="hm-detail-desc">' + _hmEscapeHtml(chr.description) + '</p>';
+    html += '<p class="hm-detail-desc">' + _hmEscapeHtml(_hmField(chr, 'description', 'descriptionEn')) + '</p>';
     container.innerHTML = html;
 }
 
@@ -1294,33 +1352,33 @@ function _hmOpenEventFromJourney(evt) {
     var html = '';
 
     html += '<div class="hm-detail-header">';
-    html += '<h3 class="hm-detail-title">' + _hmEscapeHtml(evt.name) + '</h3>';
+    html += '<h3 class="hm-detail-title">' + _hmEscapeHtml(_hmField(evt, 'name', 'nameEn')) + '</h3>';
     if (evtLoc) {
-        html += '<span class="hm-detail-type">' + _hmEscapeHtml(evtLoc.name) + '</span>';
+        html += '<span class="hm-detail-type">' + _hmEscapeHtml(_hmField(evtLoc, 'name', 'nameEn')) + '</span>';
     }
     html += '</div>';
 
-    html += '<p class="hm-detail-short-tip">' + _hmEscapeHtml(evt.summary) + '</p>';
-    html += '<p class="hm-detail-desc">' + _hmEscapeHtml(evt.detail) + '</p>';
+    html += '<p class="hm-detail-short-tip">' + _hmEscapeHtml(_hmField(evt, 'summary', 'summaryEn')) + '</p>';
+    html += '<p class="hm-detail-desc">' + _hmEscapeHtml(_hmField(evt, 'detail', 'detailEn')) + '</p>';
 
     if (evt.source) {
         html += '<div class="hm-detail-section">';
-        html += '<h4 class="hm-detail-section-title">史料来源</h4>';
+        html += '<h4 class="hm-detail-section-title">' + _hmT('史料来源', 'Historical Source') + '</h4>';
         html += '<p class="hm-source-text">' + _hmEscapeHtml(evt.source) + '</p>';
         html += '</div>';
     }
 
     if (characters.length > 0) {
         html += '<div class="hm-detail-section">';
-        html += '<h4 class="hm-detail-section-title">涉及人物</h4>';
+        html += '<h4 class="hm-detail-section-title">' + _hmT('涉及人物', 'Figures Involved') + '</h4>';
         html += '<div class="hm-character-list">';
         for (var i = 0; i < characters.length; i++) {
             var chr = characters[i];
             html += '<div class="hm-character-chip hm-character-chip-clickable" onclick="hmSwitchTab(\'atlas\'); _hmAtlasView=\'detail\'; _hmSelectedCharacter=getCharacterById(\'' + chr.id + '\'); _hmRenderAtlasDetail();">';
-            html += '<span class="hm-character-chip-name">' + _hmEscapeHtml(chr.name) + '</span>';
-            html += '<span class="hm-character-chip-identity">' + _hmEscapeHtml(chr.identity === 'master' ? '先师' : chr.identity === 'disciple' ? '弟子' : chr.identity === 'ruler' ? '诸侯' : chr.identity === 'minister' ? '大夫' : '其他') + '</span>';
-            if (chr.title) {
-                html += '<span class="hm-character-chip-alias">' + _hmEscapeHtml(chr.title) + '</span>';
+            html += '<span class="hm-character-chip-name">' + _hmEscapeHtml(_hmField(chr, 'name', 'nameEn')) + '</span>';
+            html += '<span class="hm-character-chip-identity">' + _hmEscapeHtml(_hmGetIdentityLabel(chr.identity)) + '</span>';
+            if (chr.title || chr.titleEn) {
+                html += '<span class="hm-character-chip-alias">' + _hmEscapeHtml(_hmField(chr, 'title', 'titleEn')) + '</span>';
             }
             html += '</div>';
         }
@@ -1344,25 +1402,25 @@ function _hmRenderJourneyLocationDetail(container) {
     var html = '';
 
     html += '<div class="hm-detail-header">';
-    html += '<h3 class="hm-detail-title">' + _hmEscapeHtml(loc.name) + '</h3>';
+    html += '<h3 class="hm-detail-title">' + _hmEscapeHtml(_hmField(loc, 'name', 'nameEn')) + '</h3>';
     html += '<span class="hm-detail-type">' + _hmGetTypeLabel(loc.type) + '</span>';
     if (loc.isCore) {
-        html += '<span class="hm-core-badge">核心路线</span>';
+        html += '<span class="hm-core-badge">' + _hmT('核心路线', 'Core Route') + '</span>';
     }
     html += '</div>';
 
-    html += '<p class="hm-detail-short-tip">' + _hmEscapeHtml(loc.shortTip) + '</p>';
-    html += '<p class="hm-detail-desc">' + _hmEscapeHtml(loc.description) + '</p>';
+    html += '<p class="hm-detail-short-tip">' + _hmEscapeHtml(_hmField(loc, 'shortTip', 'shortTipEn')) + '</p>';
+    html += '<p class="hm-detail-desc">' + _hmEscapeHtml(_hmField(loc, 'description', 'descriptionEn')) + '</p>';
 
     if (events.length > 0) {
         html += '<div class="hm-detail-section">';
-        html += '<h4 class="hm-detail-section-title">相关事件</h4>';
+        html += '<h4 class="hm-detail-section-title">' + _hmT('相关事件', 'Related Events') + '</h4>';
         html += '<div class="hm-event-list">';
         for (var i = 0; i < events.length; i++) {
             var evt = events[i];
             html += '<div class="hm-event-item hm-event-item-clickable" onclick="_hmOpenEventFromJourney(getEventById(\'' + evt.id + '\'))">';
-            html += '<span class="hm-event-name">' + _hmEscapeHtml(evt.name) + '</span>';
-            html += '<span class="hm-event-summary">' + _hmEscapeHtml(evt.summary) + '</span>';
+            html += '<span class="hm-event-name">' + _hmEscapeHtml(_hmField(evt, 'name', 'nameEn')) + '</span>';
+            html += '<span class="hm-event-summary">' + _hmEscapeHtml(_hmField(evt, 'summary', 'summaryEn')) + '</span>';
             html += '</div>';
         }
         html += '</div>';
@@ -1371,21 +1429,23 @@ function _hmRenderJourneyLocationDetail(container) {
 
     if (characters.length > 0) {
         html += '<div class="hm-detail-section">';
-        html += '<h4 class="hm-detail-section-title">相关人物</h4>';
+        html += '<h4 class="hm-detail-section-title">' + _hmT('相关人物', 'Related Figures') + '</h4>';
         html += '<div class="hm-character-list">';
         for (var i = 0; i < characters.length; i++) {
             var chr = characters[i];
             html += '<div class="hm-character-chip hm-character-chip-clickable" onclick="hmSwitchTab(\'atlas\'); _hmAtlasView=\'detail\'; _hmSelectedCharacter=getCharacterById(\'' + chr.id + '\'); _hmRenderAtlasDetail();">';
-            html += '<span class="hm-character-chip-name">' + _hmEscapeHtml(chr.name) + '</span>';
-            html += '<span class="hm-character-chip-identity">' + _hmEscapeHtml(chr.identity === 'master' ? '先师' : chr.identity === 'disciple' ? '弟子' : chr.identity === 'ruler' ? '诸侯' : chr.identity === 'minister' ? '大夫' : '其他') + '</span>';
-            if (chr.title) {
-                html += '<span class="hm-character-chip-alias">' + _hmEscapeHtml(chr.title) + '</span>';
+            html += '<span class="hm-character-chip-name">' + _hmEscapeHtml(_hmField(chr, 'name', 'nameEn')) + '</span>';
+            html += '<span class="hm-character-chip-identity">' + _hmEscapeHtml(_hmGetIdentityLabel(chr.identity)) + '</span>';
+            if (chr.title || chr.titleEn) {
+                html += '<span class="hm-character-chip-alias">' + _hmEscapeHtml(_hmField(chr, 'title', 'titleEn')) + '</span>';
             }
             html += '</div>';
         }
         html += '</div>';
         html += '</div>';
     }
+
+    html += '<button class="hm-back-btn hm-detail-toggle-btn" onclick="_hmShowLocationDescription()">' + _hmT('查看详情 ∨', 'View Details ∨') + '</button>';
 
     container.innerHTML = html;
 }
@@ -1397,7 +1457,7 @@ function _hmResetDetailPanel() {
     _hmSelectedCharacter = null;
     var container = _hmEl('hmDetailContent');
     if (container) {
-        container.innerHTML = '<p class="hm-detail-hint">点击地图上的点位，查看地点详情</p>';
+        container.innerHTML = '<p class="hm-detail-hint">' + _hmT('点击地图上的点位，查看地点详情', 'Click a location on the map to view details') + '</p>';
     }
 }
 
@@ -1419,11 +1479,11 @@ function _hmRenderAtlas() {
     var filterEl = document.getElementById('hmAtlasFilters');
     if (filterEl) {
         var filterDefs = [
-            { key: 'all', label: '全部' },
-            { key: 'disciple', label: '弟子' },
-            { key: 'ruler', label: '诸侯' },
-            { key: 'minister', label: '大夫' },
-            { key: 'other', label: '其他' }
+            { key: 'all', label: _hmT('全部', 'All') },
+            { key: 'disciple', label: _hmT('弟子', 'Disciple') },
+            { key: 'ruler', label: _hmT('诸侯', 'Ruler') },
+            { key: 'minister', label: _hmT('大夫', 'Minister') },
+            { key: 'other', label: _hmT('其他', 'Other') }
         ];
         var html = '<div class="hm-atlas-filter-group">';
         for (var i = 0; i < filterDefs.length; i++) {
@@ -1434,9 +1494,9 @@ function _hmRenderAtlas() {
         html += '</div>';
         html += '<div class="hm-atlas-filter-group">';
         var unlockDefs = [
-            { key: 'all', label: '全部' },
-            { key: 'unlocked', label: '已解锁' },
-            { key: 'locked', label: '未解锁' }
+            { key: 'all', label: _hmT('全部', 'All') },
+            { key: 'unlocked', label: _hmT('已解锁', 'Unlocked') },
+            { key: 'locked', label: _hmT('未解锁', 'Locked') }
         ];
         for (var i = 0; i < unlockDefs.length; i++) {
             var d = unlockDefs[i];
@@ -1463,8 +1523,10 @@ function _hmRenderAtlas() {
 
         if (searchTerm) {
             var match = chr.name.toLowerCase().indexOf(searchTerm) !== -1 ||
+                (chr.nameEn && chr.nameEn.toLowerCase().indexOf(searchTerm) !== -1) ||
                 (chr.alias && chr.alias.toLowerCase().indexOf(searchTerm) !== -1) ||
-                (chr.title && chr.title.toLowerCase().indexOf(searchTerm) !== -1);
+                (chr.title && chr.title.toLowerCase().indexOf(searchTerm) !== -1) ||
+                (chr.titleEn && chr.titleEn.toLowerCase().indexOf(searchTerm) !== -1);
             if (!match) continue;
         }
 
@@ -1484,20 +1546,20 @@ function _hmRenderAtlas() {
         html += '<div class="hm-atlas-card-header">';
         html += '<div class="hm-atlas-avatar">' + _hmEscapeHtml(chr.name.charAt(0)) + '</div>';
         html += '<div class="hm-atlas-card-info">';
-        html += '<div class="hm-atlas-card-name">' + (isUnlocked ? _hmEscapeHtml(chr.name) : '未解锁人物') + '</div>';
+        html += '<div class="hm-atlas-card-name">' + (isUnlocked ? _hmEscapeHtml(_hmField(chr, 'name', 'nameEn')) : _hmT('未解锁人物', 'Locked Character')) + '</div>';
         if (chr.alias && isUnlocked) {
-            html += '<div class="hm-atlas-card-alias">' + _hmEscapeHtml(chr.alias) + '</div>';
+            html += '<div class="hm-atlas-card-alias">' + _hmEscapeHtml(_hmField(chr, 'alias', 'aliasEn')) + '</div>';
         }
-        if (chr.title && isUnlocked) {
-            html += '<div class="hm-atlas-card-title">' + _hmEscapeHtml(chr.title) + '</div>';
+        if ((chr.title || chr.titleEn) && isUnlocked) {
+            html += '<div class="hm-atlas-card-title">' + _hmEscapeHtml(_hmField(chr, 'title', 'titleEn')) + '</div>';
         }
         html += '</div>';
         html += '</div>';
 
         if (isUnlocked) {
-            html += '<div class="hm-atlas-card-identity">' + _hmEscapeHtml(chr.identity === 'master' ? '先师' : chr.identity === 'disciple' ? '弟子' : chr.identity === 'ruler' ? '诸侯' : chr.identity === 'minister' ? '大夫' : '其他') + '</div>';
+            html += '<div class="hm-atlas-card-identity">' + _hmEscapeHtml(_hmGetIdentityLabel(chr.identity)) + '</div>';
         } else {
-            html += '<div class="hm-atlas-card-locked-hint">继续游历后解锁</div>';
+            html += '<div class="hm-atlas-card-locked-hint">' + _hmT('继续游历后解锁', 'Unlock by continuing your journey') + '</div>';
         }
 
         html += '</div>';
@@ -1545,31 +1607,31 @@ function _hmRenderAtlasDetail() {
 
     var html = '';
 
-    html += '<button class="hm-atlas-back-btn" onclick="_hmAtlasView=\'grid\'; _hmRenderAtlas();">返回图鉴列表</button>';
+    html += '<button class="hm-atlas-back-btn" onclick="_hmAtlasView=\'grid\'; _hmRenderAtlas();">' + _hmT('返回图鉴列表', 'Back to Atlas') + '</button>';
 
     html += '<div class="hm-atlas-detail-header">';
     html += '<div class="hm-atlas-detail-avatar">' + _hmEscapeHtml(chr.name.charAt(0)) + '</div>';
     html += '<div class="hm-atlas-detail-info">';
-    html += '<h3>' + _hmEscapeHtml(chr.name) + '</h3>';
+    html += '<h3>' + _hmEscapeHtml(_hmField(chr, 'name', 'nameEn')) + '</h3>';
     if (chr.alias) {
-        html += '<p class="hm-atlas-detail-alias">' + _hmEscapeHtml(chr.alias) + '</p>';
+        html += '<p class="hm-atlas-detail-alias">' + _hmEscapeHtml(_hmField(chr, 'alias', 'aliasEn')) + '</p>';
     }
-    if (chr.title) {
-        html += '<span class="hm-atlas-detail-title">' + _hmEscapeHtml(chr.title) + '</span>';
+    if (chr.title || chr.titleEn) {
+        html += '<span class="hm-atlas-detail-title">' + _hmEscapeHtml(_hmField(chr, 'title', 'titleEn')) + '</span>';
     }
     html += '</div>';
     html += '</div>';
 
-    html += '<div class="hm-atlas-detail-desc">' + _hmEscapeHtml(chr.description) + '</div>';
+    html += '<div class="hm-atlas-detail-desc">' + _hmEscapeHtml(_hmField(chr, 'description', 'descriptionEn')) + '</div>';
 
     if (chr.relatedLocationIds && chr.relatedLocationIds.length > 0) {
         html += '<div class="hm-atlas-detail-section">';
-        html += '<h4 class="hm-atlas-detail-section-title">相关地点</h4>';
+        html += '<h4 class="hm-atlas-detail-section-title">' + _hmT('相关地点', 'Related Places') + '</h4>';
         html += '<div class="hm-atlas-detail-links">';
         for (var i = 0; i < chr.relatedLocationIds.length; i++) {
             var loc = getLocationById(chr.relatedLocationIds[i]);
             if (loc) {
-                html += '<button class="hm-atlas-detail-link hm-link-location" onclick="_hmOpenLocationFromAtlas(\'' + loc.id + '\')">' + _hmEscapeHtml(loc.name) + '</button>';
+                html += '<button class="hm-atlas-detail-link hm-link-location" onclick="_hmOpenLocationFromAtlas(\'' + loc.id + '\')">' + _hmEscapeHtml(_hmField(loc, 'name', 'nameEn')) + '</button>';
             }
         }
         html += '</div>';
@@ -1578,19 +1640,19 @@ function _hmRenderAtlasDetail() {
 
     if (chr.relatedEventIds && chr.relatedEventIds.length > 0) {
         html += '<div class="hm-atlas-detail-section">';
-        html += '<h4 class="hm-atlas-detail-section-title">相关事件</h4>';
+        html += '<h4 class="hm-atlas-detail-section-title">' + _hmT('相关事件', 'Related Events') + '</h4>';
         html += '<div class="hm-atlas-detail-links">';
         for (var i = 0; i < chr.relatedEventIds.length; i++) {
             var evt = getEventById(chr.relatedEventIds[i]);
             if (evt) {
-                html += '<button class="hm-atlas-detail-link hm-link-event" onclick="_hmOpenEventFromAtlas(\'' + evt.id + '\')">' + _hmEscapeHtml(evt.name) + '</button>';
+                html += '<button class="hm-atlas-detail-link hm-link-event" onclick="_hmOpenEventFromAtlas(\'' + evt.id + '\')">' + _hmEscapeHtml(_hmField(evt, 'name', 'nameEn')) + '</button>';
             }
         }
         html += '</div>';
         html += '</div>';
     }
 
-    html += '<div class="hm-atlas-unlock-step">首次解锁站点：第 ' + chr.unlockStep + ' 站</div>';
+    html += '<div class="hm-atlas-unlock-step">' + _hmT('首次解锁站点：第 ', 'First unlocked at stop ') + chr.unlockStep + _hmT(' 站', '') + '</div>';
 
     gridEl.innerHTML = html;
 }
@@ -1637,11 +1699,11 @@ function renderLayerControls(container, activeLayers) {
     var layers = activeLayers || _hmActiveLayers;
     var html = '';
     var defs = [
-        { key: 'state', label: '国家' },
-        { key: 'route', label: '路线' },
-        { key: 'event', label: '事件' },
-        { key: 'geo', label: '山河关隘' },
-        { key: 'city', label: '城邑' }
+        { key: 'state', label: _hmT('国家', 'States') },
+        { key: 'route', label: _hmT('路线', 'Route') },
+        { key: 'event', label: _hmT('事件', 'Events') },
+        { key: 'geo', label: _hmT('山河关隘', 'Landmarks') },
+        { key: 'city', label: _hmT('城邑', 'Cities') }
     ];
     for (var i = 0; i < defs.length; i++) {
         var d = defs[i];
@@ -1662,12 +1724,12 @@ function renderLegend(container) {
     var el = typeof container === 'string' ? document.getElementById(container) : container;
     if (!el) return;
     var html = '';
-    html += '<div class="hm-legend-title">图例</div>';
-    html += '<div class="hm-legend-item"><span class="hm-legend-dot hm-legend-dot-state"></span><span>国家</span></div>';
-    html += '<div class="hm-legend-item"><span class="hm-legend-dot hm-legend-dot-city"></span><span>城邑</span></div>';
-    html += '<div class="hm-legend-item"><span class="hm-legend-dot hm-legend-dot-event"></span><span>事件</span></div>';
-    html += '<div class="hm-legend-item"><span class="hm-legend-dot hm-legend-dot-geo"></span><span>山河关隘</span></div>';
-    html += '<div class="hm-legend-item hm-legend-line"><span class="hm-legend-line-seg"></span><span>孔子路线</span></div>';
+    html += '<div class="hm-legend-title">' + _hmT('图例', 'Legend') + '</div>';
+    html += '<div class="hm-legend-item"><span class="hm-legend-dot hm-legend-dot-state"></span><span>' + _hmT('国家', 'States') + '</span></div>';
+    html += '<div class="hm-legend-item"><span class="hm-legend-dot hm-legend-dot-city"></span><span>' + _hmT('城邑', 'Cities') + '</span></div>';
+    html += '<div class="hm-legend-item"><span class="hm-legend-dot hm-legend-dot-event"></span><span>' + _hmT('事件', 'Events') + '</span></div>';
+    html += '<div class="hm-legend-item"><span class="hm-legend-dot hm-legend-dot-geo"></span><span>' + _hmT('山河关隘', 'Landmarks') + '</span></div>';
+    html += '<div class="hm-legend-item hm-legend-line"><span class="hm-legend-line-seg"></span><span>' + _hmT('孔子路线', "Confucius' Route") + '</span></div>';
     el.innerHTML = html;
 }
 
@@ -1678,7 +1740,7 @@ function renderLegend(container) {
 function renderDisclaimer(container) {
     var el = typeof container === 'string' ? document.getElementById(container) : container;
     if (!el) return;
-    el.textContent = '本地图为春秋列国教学示意图，疆域和位置用于学习展示，不代表精确历史地理边界。';
+    el.textContent = _hmT('本地图为春秋列国教学示意图，疆域和位置用于学习展示，不代表精确历史地理边界。', 'This map is a teaching diagram of the Spring and Autumn states; borders and positions are for learning display and do not represent precise historical geography.');
 }
 
 /**
@@ -1720,10 +1782,10 @@ function renderJourneyCard(container, options) {
     if (!step) return;
     el.innerHTML =
         '<div class="hm-journey-header">' +
-            '<span class="hm-journey-step-label">第 ' + (_hmCurrentStep) + ' 站 / 共 ' + total + ' 站</span>' +
-            '<h3 class="hm-journey-title">' + _hmEscapeHtml(step.title) + '</h3>' +
+            '<span class="hm-journey-step-label">' + _hmT('第 ' + _hmCurrentStep + ' 站 / 共 ' + total + ' 站', 'Stop ' + _hmCurrentStep + ' of ' + total) + '</span>' +
+            '<h3 class="hm-journey-title">' + _hmEscapeHtml(_hmField(step, 'title', 'titleEn')) + '</h3>' +
         '</div>' +
-        '<p class="hm-journey-prompt">' + _hmEscapeHtml(step.prompt) + '</p>';
+        '<p class="hm-journey-prompt">' + _hmEscapeHtml(_hmField(step, 'prompt', 'promptEn')) + '</p>';
 }
 
 /**
@@ -1735,7 +1797,7 @@ function renderDetailPanel(container, options) {
     if (!options) { _hmRenderDetailPanel(); return; }
     var el = typeof container === 'string' ? document.getElementById(container) : container;
     if (!el) return;
-    el.innerHTML = '<p class="hm-detail-hint">' + _hmEscapeHtml(options.hint || '点击地图上的点位，查看地点详情') + '</p>';
+    el.innerHTML = '<p class="hm-detail-hint">' + _hmEscapeHtml(options.hint || _hmT('点击地图上的点位，查看地点详情', 'Click a location on the map to view details')) + '</p>';
 }
 
 // ===== 初始化：对每个 tab 渲染共享的图层控件和图例 =====
@@ -1749,7 +1811,7 @@ function _hmRenderLayoutComponents() {
     var totalChars = (window.historyMapCharacters || []).length;
     var stepLabel = document.getElementById('hmJourneyStepLabel');
     var progressCount = document.getElementById('hmAtlasProgressCount');
-    if (stepLabel) stepLabel.textContent = '第 1 站 / 共 ' + totalSteps + ' 站';
+    if (stepLabel) stepLabel.textContent = _hmT('第 1 站 / 共 ' + totalSteps + ' 站', 'Stop 1 of ' + totalSteps);
     if (progressCount) progressCount.textContent = '0 / ' + totalChars;
 
     // 继续上次游历按钮
@@ -1758,11 +1820,11 @@ function _hmRenderLayoutComponents() {
     if (continueBtn) {
         if (saved && saved.journeyMode && saved.currentStepOrder > 1) {
             var step = getRouteStepByOrder(saved.currentStepOrder);
-            var stepName = step ? step.title : ('第 ' + saved.currentStepOrder + ' 站');
-            continueBtn.textContent = '继续上次游历 · ' + stepName;
+            var stepName = step ? _hmField(step, 'title', 'titleEn') : _hmT('第 ' + saved.currentStepOrder + ' 站', 'Stop ' + saved.currentStepOrder);
+            continueBtn.textContent = _hmT('继续上次游历 · ' + stepName, 'Continue · ' + stepName);
             continueBtn.style.display = '';
         } else {
-            continueBtn.textContent = '开始游历';
+            continueBtn.textContent = _hmT('开始游历', 'Start Journey');
             continueBtn.style.display = '';
         }
     }
@@ -1834,7 +1896,7 @@ function hmZoomReset() {
 
 document.addEventListener('DOMContentLoaded', function() {
     if (window.historyMapLocations && window.historyMapLocations.length > 0) {
-        console.log('[历史地理] 数据已加载，共 ' + window.historyMapLocations.length + ' 个地点');
+        console.log(_hmT('[历史地理] 数据已加载，共 ', '[History Map] Data loaded, ') + window.historyMapLocations.length + _hmT(' 个地点', ' locations'));
     }
     _hmRenderLayoutComponents();
     _hmApplyZoom();
