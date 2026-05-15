@@ -68,6 +68,8 @@ npm start
 http://localhost:3000
 ```
 
+线上 GitHub Pages 是静态托管，不能直接处理 `/api/*` 的 POST 请求。页面在 `*.github.io` 域名下运行时，会自动把 DeepSeek 代理请求转发到已部署的 Supabase Edge Function；本地 `localhost` 或 `file://` 调试会优先尝试本机 Node 后端，未连通时自动重试 Supabase Edge Function。
+
 可用下面的命令检查后端接口是否联通：
 
 ```bash

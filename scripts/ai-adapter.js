@@ -11,11 +11,12 @@
         ];
 
         const LANTAI_AI_DEFAULTS = {
-            // 前端只调用站内接口，不保存、不拼接任何 DeepSeek API Key。
+            // 前端只调用后端代理，不保存、不拼接任何 DeepSeek API Key。
             chatEndpoint: '/api/deepseek/chat',
             autoNotesEndpoint: '/api/auto-notes/llm',
             localBackendOrigin: 'http://localhost:3000',
             supabaseEndpoint: 'https://jvpigxbiwmwvxiawcjml.supabase.co/functions/v1/deepseek-chat',
+            staticHostSuffixes: ['github.io'],
             model: 'deepseek-chat',
             timeoutMs: 120000
         };
@@ -81,65 +82,110 @@
         }
 
         async function lantaiAIRequest(endpoint, body, options = {}) {
-            const requestEndpoint = lantaiResolveAIEndpoint(endpoint);
+            const requestEndpoints = lantaiResolveAIEndpoints(endpoint);
             const timeoutMs = Number(options.timeoutMs || window.LantaiAIAdapter.endpoints.timeoutMs || 45000);
             const controller = new AbortController();
             const timer = window.setTimeout(() => controller.abort(), timeoutMs);
             lantaiSetAILoading(true, options.loadingMessage || 'AI 请求中');
+            let lastError = null;
+            let lastEndpoint = requestEndpoints[0] || String(endpoint || '');
 
             try {
-                const response = await fetch(requestEndpoint, {
-                    method: 'POST',
-                    headers: lantaiBuildAIHeaders(requestEndpoint),
-                    body: JSON.stringify(body),
-                    signal: controller.signal
-                });
-
-                const rawText = await response.text();
-                let data;
-                try {
-                    data = rawText ? JSON.parse(rawText) : {};
-                } catch (error) {
-                    if (!response.ok && response.status === 404) {
-                        throw new Error(`后端接口不存在：${requestEndpoint}`);
+                for (let i = 0; i < requestEndpoints.length; i += 1) {
+                    const requestEndpoint = requestEndpoints[i];
+                    lastEndpoint = requestEndpoint;
+                    try {
+                        const data = await lantaiFetchAIRequest(requestEndpoint, body, controller.signal);
+                        window.LantaiAIAdapter.lastError = null;
+                        window.LantaiAIAdapter.lastEndpoint = requestEndpoint;
+                        return data;
+                    } catch (error) {
+                        lastError = error;
+                        if (!shouldRetryAIEndpoint(error, requestEndpoint, requestEndpoints, i)) {
+                            throw error;
+                        }
                     }
-                    if (!response.ok) {
-                        throw new Error(`后端接口返回了非 JSON 错误：HTTP ${response.status}`);
-                    }
-                    throw new Error('AI 服务返回内容不是合法 JSON，请检查后端接口。');
                 }
-
-                if (!response.ok) {
-                    throw new Error(lantaiExtractAIError(data) || `AI 服务请求失败：HTTP ${response.status}`);
-                }
-                if (data && data.error) {
-                    throw new Error(lantaiExtractAIError(data));
-                }
-
-                window.LantaiAIAdapter.lastError = null;
-                return data;
             } catch (error) {
-                const message = lantaiDescribeAIError(error, requestEndpoint);
+                const message = lantaiDescribeAIError(error, lastEndpoint);
                 window.LantaiAIAdapter.lastError = message;
                 throw new Error(message);
             } finally {
                 window.clearTimeout(timer);
                 lantaiSetAILoading(false);
             }
+
+            const message = lantaiDescribeAIError(lastError || new Error('AI 请求失败'), lastEndpoint);
+            window.LantaiAIAdapter.lastError = message;
+            throw new Error(message);
+        }
+
+        async function lantaiFetchAIRequest(requestEndpoint, body, signal) {
+            const response = await fetch(requestEndpoint, {
+                method: 'POST',
+                headers: lantaiBuildAIHeaders(requestEndpoint),
+                body: JSON.stringify(body),
+                signal
+            });
+
+            const rawText = await response.text();
+            let data;
+            try {
+                data = rawText ? JSON.parse(rawText) : {};
+            } catch (error) {
+                if (!response.ok && response.status === 404) {
+                    throw new Error(`后端接口不存在：${requestEndpoint}`);
+                }
+                if (!response.ok) {
+                    throw new Error(`后端接口返回了非 JSON 错误：HTTP ${response.status}`);
+                }
+                throw new Error('AI 服务返回内容不是合法 JSON，请检查后端接口。');
+            }
+
+            if (!response.ok) {
+                throw new Error(lantaiExtractAIError(data) || `AI 服务请求失败：HTTP ${response.status}`);
+            }
+            if (data && data.error) {
+                throw new Error(lantaiExtractAIError(data));
+            }
+
+            return data;
         }
 
         function lantaiResolveAIEndpoint(endpoint) {
+            return lantaiResolveAIEndpoints(endpoint)[0] || String(endpoint || '');
+        }
+
+        function lantaiResolveAIEndpoints(endpoint) {
             const value = String(endpoint || '');
-            if (/^https?:\/\//i.test(value)) return value;
+            if (/^https?:\/\//i.test(value)) return [value];
+            const endpoints = [];
+            const remoteEndpoint = String(window.LantaiAIAdapter.endpoints.supabaseEndpoint || '').trim();
+            const addEndpoint = candidate => {
+                const normalized = String(candidate || '').trim();
+                if (normalized && !endpoints.includes(normalized)) endpoints.push(normalized);
+            };
             if (value.startsWith('/api/') && shouldUseConfiguredLocalAIOrigin()) {
                 const origin = (window.LantaiAIAdapter.endpoints.localBackendOrigin || 'http://localhost:3000').replace(/\/+$/, '');
-                return origin + value;
+                addEndpoint(origin + value);
+                addEndpoint(remoteEndpoint);
+                return endpoints;
             }
             if (window.location.protocol === 'file:' && value.startsWith('/api/')) {
                 const origin = (window.LantaiAIAdapter.endpoints.localBackendOrigin || 'http://localhost:3000').replace(/\/+$/, '');
-                return origin + value;
+                addEndpoint(origin + value);
+                addEndpoint(remoteEndpoint);
+                return endpoints;
             }
-            return value;
+            if (value.startsWith('/api/') && shouldUseStaticHostAIProxy()) {
+                addEndpoint(remoteEndpoint);
+                return endpoints;
+            }
+            addEndpoint(value);
+            if (value.startsWith('/api/') && isLocalAIPage()) {
+                addEndpoint(remoteEndpoint);
+            }
+            return endpoints;
         }
 
         function shouldUseConfiguredLocalAIOrigin() {
@@ -160,6 +206,46 @@
             const pagePort = window.location.port || (window.location.protocol === 'https:' ? '443' : '80');
             const backendPort = parsedOrigin.port || (parsedOrigin.protocol === 'https:' ? '443' : '80');
             return pagePort !== backendPort;
+        }
+
+        function isLocalAIPage() {
+            if (!window.location || window.location.protocol === 'file:') return true;
+            return ['localhost', '127.0.0.1', '0.0.0.0'].includes(window.location.hostname);
+        }
+
+        function shouldUseStaticHostAIProxy() {
+            if (!window.location || window.location.protocol === 'file:') return false;
+            const remoteEndpoint = String(window.LantaiAIAdapter.endpoints.supabaseEndpoint || '').trim();
+            if (!remoteEndpoint) return false;
+            const hostname = String(window.location.hostname || '').toLowerCase();
+            const configuredSuffixes = window.LantaiAIAdapter.endpoints.staticHostSuffixes || [];
+            const staticHostSuffixes = Array.isArray(configuredSuffixes) ? configuredSuffixes : String(configuredSuffixes).split(',');
+            return staticHostSuffixes.some(suffix => {
+                const normalizedSuffix = String(suffix || '').toLowerCase().replace(/^\.+/, '');
+                return normalizedSuffix && (hostname === normalizedSuffix || hostname.endsWith('.' + normalizedSuffix));
+            });
+        }
+
+        function shouldRetryAIEndpoint(error, endpoint, endpoints, index) {
+            if (index >= endpoints.length - 1) return false;
+            if (error && error.name === 'AbortError') return false;
+            return isLocalAIEndpoint(endpoint) || isRecoverableAIEndpointError(error);
+        }
+
+        function isLocalAIEndpoint(endpoint) {
+            const value = String(endpoint || '');
+            if (value.startsWith('/api/')) return true;
+            try {
+                const url = new URL(value);
+                return ['localhost', '127.0.0.1', '0.0.0.0'].includes(url.hostname);
+            } catch {
+                return false;
+            }
+        }
+
+        function isRecoverableAIEndpointError(error) {
+            const message = error && error.message ? error.message : '';
+            return /Failed to fetch|NetworkError|Load failed|HTTP 404|HTTP 405|后端接口不存在|后端接口返回了非 JSON 错误/i.test(message);
         }
 
         function lantaiBuildAIHeaders(endpoint) {
@@ -232,16 +318,17 @@
                 return message;
             }
 
-            if (window.location.protocol === 'file:') {
-                return '本地 API 未连通：请先双击 start-local.bat，再刷新当前页面。';
+            if (String(endpoint || '').includes('supabase.co/functions')) {
+                return 'Supabase Function 请求失败：请确认已部署 deepseek-chat 函数，并配置 DEEPSEEK_API_KEY 环境变量。';
+            }
+
+            if (window.location.protocol === 'file:' && isLocalAIEndpoint(endpoint)) {
+                return '本地 API 未连通，且远端代理重试未完成：请检查网络后刷新页面，或双击 start-local.bat 使用本地后端。';
             }
 
             const isLocalHost = ['localhost', '127.0.0.1'].includes(window.location.hostname);
-            if (isLocalHost && String(endpoint || '').startsWith('/api/')) {
-                return '后端未启动或端口不一致：请确认已运行 npm start，并从同一地址打开页面。';
-            }
-            if (String(endpoint || '').includes('supabase.co/functions')) {
-                return 'Supabase Function 请求失败：请确认已部署 deepseek-chat 函数，并配置 DEEPSEEK_API_KEY 环境变量。';
+            if (isLocalHost && isLocalAIEndpoint(endpoint)) {
+                return '后端未启动或端口不一致：请确认已运行 npm start，或检查远端代理是否可访问。';
             }
 
             return '网络或 CORS 错误：浏览器无法连接后端接口，请检查后端服务、代理和跨域配置。';
