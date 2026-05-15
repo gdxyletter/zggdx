@@ -1,6 +1,6 @@
         const KB_MAX_VERSIONS = 10;
         const KB_MAX_DOCS = 50;
-        const KB_MAX_SIZE = 2 * 1024 * 1024;
+        const KB_MAX_SIZE = 5 * 1024 * 1024;
         
         const DEEPSEEK_CONFIG = {
             endpoint: '/api/deepseek/chat',
@@ -173,6 +173,9 @@
         }
         
         function switchTab(tab) {
+            if (tab === 'teaching') tab = 'review';
+            if (tab === 'knowledge') tab = 'community';
+            
             document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
             document.querySelectorAll('.mobile-nav button').forEach(t => t.classList.remove('active'));
             
@@ -194,12 +197,10 @@
             }
             else if (tab === 'historyMap') {
             }
-            else if (tab === 'knowledge') {
-                renderKnowledgeBase();
-                checkStorageWarning();
-            }
             else if (tab === 'community') {
                 loadCommunityDocs();
+                renderKnowledgeBase();
+                checkStorageWarning();
             }
             
             const mobileBtns = document.querySelectorAll('.mobile-nav button');
@@ -218,6 +219,33 @@
                 wrapper.classList.add('hm-fullscreen');
             } else {
                 wrapper.classList.remove('hm-fullscreen');
+            }
+        }
+
+        function toggleTeachingSection() {
+            const body = document.getElementById('teachingSectionBody');
+            const icon = document.getElementById('teachingToggleIcon');
+            if (body && icon) {
+                const isHidden = body.classList.toggle('hidden');
+                icon.textContent = isHidden ? '展开 ▸' : '收起 ▾';
+            }
+        }
+
+        function toggleKbSection() {
+            const body = document.getElementById('kbSectionBody');
+            const icon = document.getElementById('kbToggleIcon');
+            if (body && icon) {
+                const isHidden = body.classList.toggle('hidden');
+                icon.textContent = isHidden ? '展开 ▸' : '收起 ▾';
+            }
+        }
+
+        function toggleCommunitySection() {
+            const body = document.getElementById('communitySectionBody');
+            const icon = document.getElementById('communityToggleIcon');
+            if (body && icon) {
+                const isHidden = body.classList.toggle('hidden');
+                icon.textContent = isHidden ? '展开 ▸' : '收起 ▾';
             }
         }
         

@@ -922,7 +922,7 @@
                         document.getElementById('teaching-result').textContent = teachingSummary;
                         document.getElementById('teaching-result').classList.remove('hidden');
                         alert('已设为教学标准!' + (doc.formatted_content ? ' (格式信息已保留)' : ''));
-                        switchTab('teaching');
+                        switchTab('review');
                     } else {
                         document.getElementById('docName').value = doc.title.replace(/^\[审核文档\] /, '').replace(/^\[教学文档\] /, '').replace(/^\[教学标准\] /, '');
                         document.getElementById('reviewContent').value = doc.content || '';

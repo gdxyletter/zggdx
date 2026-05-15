@@ -72,7 +72,7 @@
             
             const hasFormat = userTeachingDocs.some(d => d.formattedContent);
             alert('教学文档已上传到知识库！' + (hasFormat ? ' (格式信息已保留)' : ''));
-            switchTab('knowledge');
+            switchTab('community');
             renderKnowledgeBase();
         }
 

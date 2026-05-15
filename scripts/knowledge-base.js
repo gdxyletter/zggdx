@@ -264,7 +264,7 @@
             }
             
             alert('已加载教学文档到当前会话');
-            switchTab('teaching');
+            switchTab('review');
         }
         
         function formatSize(bytes) {

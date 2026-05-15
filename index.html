@@ -28,12 +28,10 @@
         <div class="header-left">
             <div class="logo">古典学园数字兰台</div>
             <nav class="nav-tabs">
-                <button class="nav-tab active" onclick="switchTab('teaching')">提交教学文档</button>
-                <button class="nav-tab" onclick="switchTab('review')">文档审核</button>
+                <button class="nav-tab active" onclick="switchTab('review')">文档审核</button>
                 <button class="nav-tab" onclick="switchTab('classic')">经典阅读</button>
                 <button class="nav-tab" onclick="switchTab('autoNotes')">札记自动梳理</button>
                 <button class="nav-tab" onclick="switchTab('historyMap')">孔子行迹</button>
-                <button class="nav-tab" onclick="switchTab('knowledge')">知识库</button>
                 <button class="nav-tab" onclick="switchTab('community')">学术社区</button>
             </nav>
         </div>
@@ -114,49 +112,10 @@
             
             <!-- Center Content -->
             <main class="main-content">
-                <!-- Teaching Panel -->
-                <div class="panel teaching-panel active" id="teaching-panel">
+                <!-- Review Panel (merged with teaching docs) -->
+                <div class="panel review-panel active" id="review-panel">
                     <div class="content-header">
-                        <h1 class="content-title">提交教学标准</h1>
-                        <div class="content-meta">
-                            <span>上传参考文档，AI将理解其中的学术标准</span>
-                        </div>
-                    </div>
-                    
-                    <div class="instruction-box">
-                        提交教学文档，AI会理解并消化其中的观点和理念，作为后续审核的参考标准。
-                    </div>
-                    
-                    <div class="file-upload-area" onclick="document.getElementById('teachingFile').click()">
-                        <input type="file" id="teachingFile" accept=".pdf,.docx,.doc,.txt,.md,.jpg,.jpeg,.png,.gif,.bmp,.webp" multiple onchange="handleTeachingFiles(this)">
-                        <p>点击上传教学文档（支持多选）</p>
-                        <p class="hint">支持 PDF、Word（自动识别颜色和字体大小）、图片（OCR识别）、文本、Markdown</p>
-                    </div>
-                    
-                    <div id="teachingDocsList" class="teaching-docs-list"></div>
-                    
-                    <div id="teachingPreview" class="formatted-preview" style="display:none;"></div>
-                    
-                    <textarea id="teachingContent" class="textarea-area" placeholder="或者直接粘贴文档内容..."></textarea>
-                    
-                    <div id="teachingDocsSummary" class="teaching-docs-summary hidden">
-                        <span id="teachingDocsCount">0</span> 个教学文档已加载
-                    </div>
-                    
-                    <button class="primary-btn" onclick="submitTeachingDoc()">理解文档</button>
-                    
-                    <div style="display: flex; gap: 12px; margin-top: 12px;">
-                        <button class="primary-btn" style="flex: 1; background: var(--bg-card); border: 1px solid var(--accent); color: var(--accent);" onclick="uploadTeachingToKnowledgeBase()">上传到知识库</button>
-                        <button class="primary-btn" style="flex: 1; background: var(--bg-card); border: 1px solid var(--accent-light); color: var(--accent-light);" onclick="uploadTeachingToCommunity()">上传到社区</button>
-                    </div>
-                    
-                    <div id="teaching-result" class="result-box hidden"></div>
-                </div>
-                
-                <!-- Review Panel -->
-                <div class="panel review-panel" id="review-panel">
-                    <div class="content-header">
-                        <h1 class="content-title">AI 学术审核</h1>
+                        <h1 class="content-title">学术审核</h1>
                         <div class="content-meta">
                             <span id="docIteration">第 1 版</span>
                         </div>
@@ -164,6 +123,40 @@
                     
                     <div class="instruction-box">
                         提交待审核文档，AI将运用已学习的教学文档知识进行评价。
+                    </div>
+                    
+                    <!-- Teaching Docs Section (merged into Review) -->
+                    <div class="teaching-section" id="teachingSectionInReview">
+                        <div class="teaching-section-header" onclick="toggleTeachingSection()">
+                            <span class="teaching-section-title">教学文档 (参考标准)</span>
+                            <span id="teachingToggleIcon" class="teaching-toggle">展开 ▸</span>
+                        </div>
+                        <div id="teachingSectionBody" class="teaching-section-body hidden">
+                            <div class="file-upload-area" onclick="document.getElementById('teachingFile').click()">
+                                <input type="file" id="teachingFile" accept=".pdf,.docx,.doc,.txt,.md,.jpg,.jpeg,.png,.gif,.bmp,.webp" multiple onchange="handleTeachingFiles(this)">
+                                <p>点击上传教学文档（支持多选）</p>
+                                <p class="hint">支持 PDF、Word（自动识别颜色和字体大小）、图片（OCR识别）、文本、Markdown</p>
+                            </div>
+                            
+                            <div id="teachingDocsList" class="teaching-docs-list"></div>
+                            
+                            <div id="teachingPreview" class="formatted-preview" style="display:none;"></div>
+                            
+                            <textarea id="teachingContent" class="textarea-area" placeholder="或者直接粘贴文档内容..."></textarea>
+                            
+                            <div id="teachingDocsSummary" class="teaching-docs-summary hidden">
+                                <span id="teachingDocsCount">0</span> 个教学文档已加载
+                            </div>
+                            
+                            <button class="primary-btn" onclick="submitTeachingDoc()">理解文档</button>
+                            
+                            <div style="display: flex; gap: 12px; margin-top: 12px;">
+                                <button class="primary-btn" style="flex: 1; background: var(--bg-card); border: 1px solid var(--accent); color: var(--accent);" onclick="uploadTeachingToKnowledgeBase()">上传到知识库</button>
+                                <button class="primary-btn" style="flex: 1; background: var(--bg-card); border: 1px solid var(--accent-light); color: var(--accent-light);" onclick="uploadTeachingToCommunity()">上传到社区</button>
+                            </div>
+                            
+                            <div id="teaching-result" class="result-box hidden"></div>
+                        </div>
                     </div>
                     
                     <div class="doc-input-section">
@@ -743,43 +736,6 @@
                     </div>
                 </div>
                 
-                <!-- Knowledge Base Panel -->
-                <div class="panel knowledge-panel" id="knowledge-panel">
-                    <div class="content-header">
-                        <h1 class="content-title">知识库</h1>
-                        <div class="content-meta">
-                            <span>保存所有已上传的文档，支持版本对比</span>
-                        </div>
-                    </div>
-                    
-                    <div id="storageWarning" class="storage-warning hidden">
-                        存储空间即将用尽，建议清理旧文档
-                    </div>
-                    
-                    <div class="kb-stats">
-                        <div class="stat-card">
-                            <div class="stat-value" id="kbDocCount">0</div>
-                            <div class="stat-label">文档数</div>
-                        </div>
-                        <div class="stat-card">
-                            <div class="stat-value" id="kbVersionCount">0</div>
-                            <div class="stat-label">总版本数</div>
-                        </div>
-                        <div class="stat-card">
-                            <div class="stat-value" id="kbStorageUsed">0KB</div>
-                            <div class="stat-label">已用空间</div>
-                        </div>
-                    </div>
-                    
-                    <div class="kb-search-bar">
-                        <input type="text" id="kbSearch" placeholder="搜索文档..." oninput="renderKnowledgeBase()">
-                        <button onclick="exportKnowledgeBase()">导出</button>
-                        <button onclick="confirmClearKnowledgeBase()">清理</button>
-                    </div>
-                    
-                    <div id="kbList"></div>
-                </div>
-                
                 <!-- 全屏阅读模式 -->
                 <div id="fullscreenViewer" class="fullscreen-viewer hidden">
                     <div class="fullscreen-header">
@@ -823,13 +779,58 @@
                     
                     <div id="communityStatus" class="community-status">正在连接...</div>
                     
-                    <div style="display: flex; gap: 8px; margin-bottom: 16px;">
-                        <button onclick="filterCategory('all')" id="filterAll" style="padding: 6px 12px; font-size: 12px; border: 1px solid var(--border); border-radius: 5px; cursor: pointer; background: var(--accent); color: white;">全部</button>
-                        <button onclick="filterCategory('teaching')" id="filterTeaching" style="padding: 6px 12px; font-size: 12px; border: 1px solid var(--border); border-radius: 5px; cursor: pointer; background: var(--white); color: var(--text-secondary);">教学文档</button>
-                        <button onclick="filterCategory('review')" id="filterReview" style="padding: 6px 12px; font-size: 12px; border: 1px solid var(--border); border-radius: 5px; cursor: pointer; background: var(--white); color: var(--text-secondary);">审核文档</button>
+                    <!-- Knowledge Base Section -->
+                    <div class="kb-section" id="kbSectionInCommunity">
+                        <div class="kb-section-header" onclick="toggleKbSection()">
+                            <span class="kb-section-title">知识库</span>
+                            <span id="kbToggleIcon" class="kb-toggle">展开 ▸</span>
+                        </div>
+                        <div id="kbSectionBody" class="kb-section-body hidden">
+                            <div id="storageWarning" class="storage-warning hidden">
+                                存储空间即将用尽，建议清理旧文档
+                            </div>
+                            
+                            <div class="kb-stats">
+                                <div class="stat-card">
+                                    <div class="stat-value" id="kbDocCount">0</div>
+                                    <div class="stat-label">文档数</div>
+                                </div>
+                                <div class="stat-card">
+                                    <div class="stat-value" id="kbVersionCount">0</div>
+                                    <div class="stat-label">总版本数</div>
+                                </div>
+                                <div class="stat-card">
+                                    <div class="stat-value" id="kbStorageUsed">0KB</div>
+                                    <div class="stat-label">已用空间</div>
+                                </div>
+                            </div>
+                            
+                            <div class="kb-search-bar">
+                                <input type="text" id="kbSearch" placeholder="搜索文档..." oninput="renderKnowledgeBase()">
+                                <button onclick="exportKnowledgeBase()">导出</button>
+                                <button onclick="confirmClearKnowledgeBase()">清理</button>
+                            </div>
+                            
+                            <div id="kbList"></div>
+                        </div>
                     </div>
                     
-                    <div id="communityDocs"></div>
+                    <!-- Community Section -->
+                    <div class="community-section" id="communitySectionInPanel">
+                        <div class="community-section-header" onclick="toggleCommunitySection()">
+                            <span class="community-section-title">社区</span>
+                            <span id="communityToggleIcon" class="community-toggle">展开 ▸</span>
+                        </div>
+                        <div id="communitySectionBody" class="community-section-body hidden">
+                            <div style="display: flex; gap: 8px; margin-bottom: 16px;">
+                                <button onclick="filterCategory('all')" id="filterAll" style="padding: 6px 12px; font-size: 12px; border: 1px solid var(--border); border-radius: 5px; cursor: pointer; background: var(--accent); color: white;">全部</button>
+                                <button onclick="filterCategory('teaching')" id="filterTeaching" style="padding: 6px 12px; font-size: 12px; border: 1px solid var(--border); border-radius: 5px; cursor: pointer; background: var(--white); color: var(--text-secondary);">教学文档</button>
+                                <button onclick="filterCategory('review')" id="filterReview" style="padding: 6px 12px; font-size: 12px; border: 1px solid var(--border); border-radius: 5px; cursor: pointer; background: var(--white); color: var(--text-secondary);">审核文档</button>
+                            </div>
+                            
+                            <div id="communityDocs"></div>
+                        </div>
+                    </div>
                 </div>
             </main>
             
@@ -870,12 +871,10 @@
     
     <!-- Mobile Navigation -->
     <div class="mobile-nav">
-        <button onclick="switchTab('teaching')" class="active" data-tab="teaching">教学文档</button>
-        <button onclick="switchTab('review')" data-tab="review">文档审核</button>
+        <button onclick="switchTab('review')" class="active" data-tab="review">文档审核</button>
         <button onclick="switchTab('classic')" data-tab="classic">经典阅读</button>
         <button onclick="switchTab('autoNotes')" data-tab="autoNotes">札记梳理</button>
         <button onclick="switchTab('historyMap')" data-tab="historyMap">孔子行迹</button>
-        <button onclick="switchTab('knowledge')" data-tab="knowledge">知识库</button>
         <button onclick="switchTab('community')" data-tab="community">学术社区</button>
     </div>
     
