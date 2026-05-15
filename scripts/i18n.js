@@ -48,10 +48,10 @@
         '.formatted-preview',
         '#fullscreenContent',
         '#modalContent',
+        '#classicText',
+        '.sentence-highlight',
     ].join(',');
     const CONTENT_I18N_SELECTOR = [
-        '#classicText',
-        '#fullscreenReadingContent',
         '#selectedSentenceText',
         '#citationPanelRight',
         '#etymologyPanel',
