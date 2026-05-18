@@ -259,7 +259,8 @@
                                                         <option value="daxue_zhuzhu">大学章句集注</option>
                             <option value="lunyu_jizhu">论语集注</option>
                             <option value="zhongyong">中庸</option>
-                            <!-- 更多书籍来源将在这里添加 -->
+                            <option value="zuozhuan">春秋左传</option>
+                            <option value="shiji">史记</option>
                         </select>
                     </div>
 
@@ -277,6 +278,14 @@
                                 <button onclick="toggleFullscreenReading()" class="primary-btn" style="background: var(--bg-secondary); border: 1px solid var(--border); color: var(--text-secondary); font-size: 13px; padding: 8px 16px;">全屏阅读</button>
                             </div>
                         </div>
+                        <div class="classic-search-bar">
+                            <input type="text" id="searchInput" class="search-input" placeholder="搜索文本..." onkeydown="if(event.key==='Enter') searchClassicText(this.value)">
+                            <button class="search-btn" onclick="searchClassicText(document.getElementById('searchInput').value)">搜索</button>
+                            <button class="search-btn" onclick="prevSearchMatch()" title="上一个匹配">▲</button>
+                            <button class="search-btn" onclick="nextSearchMatch()" title="下一个匹配">▼</button>
+                            <button class="search-btn" onclick="document.getElementById('classicContent').scrollIntoView({behavior:'smooth',block:'start'})" title="回到顶部">↑</button>
+                            <span id="searchInfo" class="search-info"></span>
+                        </div>
                         <div id="classicText" class="classic-text-body"></div>
                     </div>
                 </div>
@@ -286,7 +295,7 @@
                     <div class="content-header">
                         <h1 class="content-title">走进古典</h1>
                         <div class="content-meta">
-                            <span data-i18n="面向学生的中国经典入门与跨文化比较模块">面向学生的中国经典入门与跨文化比较模块</span>
+                             <span data-i18n="面向学生的中国经典入门与跨文化比较模块">由浅入深、兼修中西</span>
                         </div>
                     </div>
 

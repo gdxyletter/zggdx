@@ -109,7 +109,7 @@ function toggleBold() {
 
         function renderClassicSentenceSpan(displayText, sentence, extraStyle) {
             const styleAttr = extraStyle ? ` style="${escapeClassicAttribute(extraStyle)}"` : '';
-            return `<span class="sentence-highlight" data-sentence="${escapeClassicAttribute(sentence)}" onclick="selectSentence(this.dataset.sentence)"${styleAttr}>${escapeClassicHtml(displayText)}</span>`;
+            return `<span class="sentence-highlight" data-sentence="${escapeClassicAttribute(sentence)}"${styleAttr}>${escapeClassicHtml(displayText)}</span>`;
         }
 
         function refreshDynamicI18n(target) {
@@ -170,12 +170,72 @@ function toggleBold() {
             }
         }
         
+        // 搜索功能状态
+        let currentSearchResults = [];
+        let currentSearchIndex = -1;
+
+        function searchClassicText(query) {
+            const container = document.getElementById('classicText');
+            const allSpans = container.querySelectorAll('.sentence-highlight');
+            
+            allSpans.forEach(span => span.classList.remove('search-match', 'search-current'));
+            
+            if (!query.trim()) {
+                document.getElementById('searchInfo').textContent = '';
+                currentSearchResults = [];
+                currentSearchIndex = -1;
+                return;
+            }
+            
+            const lowerQuery = query.toLowerCase();
+            currentSearchResults = [];
+            
+            allSpans.forEach(span => {
+                const text = (span.dataset.sentence || span.textContent).toLowerCase();
+                if (text.includes(lowerQuery)) {
+                    span.classList.add('search-match');
+                    currentSearchResults.push(span);
+                }
+            });
+            
+            currentSearchIndex = currentSearchResults.length > 0 ? 0 : -1;
+            
+            if (currentSearchIndex >= 0) {
+                currentSearchResults[0].classList.add('search-current');
+            }
+            
+            const info = document.getElementById('searchInfo');
+            info.textContent = currentSearchResults.length > 0
+                ? `1 / ${currentSearchResults.length} 个匹配`
+                : '无匹配';
+        }
+
+        function nextSearchMatch() {
+            if (currentSearchResults.length === 0) return;
+            currentSearchResults[currentSearchIndex].classList.remove('search-current');
+            currentSearchIndex = (currentSearchIndex + 1) % currentSearchResults.length;
+            applySearchMatch();
+        }
+
+        function prevSearchMatch() {
+            if (currentSearchResults.length === 0) return;
+            currentSearchResults[currentSearchIndex].classList.remove('search-current');
+            currentSearchIndex = (currentSearchIndex - 1 + currentSearchResults.length) % currentSearchResults.length;
+            applySearchMatch();
+        }
+
+        function applySearchMatch() {
+            currentSearchResults[currentSearchIndex].classList.add('search-current');
+            currentSearchResults[currentSearchIndex].scrollIntoView({ behavior: 'smooth', block: 'center' });
+            document.getElementById('searchInfo').textContent =
+                `${currentSearchIndex + 1} / ${currentSearchResults.length} 个匹配`;
+        }
+
         function renderClassicText(text) {
             currentClassicText = text;
             const container = document.getElementById('classicText');
             
-            // 按换行分割成段落
-            const paragraphs = text.split('\n');
+            const paragraphs = text.split('\n').filter(p => p.trim());
             
             let html = '';
             
@@ -183,14 +243,12 @@ function toggleBold() {
                 const para = paragraphs[p];
                 if (!para.trim()) continue;
                 
-                // 按逗号分割每段，按钮显示时保留标点
                 const parts = para.split('，');
                 
                 for (let i = 0; i < parts.length; i++) {
                     let part = parts[i];
                     if (!part.trim()) continue;
                     
-                    // 检查是否包含顿号，进一步分割
                     const dunhaoParts = part.split('、');
                     for (let j = 0; j < dunhaoParts.length; j++) {
                         let dp = dunhaoParts[j];
@@ -200,7 +258,6 @@ function toggleBold() {
                             html += '、';
                         }
                         
-                        // 为每个片段创建可点击span，移除末尾可能的句末标点用于匹配
                         const matchText = dp.replace(/[。？！；：]$/, '').trim();
                         if (matchText) {
                             html += renderClassicSentenceSpan(dp, matchText);
@@ -209,24 +266,32 @@ function toggleBold() {
                         }
                     }
                     
-                    // 在最后一个逗号段落后添加逗号
                     if (i < parts.length - 1) {
                         html += '，';
                     }
                 }
                 
-                // 段落末尾添加换行
                 if (p < paragraphs.length - 1) {
                     html += '<br><br>';
                 }
             }
             
             container.innerHTML = html;
+            container.removeEventListener('click', container._sentenceHandler);
+            container._sentenceHandler = function (e) {
+                const span = e.target.closest('.sentence-highlight');
+                if (span && span.dataset.sentence) {
+                    selectSentence(span.dataset.sentence);
+                }
+            };
+            container.addEventListener('click', container._sentenceHandler);
             if (typeof highlightConceptKeywords === 'function') {
                 highlightConceptKeywords(container);
             }
             refreshDynamicI18n(container);
-}
+            currentSearchResults = [];
+            currentSearchIndex = -1;
+        }
         
         function selectSentence(sentence) {
             selectedSentence = sentence;
@@ -436,6 +501,14 @@ function toggleBold() {
             });
             
             container.innerHTML = html;
+            container.removeEventListener('click', container._sentenceHandler);
+            container._sentenceHandler = function (e) {
+                const span = e.target.closest('.sentence-highlight');
+                if (span && span.dataset.sentence) {
+                    selectSentence(span.dataset.sentence);
+                }
+            };
+            container.addEventListener('click', container._sentenceHandler);
             if (typeof highlightConceptKeywords === 'function') {
                 highlightConceptKeywords(container);
             }

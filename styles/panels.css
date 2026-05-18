@@ -2439,4 +2439,62 @@
         .file-task-cancel:hover {
             background: var(--bg-secondary);
         }
+
+        /* Classic Text Search Bar */
+        .classic-search-bar {
+            position: sticky;
+            top: 64px;
+            z-index: 10;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 16px;
+            padding: 8px 12px;
+            background: var(--bg-card);
+            border: 1px solid var(--border-light);
+            border-radius: 8px;
+        }
+
+        .classic-search-bar .search-input {
+            flex: 1;
+            border: none;
+            outline: none;
+            background: transparent;
+            font-size: 14px;
+            color: var(--text-primary);
+            font-family: inherit;
+        }
+
+        .search-btn {
+            background: none;
+            border: 1px solid var(--border-light);
+            border-radius: 4px;
+            cursor: pointer;
+            padding: 2px 8px;
+            font-size: 13px;
+            color: var(--text-primary);
+            line-height: 1.4;
+        }
+
+        .search-btn:hover {
+            background: var(--bg-secondary);
+        }
+
+        .search-info {
+            font-size: 12px;
+            color: var(--text-muted);
+            min-width: 80px;
+            text-align: right;
+        }
+
+        .search-match {
+            background: rgba(255, 235, 59, 0.25) !important;
+            border-radius: 2px;
+        }
+
+        .search-current {
+            background: rgba(255, 235, 59, 0.55) !important;
+            outline: 2px solid #FF9800;
+            outline-offset: 1px;
+        }
         

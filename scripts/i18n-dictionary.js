@@ -272,7 +272,7 @@
         '继续上次游历': 'Continue Previous Journey',
 
         '走进古典': 'Approaching Chinese Classics',
-        '面向学生的中国经典入门与跨文化比较模块': 'A module for students to begin their journey into Chinese classics and explore cross-cultural comparisons.',
+        '面向学生的中国经典入门与跨文化比较模块': 'From the basics to depth, bridging Chinese and Western traditions.',
         '学习路径': 'Learning Paths',
         '跨文化比较': 'Cross-Cultural Comparisons',
         '中国经典入门路径': 'Learning Paths for Chinese Classics',
