@@ -17386,6 +17386,3589 @@ const CROSS_REFERENCES = [
         "relationship": "理想品德",
         "commentary": "孔子所说的中庸之德，《中庸》进一步解释为'中也者，天下之大本也'",
         "description": "中庸是最高的道德境界"
-    }
+    },
+    [
+  {
+    "classic_title": "中庸",
+    "chapter": "第1章",
+    "scripture_content": "天命之谓性，",
+    "note_zhengxuan": "天命，谓天所命生人者也，是谓性命。木神则仁，金神则义，火神则礼，水神则信，土神则知。《孝经说》曰：\"性者，生之质；命，人所禀受度也。\"",
+    "note_kongyingda": "天本无体，亦无言语之命，但人感自然而生，有贤愚吉凶，若天之付命遣使之然，故云\"天命\"。《老子》云：\"道本无名，强名之曰道。\"但人自然感生，有刚柔好恶，或仁、或义、或礼、或知、或信，是天性自然，故云\"之谓性\"。",
+    "note_zhuxi": "命，犹令也。性，即理也。天以阴阳五行化生万物，气以成形，而理亦赋焉，犹命令也。于是人物之生，因各得其所赋之理，以为健顺五常之德，所谓性也。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第1章",
+    "scripture_content": "率性之谓道，",
+    "note_zhengxuan": "率，循也。循性行之是谓\"道\"。",
+    "note_kongyingda": "率，循也。道者，通物之名。言依循性之所感而行，不令违越，是之曰\"道\"。感仁行仁，感义行义之属，不失其常，合于道理，使得通达，是\"率性之谓道\"。",
+    "note_zhuxi": "率，循也。道，犹路也。人物各循其性之自然，则其日用事物之间，莫不各有当行之路，是则所谓道也。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第1章",
+    "scripture_content": "修道之谓教。",
+    "note_zhengxuan": "修，治也。治而广之，人放傚之，是曰\"教\"。",
+    "note_kongyingda": "人君在上，修行此道，以教于下，是\"修道之谓教\"也。",
+    "note_zhuxi": "脩，品节之也。性道虽同，而气禀或异，故不能无过不及之差，圣人因人物之所当行者而品节之，以为法于天下，则谓之教，若礼、乐、刑、政之属是也。盖人之所以为人，道之所以为道，圣人之所以为教，原其所自，无一不本于天而备于我。学者知之，则其于学知所用力而自不能已矣。故子思于此首发明之，读者所宜深体而默识也。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第1章",
+    "scripture_content": "道也者，不可须臾离也，",
+    "note_zhengxuan": "道，犹道路也，出入动作由之，离之恶乎从也？○恶，音乌。",
+    "note_zhuxi": "道者，日用事物当行之理，皆性之德而具于心，无物不有，无时不然，所以不可须臾离也。若其可离，则为外物而非道矣。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第1章",
+    "scripture_content": "可离非道也。",
+    "note_kongyingda": "若荒梗塞涩之处，是可离弃，以非道路之所由。犹如凶恶邪辟之行，是可离弃，以亦非善道之行，故云\"可离非道也\"。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第1章",
+    "scripture_content": "是故君子戒慎乎其所不睹，",
+    "note_zhengxuan": "小人闲居为不善，无所不至也。君子则不然，虽视之无人，听之无声，犹戒慎恐惧自修正，是其不须臾离道。",
+    "note_kongyingda": "言君子行道，先虑其微，若微能先虑，则必合于道，故君子恒常戒于其所不睹之处。人虽目不睹之处，犹戒慎，况其恶事睹见，而肯犯乎？故君子恒常戒慎之。",
+    "note_zhuxi": "是以君子之心常存敬畏，虽不见闻，亦不敢忽，所以存天理之本然，而不使离于须臾之顷也。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第1章",
+    "scripture_content": "恐惧乎其所不闻。",
+    "note_kongyingda": "言君子恒恐迫畏惧于所不闻之处。言虽耳所不闻，恒怀恐惧之。不说、不闻犹须慎惧，况睹、闻之处，恐惧可知也。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第1章",
+    "scripture_content": "莫见乎隐，莫显乎微，",
+    "note_zhengxuan": "慎独者，慎其闲居之所为。小人于隐者，动作言语，自以为不见睹，不见闻，则必肆尽其情也。若有占听之者，是为显见，甚于众人之中为之。",
+    "note_kongyingda": "莫，无也。言凡在众人之中，犹知所畏，及至幽隐之处，谓人不见，便即恣情。人皆觇听察见罪状，甚于众人之中，所以恒须慎惧如此，以罪过愆失无见于幽隐之处，无显露于细微之所也。",
+    "note_zhuxi": "隐，暗处也。微，细事也。独者，人所不知而己所独知之地也。言幽暗之中，细微之事，迹虽未形而几则已动，人虽不知而己独知之，则是天下之事无有着见明显而过于此者。是以君子既常戒惧，而于此尤加谨焉，所以遏人欲于将萌，而不使其滋长于隐微之中，以至离道之远也。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第1章",
+    "scripture_content": "故君子慎其独也。",
+    "note_kongyingda": "以其隐微之处，恐其罪恶彰显，故君子之人恒慎其独居。言虽曰独居，能谨慎守道也。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第1章",
+    "scripture_content": "喜怒哀乐之未发，谓之中；",
+    "note_zhengxuan": "中为大本者，以其含喜怒哀乐，礼之所由生，政教自此出也。",
+    "note_kongyingda": "言喜怒哀乐缘事而生，未发之时，澹然虚静，心无所虑，而当于理，故谓之中。",
+    "note_zhuxi": "喜、怒、哀、乐，情也。其未发，则性也，无所偏倚，故谓之中。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第1章",
+    "scripture_content": "发而皆中节，谓之和。",
+    "note_kongyingda": "不能寂静，而有喜怒哀乐之情，虽复动发，皆中节限，犹如盐梅相得，性行和谐，故云\"谓之和\"。",
+    "note_zhuxi": "发皆中节，情之正也，无所乖戾，故谓之和。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第1章",
+    "scripture_content": "中也者，天下之大本也；",
+    "note_zhengxuan": "中也者，天下之大本也。",
+    "note_kongyingda": "言情欲未发，是人性初本，故曰\"天下之大本也\"。",
+    "note_zhuxi": "大本者，天命之性，天下之理皆由此出，道之体也。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第1章",
+    "scripture_content": "和也者，天下之达道也。",
+    "note_zhengxuan": "和也者，天下之达道也。",
+    "note_kongyingda": "言情欲虽发，而能和合道理，可通达流行，故曰\"天下之达道也\"。",
+    "note_zhuxi": "达道者，循性之谓，天下古今之所共由，道之用也。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第1章",
+    "scripture_content": "致中和，",
+    "note_zhengxuan": "致，行之至也。",
+    "note_kongyingda": "致，至也。",
+    "note_zhuxi": "致，推而极之也。自戒惧而约之，以至于至静之中，无少偏倚，而其守不失，则极其中而天地位矣。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第1章",
+    "scripture_content": "天地位焉，",
+    "note_zhengxuan": "位，犹正也。",
+    "note_kongyingda": "位，正也。",
+    "note_zhuxi": "位者，安其所也。自戒惧而约之，以至于至静之中，无少偏倚，而其守不失，则极其中而天地位矣。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第1章",
+    "scripture_content": "万物育焉。",
+    "note_zhengxuan": "育，生也，长也。",
+    "note_kongyingda": "育，生长也。言人君所能至极中和，使阴阳不错，则天地得其正位焉；生成得理，故万物其养育焉。",
+    "note_zhuxi": "育者，遂其生也。自谨独而精之，以至于应物之处，无少差谬，而无适不然，则极其和而万物育矣。盖天地万物本吾一体，吾之心正，则天地之心亦正矣，吾之气顺，则天地之气亦顺矣。故其效验至于如此。此学问之极功、圣人之能事，初非有待于外，而修道之教亦在其中矣。是其一体一用虽有动静之殊，然必其体立而后用有以行，则其实亦非有两事也。故于此合而言之，以结上文之意。右第一章。子思述所传之意以立言：首明道之本原出于天而不可易，其实体备于己而不可离，次言存养省察之要，终言圣神功化之极。盖欲学者于此反求诸身而自得之，以去夫外诱之私，而充其本然之善，杨氏所谓一篇之体要是也。其下十章，盖子思引夫子之言，以终此章之义。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第2章",
+    "scripture_content": "君子中庸，",
+    "note_zhengxuan": "庸，常也。用中为常，道也。",
+    "note_kongyingda": "“仲尼”至“矣夫”。○正义曰：此一节是子思引仲尼之言，广明中庸之行，贤者过之，不肖者不及也；中庸之道，鲜能行之。○“君子中庸”者，庸，常也。君子之人用中以为常，故云“君子中庸”。",
+    "note_zhuxi": "中庸者，不偏不倚、无过不及，而平常之理，乃天命所当然，精微之极致也。惟君子为能体之。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第2章",
+    "scripture_content": "小人反中庸。",
+    "note_zhengxuan": "反中庸者，所行非中庸，然亦自以为中庸也。",
+    "note_kongyingda": "小人则不用中为常，是“反中庸”也。",
+    "note_zhuxi": "小人反是。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第2章",
+    "scripture_content": "君子之中庸也，君子而时中；",
+    "note_zhengxuan": "君子而时中者，其容貌君子，而又时节其中也。",
+    "note_kongyingda": "此覆说君子中庸之事，言君子之为中庸，容貌为君子，心行而时节其中，谓喜怒不过节也，故云君子而时中。",
+    "note_zhuxi": "君子之所以为中庸者，以其有君子之德，而又能随时以处中也。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第2章",
+    "scripture_content": "小人之中庸也，小人而无忌惮也。",
+    "note_zhengxuan": "小人而无忌惮，其容貌小人，又以无畏难为常行，是其反中庸也。",
+    "note_kongyingda": "此覆说小人反中庸之事，言小人为中庸，形貌为小人，而心行无所忌惮，故云“小人而无忌惮也”。小人将此以为常，亦以为中庸，故云“小人之中庸也”。",
+    "note_zhuxi": "小人之所以反中庸者，以其有小人之心，而又无所忌惮也。盖中无定体，随时而在，是乃平常之理也。君子知其在我，故能戒谨不睹、恐惧不闻，而无时不中。小人不知有此，则肆欲妄行，而无所忌惮矣。右第二章。此下十章，皆论中庸以释首章之义。文虽不属，而意实相承也。变和言庸者，游氏曰：「以性情言之，则曰中和，以德行言之，则曰中庸是也。」然中庸之中，实兼中和之义。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第3章",
+    "scripture_content": "中庸其至矣乎！民鲜能久矣！",
+    "note_zhengxuan": "鲜，罕也。言中庸爲道至美，顾人罕能久行。〇「中庸其至矣乎」，一本作「中庸之爲德，其至矣乎」。",
+    "note_kongyingda": "前既言君子、小人不同，此又叹中庸之美，人寡能久行，其中庸之德至极美乎！○“民鲜能久矣”者，但寡能长久而行。鲜，罕也。言中庸为至美，故人罕能久行之。",
+    "note_zhuxi": "过则失中，不及则未至，故惟中庸之德爲至。然亦人所同得，初无难事，但世教衰，民不兴行，故鲜能之，今已久矣。《论语》无“能”字。右第三章。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第4章",
+    "scripture_content": "道之不行也，我知之矣：",
+    "note_kongyingda": "此覆说人寡能行中庸之事。道之所以不行者，言我知其道之不行所由，故云“我知之矣”。",
+    "note_zhuxi": "道者，天理之当然，中而已矣。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第4章",
+    "scripture_content": "知者过之，愚者不及也。",
+    "note_kongyingda": "以轻于道，故“过之”。以远于道，故“不及”。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第4章",
+    "scripture_content": "道之不明也，我知之矣：",
+    "note_kongyingda": "言道之所以不显明，我亦知其所由也。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第4章",
+    "scripture_content": "贤者过之，不肖者不及也。",
+    "note_kongyingda": "言道之不行为易，故“知者过之，愚者不及”；道之不明为难，故云“贤者过之，不肖者不及”。是以变知称贤，变愚称不肖，是贤胜于智，不肖胜于愚也。",
+    "note_zhuxi": "知愚贤不肖之过不及，则生禀之异而失其中也。知者知之过，既以道爲不足行；愚者不及知，又不知所以行，此道之所以常不行也。贤者行之过，既以道爲不足知；不肖者不及行，又不求所以知，此道之所以常不明也。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第4章",
+    "scripture_content": "人莫不饮食也，鲜能知味也。",
+    "note_zhengxuan": "罕知其味，谓愚者所以不及也。过与不及，使道不行，唯礼能爲之中。",
+    "note_kongyingda": "言饮食，易也；知味，难也。犹言人莫不行中庸，但鲜能久行之。言知之者易，行之者难，所谓愚者不能及中庸也。案《异义》云：张华辨鲊，师旷别薪，符朗为青州剌史，善能知味，食鸡知栖半露，食鹅知其黑白。此皆《晋书》文也。“",
+    "note_zhuxi": "道不可离，人自不察，是以有过不及之弊。右第四章。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第5章",
+    "scripture_content": "道其不行矣夫。",
+    "note_zhengxuan": "闵无明君教之。",
+    "note_kongyingda": "夫子既伤道之不行，又哀闵伤之，云时无明君，其道不复行也。",
+    "note_zhuxi": "由不明，故不行。此章承上章而举其不行之端，以起下章之意。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第6章",
+    "scripture_content": "舜其大知也与！",
+    "note_kongyingda": "此一经明舜能行中庸之行，先察近言而后至于中庸也。○“舜其大知也与”者，既能包于大道，又能察于近言，即是“大知”也。",
+    "note_zhuxi": "舜之所以爲大知者，以其不自用而取诸人也。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第6章",
+    "scripture_content": "舜好问而好察迩言，",
+    "note_zhengxuan": "迩，近也。近言而善，易以进人，察而行之也。孔颖达：",
+    "note_zhuxi": "迩言者，浅近之言，犹必察焉，其无遗善可知。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第6章",
+    "scripture_content": "隐恶而扬善，",
+    "note_zhuxi": "然于其言之未善者则隐而不宣，其善者则播而不匿，其广大光明又如此，则人孰不乐告以善哉。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第6章",
+    "scripture_content": "执其两端，用其中于民，",
+    "note_zhengxuan": "两端，过与不及也。用其中于民，贤与不肖，皆能行之也。",
+    "note_kongyingda": "端谓头绪，谓“知者过之，愚者不及”，言舜能执持愚、知两端，用其中道于民，使愚、知俱能行之。",
+    "note_zhuxi": "两端，谓衆论不同之极致。盖凡物皆有两端，如小大厚薄之类，于善之中又执其两端，而量度以取中，然后用之，则其择之审而行之至矣。然非在我之权度精切不差，何以与此。此知之所以无过不及，而道之所以行也。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第6章",
+    "scripture_content": "其斯以为舜乎！",
+    "note_zhengxuan": "斯，此也。其德如此，乃号爲「舜」，舜之言充也。",
+    "note_kongyingda": "斯，此也，以其德化如此，故号之为“舜”。○注“舜之言充也”。案《谥法》云：“受禅成功曰舜。”又云：“仁义盛明曰舜。”皆是道德充满之意，故言舜为“充”也。",
+    "note_zhuxi": "右第六章。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第7章",
+    "scripture_content": "人皆曰‘予知’，",
+    "note_zhengxuan": "予，我也。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第7章",
+    "scripture_content": "驱而纳诸罟擭陷阱之中，而莫之知辟也。",
+    "note_zhengxuan": "言凡人自谓有知，人使之入罟，不知辟也。",
+    "note_kongyingda": "此谓无知之人设譬也。罟，网也。擭，谓柞㮙也。陷阱，谓坑也。穿地为坎，竖锋刃于中以陷兽也。言禽兽被人所驱，纳于罟网、擭陷阱之中，而不知违辟，似无知之人为嗜欲所驱，入罪祸之中而不知辟，即下文是也。",
+    "note_zhuxi": "○罟，网也；擭，机槛也；陷阱，坑坎也；皆所以掩取禽兽者也。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第7章",
+    "scripture_content": "人皆曰‘予知’，"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第7章",
+    "scripture_content": "择乎中庸，而不能期月守也。",
+    "note_zhengxuan": "自谓择中庸而爲之，亦不能久行，言其实愚，又无恒。",
+    "note_kongyingda": "小人自谓选择中庸，而心行亦非中庸。假令偶有中庸，亦不能期匝一月而守之，如入陷阱也。",
+    "note_zhuxi": "择乎中庸，辨别衆理，以求所谓中庸，即上章好问用中之事也。期月，匝一月也。言知祸而不知辟，以况能择而不能守，皆不得爲知也。\n右第七章。承上章大知而言，又举不明之端，以起下章也。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第8章",
+    "scripture_content": "回之为人也，择乎中庸，",
+    "note_kongyingda": "“子曰”至“能也”。此一节是夫子明颜回能行中庸，言中庸之难也。",
+    "note_zhuxi": "回，孔子弟子顔渊名。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第8章",
+    "scripture_content": "得一善，则拳拳服膺而弗失之矣。",
+    "note_zhengxuan": "拳拳，奉持之貌。",
+    "note_kongyingda": "言颜回选择中庸而行，得一善事，则形貌拳拳然奉持之。膺，谓胸膺，言奉持守于善道，弗敢弃失。",
+    "note_zhuxi": "拳拳，奉持之貌。服，犹着也。膺，胸也。奉持而着之心胸之间，言能守也。顔子盖真知之，故能择能守如此，此行之所以无过不及，而道之所以明也。右第八章。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第9章",
+    "scripture_content": "天下国家可均也，",
+    "note_kongyingda": "“天下”谓天子，“国”谓诸侯，“家”谓卿大夫也。",
+    "note_zhuxi": "均，平治也。三者亦知仁勇之事，天下之至难也，然不必其合于中庸，则质之近似者皆能以力为之。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第9章",
+    "scripture_content": "爵禄可辞也，"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第9章",
+    "scripture_content": "白刃可蹈也，",
+    "note_kongyingda": "言白刃虽利，尚可履蹈而行之。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第9章",
+    "scripture_content": "中庸不可能也。",
+    "note_zhengxuan": "言中庸难，为之难。",
+    "note_kongyingda": "言在上诸事，虽难犹可为之，唯中庸之道不可能也。为知者过之，愚者不及，言中庸难，为之难也。",
+    "note_zhuxi": "若中庸，则虽不必皆如三者之难，然非义精仁熟，而无一毫人欲之私者，不能及也。三者难而易，中庸易而难，此民之所以鲜能也。右第九章。亦承上章以起下章。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第10章",
+    "scripture_content": "子路问强。",
+    "note_zhengxuan": "强，勇者所好也。",
+    "note_kongyingda": "疏\"子路\"至\"哉矫\"。○正义曰：此一节明中庸之道，亦兼中国之强。子路闻孔子美颜回能择\"中庸\"，言己有强，故问之，问强中亦兼有中庸否？庾氏云：问强中之中庸者。然此问之，亦如《论语》云\"子谓颜渊曰：'用之则行，舍之则藏，唯我与尔有是夫？'子路曰'子行三军，则谁与'之类\"是也。",
+    "note_zhuxi": "子路，孔子弟子仲由也。子路好勇，故问强。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第10章",
+    "scripture_content": "南方之强与？",
+    "note_zhengxuan": "言三者，所以为强者异也。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第10章",
+    "scripture_content": "北方之强与？"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第10章",
+    "scripture_content": "抑而强与？",
+    "note_zhengxuan": "抑，辞也。而之言女也，谓中国也。",
+    "note_kongyingda": "抑，语助也，\"而\"之言\"女\"也；女，子路也。夫子将答子路之问，且先反问子路，言强有多种，女今所问，问何者之强，为南方，为北方，为中国，女所能之强也。子路之强，行中国之强也。",
+    "note_zhuxi": "抑，语辞。而，汝也。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第10章",
+    "scripture_content": "宽柔以教，",
+    "note_kongyingda": "反问既竟，夫子遂为历解之。朱子：宽柔以教，谓含容巽顺以诲人之不及也。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第10章",
+    "scripture_content": "不报无道，",
+    "note_zhengxuan": "不报无道，谓犯而不校也。",
+    "note_zhuxi": "不报无道，谓横逆之来，直受之而不报也。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第10章",
+    "scripture_content": "南方之强也，",
+    "note_zhengxuan": "南方以舒缓为强。",
+    "note_zhuxi": "南方风气柔弱，故以含忍之力胜人为强，君子之道也。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第10章",
+    "scripture_content": "君子居之。",
+    "note_kongyingda": "南方，谓荆阳之南，其地多阳。阳气舒散，人情宽缓和柔，假令人有无道加己，己亦不报，和柔为君子之道，故云\"君子居之\"。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第10章",
+    "scripture_content": "衽金革，",
+    "note_zhengxuan": "衽，犹席也。",
+    "note_kongyingda": "衽，卧席也。金革，谓军戎器械也。朱子：衽，席也。金，戈兵之属。革，甲冑之属。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第10章",
+    "scripture_content": "死而不厌，"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第10章",
+    "scripture_content": "北方之强也，",
+    "note_zhengxuan": "北方以刚猛为强。",
+    "note_kongyingda": "北方沙漠之地，其地多阴。阴气坚急，故人生刚猛，恒好斗争，故以甲铠为席，寝宿于中，至死不厌，非君子所处，而强梁者居之。然唯云南北，不云东西者，郑冲云：\"是必南北互举，盖与东西俗同，故不言也。\"",
+    "note_zhuxi": "北方风气刚劲，故以果敢之力胜人为强，强者之事也。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第10章",
+    "scripture_content": "而强者居之。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第10章",
+    "scripture_content": "故君子和而不流，",
+    "note_zhengxuan": "流，犹移也。",
+    "note_kongyingda": "○\"故君子和而不流，强哉矫\"，此以下，皆述中国之强也。流，移也。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第10章",
+    "scripture_content": "强哉矫！",
+    "note_zhengxuan": "矫，强貌。",
+    "note_kongyingda": "矫亦强貌也。不为南北之强，故性行和合而不流移，心行强哉，形貌矫然。",
+    "note_zhuxi": "矫，强貌。诗曰「矫矫虎臣」是也。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第10章",
+    "scripture_content": "中立而不倚，强哉矫！",
+    "note_zhengxuan": "此抑女之强也。",
+    "note_kongyingda": "中正独立而不偏倚，志意强哉，形貌矫然。",
+    "note_zhuxi": "倚，偏着也。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第10章",
+    "scripture_content": "国有道，不变塞焉，强哉矫！",
+    "note_zhengxuan": "国有道，不变以趋时。塞，犹实也。",
+    "note_kongyingda": "○\"国有道，不变塞焉，强哉矫\"者，若国有道，守直不变，德行充实，志意强哉，形貌矫然。",
+    "note_zhuxi": "塞，未达也。国有道，不变未达之所守。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第10章",
+    "scripture_content": "国无道，至死不变，强哉矫！",
+    "note_zhengxuan": "国无道，不变以辟害。",
+    "note_kongyingda": "若国之无道，守善至死，性不改变，志意强哉，形貌矫然。",
+    "note_zhuxi": "国无道，不变平生之所守也。此则所谓中庸之不可能者，非有以自胜其人欲之私，不能择而守也。君子之强，孰大于是。夫子以是告子路者，所以抑其血气之刚，而进之以德义之勇也。此四者，汝之所当强也。右第十章。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第11章",
+    "scripture_content": "素隐行怪，后世有述焉，",
+    "note_zhengxuan": "素，读如「攻城攻其所傃」之「傃」，傃，犹乡也，言方乡辟害，隐身而行佹谲，以作后世名也。",
+    "note_kongyingda": "“子曰”至“天地”。○正义曰：此一节论夫子虽隐遯之世，亦行中庸。又明中庸之道，初则起于匹夫匹妇，终则遍于天地。○“素隐行怪，后世有述焉”者，素，乡也。谓无道之世，身乡幽隐之处，应须静默。若行怪异之事，求立功名，使后世有所述焉。",
+    "note_zhuxi": "素，按汉书当作索，盖字之误也。索隐行怪，言深求隐僻之理，而过爲诡异之行也。然以其足以欺世而盗名，故后世或有称述之者。此知之过而不择乎善，行之过而不用其中，不当强而强者也，圣人岂爲之哉！"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第11章",
+    "scripture_content": "吾弗为之矣。",
+    "note_zhengxuan": "弗为之矣，耻之也。",
+    "note_kongyingda": "耻之也。如此之事，我不能为之，以其身虽隐遯而名欲彰也。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第11章",
+    "scripture_content": "君子遵道而行，半涂而废，",
+    "note_zhengxuan": "君子遵道而行，半涂而废，吾弗能已矣。废，犹罢止也。弗能已矣，汲汲行道，不为时人之隐行。",
+    "note_kongyingda": "言君子之人，初既遵循道德而行，当须行之终竟。今不能终竟，犹如人行于道路，半涂而自休废。废，犹罢止也。",
+    "note_zhuxi": "遵道而行，则能择乎善矣；半涂而废，则力之不足也。此其知虽足以及之，而行有不逮，当强而不强者也。已，止也。圣人于此，非勉焉而不敢废，盖至诚无息，自有所不能止也。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第11章",
+    "scripture_content": "吾弗能已矣。",
+    "note_kongyingda": "已，犹止也。吾弗能如时人半涂而休止，言汲汲行道无休已也。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第11章",
+    "scripture_content": "君子依乎中庸，遁世不见知而不悔，唯圣者能之。",
+    "note_zhengxuan": "言隐者当如此也。唯舜为能如此。",
+    "note_kongyingda": "言君子依行中庸之德，若值时无道隐遯于世，虽有才德，不为时人所知，而无悔恨之心，如此者非凡人所能，唯圣者能然。若不能依行中庸者，虽隐遯于世，不为人所知，则有悔恨之心也。○注\"唯舜为能如此\"。○正义曰：知者，《史记》云：\"舜耕于历山，渔于雷泽，陶于河滨。\"是不见知而不悔。",
+    "note_zhuxi": "不爲索隐行怪，则依乎中庸而已。不能半涂而废，是以遯世不见知而不悔也。此中庸之成德，知之尽、仁之至、不赖勇而裕如者，正吾夫子之事，而犹不自居也。故曰唯圣者能之而已。右第十一章。子思所引夫子之言，以明首章之义者止此。盖此篇大旨，以知仁勇三达德爲入道之门。故于篇首，即以大舜、顔渊、子路之事明之。舜，知也；顔渊，仁也；子路，勇也：三者废其一，则无以造道而成德矣。余见第二十章。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第12章",
+    "scripture_content": "君子之道费而隐。",
+    "note_zhengxuan": "言可隐之节也。费，犹佹也。道不费则仕。",
+    "note_kongyingda": "言君子之人，遭值乱世，道德违费则隐而不仕。若道之不费，则当仕也。",
+    "note_zhuxi": "费，用之广也。隐，体之微也。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第12章",
+    "scripture_content": "夫妇之愚，可以与知焉，",
+    "note_zhengxuan": "与，读为「赞者皆与」之「与」。言匹夫、匹妇愚耳，亦可以其与有所知，可以其能有所行者。以其知行之极也，圣人有不能如此，舜好察迩言，由此故与？",
+    "note_kongyingda": "言天下之事，千端万绪，或细小之事，虽夫妇之愚，偶然与知其善恶，若萏荛之言有可听用，故云\"与知\"。",
+    "note_zhuxi": "君子之道，近自夫妇居室之间，远而至于圣人天地之所不能尽，其大无外，其小无内，可谓费矣。然其理之所以然，则隐而莫之见也。盖可知可能者，道中之一事，及其至而圣人不知不能。则举全体而言，圣人固有所不能尽也。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第12章",
+    "scripture_content": "及其至也，虽圣人亦有所不知焉；",
+    "note_kongyingda": "言道之至极，如造化之理，虽圣人不知其所由，故云\"及其至也，虽圣人亦有所不知焉\"。",
+    "note_zhuxi": "侯氏曰：「圣人所不知，如孔子问礼问官之类；所不能，如孔子不得位、尧舜病博施之类。」"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第12章",
+    "scripture_content": "夫妇之不肖，可以能行焉，",
+    "note_kongyingda": "以行之至极故也。前文据其知，此文据其行，以其知、行有异，故别起其文。但知之易，行之难，故上文云\"夫妇之愚\"。行之难，故此经云\"夫妇之不肖\"。不肖胜于愚也。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第12章",
+    "scripture_content": "及其至也，虽圣人亦有所不能焉。",
+    "note_kongyingda": "知之与行之皆是至极，既是至极，故圣人有不能也。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第12章",
+    "scripture_content": "天地之大也，人犹有所憾，",
+    "note_zhengxuan": "天地之大也，人犹有所憾。憾，恨也。天地至大，无不覆载，人尚有所恨焉，况于圣人能尽备之乎？",
+    "note_kongyingda": "憾，恨也。言天地至大，无物不养，无物不覆，载于冬寒夏暑，人犹有怨恨之，犹如圣人之德，无善不包，人犹怨之，是不可备也。中庸之道，于理为难，大小兼包，始可以备也。",
+    "note_zhuxi": "愚谓人所憾于天地，如覆载生成之偏，及寒暑灾祥之不得其正者。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第12章",
+    "scripture_content": "故君子语大，天下莫能载焉；",
+    "note_zhengxuan": "语，犹说也。所说大事，谓先王之道也；所说小事，谓若愚、不肖、夫妇之知行也。圣人尽兼行。",
+    "note_kongyingda": "语，说也；大，谓先王之道。言君子语说先王之道，其事既大，天下之人无能胜载之者。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第12章",
+    "scripture_content": "语小，天下莫能破焉。",
+    "note_kongyingda": "若说细碎小事，谓愚不肖，事既纤细，天下之人无能分破之者。言事似秋毫，不可分破也。",
+    "note_zhuxi": "（无直接对应）"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第12章",
+    "scripture_content": "《诗》云："
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第12章",
+    "scripture_content": "‘鸢飞戾天，鱼跃于渊。’言其上下察也。",
+    "note_zhengxuan": "察，犹着也。言圣人之德至于天，则鸢飞戾天；至于地，则鱼跃于渊。是其着明于天地也。",
+    "note_kongyingda": "《诗·大雅·旱麓》之篇，美文王之诗。引之者，言圣人之德上至于天，则\"鸢飞戾天\"，是翱翔得所。圣人之德下至于地，则\"鱼跃于渊\"，是游泳得所。言圣人之德，上下明察。《诗》本文云\"鸢飞戾天\"，喻恶人远去；\"鱼跃于渊\"，喻善人得所。此引断章，故与《诗》义有异也。",
+    "note_zhuxi": "《诗·大雅·旱麓》之篇。鸢，鸱类。戾，至也。察，着也。子思引此诗以明化育流行，上下昭著，莫非此理之用，所谓费也。然其所以然者，则非见闻所及，所谓隐也。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第12章",
+    "scripture_content": "君子之道，造端乎夫妇，",
+    "note_zhengxuan": "夫妇，谓匹夫、匹妇之所知所行。",
+    "note_kongyingda": "言君子行道，初始造立端绪，起于匹夫匹妇之所知所行者。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第12章",
+    "scripture_content": "及其至也，察乎天地。",
+    "note_kongyingda": "言虽起于匹夫匹妇所知所行，及其至极之时，明察于上下天地也。",
+    "note_zhuxi": "故程子曰：「此一节，子思喫紧为人处，活泼泼地，读者其致思焉。」右第十二章。子思之言，盖以申明首章道不可离之意也。其下八章，杂引孔子之言以明之。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第13章",
+    "scripture_content": "道不远人。",
+    "note_zhengxuan": "言道即不远于人，人不能行也。",
+    "note_kongyingda": "○正义曰：此一节明中庸之道去人不远，但行于己则外能及物。\"道不远人\"者，言中庸之道不远离于人身，但人能行之于己，则中庸也。",
+    "note_zhuxi": "道者，率性而已，固衆人之所能知能行者，故常不远于人。若爲道者，厌其卑近以爲不足爲，而反务爲高远难行之事，则非所以爲道矣。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第13章",
+    "scripture_content": "人之为道而远人，不可以为道。",
+    "note_kongyingda": "言人为中庸之道，当附近于人，谓人所能行，则己所行可以为道。若违理离远，则不可施于己，又不可行于人，则非道也，故云\"人之为道而远人，不可以为道也\"。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第13章",
+    "scripture_content": "《诗》云："
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第13章",
+    "scripture_content": "‘伐柯伐柯，其则不远。’",
+    "note_zhengxuan": "则，法也。",
+    "note_kongyingda": "此《豳风·伐柯》之篇，美周公之诗。柯，斧柄也。《周礼》云：\"柯长三尺，博三寸。\"则，法也。言伐柯，斫也。",
+    "note_zhuxi": "《诗·豳风·伐柯》之篇。柯，斧柄。则，法也。睨，邪视也。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第13章",
+    "scripture_content": "执柯以伐柯，睨而视之，犹以为远。",
+    "note_zhengxuan": "言持柯以伐木，将以爲柯近，以柯爲尺寸之法。此法不远。人尚远之，明爲道不可以远。",
+    "note_kongyingda": "柯柄长短，其法不远也，但执柯睨而视之，犹以为远。言欲行其道于人，其法亦不远，但近取法于身，何异持柯以伐柯？人犹以为远，明为道之法亦不可以远。",
+    "note_zhuxi": "言人执柯伐木以爲柯者，彼柯长短之法，在此柯耳。然犹有彼此之别，故伐者视之犹以爲远也。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第13章",
+    "scripture_content": "故君子以人治人，改而止。",
+    "note_zhengxuan": "言人有罪过，君子以人道治之，其人改则止赦之，不责以人所不能。",
+    "note_kongyingda": "以道去人不远，言人有过，君子当以人道治此有过之人。“改而止”，若人自改而休止，不须更责不能之事。若人所不能，则己亦不能，是行道在于己身也。",
+    "note_zhuxi": "若以人治人，则所以爲人之道，各在当人之身，初无彼此之别。故君子之治人也，即以其人之道，还治其人之身。其人能改，即止不治。盖责之以其所能知能行，非欲其远人以为道也。张子所谓「以众人望人则易从」是也。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第13章",
+    "scripture_content": "忠恕违道不远，",
+    "note_zhengxuan": "违，犹去也。",
+    "note_kongyingda": "忠者，内尽于心，恕者，外不欺物。恕，忖也。忖度其义于人。违，去也。言身行忠恕，则去道不远也。",
+    "note_zhuxi": "尽己之心爲忠，推己及人爲恕。违，去也，如春秋传「齐师违谷七里」之违。言自此至彼，相去不远，非背而去之之谓也。道，即其不远人者也。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第13章",
+    "scripture_content": "施诸己而不愿，亦勿施于人。",
+    "note_kongyingda": "诸，于也。他人有一不善之事施之于己，己所不愿，亦勿施于人，人亦不原故也。",
+    "note_zhuxi": "施诸己而不愿亦勿施于人，忠恕之事也。以己之心度人之心，未尝不同，则道之不远于人者可见。故己之所不欲，则勿以施之于人，亦不远人以爲道之事。张子所谓「以爱己之心爱人则尽仁」是也。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第13章",
+    "scripture_content": "君子之道四，"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第13章",
+    "scripture_content": "丘未能一焉：",
+    "note_zhengxuan": "圣人而曰我未能，明人当勉之无已。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第13章",
+    "scripture_content": "所求乎子以事父，未能也；",
+    "note_kongyingda": "言此四者，欲明求之于他人，必先行之于己，欲求其子以孝道事己，己须以孝道事父母，故云\"所求乎子以事父，未能也\"。恐人未能行之。夫子，圣人，圣人犹曰我未能行，凡人当勉之无己。",
+    "note_zhuxi": "求，犹责也。道不远人，凡己之所以责人者，皆道之所当然也，故反之以自责而自修焉。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第13章",
+    "scripture_content": "所求乎臣以事君，未能也；",
+    "note_kongyingda": "譬如己是诸侯，欲求于臣以忠事己，己当先行忠于天子及庙中事尸，是全臣道也。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第13章",
+    "scripture_content": "所求乎弟以事兄，未能也；"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第13章",
+    "scripture_content": "所求乎朋友先施之，未能也。",
+    "note_kongyingda": "欲求朋友以恩惠施己，则己当先施恩惠于朋友也。",
+    "note_zhuxi": "子、臣、弟、友，四字絶句。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第13章",
+    "scripture_content": "庸德之行，庸言之谨，",
+    "note_zhengxuan": "庸，犹常也。言德常行也，言常谨也。",
+    "note_kongyingda": "庸，常也。谓自修己身，常以德而行，常以言而谨也。",
+    "note_zhuxi": "庸，平常也。行者，践其实。谨者，择其可。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第13章",
+    "scripture_content": "有所不足，不敢不勉；",
+    "note_kongyingda": "谓己之才行有所不足之处，不敢不勉而行之。",
+    "note_zhuxi": "德不足而勉，则行益力。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第13章",
+    "scripture_content": "有余，不敢尽；",
+    "note_zhengxuan": "圣人之行，实过于人。有余不敢尽，常为人法，从礼也。",
+    "note_kongyingda": "谓己之才行有馀，于人常持谦退，不敢尽其才行以过于人。",
+    "note_zhuxi": "言有余而訒，则谨益至。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第13章",
+    "scripture_content": "言顾行，",
+    "note_kongyingda": "使言不过行，恒顾视于行。",
+    "note_zhuxi": "谨之至则言顾行矣。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第13章",
+    "scripture_content": "行顾言，",
+    "note_kongyingda": "使行副于言，谓恒顾视于言也。",
+    "note_zhuxi": "行之力则行顾言矣。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第13章",
+    "scripture_content": "君子胡不慥慥尔！",
+    "note_zhengxuan": "君子，谓众贤也。慥慥，守实，言行相应之貌。",
+    "note_kongyingda": "\"慥慥，守实言行相应之貌\"。胡，犹何也。既顾言行相副，君子何得不慥慥然守实言行相应之道也。",
+    "note_zhuxi": "慥慥，笃实貌。言君子之言行如此，岂不慥慥乎，赞美之也。凡此皆不远人以爲道之事。张子所谓「以责人之心责己则尽道」是也。右第十三章。道不远人者，夫妇所能，丘未能一者，圣人所不能，皆费也。而其所以然者，则至隐存焉。下章放此。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第14章",
+    "scripture_content": "君子素其位而行，",
+    "note_zhengxuan": "素，皆读爲「傃」。",
+    "note_kongyingda": "素，乡也。乡其所居之位，而行其所行之事，不愿行在位外之事。《论语》云：\"君子思不出其位也。\"",
+    "note_zhuxi": "素，犹见在也。言君子但因见在所居之位而为其所当为，无慕乎其外之心也。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第14章",
+    "scripture_content": "不愿乎其外。",
+    "note_zhengxuan": "不愿乎其外，谓思不岀其位也。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第14章",
+    "scripture_content": "素富贵，行乎富贵；",
+    "note_kongyingda": "乡富贵之中，行道于富贵，谓不骄、不淫也。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第14章",
+    "scripture_content": "素贫贱，行乎贫贱；",
+    "note_kongyingda": "乡贫贱之中，则行道于贫贱，谓不谄、不慑也。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第14章",
+    "scripture_content": "素夷狄，行乎夷狄；",
+    "note_kongyingda": "乡夷狄之中，行道于夷狄，夷狄虽陋，虽随其俗而守道不改。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第14章",
+    "scripture_content": "素患难，行乎患难：",
+    "note_kongyingda": "乡难患之中，行道于患难，而临危不倾，守死于善道也。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第14章",
+    "scripture_content": "君子无入而不自得焉。",
+    "note_zhengxuan": "自得，谓所乡不失其道。",
+    "note_kongyingda": "言君子所入之处，皆守善道。",
+    "note_zhuxi": "此言素其位而行也。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第14章",
+    "scripture_content": "在上位不陵下，",
+    "note_kongyingda": "此“素富贵行富贵”也。若身处富贵，依我常正之性，不使富贵以陵人。若以富贵陵人，是不行富贵之道。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第14章",
+    "scripture_content": "在下位不援上，",
+    "note_zhengxuan": "援，谓牵持之也。",
+    "note_kongyingda": "此“素贫贱行贫贱”也。援，牵持也。若身处贫贱则安之，宜令自乐，不得援牵富贵。若以援牵富贵，是不行贫贱之道。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第14章",
+    "scripture_content": "正己而不求于人，则无怨。",
+    "note_zhengxuan": "无怨，人无怨之者也。",
+    "note_kongyingda": "此“素夷狄行夷狄”也。若身入夷狄，夷狄无礼义，当自正己而行，不得求于彼人，则被人无怨己者。《论语》云：“言忠信，行笃敬，虽之夷狄，不可弃。”",
+    "note_zhuxi": "此言不愿乎其外也。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第14章",
+    "scripture_content": "上不怨天，下不尤人。",
+    "note_kongyingda": "此\"素患难行患难\"也。尤，过也，责也。苟皆应之患难，则亦甘为，不得上怨天下尤人，故《论语》云“不怨天，不尤人”是也。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第14章",
+    "scripture_content": "故君子居易以俟命，",
+    "note_zhengxuan": "易，犹平安也。俟命，听天任命也。",
+    "note_kongyingda": "易，谓平安也。言君子以道自处，恒居平安之中，以听待天命也。",
+    "note_zhuxi": "易，平地也。居易，素位而行也。俟命，不愿乎外也。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第14章",
+    "scripture_content": "小人行险以徼幸。",
+    "note_zhengxuan": "险，谓倾危之道。",
+    "note_kongyingda": "小人以恶自居，恒行险难倾危之事以徼求荣幸之道，《论语》曰\"不仁者，不可以久处约\"是也。",
+    "note_zhuxi": "徼，求也。幸，谓所不当得而得者。右第十四章。子思之言也。凡章首无「子曰」字者放此。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第15章",
+    "scripture_content": "射有似乎君子，",
+    "note_kongyingda": "“子曰”至“妻帑”。〇正义曰：以上虽行道在于已身，故此一节覆明行道在身之事，以射譬之。〇\"射有似乎君子\"者：言凡人之射，有似乎君子之道。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第15章",
+    "scripture_content": "失诸正鹄，",
+    "note_zhengxuan": "鹄，直也。",
+    "note_kongyingda": "诸，于也。正，谓賔射之侯。鹄，谓大射之侯。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第15章",
+    "scripture_content": "反求诸其身。",
+    "note_zhengxuan": "反求于其身，不以怨人。画曰正，栖皮曰鹄。正、鹄，皆鸟名也。一曰正，正也。",
+    "note_kongyingda": "求，责也。言射者失于正鹄，谓矢不中正鹄，不责他人，反乡自责其身。言君子之人，失道于外，亦反自责于已。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第15章",
+    "scripture_content": "君子之道，"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第15章",
+    "scripture_content": "辟如行远必自迩，",
+    "note_zhengxuan": "自，从也。迩，近也。",
+    "note_kongyingda": "自，从也。迩，近也，卑下也。",
+    "note_zhuxi": "辟、譬同。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第15章",
+    "scripture_content": "辟如登高必自卑。",
+    "note_zhengxuan": "行之以近者、卑者，始以渐致之高远。",
+    "note_kongyingda": "行之以远者，近之始；升之以高者，卑之始。言以渐至高远，不云近者远始，卑者高始，但勤行其道于身，然后能被于物，而可谓之高远耳。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第15章",
+    "scripture_content": "《诗》曰："
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第15章",
+    "scripture_content": "‘妻子好合，"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第15章",
+    "scripture_content": "如鼓瑟琴；",
+    "note_zhengxuan": "瑟琴声相应和也。",
+    "note_zhuxi": "鼓瑟琴，和也。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第15章",
+    "scripture_content": "兄弟既翕，",
+    "note_zhengxuan": "翕，合也。",
+    "note_zhuxi": "翕，亦合也。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第15章",
+    "scripture_content": "和乐且耽。",
+    "note_zhengxuan": "耽，亦乐也。",
+    "note_zhuxi": "耽，亦乐也。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第15章",
+    "scripture_content": "宜尔室家，"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第15章",
+    "scripture_content": "乐尔妻帑。’",
+    "note_zhengxuan": "古者谓子孙曰帑。此诗言和室家之道，自近者始。",
+    "note_zhuxi": "《诗·小雅·常棣》之篇。帑，子孙也。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第15章",
+    "scripture_content": "父母其顺矣乎！",
+    "note_zhengxuan": "谓其教令行，使室家顺。",
+    "note_zhuxi": "夫子诵此诗而赞之曰：人能和于妻子，宜于兄弟如此，则父母其安乐之矣。子思引诗及此语，以明行远自迩、登高自卑之意。右第十五章。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第16章",
+    "scripture_content": "鬼神之为德，",
+    "note_kongyingda": "○正义曰：此一节明鬼神之道无形，而能显著诚信。中庸之道与鬼神之道相似，亦从微至着，不言而自诚也。",
+    "note_zhuxi": "程子曰：「鬼神，天地之功用，而造化之迹也。」张子曰：「鬼神者，二气之良能也。」愚谓以二气言，则鬼者阴之灵也，神者阳之灵也。以一气言，则至而伸者为神，反而归者为鬼，其实一物而已。为德，犹言性情功效。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第16章",
+    "scripture_content": "其盛矣乎！"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第16章",
+    "scripture_content": "视之而弗见，"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第16章",
+    "scripture_content": "听之而弗闻，"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第16章",
+    "scripture_content": "体物而不可遗。",
+    "note_zhengxuan": "体，犹生也。可，犹所也。不有所遗，言万物无不以鬼神之气生也。",
+    "note_kongyingda": "体，犹生也；可，犹所也。言万物生而有形体，故云\"体物而不可遗\"者，言鬼神之道，生养万物，无不周遍而不有所遗，言万物无不以鬼神之气生也。",
+    "note_zhuxi": "鬼神无形与声，然物之终始，莫非阴阳合散之所为，是其为物之体，而物所不能遗也。其言体物，犹易所谓干事。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第16章",
+    "scripture_content": "使天下之人齐明盛服，以承祭祀，",
+    "note_zhengxuan": "明，犹洁也。",
+    "note_kongyingda": "明，犹絜也。言鬼神能生养万物，故天下之人齐戒明絜，盛饰馀服以承祭祀。",
+    "note_zhuxi": "齐之为言齐也，所以齐不齐而致其齐也。明，犹洁也。洋洋，流动充满之意。能使人畏敬奉承，而发见昭著如此，乃其体物而不可遗之验也。孔子曰：「其气发扬于上，为昭明焄蒿凄怆。此百物之精也，神之着也」，正谓此尔。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第16章",
+    "scripture_content": "洋洋乎如在其上，如在其左右。",
+    "note_zhengxuan": "洋洋，人想思其傍僾之貌。",
+    "note_kongyingda": "言鬼神之形状，人想象之，如在人之上，如在人之左右，想见其形也。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第16章",
+    "scripture_content": "《诗》曰："
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第16章",
+    "scripture_content": "‘神之格思，",
+    "note_zhengxuan": "格，来也。",
+    "note_kongyingda": "格，来也；思，辞也；",
+    "note_zhuxi": "格，来也。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第16章",
+    "scripture_content": "不可度思！"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第16章",
+    "scripture_content": "矧可射思！’",
+    "note_zhengxuan": "矧，况也。射，厌也。思，皆声之助，言神之来，其形象不可亿度而知，事之尽敬而已，况可厌倦乎？",
+    "note_kongyingda": "矧，况也；射，厌也。此《大雅·抑》之篇，剌厉王之诗。诗人剌时人祭祀懈倦，故云神之来至，以其无形不可度知，恒须恭敬，况于祭祀之末可厌倦之乎？言不可厌倦也。记者引《诗》，明鬼神之所尊敬也。",
+    "note_zhuxi": "《诗·大雅·抑》之篇。矧，况也。射，厌也，言厌怠而不敬也。思，语辞。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第16章",
+    "scripture_content": "夫微之显，",
+    "note_zhengxuan": "言神无形而着，不言而诚。",
+    "note_kongyingda": "言鬼神之状微昧不见，而精灵与人为吉凶，是\"从微之显\"也。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第16章",
+    "scripture_content": "诚之不可掩如此夫。",
+    "note_kongyingda": "言鬼神诚信，不可揜蔽。善者必降之以福，恶者必降之以祸。“如此夫”者，此诗人所云，何可厌倦？夫，语助也。",
+    "note_zhuxi": "诚者，真实无妄之谓。阴阳合散，无非实者。故其发见之不可揜如此。右第十六章。不见不闻，隐也。体物如在，则亦费矣。此前三章，以其费之小者而言。此后三章，以其费之大者而言。此一章，兼费隐、包大小而言。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第17章",
+    "scripture_content": "舜其大孝也与！",
+    "note_kongyingda": "○正义曰：此一节明中庸之德，故能富有天下，受天之命也。",
+    "note_zhuxi": "与，平声。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第17章",
+    "scripture_content": "德为圣人，"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第17章",
+    "scripture_content": "尊为天子，"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第17章",
+    "scripture_content": "富有四海之内。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第17章",
+    "scripture_content": "宗庙飨之，"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第17章",
+    "scripture_content": "子孙保之。",
+    "note_zhengxuan": "保，安也。",
+    "note_kongyingda": "师说云：舜禅与禹，何言保者，此子孙承保祭祀，故云\"保\"。周时陈国是舜之后。",
+    "note_zhuxi": "子孙，谓虞思、陈胡公之属。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第17章",
+    "scripture_content": "故大德必得其位，",
+    "note_kongyingda": "以其德大能覆养天下，故“必得其位”。如孔子有大德而无其位，以不应王录，虽有大德，而无其位也。案《援神契》云：“丘为制法，上黑绿，不代苍黄。”言孔子黑龙之精，不合代周家木德之苍也。《孔演图》又云“圣人不空生，必有所制以显天心，丘为木铎制天下法”是也。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第17章",
+    "scripture_content": "必得其禄，"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第17章",
+    "scripture_content": "必得其名，",
+    "note_zhengxuan": "名，令闻也。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第17章",
+    "scripture_content": "必得其寿。",
+    "note_kongyingda": "据舜言之，而夫子不长寿，以勤忧故也。",
+    "note_zhuxi": "舜年百有十岁。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第17章",
+    "scripture_content": "故天之生物，必因其材而笃焉。",
+    "note_zhengxuan": "材，谓其质性也。笃，厚也。言善者天厚其福，恶者天厚其毒，皆由其本而为之。",
+    "note_kongyingda": "材谓质性也；笃，厚也。言天之所生，随物质性而厚之。善者因厚其福，舜、禹是也；恶者因厚其毒，桀、纣是也。故四凶黜而舜受禅也。",
+    "note_zhuxi": "材，质也。笃，厚也。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第17章",
+    "scripture_content": "故栽者培之，",
+    "note_zhengxuan": "栽，犹殖也。培，益也。今时人名草木之殖曰栽，筑墙立板亦曰栽。栽，或为「兹」。",
+    "note_kongyingda": "栽，殖也；培，益也。言道德自能丰殖，则天因而培益之。案《诗·大明》云：“文王初载，天作之合。”彼注云：“载，识也。言文王生适有所识，天为之生配，谓生大姒。”此载为栽殖者，载容两义，亦得为识，亦得为殖。此对倾者覆之，故以为殖。云“筑墙立板亦曰栽”者，案庄二十九年《左传》云“水昏正而栽”，谓立板筑也。",
+    "note_zhuxi": "栽，植也。气至而滋息为培。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第17章",
+    "scripture_content": "倾者覆之。",
+    "note_zhengxuan": "覆，败也。",
+    "note_kongyingda": "若无德自取倾危者，天亦因而覆败之也。",
+    "note_zhuxi": "气反而游散则覆。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第17章",
+    "scripture_content": "《诗》曰："
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第17章",
+    "scripture_content": "‘嘉乐君子，",
+    "note_zhengxuan": "嘉，善也。",
+    "note_zhuxi": "假，当依此作嘉。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第17章",
+    "scripture_content": "宪宪令德！",
+    "note_zhengxuan": "宪宪，兴盛之貌。",
+    "note_kongyingda": "此《大雅·嘉乐》之篇，美成王之诗。嘉，善也。宪宪，兴盛之貌。诗人言善乐君子，此成王宪宪然，有令善之德。案《诗》本文“宪宪”为“显显”，与此不同者，齐鲁、韩《诗》与《毛诗》不同故也。",
+    "note_zhuxi": "《诗·大雅·假乐》之篇。宪，当依诗作显。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第17章",
+    "scripture_content": "宜民宜人，",
+    "note_kongyingda": "宜民，谓宜养万民，宜人，谓宜官人。朱子：（无）"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第17章",
+    "scripture_content": "受禄于天。",
+    "note_kongyingda": "其德如此，故受福于天。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第17章",
+    "scripture_content": "保佑命之，",
+    "note_zhengxuan": "保，安也。佑，助也。",
+    "note_kongyingda": "佑，助也。保，安也。天乃保安佑助，命之为天子。",
+    "note_zhuxi": "申，重也。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第17章",
+    "scripture_content": "自天申之！’",
+    "note_kongyingda": "又申重福之。作《记》者，引证大德必受命之义，则舜之为也。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第17章",
+    "scripture_content": "故大德者必受命。",
+    "note_zhuxi": "受命者，受天命为天子也。右第十七章。此由庸行之常，推之以极其至，见道之用广也。而其所以然者，则为体微矣。后二章亦此意。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第18章",
+    "scripture_content": "无忧者其惟文王乎！",
+    "note_zhengxuan": "圣人以立法度爲大事，子能述成之，则何忧乎？尧、舜之父子，则有凶顽；禹、汤之父子，则寡令闻。父子相成，唯有文王。",
+    "note_kongyingda": "此一节明夫子论文王、武王圣德相承王有天下，上能追尊大王、王季，因明天子以下及士、庶人葬、祭祀之礼，各随文解之。",
+    "note_zhuxi": "此言文王之事。书言「王季其勤王家」，盖其所作，亦积功累仁之事也。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第18章",
+    "scripture_content": "以王季为父，"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第18章",
+    "scripture_content": "以武王为子，"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第18章",
+    "scripture_content": "父作之，"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第18章",
+    "scripture_content": "子述之。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第18章",
+    "scripture_content": "武王缵大王、王季、文王之绪，",
+    "note_zhengxuan": "缵，继也。绪，业也。",
+    "note_kongyingda": "缵，继也；绪，业也。言武王能缵继父祖之业，以王天下也。",
+    "note_zhuxi": "此言武王之事。缵，继也。大王，王季之父也。书云：「大王肇基王迹。」诗云「至于大王，实始翦商。」绪，业也。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第18章",
+    "scripture_content": "壹戎衣而有天下，",
+    "note_zhengxuan": "戎，兵也。",
+    "note_kongyingda": "戎，兵也。言一用兵伐殷而胜之也。○注“衣读为殷”。案《尚书·武成》云“一戎衣”，谓一着戎衣而灭殷。此云“一”者，以经武王继大王、王季、文王三人之业，一用灭殷，对三人之业为“一”耳。由三人之业，故一身灭之。郑必以衣为“殷”者，以十一年观兵于孟津，十三年灭纣，是再着戎服，不得称“一戎衣”，故“以衣为殷”，故注云“齐人言殷声如衣”。",
+    "note_zhuxi": "戎衣，甲冑之属。壹戎衣，武成文，言一着戎衣以伐纣也。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第18章",
+    "scripture_content": "身不失天下之显名；"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第18章",
+    "scripture_content": "尊为天子，"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第18章",
+    "scripture_content": "富有四海之内。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第18章",
+    "scripture_content": "宗庙飨之，"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第18章",
+    "scripture_content": "子孙保之。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第18章",
+    "scripture_content": "武王末受命，",
+    "note_zhengxuan": "末，犹老也。",
+    "note_kongyingda": "此美周公之德也。末，犹老也，谓武王年老，而受命平定天下也。",
+    "note_zhuxi": "末，犹老也。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第18章",
+    "scripture_content": "周公成文、武之德，"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第18章",
+    "scripture_content": "追王大王、王季，",
+    "note_zhengxuan": "追王大王、王季者，以王迹起焉。",
+    "note_kongyingda": "○注\"追王大王、王季者，以王迹起焉\"，案《诗·颂·閟宫》云大王\"居岐之阳，实始翦商\"，是王迹起也。",
+    "note_zhuxi": "此言周公之事。追王，盖推文武之意，以及乎王迹之所起也。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第18章",
+    "scripture_content": "上祀先公以天子之礼。",
+    "note_zhengxuan": "先公组绀以上，至后稷也。",
+    "note_kongyingda": "云\"先公组绀以上至后稷也\"者，组绀，太王之父，一名诸盭，《周本纪》云：\"亚圉卒，子太公叔颖立。太公卒，子古公亶父立。\"又《世本》云：\"亚圉云生太公组绀诸盭\"，则叔颖、组绀、诸盭是一人也。此文云\"追王大王、王季，上祀先公\"，则先公之中包后稷也。故云\"组绀以上至后稷\"也。",
+    "note_zhuxi": "先公，组绀以上至后稷也。上祀先公以天子之礼，又推大王、王季之意，以及于无穷也。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第18章",
+    "scripture_content": "斯礼也，达乎诸侯、大夫及士、庶人。",
+    "note_zhengxuan": "斯礼逹于诸侯、大夫、士、庶人者，谓葬之，从死者之爵；祭之，用生者之禄也。",
+    "note_kongyingda": "斯，此也。言周公尊崇先公之礼，非直天子所行，乃下达于诸侯、大夫、士、庶人等，无问尊卑，皆得上尊祖父，以己之禄祭其先人，犹若周公以成王天子之礼祀其先公也。",
+    "note_zhuxi": "制为礼法，以及天下，使葬用死者之爵，祭用生者之禄。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第18章",
+    "scripture_content": "父为大夫，子为士，"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第18章",
+    "scripture_content": "葬以大夫，"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第18章",
+    "scripture_content": "祭以士。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第18章",
+    "scripture_content": "父为士，子为大夫，"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第18章",
+    "scripture_content": "葬以士，"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第18章",
+    "scripture_content": "祭以大夫。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第18章",
+    "scripture_content": "期之丧，达乎大夫；",
+    "note_zhengxuan": "期之丧，逹于大夫者，谓旁亲所降在大功者，其正统之期，天子、诸侯犹不降也。大夫所降，天子、诸侯絶之不爲服，所不臣乃服之也。",
+    "note_kongyingda": "欲见大夫之尊，犹有期丧，谓旁亲所降在大功者，得为期丧，还着大功之服，故云“达乎大夫”。若天子、诸侯旁期之丧，则不为服也。",
+    "note_zhuxi": "丧服自期以下，诸侯絶；大夫降；而父母之丧，上下同之，推己以及人也。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第18章",
+    "scripture_content": "三年之丧，达乎天子；",
+    "note_kongyingda": "谓正统在三年之丧，父母及适子并妻也。“达乎天子”者，言天子皆服之。不云“父母”，而云“三年”者，包适子也。天子为后服期，以三年包之者，以后卒必待三年然后娶，所以达子之志，故通在三年之中。是以昭十五年《左传》云：“穆后崩”，“大子寿卒”。叔向云：“王一岁而有三年之丧二焉。”是包后为三年也。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第18章",
+    "scripture_content": "父母之丧，无贵贱，一也。",
+    "note_zhengxuan": "承葬、祭说、期三年之丧者，明子事父以孝，不用其尊卑变。",
+    "note_kongyingda": "唯父母之丧，无问天子及士、庶人，其服并同，故云“无贵贱一也”。○注“末犹”至“卑变”。○正义曰：“末犹老也”者，谓文王受命，十一年武王观兵于孟津，白鱼入王舟，是老而受命，受命后七年而崩。故郑注《洛诰》，文王受赤雀，武王俯取白鱼，皆七年是也。云“追王大王、王季者，以王迹起焉”，案《诗·颂·閟宫》云大王“居岐之阳，实始翦商”，是王迹起也。云“先公组绀以上至后稷也”者，组绀，太王之父，一名诸盭，《周本纪》云：“亚圉卒，子太公叔颖立。太公卒，子古公亶父立。”又《世本》云：“亚圉云生太公组绀诸盭”，则叔颖、组绀、诸盭是一人也。此文云“追王大王、王季，上祀先公”，则先公之中包后稷也。故云“组绀以上至后稷”也。案《司服》云：“享先王则衮冕，先公则鷩冕。”以后稷为周之始祖，祫祭于庙，当同先王用衮，则先公无后稷也。故郑注《司服》云，先公不窋至诸盭。若四时常祀，唯后稷及大王、王季之等，不得广及先公。故《天保》云：“禴祀蒸尝于公。”先王是四时常祀，但有后稷诸盭以下，故郑注《天保》云：“先公谓后稷至诸盭。”此皆尽望经上下释义，故不同，或有至字误也。云“则追王者，改葬之矣”者，以大王、王季身为诸侯，葬从死者之爵，则大王、王季祗得为诸侯葬礼，不得言“追王”，从天子法。故知追王之时，而更改葬，用天子礼。案《大传》云：“武王追王大王亶父、王季历。”此云周公追王，不同者，武王既伐纣，“追王”布告天下，周公追而改葬，故不同也。云“期之丧，达于大夫者，谓旁亲所降在大功”者，熊氏云：“此对天子、诸侯，故云‘期之丧达乎大夫’，其实大夫为大功之丧得降小功，小功之丧得降缌麻。”是大功小功，皆达乎大夫。熊氏又云：“天子为正统之丧，适妇大功，适孙之妇小功。”义或然，但无正文耳。云“所不臣乃服之也”者，《丧服传》云：“始封之君不臣诸父昆弟，封君之子不臣诸父而臣昆弟。”但不臣者，皆以本服服也。",
+    "note_zhuxi": "右第十八章。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第19章",
+    "scripture_content": "武王、周公，其达孝矣乎！",
+    "note_kongyingda": "○正义曰：以前经论文王、武王圣德相承，此论武王、周公上成先祖，脩其宗庙，行郊社之礼，所以能治国如置物掌中也，各随文解之。",
+    "note_zhuxi": "达，通也。承上章而言武王、周公之孝，乃天下之人通谓之孝，犹孟子之言达尊也。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第19章",
+    "scripture_content": "夫孝者，善继人之志，",
+    "note_kongyingda": "人，谓先人。若文王有志伐纣，武王能继而承之。《尚书·武成》曰：“予小子，其承厥志。”是“善继人之志”也。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第19章",
+    "scripture_content": "善述人之事者也。",
+    "note_kongyingda": "言文王有文德为王基，而周公制礼以赞述之。故《洛诰》云“考朕昭子刑，乃单文祖德”，是善述人之事也。此是武王、周公继孝之事。",
+    "note_zhuxi": "上章言武王缵大王、王季、文王之绪以有天下，而周公成文武之德以追崇其先祖，此继志述事之大者也。下文又以其所制祭祀之礼，通于上下者言之。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第19章",
+    "scripture_content": "春秋修其祖庙，",
+    "note_zhengxuan": "脩，谓埽粪也。",
+    "note_zhuxi": "祖庙：天子七，诸侯五，大夫三，适士二，官师一。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第19章",
+    "scripture_content": "陈其宗器，",
+    "note_zhengxuan": "宗器，祭器也。",
+    "note_zhuxi": "宗器，先世所藏之重器；若周之赤刀、大训、天球、河图之属也。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第19章",
+    "scripture_content": "设其裳衣，",
+    "note_zhengxuan": "裳衣，先祖之遗衣服也。设之当以授尸也。",
+    "note_zhuxi": "裳衣，先祖之遗衣服，祭则设之以授尸也。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第19章",
+    "scripture_content": "荐其时食。",
+    "note_zhengxuan": "时食，四时祭也。",
+    "note_zhuxi": "时食，四时之食，各有其物，如春行羔、豚、膳、膏、香之类是也。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第19章",
+    "scripture_content": "宗庙之礼，所以序昭穆也；",
+    "note_zhengxuan": "序，犹次也。",
+    "note_kongyingda": "若昭与昭齿，穆与穆齿是也。",
+    "note_zhuxi": "宗庙之次：左为昭，右为穆，而子孙亦以为序。有事于太庙，则子姓、兄弟、群昭、群穆咸在而不失其伦焉。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第19章",
+    "scripture_content": "序爵，所以辨贵贱也；",
+    "note_zhengxuan": "爵，谓公、卿、大夫、士也。",
+    "note_kongyingda": "序，谓次序；爵，谓公、卿、大夫、士也。谓祭祀之时，公、卿、大夫各以其爵位齿列而助祭祀，是\"辨贵贱\"也。故《文王世子》云\"宗庙之中，以爵为位，崇德也。宗人授事以官，尊贤也\"是也。",
+    "note_zhuxi": "爵，公、侯、卿、大夫也。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第19章",
+    "scripture_content": "序事，所以辨贤也；",
+    "note_zhengxuan": "事，谓荐羞也。以辨贤者，以其事别所能也。若司徒「羞牛」，宗伯「共鸡牲」矣。文王世子曰：「宗庙之中，以爵爲位，崇德也。宗人授事以官，尊贤也。」",
+    "note_kongyingda": "序谓荐羞也，序谓次序，所共祭祀之事，若司徒奉牛，司马奉羊，宗伯供鸡，是分别贤能，堪任其官也。",
+    "note_zhuxi": "事，宗祝有司之职事也。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第19章",
+    "scripture_content": "旅酬下为上，所以逮贱也；",
+    "note_zhengxuan": "旅酬下爲上者，谓若特牲馈食之礼。賔弟子、兄弟之子各举觯于其长也。逮贱者，宗庙之中，以有事爲荣也。",
+    "note_kongyingda": "旅，众也；逮，及也。谓祭末饮酒之时，使一人举觯之后，至旅酬之时，使卑者二人各举觯于其长者。卑下者先饮，是下者为上，贱人在先，是恩意先及于贱者，故云\"所以逮贱也\"。",
+    "note_zhuxi": "旅，众也。酬，导饮也。旅酬之礼，宾弟子、兄弟之子各举觯于其长而衆相酬。盖宗庙之中以有事为荣，故逮及贱者，使亦得以申其敬也。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第19章",
+    "scripture_content": "燕毛，所以序齿也。",
+    "note_zhengxuan": "燕，谓既祭而燕也，燕以发色爲坐，祭时尊尊也，至燕亲亲也。齿，亦年也。",
+    "note_kongyingda": "言祭末燕时，以毛发为次序，是所以序年齿也。故注云：\"燕谓既祭而燕也。燕以发色为坐，祭时尊尊也，至燕亲亲也。\"",
+    "note_zhuxi": "燕毛，祭毕而燕，则以毛发之色别长幼，为坐次也。齿，年数也。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第19章",
+    "scripture_content": "践其位，行其礼，奏其乐，",
+    "note_kongyingda": "践，升也，谓孝子升其先祖之位，行祭祀之礼也。",
+    "note_zhuxi": "践，犹履也。其，指先王也。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第19章",
+    "scripture_content": "敬其所尊，爱其所亲，",
+    "note_zhuxi": "所尊所亲，先王之祖考、子孙、臣庶也。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第19章",
+    "scripture_content": "事死如事生，事亡如事存，",
+    "note_zhuxi": "始死谓之死，既葬则曰反而亡焉，皆指先王也。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第19章",
+    "scripture_content": "孝之至也。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第19章",
+    "scripture_content": "郊社之礼，",
+    "note_zhuxi": "郊，祀天。社，祭地。不言后土者，省文也。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第19章",
+    "scripture_content": "所以事上帝也；"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第19章",
+    "scripture_content": "宗庙之礼，"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第19章",
+    "scripture_content": "所以祀乎其先也。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第19章",
+    "scripture_content": "明乎郊社之礼、禘尝之义，",
+    "note_zhuxi": "禘，天子宗庙之大祭，追祭太祖之所自出于太庙，而以太祖配之也。尝，秋祭也。四时皆祭，举其一耳。礼必有义，对举之，互文也。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第19章",
+    "scripture_content": "治国其如示诸掌乎！",
+    "note_kongyingda": "注云“示”，读如“寘诸河干”之“寘”。寘，置也者，若能明此序爵辨贤尊亲，则治理其国，其事为易，犹如置物于掌中也。",
+    "note_zhuxi": "示，与视同。视诸掌，言易见也。此与论语文意大同小异，记有详略耳。右第十九章。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第20章",
+    "scripture_content": "哀公问政。",
+    "note_kongyingda": "○正义曰：此一节明哀公问政于孔子，孔子答以为政之道在于\"取人\"、\"修身\"，并明\"达道\"有五，行之者三。今各随文解之。",
+    "note_zhuxi": "哀公，鲁君，名蒋。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第20章",
+    "scripture_content": "文、武之政，布在方策，",
+    "note_zhengxuan": "方，版也。策，简也。",
+    "note_kongyingda": "○\"文武之政，布在方策\"者，言文王武王为政之道，皆布列在于方牍简策。",
+    "note_zhuxi": "方，版也。策，简也。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第20章",
+    "scripture_content": "其人存，则其政举；",
+    "note_kongyingda": "虽在方策，其事久远，此广陈为政之道。\"其人\"，谓贤人。举，犹行也。存，谓道德存在也。若得其人，道德存在，则能兴行政教，故云\"举\"也。",
+    "note_zhuxi": "有是君，有是臣，则有是政矣。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第20章",
+    "scripture_content": "其人亡，则其政息。",
+    "note_zhengxuan": "息，犹灭也。",
+    "note_kongyingda": "息，灭也。其人若亡，谓道德灭亡，不能兴举于政教。若位无贤臣，政所以灭绝也。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第20章",
+    "scripture_content": "人道敏政，",
+    "note_zhengxuan": "敏，犹勉也。",
+    "note_kongyingda": "敏，勉也。言为人君当勉力行政。",
+    "note_zhuxi": "敏，速也。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第20章",
+    "scripture_content": "地道敏树。",
+    "note_zhengxuan": "树，谓殖草木也。人之无政，若地无草木矣。敏，或为「谋」。",
+    "note_kongyingda": "树，殖草木也。言为地之道，亦勉力生殖也。人之无政，若地无草木。地既无心，云勉力者，以地之生物无倦，似若人勉力行政然也。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第20章",
+    "scripture_content": "夫政也者，蒲卢也。",
+    "note_zhengxuan": "蒲卢，蜾蠃，谓土蜂也。诗曰：「螟蛉有子，蜾蠃负之。」螟蛉，桑虫也。蒲卢取桑虫之子，去而变化之，以成为己子。政之于百姓，若蒲卢之于桑虫然。",
+    "note_kongyingda": "蒲卢，取桑虫之子以为己子。善为政者，化养他民以为己民，若蒲卢然也。",
+    "note_zhuxi": "蒲卢，沈括以为蒲苇是也。以人立政，犹以地种树，其成速矣，而蒲苇又易生之物，其成尤速也。言人存政举，其易如此。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第20章",
+    "scripture_content": "故为政在人，",
+    "note_zhengxuan": "在于得贤人也。",
+    "note_kongyingda": "言君行善政，则民从之，故欲为善政者，在于得贤人也。",
+    "note_zhuxi": "此承上文人道敏政而言也。为政在人，家语作「为政在于得人」，语意尤备。人，谓贤臣。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第20章",
+    "scripture_content": "取人以身，",
+    "note_zhengxuan": "取人以身，言明君乃能得人。",
+    "note_kongyingda": "明君欲取贤人，先以修正己身，则贤人至也。",
+    "note_zhuxi": "身，指君身。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第20章",
+    "scripture_content": "修身以道，",
+    "note_kongyingda": "言欲修正其身，先须行于道德也。",
+    "note_zhuxi": "道者，天下之达道。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第20章",
+    "scripture_content": "修道以仁。",
+    "note_kongyingda": "言欲修道德，必须先修仁义。",
+    "note_zhuxi": "仁者，天地生物之心，而人得以生者，所谓元者善之长也。言人君为政在于得人，而取人之则又在修身。能修其身，则有君有臣，而政无不举矣。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第20章",
+    "scripture_content": "仁者人也，亲亲为大；",
+    "note_zhengxuan": "人也，读如「相人偶」之人，以人意相存问之言。",
+    "note_kongyingda": "仁谓仁爱相亲偶也。言行仁之法，在于亲偶。欲亲偶疏人，先亲己亲，然后比亲及疏，故云\"亲亲为大\"。",
+    "note_zhuxi": "人，指人身而言。具此生理，自然便有恻怛慈爱之意，深体味之可见。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第20章",
+    "scripture_content": "义者宜也，尊贤为大。",
+    "note_kongyingda": "宜，谓于事得宜，即是其义，故云\"义者宜也\"。",
+    "note_zhuxi": "宜者，分别事理，各有所宜也。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第20章",
+    "scripture_content": "亲亲之杀，尊贤之等，礼所生也。",
+    "note_kongyingda": "五服之节，降杀不同，是亲亲之衰杀。公卿大夫，其爵各异，是\"尊贤之等\"。礼者所以辨明此上诸事，故云\"礼所生也\"。",
+    "note_zhuxi": "杀，去声。礼，则节文斯二者而已。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第20章",
+    "scripture_content": "在下位不获乎上，",
+    "note_zhengxuan": "此句其属在下，着脱误重在此。",
+    "note_kongyingda": "郑谓此句应在下章，着脱误重在此耳。",
+    "note_zhuxi": "郑氏曰：「此句在下，误重在此。」"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第20章",
+    "scripture_content": "民不可得而治矣！"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第20章",
+    "scripture_content": "故君子不可以不修身；",
+    "note_zhuxi": "为政在人，取人以身，故不可以不修身。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第20章",
+    "scripture_content": "思修身，不可以不事亲；",
+    "note_kongyingda": "言思念修身之道，必先以孝为本，故云\"不可以不事亲\"。",
+    "note_zhuxi": "修身以道，修道以仁，故思修身不可以不事亲。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第20章",
+    "scripture_content": "思事亲，不可以不知人；",
+    "note_kongyingda": "既思事亲，不可不先择友取人也。",
+    "note_zhuxi": "欲尽亲亲之仁，必由尊贤之义，故又当知人。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第20章",
+    "scripture_content": "思知人，不可以不知天。",
+    "note_kongyingda": "欲思择人，必先知天时所佑助也。谓人作善，降之百祥；作不善，降之百殃，当舍恶修善也。",
+    "note_zhuxi": "亲亲之杀，尊贤之等，皆天理也，故又当知天。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第20章",
+    "scripture_content": "天下之达道五，",
+    "note_zhengxuan": "达者常行，百王所不变也。",
+    "note_kongyingda": "五者，谓君臣、父子、夫妇、昆弟、朋夫之交，皆是人间常行道理，事得开通，故云\"达道也\"。",
+    "note_zhuxi": "达道者，天下古今所共由之路，即书所谓五典，孟子所谓「父子有亲、君臣有义、夫妇有别、长幼有序、朋友有信」是也。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第20章",
+    "scripture_content": "所以行之者三，"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第20章",
+    "scripture_content": "曰：君臣也，"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第20章",
+    "scripture_content": "父子也，"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第20章",
+    "scripture_content": "夫妇也，"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第20章",
+    "scripture_content": "昆弟也，"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第20章",
+    "scripture_content": "朋友之交也，"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第20章",
+    "scripture_content": "五者天下之达道也。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第20章",
+    "scripture_content": "知仁勇三者，天下之达德也，",
+    "note_kongyingda": "言知、仁、勇，人所常行，在身为德，故云\"天下之达德也\"。言百王用此三德以行五道。五事为本，故云\"道\"；三者为末，故云\"德\"。若行五道，必须三德。无知不能识其理，无仁不能安其事，无勇不能果其行，故必须三德也。",
+    "note_zhuxi": "知，所以知此也；仁，所以体此也；勇，所以强此也；谓之达德者，天下古今所同得之理也。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第20章",
+    "scripture_content": "所以行之者一也。",
+    "note_kongyingda": "言百王以来，行此五道三德，其义一也，古今不变也。",
+    "note_zhuxi": "一则诚而已矣。达道虽人所共由，然无是三德，则无以行之；达德虽人所同得，然一有不诚，则人欲间之，而德非其德矣。程子曰：「所谓诚者，止是诚实此三者。三者之外，更别无诚。」"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第20章",
+    "scripture_content": "或生而知之，",
+    "note_kongyingda": "谓天生自知也。",
+    "note_zhuxi": "知之者之所知，行之者之所行，谓达道也。以其分而言：则所以知者知也，所以行者仁也，所以至于知之成功而一者勇也。以其等而言：则生知安行者知也，学知利行者仁也，困知勉行者勇也。盖人性虽无不善，而气禀有不同者，故闻道有蚤莫，行道有难易，然能自强不息，则其至一也。吕氏曰：「所入之涂虽异，而所至之域则同，此所以为中庸。若乃企生知安行之资为不可几及，轻困知勉行谓不能有成，此道之所以不明不行也。」"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第20章",
+    "scripture_content": "或学而知之，",
+    "note_kongyingda": "谓因学而知之。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第20章",
+    "scripture_content": "或困而知之，",
+    "note_zhengxuan": "困而知之，谓长而见礼义之事，已临之而有不足，乃始学而知之，此逹道也。",
+    "note_kongyingda": "谓临事有困，由学乃知。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第20章",
+    "scripture_content": "及其知之，一也；",
+    "note_kongyingda": "言初知之时，其事虽别，既知之后，并皆是\"知\"，故云\"及其知之，一也\"。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第20章",
+    "scripture_content": "或安而行之，",
+    "note_kongyingda": "谓无所求为，安静而行之。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第20章",
+    "scripture_content": "或利而行之，",
+    "note_zhengxuan": "利，谓贪荣名也。",
+    "note_kongyingda": "谓贪其利益而行之。行此五事，得其荣名，于己无害，则\"利而行之\"也。故《论语》云\"知者利仁\"是也。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第20章",
+    "scripture_content": "或勉强而行之，",
+    "note_zhengxuan": "勉强，耻不若人。",
+    "note_kongyingda": "或畏惧罪恶，勉力自强而行之。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第20章",
+    "scripture_content": "及其成功，一也。",
+    "note_kongyingda": "虽行之有异，及其所行成功，是一也，言皆得成功矣。皇氏云：\"所知、所行，谓上五道三德。\"今谓百行皆然，非唯三五而已也。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第20章",
+    "scripture_content": "好学近乎知，",
+    "note_kongyingda": "覆前文\"或学而知之\"，覆能好学，无事不知，故云\"近乎知\"也。",
+    "note_zhuxi": "「子曰」二字衍文。好近乎知之知，并去声。○此言未及乎达德而求以入德之事。通上文三知为知，三行为仁，则此三近者，勇之次也。吕氏曰：「愚者自是而不求，自私者殉人欲而忘反，懦者甘为人下而不辞。故好学非知，然足以破愚；力行非仁，然足以忘私；知耻非勇，然足以起懦。」"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第20章",
+    "scripture_content": "力行近乎仁，",
+    "note_kongyingda": "此则前文\"或利而行之\"，以其勉力行善，故\"近乎仁\"也。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第20章",
+    "scripture_content": "知耻近乎勇。",
+    "note_kongyingda": "覆前文\"困而知之\"，及\"勉强而行之\"，以其知自羞耻，勤行善事，不避危难，故\"近乎勇\"也。前经\"生而知之\"不覆说者，以其生知自然合圣，故不须覆说也。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第20章",
+    "scripture_content": "知斯三者，则知所以修身；",
+    "note_kongyingda": "言知此三事，则知修身之道也。",
+    "note_zhuxi": "斯三者，指三近而言。人者，对己之称。天下国家，则尽乎人矣。言此以结上文修身之意，起下文九经之端也。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第20章",
+    "scripture_content": "知所以修身，"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第20章",
+    "scripture_content": "则知所以治人；"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第20章",
+    "scripture_content": "知所以治人，"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第20章",
+    "scripture_content": "则知所以治天下国家矣。",
+    "note_zhengxuan": "言有知、有仁、有勇，乃知修身，则修身以此三者为基。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第20章",
+    "scripture_content": "凡为天下国家有九经，",
+    "note_kongyingda": "此夫子为哀公说治天下国家之道有九种常行之事，论九经之次目也。",
+    "note_zhuxi": "经，常也。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第20章",
+    "scripture_content": "曰：修身也，",
+    "note_zhuxi": "此列九经之目也。吕氏曰：「天下国家之本在身，故修身为九经之本。然必亲师取友，然后修身之道进，故尊贤次之。道之所进，莫先其家，故亲亲次之。由家以及朝廷，故敬大臣、体群臣次之。由朝廷以及其国，故子庶民、来百工次之。由其国以及天下，故柔远人、怀诸侯次之。此九经之序也。」视群臣犹吾四体，视百姓犹吾子，此视臣视民之别也。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第20章",
+    "scripture_content": "尊贤也，"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第20章",
+    "scripture_content": "亲亲也，"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第20章",
+    "scripture_content": "敬大臣也，"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第20章",
+    "scripture_content": "体群臣也，",
+    "note_zhengxuan": "体，犹接纳也。",
+    "note_zhuxi": "体，谓设以身处其地而察其心也。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第20章",
+    "scripture_content": "子庶民也，",
+    "note_zhengxuan": "子，犹爱也。",
+    "note_zhuxi": "子，如父母之爱其子也。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第20章",
+    "scripture_content": "来百工也，"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第20章",
+    "scripture_content": "柔远人也，",
+    "note_zhengxuan": "远人，蕃国之诸侯也。",
+    "note_zhuxi": "柔远人，所谓无忘宾旅者也。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第20章",
+    "scripture_content": "怀诸侯也。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第20章",
+    "scripture_content": "修身则道立，",
+    "note_kongyingda": "此一经覆说行\"九经\"，则致其功用也。\"修身则道立\"者，谓修正其身，不为邪恶，则道德兴立也。",
+    "note_zhuxi": "此言九经之效也。道立，谓道成于己而可为民表，所谓皇建其有极是也。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第20章",
+    "scripture_content": "尊贤则不惑，",
+    "note_kongyingda": "以贤人辅弼，故临事不惑，所谋者善也。",
+    "note_zhuxi": "不惑，谓不疑于理。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第20章",
+    "scripture_content": "亲亲则诸父昆弟不怨，"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第20章",
+    "scripture_content": "敬大臣则不眩，",
+    "note_kongyingda": "眩，亦惑也，以恭敬大臣，任使分明，故于事不惑。前文不惑，谋国家大事，此云\"不眩\"，谓谋国家众事，但所谋之事，大小有殊，所以异其文。",
+    "note_zhuxi": "不眩，谓不迷于事。敬大臣则信任专，而小臣不得以间之，故临事而不眩也。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第20章",
+    "scripture_content": "体群臣则士之报礼重，",
+    "note_kongyingda": "群臣虽贱，而君厚接纳之，则臣感君恩，故为君死于患难，是\"报礼重\"也。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第20章",
+    "scripture_content": "子庶民则百姓劝，",
+    "note_kongyingda": "子，爱也，言爱民如子，则百姓劝勉以事上也。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第20章",
+    "scripture_content": "来百工则财用足，",
+    "note_kongyingda": "百工兴财用也，君若赏赉招来之，则百工皆自至，故国家财用丰足。",
+    "note_zhuxi": "来百工则通功易事，农末相资，故财用足。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第20章",
+    "scripture_content": "柔远人则四方归之，",
+    "note_kongyingda": "\"远\"，谓蕃国之诸侯，\"四方\"，则蕃国也。",
+    "note_zhuxi": "柔远人，则天下之旅皆悦而愿出于其涂，故四方归。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第20章",
+    "scripture_content": "怀诸侯则天下畏之。",
+    "note_kongyingda": "怀，安抚也。君若安抚怀之，则诸侯服从，兵强土广，故\"天下畏之\"。",
+    "note_zhuxi": "怀诸侯，则德之所施者博，而威之所制者广矣，故曰天下畏之。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第20章",
+    "scripture_content": "齐明盛服，",
+    "note_kongyingda": "齐，谓整齐；明，谓严明；盛服，谓正其衣冠：是修身之体也。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第20章",
+    "scripture_content": "非礼不动，",
+    "note_kongyingda": "此等\"非礼不动\"，是所以劝修身。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第20章",
+    "scripture_content": "所以修身也；"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第20章",
+    "scripture_content": "去谗远色，"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第20章",
+    "scripture_content": "贱货而贵德，"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第20章",
+    "scripture_content": "所以劝贤也；"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第20章",
+    "scripture_content": "尊其位，重其禄，同其好恶，所以劝亲亲也；",
+    "note_zhengxuan": "同其好恶，不特有所好恶于同姓，虽恩不同，义必同也。",
+    "note_kongyingda": "\"尊其位\"，谓授以大位；\"重其禄\"，谓重多其禄位。崇重而已，不可任以职事。\"同其好恶\"，好，谓庆赏，恶，谓诛罚。言于同姓既有亲疏，恩亲虽不同，义必须等，故不特有所好恶。\"劝亲亲也\"者，尊位重禄以勉之，同其好恶以励之，是\"劝亲亲也\"。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第20章",
+    "scripture_content": "官盛任使，所以劝大臣也；",
+    "note_zhengxuan": "官盛任使，大臣皆有属官所任使，不亲小事也。",
+    "note_kongyingda": "官盛，谓官之盛大。\"有属臣\"者，当令任使属臣，不可以小事专劳大臣。大臣怀德，故云\"所以劝大臣\"也。",
+    "note_zhuxi": "谓官属众盛，足任使令也，盖大臣不当亲细事，所以优之者如此。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第20章",
+    "scripture_content": "忠信重禄，所以劝士也；",
+    "note_zhengxuan": "忠信重禄，有忠信者，重其禄也。",
+    "note_zhuxi": "谓待之诚而养之厚，盖以身体之，而知其所赖乎上者如此也。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第20章",
+    "scripture_content": "时使薄敛，所以劝百姓也；",
+    "note_zhengxuan": "时使，使之以时。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第20章",
+    "scripture_content": "日省月试，既廪称事，所以劝百工也；",
+    "note_zhengxuan": "日省月试，考校其成功也。既，读为「饩」。饩廪，稍食也。槀人职曰：「乘其事，考其弓弩，以下上其食。」",
+    "note_kongyingda": "既廪，谓饮食、粮廪也。言在上每日省视百工功程，每月试其所作之事，又饮食粮廪，称当其事，功多则廪厚，功小则饩薄，是\"所以劝百工也\"。注“尊重”至“其食”。○正义曰：“尊重其禄位”者，言同姓之亲，既非贤才，但尊重其禄位，荣贵之而已，不必授以官守也。云“大臣皆有属官所任，使不亲小事也”者，若《周礼》六卿其下，各有属官，其细碎小事，皆属官为之，是“不亲小事也”。云“既读为饩，饩廪稍食也”者，以既与廪连文，又与饩字声同，故读既为饩。“稍食”者，谓稍给之，故《周礼》“月终均其稍食”是也。引《槀人职》者，证其饩廪称事。案《周礼·夏官·槀人》掌弓矢之材，其职云“乘其事”，乘，谓计筭其所为之事。“考其弓弩”谓考校弓弩之善恶多少。“以下上其食”，下，谓贬退；上，谓增益。善者则增上其食，恶者则减其食故也。",
+    "note_zhuxi": "既，读曰饩。饩禀，稍食也。称事，如周礼稿人职，曰「考其弓弩，以上下其食」是也。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第20章",
+    "scripture_content": "送往迎来，"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第20章",
+    "scripture_content": "嘉善而矜不能，"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第20章",
+    "scripture_content": "所以柔远人也；"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第20章",
+    "scripture_content": "继绝世，"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第20章",
+    "scripture_content": "举废国，"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第20章",
+    "scripture_content": "治乱持危，",
+    "note_kongyingda": "诸侯国内有乱，则治讨之，危弱则扶持之。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第20章",
+    "scripture_content": "朝聘以时，"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第20章",
+    "scripture_content": "厚往而薄来，所以怀诸侯也。",
+    "note_kongyingda": "\"厚往\"，谓诸侯还国，王者以其材贿厚重往报之。\"薄来\"，谓诸侯贡献，使轻薄而来。如此则诸侯归服，故所以怀诸侯也。",
+    "note_zhuxi": "往则为之授节以送之，来则丰其委积以迎之。朝，谓诸侯见于天子。聘，谓诸侯使大夫来献。王制「比年一小聘，三年一大聘，五年一朝」。厚往薄来，谓燕赐厚而纳贡薄。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第20章",
+    "scripture_content": "凡为天下国家有九经，所以行之者一也。",
+    "note_zhengxuan": "一，谓当豫也。",
+    "note_kongyingda": "“凡为”至“不穷”。○正义曰：此一节明前\"九经\"之法，唯在豫前谋之，故云\"所以行之者一也\"。\"一\"，谓豫也。",
+    "note_zhuxi": "一者，诚也。一有不诚，则是九者皆为虚文矣，此九经之实也。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第20章",
+    "scripture_content": "凡事豫则立，"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第20章",
+    "scripture_content": "不豫则废。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第20章",
+    "scripture_content": "言前定则不跲，",
+    "note_zhengxuan": "跲，踬也。",
+    "note_kongyingda": "案《字林》：\"跲，踬也。\"踬谓行倒蹶也。将欲发言，能豫前思定，然后出口，则言得流行，不有踬蹶也。",
+    "note_zhuxi": "跲，踬也。此承上文，言凡事皆欲先立乎诚，如下文所推是也。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第20章",
+    "scripture_content": "事前定则不困，",
+    "note_kongyingda": "困，乏也。言欲为事之时，先须豫前思定，则临事不困。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第20章",
+    "scripture_content": "行前定则不疚，",
+    "note_zhengxuan": "疚，病也。人不能病之。",
+    "note_kongyingda": "疚，病也。言欲为行之时，豫前思定，则行不疚病。",
+    "note_zhuxi": "疚，病也。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第20章",
+    "scripture_content": "道前定则不穷。",
+    "note_kongyingda": "言欲行道之时，豫前谋定，则道无穷也。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第20章",
+    "scripture_content": "在下位不获乎上，民不可得而治矣；",
+    "note_zhengxuan": "获，得也。言臣不得于君，则不得居位治民。",
+    "note_kongyingda": "获，得也。言人臣处在下位，不得于君上之意，则不得居位以治民，故云\"民不可得而治矣\"。",
+    "note_zhuxi": "此又以在下位者，推言素定之意。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第20章",
+    "scripture_content": "获乎上有道：不信乎朋友，不获乎上矣；",
+    "note_kongyingda": "言臣欲得君上之意，先须有道德信着朋友。若道德无信着乎朋友，则不得君上之意矣。言欲得上意，先须信乎朋友也。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第20章",
+    "scripture_content": "信乎朋友有道：不顺乎亲，不信乎朋友矣；",
+    "note_kongyingda": "言欲行信着于朋友，先须有道顺乎其亲。若不顺乎其亲，则不信乎朋友矣。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第20章",
+    "scripture_content": "顺乎亲有道：反诸身不诚，不顺乎亲矣；",
+    "note_kongyingda": "言欲顺乎亲，必须有道，反于己身，使有至诚。若身不能至诚，则不能\"顺乎亲矣\"。",
+    "note_zhuxi": "反诸身不诚，谓反求诸身而所存所发，未能真实而无妄也。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第20章",
+    "scripture_content": "诚身有道：不明乎善，不诚乎身矣。",
+    "note_kongyingda": "言欲行至诚于身，先须有道明乎善行。若不明乎善行，则不能至诚乎身矣。言明乎善行，始能至诚乎身。能至诚乎身，始能顺乎亲。顺乎亲，始能信乎朋友。信乎朋友，始能得君上之意。得乎君上之意，始得居位治民也。",
+    "note_zhuxi": "不明乎善，谓未能察于人心天命之本然，而真知至善之所在也。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第20章",
+    "scripture_content": "诚者，",
+    "note_kongyingda": "○\"诚者\"至\"者也\"。○正义曰：前经欲明事君，先须身有至诚。此经明至诚之道，天之性也。则人当学其至诚之性，是上天之道不为而诚，不思而得。",
+    "note_zhuxi": "此承上文诚身而言。诚者，真实无妄之谓，天理之本然也。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第20章",
+    "scripture_content": "天之道也；",
+    "note_kongyingda": "若天之性有杀，信着四时，是天之道。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第20章",
+    "scripture_content": "诚之者，人之道也。",
+    "note_kongyingda": "言人能勉力学此至诚，是人之道也。不学则不得，故云人之道。",
+    "note_zhuxi": "诚之者，未能真实无妄，而欲其真实无妄之谓，人事之当然也。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第20章",
+    "scripture_content": "诚者不勉而中，不思而得，从容中道，圣人也。",
+    "note_zhengxuan": "言诚者，天性也。",
+    "note_kongyingda": "此覆说上文\"诚者，天之道也\"。唯圣人能然，谓不勉励而自中当于善，不思虑而自得于善，从容间暇而自中乎道，以圣人性合于天道自然，故云\"圣人也\"。",
+    "note_zhuxi": "圣人之德，浑然天理，真实无妄，不待思勉而从容中道，则亦天之道也。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第20章",
+    "scripture_content": "诚之者，择善而固执之者也。",
+    "note_kongyingda": "此覆说上文\"诚之者，人之道也\"，谓由学而致此至诚，谓贤人也。",
+    "note_zhuxi": "未至于圣，则不能无人欲之私，而其为德不能皆实。故未能不思而得，则必择善，然后可以明善；未能不勉而中，则必固执，然后可以诚身，此则所谓人之道也。不思而得，生知也。不勉而中，安行也。择善，学知以下之事。固执，利行以下之事也。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第20章",
+    "scripture_content": "博学之，",
+    "note_kongyingda": "○\"博学\"至\"必强\"。○正义曰：此一经申明上经\"诚之者，择善而固执之\"事。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第20章",
+    "scripture_content": "审问之，"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第20章",
+    "scripture_content": "慎思之，"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第20章",
+    "scripture_content": "明辨之，"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第20章",
+    "scripture_content": "笃行之。",
+    "note_zhuxi": "此诚之之目也。学、问、思、辨，所以择善而为知，学而知也。笃行，所以固执而为仁，利而行也。程子曰：「五者废其一，非学也。」"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第20章",
+    "scripture_content": "有弗学，学之弗能，弗措也；",
+    "note_kongyingda": "谓身有事，不能常学习，当须勤力学之。措，置也。言学不至于能，不措置休废，必待能之乃已也。以下诸事皆然，此一句覆上\"博学之\"也。",
+    "note_zhuxi": "君子之学，不为则已，为则必要其成，故常百倍其功。此困而知，勉而行者也，勇之事也。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第20章",
+    "scripture_content": "有弗问，问之弗知，弗措也；",
+    "note_kongyingda": "覆上\"审问之\"也。",
+    "note_zhuxi": "（同上）"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第20章",
+    "scripture_content": "有弗思，思之弗得，弗措也；",
+    "note_kongyingda": "覆上\"慎思之\"也。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第20章",
+    "scripture_content": "有弗辨，辨之弗明，弗措也，",
+    "note_kongyingda": "覆上\"明辨之\"也。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第20章",
+    "scripture_content": "有弗行，行之弗笃，弗措也。",
+    "note_kongyingda": "覆上\"笃行之\"也。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第20章",
+    "scripture_content": "人一能之己百之，人十能之己千之。",
+    "note_kongyingda": "谓他人性识聪敏，一学则能知之，己当百倍用功而学，使能知之，言己加心精勤之多，恒百倍于他人也。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第20章",
+    "scripture_content": "果能此道矣，虽愚必明，虽柔必强。",
+    "note_zhengxuan": "此劝人学诚其身也。果，犹决也。",
+    "note_kongyingda": "果，谓果决也。",
+    "note_zhuxi": "明者择善之功，强者固执之效。吕氏曰：「君子所以学者，为能变化气质而已。德胜气质，则愚者可进于明，柔者可进于强。不能胜之，则虽有志于学，亦愚不能明，柔不能立而已矣。盖均善而无恶者，性也，人所同也；昏明强弱之禀不齐者，才也，人所异也。诚之者所以反其同而变其异也。夫以不美之质，求变而美，非百倍其功，不足以致之。今以卤莽灭裂之学，或作或辍，以变其不美之质，及不能变，则曰天质不美，非学所能变。是果于自弃，其为不仁甚矣！」右第二十章。此引孔子之言，以继大舜、文、武、周公之绪，明其所传之一致，举而措之，亦犹是耳。盖包费隐、兼小大，以终十二章之意。章内语诚始详，而所谓诚者，实此篇之枢纽也。又按：《孔子家语》亦载此章，而其文尤详。「成功一也」之下，有「公曰：子之言美矣！至矣！寡人实固，不足以成之也」。故其下复以「子曰」起答辞。今无此问辞，而犹有「子曰」二字；盖子思删其繁文以附于篇，而所删有不尽者，今当为衍文也。「博学之」以下，家语无之，意彼有阙文，抑此或子思所补也欤？"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第21章",
+    "scripture_content": "自诚明，谓之性；",
+    "note_zhengxuan": "自，由也。由至诚而有明德，是圣人之性者也。",
+    "note_kongyingda": "此说天性自诚者。自，由也，言由天性至诚，而身有明德，此乃自然天性如此，故\"谓之性\"。",
+    "note_zhuxi": "自，由也。德无不实而明无不照者，圣人之德。所性而有者也，天道也。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第21章",
+    "scripture_content": "自明诚，谓之教。",
+    "note_zhengxuan": "由明德而有至诚，是贤人学以成之也。",
+    "note_kongyingda": "此说学而至诚，由身聪明，勉力学习，而致至诚，非由天性教习使然，故云\"谓之教\"。",
+    "note_zhuxi": "先明乎善，而后能实其善者，贤人之学。由教而入者也，人道也。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第21章",
+    "scripture_content": "诚则明矣，",
+    "note_zhengxuan": "有至诚则必有明德。",
+    "note_kongyingda": "言圣人天性至诚，则能有明德，由至诚而致明也。",
+    "note_zhuxi": "诚则无不明矣。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第21章",
+    "scripture_content": "明则诚矣。",
+    "note_zhengxuan": "有明德则必有至诚。",
+    "note_kongyingda": "谓贤人由身聪明习学，乃致至诚，故云\"明则诚矣\"。是诚则能明，明则能诚，优劣虽异，二者皆通有至诚也。",
+    "note_zhuxi": "明则可以至于诚矣。右第二十一章。子思承上章夫子天道、人道之意而立言也。自此以下十二章，皆子思之言，以反覆推明此章之意。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第22章",
+    "scripture_content": "唯天下至诚，",
+    "note_kongyingda": "○\"唯天\"至\"参矣\"。○正义曰：此明天性至诚，圣人之道也。\"唯天下至诚\"者，谓一天下之内，至极诚信为圣人也。",
+    "note_zhuxi": "天下至诚，谓圣人之德之实，天下莫能加也。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第22章",
+    "scripture_content": "为能尽其性；",
+    "note_zhengxuan": "尽性者，谓顺理之，使不失其所也。",
+    "note_kongyingda": "以其至极诚信，与天地合，故能\"尽其性\"。",
+    "note_zhuxi": "尽其性者德无不实，故无人欲之私，而天命之在我者，察之由之，巨细精粗，无毫发之不尽也。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第22章",
+    "scripture_content": "能尽其性，则能尽人之性；",
+    "note_kongyingda": "既尽其性，则能尽其人与万物之性，是以下云\"能尽人之性\"。",
+    "note_zhuxi": "人物之性，亦我之性，但以所赋形气不同而有异耳。能尽之者，谓知之无不明而处之无不当也。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第22章",
+    "scripture_content": "能尽人之性，则能尽物之性；",
+    "note_kongyingda": "既能尽人性，则能尽万物之性。",
+    "note_zhuxi": "（同上）"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第22章",
+    "scripture_content": "能尽物之性，"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第22章",
+    "scripture_content": "则可以赞天地之化育；",
+    "note_zhengxuan": "赞，助也。育，生也。助天地之化生，谓圣人受命在王位，致大平。",
+    "note_kongyingda": "故能赞助天地之化育。",
+    "note_zhuxi": "赞，犹助也。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第22章",
+    "scripture_content": "可以赞天地之化育，"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第22章",
+    "scripture_content": "则可以与天地参矣。",
+    "note_kongyingda": "功与天地相参。上云\"诚者，天之道\"，此兼云\"地\"者，上说至诚之理由神妙而来，故特云\"天之道\"。此据化育生物，故并云\"地\"也。",
+    "note_zhuxi": "谓与天地并立为三也。此自诚而明者之事也。右第二十二章。言天道也。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第23章",
+    "scripture_content": "其次致曲。",
+    "note_zhengxuan": "其次，谓自明诚者也。致，至也。曲，犹小小之事也。不能尽性，而有至诚于有义焉而已。",
+    "note_kongyingda": "○\"其次\"至\"能化\"。○正义曰：此一经明贤人习学而致至诚，故云\"其次致曲\"。曲，谓细小之事。言其贤人致行细小之事不能尽性，于细小之事能有至诚也。",
+    "note_zhuxi": "其次，通大贤以下凡诚有未至者而言也。致，推致也。曲，一偏也。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第23章",
+    "scripture_content": "曲能有诚，",
+    "note_zhuxi": "曲无不致，则德无不实。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第23章",
+    "scripture_content": "诚则形，形则著，",
+    "note_zhengxuan": "形，谓人见其功也。尽性之诚，人不能见也。著，形之大者也。",
+    "note_kongyingda": "谓不能自然至诚，由学而来，故诚则人见其功，是\"诚则形\"也。初有小形，后乃大而明，着故云\"形则著\"也。若天性至诚之人不能见，则不形不著也。",
+    "note_zhuxi": "形者，积中而发外。著，则又加显矣。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第23章",
+    "scripture_content": "著则明，明则动，",
+    "note_zhengxuan": "明，着之显者也。动，动人心也。",
+    "note_kongyingda": "由着故显明，由明能感动于众。",
+    "note_zhuxi": "明，则又有光辉发越之盛也。动者，诚能动物。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第23章",
+    "scripture_content": "动则变，变则化。",
+    "note_zhengxuan": "变，改恶为善也。变之久则化而性善也。",
+    "note_kongyingda": "既感动人心，渐变恶为善，变而既久，遂至于化。言恶人全化为善，人无复为恶也。",
+    "note_zhuxi": "变者，物从而变。化，则有不知其所以然者。盖人之性无不同，而气则有异，故惟圣人能举其性之全体而尽之。其次则必自其善端发见之偏，而悉推致之，以各造其极也。曲无不致，则德无不实，而形、着、动、变之功自不能已。积而至于能化，则其至诚之妙，亦不异于圣人矣。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第23章",
+    "scripture_content": "唯天下至诚为能化。",
+    "note_kongyingda": "言唯天下学致至诚之人，为能化恶为善，改移旧俗。不如前经天生至诚，能尽其性，与天地参矣。",
+    "note_zhuxi": "右第二十三章。言人道也。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第24章",
+    "scripture_content": "至诚之道，可以前知。",
+    "note_zhengxuan": "可以前知者，言天不欺至诚者也。前亦先也。",
+    "note_kongyingda": "○\"至诚\"至\"如神\"。○正义曰：\"至诚之道，可以前知\"者，此由身有至诚，可以豫知前事。此至诚之内，是天生至诚，亦通学而至诚，故前经云\"自明诚谓之教\"，是贤人至诚同圣人也。言圣人、贤人俱有至诚之行，天所不欺，可知前事。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第24章",
+    "scripture_content": "国家将兴，必有祯祥；",
+    "note_zhengxuan": "祯祥妖孽，蓍龟之占，虽其时有小人、愚主，皆为至诚能知者岀也。",
+    "note_kongyingda": "祯祥，吉之萌兆；祥，善也。言国家之将兴，必先有嘉庆善祥也。《文说》：\"祯祥者，言人有至诚，天地不能隐，如文王有至诚，招赤雀之瑞也。\"国本有今异曰祯，本无今有曰祥。何为本有今异者？何胤云：\"国本有雀，今有赤雀来，是祯也。国本无凤，今有凤来，是祥也。\"《尚书》\"祥桑、谷共生于朝\"，是恶，此经云善，何？得入国者，以吉凶先见者皆曰\"祥\"，别无义也。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第24章",
+    "scripture_content": "国家将亡，必有妖孽。",
+    "note_kongyingda": "妖孽，谓凶恶之萌兆也。妖犹伤也，伤甚曰孽，谓恶物来为妖伤之征。若鲁国宾鹆来巢，以为国之伤征。案《左传》云：\"地反物为妖。\"《说文》云：\"衣服、歌谣、草木之怪为妖，禽兽、虫蝗之怪为孽。\"",
+    "note_zhuxi": "（无）"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第24章",
+    "scripture_content": "见乎蓍龟，动乎四体。",
+    "note_zhengxuan": "四体，谓龟之四足。春占后左，夏占前左，秋占前右，冬占后右。",
+    "note_kongyingda": "○\"见乎蓍龟，动乎四体\"者，所以先知祯祥妖孽见乎蓍龟，卦兆发动于龟之四体也。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第24章",
+    "scripture_content": "祸福将至：",
+    "note_kongyingda": "祸谓妖孽，福谓祯祥。萌兆豫来，是\"祸福将至\"。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第24章",
+    "scripture_content": "善，必先知之；",
+    "note_kongyingda": "善，谓福也。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第24章",
+    "scripture_content": "不善，必先知之。",
+    "note_kongyingda": "不善谓祸也。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第24章",
+    "scripture_content": "故至诚如神。",
+    "note_kongyingda": "言至诚之道，先知前事，如神之微妙，故云\"至诚如神\"也。注云\"虽其时有小人、愚主，皆为至诚能知者出也\"。右第二十四章。言天道也。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第25章",
+    "scripture_content": "诚者自成也，",
+    "note_zhengxuan": "物，万物也，亦事也。大人无诚，万物不生；小人无诚，则事不成。",
+    "note_kongyingda": "○此经明己有至诚能成就物也。",
+    "note_zhuxi": "言诚者物之所以自成，而道者人之所当自行也。诚以心言，本也；道以理言，用也。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第25章",
+    "scripture_content": "而道自道也。",
+    "note_zhuxi": "道也之道，音导。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第25章",
+    "scripture_content": "诚者物之终始，",
+    "note_zhuxi": "天下之物，皆实理之所为，故必得是理，然后有是物。所得之理既尽，则是物亦尽而无有矣。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第25章",
+    "scripture_content": "不诚无物。",
+    "note_zhuxi": "故人之心一有不实，则虽有所为亦如无有，而君子必以诚为贵也。盖人之心能无不实，乃为有以自成，而道之在我者亦无不行矣。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第25章",
+    "scripture_content": "是故君子诚之为贵。",
+    "note_zhengxuan": "言贵至诚。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第25章",
+    "scripture_content": "诚者非自成己而已也，所以成物也。",
+    "note_kongyingda": "言人有至诚，非但自成就己身而已，又能成就外物。",
+    "note_zhuxi": "诚虽所以成己，然既有以自成，则自然及物，而道亦行于彼矣。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第25章",
+    "scripture_content": "成己，仁也；",
+    "note_zhengxuan": "以至诚成己，则仁道立。",
+    "note_kongyingda": "若成能就己身，则仁道兴立，故云\"成己，仁也\"。",
+    "note_zhuxi": "仁者体之存。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第25章",
+    "scripture_content": "成物，知也。",
+    "note_zhengxuan": "以至诚成物，则知弥博。",
+    "note_kongyingda": "若能成就外物，则知力广远，故云\"成物，知也\"。",
+    "note_zhuxi": "知者用之发。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第25章",
+    "scripture_content": "性之德也，",
+    "note_zhengxuan": "此五性之所以为德也。",
+    "note_kongyingda": "言诚者是人五性之德，则仁、义、礼、知、信皆犹至诚而为德，故云\"性之德也\"。",
+    "note_zhuxi": "是皆吾性之固有，而无内外之殊。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第25章",
+    "scripture_content": "合外内之道也，",
+    "note_zhengxuan": "外内所须而合也。外内，犹上下。",
+    "note_kongyingda": "言至诚之行合于外内之道，无问外内，皆须至诚。于人事言之，有外有内，于万物言之，外内犹上下。上谓天，下谓地。天体高明，故为外；地体博厚闭藏，故为内也。是至诚合天地之道也。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第25章",
+    "scripture_content": "故时措之宜也。",
+    "note_zhengxuan": "时措，言得其时而用也。",
+    "note_kongyingda": "措，犹用也。言至诚者成万物之性，合天地之道，故得时而用之，则无往而不宜，故注云\"时措，言得其时而用也\"。",
+    "note_zhuxi": "既得于己，则见于事者，以时措之，而皆得其宜也。右第二十五章。言人道也。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第26章",
+    "scripture_content": "故至诚无息。",
+    "note_kongyingda": "言至诚之德，所用皆宜，无有止息，故能久远、博厚、高明以配天地也。",
+    "note_zhuxi": "既无虚假，自无间断。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第26章",
+    "scripture_content": "不息则久，",
+    "note_kongyingda": "以其不息，故能长久也。",
+    "note_zhuxi": "久，常于中也。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第26章",
+    "scripture_content": "久则征，",
+    "note_zhengxuan": "征，犹效验也。此言至诚之德既着于四方，其高厚日以广大也。征，或为「彻」。",
+    "note_kongyingda": "征，验也。以其久行，故有征验。",
+    "note_zhuxi": "征，验于外也。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第26章",
+    "scripture_content": "征则悠远，",
+    "note_kongyingda": "悠，长也。若事有征验，则可行长远也。",
+    "note_zhuxi": "存诸中者既久，则验于外者益悠远而无穷矣。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第26章",
+    "scripture_content": "悠远则博厚，",
+    "note_kongyingda": "以其德既长远，无所不周，故\"博厚\"也。",
+    "note_zhuxi": "悠远，故其积也广博而深厚。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第26章",
+    "scripture_content": "博厚则高明。",
+    "note_kongyingda": "养物博厚，则功业显著，故\"博厚则高明\"也。",
+    "note_zhuxi": "博厚，故其发也高大而光明。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第26章",
+    "scripture_content": "博厚，所以载物也；",
+    "note_kongyingda": "以其德博厚，所以负载于物。",
+    "note_zhuxi": "此言圣人与天地同用。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第26章",
+    "scripture_content": "高明，所以覆物也；",
+    "note_kongyingda": "以其功业高明，所以覆盖于万物也。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第26章",
+    "scripture_content": "悠久，所以成物也。",
+    "note_kongyingda": "以行之长久，能成就于物，此谓至诚之德也。",
+    "note_zhuxi": "悠久，即悠远，兼内外而言之也。本以悠远致高厚，而高厚又悠久也。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第26章",
+    "scripture_content": "博厚配地，",
+    "note_kongyingda": "言圣人之德博厚配偶于地，与地同功，能载物也。",
+    "note_zhuxi": "此言圣人与天地同体。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第26章",
+    "scripture_content": "高明配天，",
+    "note_kongyingda": "言圣人功业高明配偶于天，与天同功，能覆物也。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第26章",
+    "scripture_content": "悠久无疆。",
+    "note_zhengxuan": "后言悠久者，言至诚之德，既至博厚、高明，配乎天地，又欲其长久行之。",
+    "note_kongyingda": "疆，穷也。言圣人之德既能覆载，又能长久行之，所以无穷。\"悠久\"，则上经\"悠远\"。\"悠久\"在\"博厚高明\"之上，此经\"悠久\"在\"博厚高明\"之下者，上经欲明积渐先悠久，后能博厚高明。此经既能博厚高明，又须行之悠久，故反覆言之。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第26章",
+    "scripture_content": "如此者，不见而章，",
+    "note_kongyingda": "言圣人之德如此博厚高明悠久，不见所为而功业章显。",
+    "note_zhuxi": "见，犹示也。不见而章，以配地而言也。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第26章",
+    "scripture_content": "不动而变，",
+    "note_kongyingda": "不见动作而万物改变。",
+    "note_zhuxi": "不动而变，以配天而言也。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第26章",
+    "scripture_content": "无为而成。",
+    "note_kongyingda": "无所施为而道德成就。",
+    "note_zhuxi": "无为而成，以无疆而言也。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第26章",
+    "scripture_content": "天地之道，",
+    "note_zhengxuan": "言其德化与天地相似，可一言而尽，要在至诚。",
+    "note_kongyingda": "言圣人之德能同于天地之道，欲寻求所由，可一句之言而能尽其事理，正由于至诚，是\"壹言而尽也\"。",
+    "note_zhuxi": "此以下，复以天地明至诚无息之功用。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第26章",
+    "scripture_content": "可壹言而尽也。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第26章",
+    "scripture_content": "其为物不贰，",
+    "note_zhengxuan": "言至诚无贰，乃能生万物多无数也。",
+    "note_kongyingda": "言圣人行至诚，接待于物不有差贰，以此之故，能生殖众物不可测量，故郑云\"言多无数也\"。",
+    "note_zhuxi": "不贰，所以诚也。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第26章",
+    "scripture_content": "则其生物不测。",
+    "note_zhuxi": "诚故不息，而生物之多，有莫知其所以然者。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第26章",
+    "scripture_content": "天地之道："
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第26章",
+    "scripture_content": "博也，"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第26章",
+    "scripture_content": "厚也，"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第26章",
+    "scripture_content": "高也，"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第26章",
+    "scripture_content": "明也，"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第26章",
+    "scripture_content": "悠也，"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第26章",
+    "scripture_content": "久也。",
+    "note_zhengxuan": "此言其着见成功也。",
+    "note_zhuxi": "言天地之道，诚一不贰，故能各极所盛，而有下文生物之功。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第26章",
+    "scripture_content": "今夫天，斯昭昭之多，",
+    "note_zhengxuan": "昭昭，犹耿耿，小明也。",
+    "note_kongyingda": "斯，此也；昭昭，狭小之貌。言天初时唯有此昭昭之多小貌尔，故云\"昭昭之多\"。",
+    "note_zhuxi": "昭昭，犹耿耿，小明也。此指其一处而言之。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第26章",
+    "scripture_content": "及其无穷也，"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第26章",
+    "scripture_content": "日月星辰系焉，"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第26章",
+    "scripture_content": "万物覆焉。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第26章",
+    "scripture_content": "今夫地，一撮土之多，",
+    "note_kongyingda": "言土之初时唯一撮土之多，言多少唯一撮土。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第26章",
+    "scripture_content": "及其广厚，"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第26章",
+    "scripture_content": "载华岳而不重，"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第26章",
+    "scripture_content": "振河海而不泄，",
+    "note_kongyingda": "振，收也。言地之广大，载五岳而不重，振收河海而不漏泄。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第26章",
+    "scripture_content": "万物载焉。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第26章",
+    "scripture_content": "今夫山，一拳石之多，",
+    "note_zhengxuan": "卷，犹区也。",
+    "note_kongyingda": "言山之初时唯一卷石之多，多少唯一卷石耳。故郑注云：\"卷犹区也。\"",
+    "note_zhuxi": "卷，区也。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第26章",
+    "scripture_content": "及其广大，"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第26章",
+    "scripture_content": "草木生之，"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第26章",
+    "scripture_content": "禽兽居之，"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第26章",
+    "scripture_content": "宝藏兴焉。",
+    "note_zhuxi": "华、藏，并去声。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第26章",
+    "scripture_content": "今夫水，一勺之多，",
+    "note_kongyingda": "言水初时多少唯一勺耳。",
+    "note_zhuxi": "勺，市若反。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第26章",
+    "scripture_content": "及其不测，"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第26章",
+    "scripture_content": "鼋鼍、蛟龙、鱼鳖生焉，"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第26章",
+    "scripture_content": "货财殖焉。",
+    "note_zhengxuan": "言天之高明，本生昭昭；地之博厚，本由撮土；山之广大，本起卷石；水之不测，本从一勺，皆合少成多，自小致大。为至诚者，亦如此乎！"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第26章",
+    "scripture_content": "《诗》云："
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第26章",
+    "scripture_content": "维天之命，於穆不已！",
+    "note_zhengxuan": "天所以为天，文王所以为文，皆由行之无已，为之不止，如天地山川之云也。易曰：「君子以顺德，积小以高大」。",
+    "note_kongyingda": "此一经以上文至诚不已，已能从小至大，故此经引《诗》明不已之事。所引《诗》者，《周颂·维天之命》文也。《诗》称\"维天之命\"，谓四时运行所为教命。穆，美也。\"於穆不已\"者，美之不休已也，此《诗》之本文也。",
+    "note_zhuxi": "《诗·周颂·维天之命》篇。於，叹辞。穆，深远也。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第26章",
+    "scripture_content": "盖曰天之所以为天也。",
+    "note_kongyingda": "此是孔子之言，记者载之。此《诗》所论，盖说天之所以为天在乎不已。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第26章",
+    "scripture_content": "於乎不显，文王之德之纯！",
+    "note_kongyingda": "此亦《周颂·文王》之诗。纯，谓不已。显，谓光明。诗人叹之云，於乎不光明乎，言光明矣。\"文王之德之纯\"，谓不已也，言文王德教不有休已，与天同功。",
+    "note_zhuxi": "不显，犹言岂不显也。纯，纯一不杂也。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第26章",
+    "scripture_content": "盖曰文王之所以为文也，",
+    "note_kongyingda": "此亦孔子之言，解《诗》之文也。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第26章",
+    "scripture_content": "纯亦不已。",
+    "note_kongyingda": "言文王之德之纯，亦如天之不休已，故云\"纯亦不已\"。",
+    "note_zhuxi": "引此以明至诚无息之意。程子曰：「天道不已，文王纯于天道，亦不已。纯则无二无杂，不已则无间断先后。」右第二十六章。言天道也。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第27章",
+    "scripture_content": "大哉，圣人之道！",
+    "note_kongyingda": "○正义曰：此一节明圣人之道高大，苟非至德，其道不成。",
+    "note_zhuxi": "包下文两节而言。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第27章",
+    "scripture_content": "洋洋乎发育万物，",
+    "note_zhengxuan": "育，生也。",
+    "note_kongyingda": "洋洋，谓道德充满之貌天下洋洋。育，生也。",
+    "note_zhuxi": "此言道之极于至大而无外也。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第27章",
+    "scripture_content": "峻极于天。",
+    "note_zhengxuan": "峻，高大也。",
+    "note_kongyingda": "峻，高也。言圣人之道，高大与山相似，上极于天。",
+    "note_zhuxi": "峻，高大也。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第27章",
+    "scripture_content": "优优大哉！",
+    "note_kongyingda": "优优，宽裕之貌。圣人优优然宽裕其道。",
+    "note_zhuxi": "优优，充足有余之意。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第27章",
+    "scripture_content": "礼仪三百，",
+    "note_kongyingda": "《周礼》有三百六十官，言\"三百\"者，举其成数耳。",
+    "note_zhuxi": "礼仪，经礼也。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第27章",
+    "scripture_content": "威仪三千，",
+    "note_kongyingda": "即《仪礼》行事之威仪。《仪礼》虽十七篇，其中事有三千。",
+    "note_zhuxi": "威仪，曲礼也。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第27章",
+    "scripture_content": "待其人然后行。",
+    "note_kongyingda": "言三百、三千之礼，必待贤人然后施行其事。",
+    "note_zhuxi": "总结上两节。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第27章",
+    "scripture_content": "故曰："
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第27章",
+    "scripture_content": "苟不至德，至道不凝焉。",
+    "note_zhengxuan": "言为政在人，政由礼也。疑，犹成也。",
+    "note_kongyingda": "凝，成也。古语先有其文，今夫子既言三百、三千待其贤人始行，故引古语证之。苟，诚也。不，非也。苟诚非至德之人，则圣人至极之道不可成也。俗本\"不\"作\"非\"也。",
+    "note_zhuxi": "至德，谓其人。至道，指上两节而言也。凝，聚也，成也。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第27章",
+    "scripture_content": "故君子尊德性而道问学，",
+    "note_zhengxuan": "德性，谓性至诚者。道，犹由也。问学，学诚者也。",
+    "note_kongyingda": "○\"故君\"至\"崇礼\"。○正义曰：此一经明君子欲行圣人之道，当须勤学。前经明圣人性之至诚，此经明贤人学而至诚也。○\"君子尊德性\"者，谓君子贤人尊敬此圣人道德之性自然至诚也。○\"而道问学\"者，言贤人行道由于问学，谓勤学乃致至诚也。",
+    "note_zhuxi": "尊者，恭敬奉持之意。德性者，吾所受于天之正理。道，由也。尊德性，所以存心而极乎道体之大也。道问学，所以致知而尽乎道体之细也。二者修德凝道之大端也。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第27章",
+    "scripture_content": "致广大而尽精微，",
+    "note_zhengxuan": "广大，犹博厚也。",
+    "note_kongyingda": "广大谓地也，言贤人由学能致广大，如地之生养之德也。\"而尽精微\"，谓致其生养之德既能致于广大，尽育物之精微，言无微不尽也。",
+    "note_zhuxi": "不以一毫私意自蔽，不以一毫私欲自累，此皆存心之属也。析理则不使有毫厘之差，处事则不使有过不及之谬，此皆致知之属也。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第27章",
+    "scripture_content": "极高明而中庸。",
+    "note_kongyingda": "高明，谓天也，言贤人由学极尽天之高明之德。道，通也，又能通达于中庸之理也。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第27章",
+    "scripture_content": "温故而知新，",
+    "note_zhengxuan": "温，读如「燖温」之温，谓故学之孰矣，后「时习之」，谓之温。",
+    "note_kongyingda": "言贤人由学既能温寻故事，又能知新事也。",
+    "note_zhuxi": "温，犹燖温之温，谓故学之矣，复时习之也。涵泳乎其所已知。理义则日知其所未知，此皆致知之属也。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第27章",
+    "scripture_content": "敦厚以崇礼。",
+    "note_kongyingda": "言以敦厚重行于学，故以尊崇三百、三千之礼也。",
+    "note_zhuxi": "敦，加厚也。敦笃乎其所已能，此皆存心之属也。节文则日谨其所未谨，此皆致知之属也。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第27章",
+    "scripture_content": "是故居上不骄，"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第27章",
+    "scripture_content": "为下不倍；",
+    "note_zhuxi": "倍，与背同。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第27章",
+    "scripture_content": "国有道，其言足以兴，",
+    "note_zhengxuan": "兴，谓起在位也。",
+    "note_kongyingda": "○\"是故\"至\"谓与\"。○正义曰：此一节明贤人学至诚之道，中庸之行，若国有道之时，尽竭知谋，其言足以兴成其国。兴，谓发谋出虑。",
+    "note_zhuxi": "兴，谓兴起在位也。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第27章",
+    "scripture_content": "国无道，其默足以容。",
+    "note_kongyingda": "若无道之时，则韬光潜默，足以自容其身，免于祸害。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第27章",
+    "scripture_content": "《诗》曰："
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第27章",
+    "scripture_content": "既明且哲，以保其身。",
+    "note_zhengxuan": "保，安也。",
+    "note_kongyingda": "此《大雅·烝民》之篇，美宣王之诗，言宣王任用仲山甫，能显明其事任，且又哲知保安全其己身，言中庸之人亦能如此，故云\"其此之谓与\"。",
+    "note_zhuxi": "《诗·大雅·烝民》之篇。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第27章",
+    "scripture_content": "其此之谓与！",
+    "note_zhuxi": "右第二十七章。言人道也。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第28章",
+    "scripture_content": "愚而好自用，"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第28章",
+    "scripture_content": "贱而好自专，"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第28章",
+    "scripture_content": "生乎今之世，"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第28章",
+    "scripture_content": "反古之道。",
+    "note_zhengxuan": "反古之道，谓晓一孔之人，不知今王之新政可从。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第28章",
+    "scripture_content": "如此者，灾及其身者也。",
+    "note_kongyingda": "此谓寻常之人，不知大道。若贤人君子，虽生今时，能持古法，故《儒行》云\"今人与居，古人与稽\"是也。俗本\"反\"下有\"行\"字，又无\"如此者\"三字，非也。",
+    "note_zhuxi": "烖，古灾字。以上孔子之言，子思引之。反，复也。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第28章",
+    "scripture_content": "非天子，",
+    "note_zhengxuan": "此天下所共行，天子乃能一之也。",
+    "note_zhuxi": "此以下，子思之言。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第28章",
+    "scripture_content": "不议礼，",
+    "note_zhengxuan": "礼，谓人所服行也。",
+    "note_kongyingda": "此论礼由天子所行，既非天子，不得论议礼之是非。",
+    "note_zhuxi": "礼，亲疏贵贱相接之体也。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第28章",
+    "scripture_content": "不制度，",
+    "note_zhengxuan": "度，国家宫室及车舆也。",
+    "note_kongyingda": "谓不敢制造法度，及国家宫室大小高下及车舆也。",
+    "note_zhuxi": "度，品制。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第28章",
+    "scripture_content": "不考文。",
+    "note_zhengxuan": "文，书名也。",
+    "note_kongyingda": "亦不得考成文章书籍之名也。",
+    "note_zhuxi": "文，书名。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第28章",
+    "scripture_content": "今天下车同轨，",
+    "note_kongyingda": "今谓孔子时车同轨，覆上\"不制度\"。",
+    "note_zhuxi": "今，子思自谓当时也。轨，辙迹之度。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第28章",
+    "scripture_content": "书同文，",
+    "note_kongyingda": "\"书同文\"，覆上\"不考文\"。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第28章",
+    "scripture_content": "行同伦。",
+    "note_kongyingda": "伦，道也，言人所行之行，皆同道理，覆上\"不议礼\"。当孔子时，礼坏乐崩，家殊国异，而云此者，欲明己虽有德，身无其位，不敢造作礼乐，故极行而虚己，先说以自谦也。",
+    "note_zhuxi": "伦，次序之体。三者皆同，言天下一统也。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第28章",
+    "scripture_content": "虽有其位，苟无其德，不敢作礼乐焉；"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第28章",
+    "scripture_content": "虽有其德，苟无其位，亦不敢作礼乐焉。",
+    "note_zhengxuan": "言作礼乐者，必圣人在天子之位。",
+    "note_zhuxi": "子曰：郑氏曰：「言作礼乐者，必圣人在天子之位。」「吾说夏礼，杞不足征也；吾学殷礼，有宋存焉；吾学周礼，今用之，吾从周。」此又引孔子之言。杞，夏之后。征，证也。宋，殷之后。三代之礼，孔子皆尝学之而能言其意；但夏礼既不可考证，殷礼虽存，又非当世之法，惟周礼乃时王之制，今日所用。孔子既不得位，则从周而已。右第二十八章。承上章为下不倍而言，亦人道也。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第29章",
+    "scripture_content": "吾说夏礼，杞不足徵也。",
+    "note_zhengxuan": "征，犹明也。吾能说夏礼，顾杞之君不足与明之也。",
+    "note_kongyingda": "征，成也，明也。孔子言：我欲明说夏代之礼，须行夏礼之国赞而成之。杞虽行夏礼，其君暗弱，不足赞而成之。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第29章",
+    "scripture_content": "吾学殷礼，有宋存焉；",
+    "note_kongyingda": "宋行殷礼，故云\"有宋存焉\"。但宋君暗弱，欲其赞明殷礼，亦不足可成。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第29章",
+    "scripture_content": "吾学周礼，今用之，吾从周。",
+    "note_zhengxuan": "吾从周，行今之道。",
+    "note_kongyingda": "既杞、宋二国不足明，己当不复行前代之礼，故云\"吾从周\"。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第29章",
+    "scripture_content": "王天下有三重焉，其寡过矣乎！",
+    "note_zhengxuan": "三重，三王之礼。",
+    "note_kongyingda": "言为君王有天下者，有三种之重焉，谓夏、殷、周三王之礼，其事尊重，若能行之，寡少于过矣。",
+    "note_zhuxi": "王，去声。○吕氏曰：「三重，谓议礼、制度、考文。惟天子得以行之，则国不异政，家不殊俗，而人得寡过矣。」"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第29章",
+    "scripture_content": "上焉者虽善无徵，无徵不信，不信民弗从；",
+    "note_zhengxuan": "上，谓君也，君虽善，善无明征，则其善不信也。",
+    "note_kongyingda": "上，谓君也，言为君虽有善行，无分明征验，则不信着于下，既不信着，则民不从。",
+    "note_zhuxi": "上焉者，谓时王以前，如夏、商之礼虽善，而皆不可考。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第29章",
+    "scripture_content": "下焉者虽善不尊，不尊不信，不信民弗从。",
+    "note_zhengxuan": "下，谓臣也，臣虽善，善而不尊君，则其善亦不信也。",
+    "note_kongyingda": "下，谓臣也，言臣所行之事，虽有善行而不尊，不尊敬于君，则善不信着于下，既不信着，则民不从。",
+    "note_zhuxi": "下焉者，谓圣人在下，如孔子虽善于礼，而不在尊位也。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第29章",
+    "scripture_content": "故君子之道，孔颖达：言君臣为善，须有征验，民乃顺从，故明之也。",
+    "note_zhuxi": "此君子，指王天下者而言。其道，即议礼、制度、考文之事也。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第29章",
+    "scripture_content": "本诸身，",
+    "note_kongyingda": "言君子行道，先从身起，是\"本诸身\"也。",
+    "note_zhuxi": "本诸身，有其德也。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第29章",
+    "scripture_content": "徵诸庶民，",
+    "note_kongyingda": "征，验也；诸，于也。谓立身行善，使有征验于庶民。",
+    "note_zhuxi": "征诸庶民，验其所信从也。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第29章",
+    "scripture_content": "考诸三王而不缪，",
+    "note_kongyingda": "缪，乱也。谓己所行之事，考校与三王合同，不有错缪也。",
+    "note_zhuxi": "建，立也，立于此而参于彼也。天地者，道也。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第29章",
+    "scripture_content": "建诸天地而不悖，",
+    "note_kongyingda": "悖，逆也。言己所行道，建达于天地，而不有悖逆，谓与天地合也。",
+    "note_zhuxi": "（同上）"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第29章",
+    "scripture_content": "质诸鬼神而无疑，",
+    "note_kongyingda": "质，正也。朱子：鬼神者，造化之迹也。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第29章",
+    "scripture_content": "百世以俟圣人而不惑。",
+    "note_zhuxi": "所谓圣人复起，不易吾言者也。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第29章",
+    "scripture_content": "质诸鬼神而无疑，知天也；",
+    "note_zhengxuan": "知天、知人，谓知其道也。鬼神，从天地者也。易曰：「故知鬼神之情状，与天地相似。」圣人则之，百世同道。",
+    "note_kongyingda": "谓己所行之行，正诸鬼神不有疑惑，是识知天道也。注\"知天\"至\"同道\"。○正义曰：以经云知天、知人，故郑引经总结之。云\"知其道\"者，以天地阴阳，生成万物，今能正诸阴阳鬼神而不有疑惑，是知天道也。",
+    "note_zhuxi": "知天知人，知其理也。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第29章",
+    "scripture_content": "百世以俟圣人而不惑，知人也。",
+    "note_kongyingda": "以圣人身有圣人之德，垂法于后，虽在后百世亦堪俟待。后世世之圣人，其道不异，故云\"知人也\"。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第29章",
+    "scripture_content": "是故君子动而世为天下道，",
+    "note_zhuxi": "动，兼言行而言。道，兼法则而言。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第29章",
+    "scripture_content": "行而世为天下法，",
+    "note_zhuxi": "法，法度也。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第29章",
+    "scripture_content": "言而世为天下则。",
+    "note_zhuxi": "则，准则也。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第29章",
+    "scripture_content": "远之则有望，近之则不厌。",
+    "note_zhengxuan": "用其法度，想思若其将来也。",
+    "note_kongyingda": "言圣人之道，为世法则，若远离之则有企望，思慕之深也。若附近之则不厌倦，言人爱之无已。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第29章",
+    "scripture_content": "《诗》曰："
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第29章",
+    "scripture_content": "在彼无恶，在此无射；庶几夙夜，以永终誉！",
+    "note_zhengxuan": "射，厌也。永，长也。",
+    "note_kongyingda": "此引《周颂·振鹭》之篇，言微子来朝，身有美德，在彼宋国之内，民无恶之，在此来朝，人无厌倦。",
+    "note_zhuxi": "诗周颂振鹭之篇。射，厌也。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第29章",
+    "scripture_content": "君子未有不如此而蚤有誉于天下者也。",
+    "note_kongyingda": "言欲蚤有名誉会须如此，未尝有不行如此而蚤得有声誉者也。",
+    "note_zhuxi": "所谓此者，指本诸身以下六事而言。右第二十九章。承上章居上不骄而言，亦人道也。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第30章",
+    "scripture_content": "仲尼祖述尧、舜，",
+    "note_zhengxuan": "此以春秋之义，说孔子之德。孔子曰：「吾志在春秋，行在孝经。」二经固足以明之。孔子祖述尧、舜之道而制春秋，而断以文王、武王之法度。",
+    "note_kongyingda": "○\"仲尼\"至\"以色\"。○正义曰：此一节明子思申明夫子之德，与天地相似堪以配天地而育万物，伤有圣德无其位也。○\"仲尼祖述尧舜\"者，祖，始也。言仲尼祖述始行尧、舜之道也。",
+    "note_zhuxi": "祖述者，远宗其道。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第30章",
+    "scripture_content": "宪章文、武；",
+    "note_kongyingda": "宪，法也；章，明也。言夫子发明文、武之德。",
+    "note_zhuxi": "宪章者，近守其法。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第30章",
+    "scripture_content": "上律天时，",
+    "note_zhengxuan": "律，述也。述天时，谓编年四时具也。",
+    "note_kongyingda": "律，述也。言夫子上则述行天时，以与言阴阳时候也。",
+    "note_zhuxi": "律天时者，法其自然之运。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第30章",
+    "scripture_content": "下袭水土。",
+    "note_zhengxuan": "袭，因也，因水土，谓记诸夏之事，山川之异。",
+    "note_kongyingda": "袭，因也。下则因袭诸侯之事，水土所在。",
+    "note_zhuxi": "袭水土者，因其一定之理。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第30章",
+    "scripture_content": "辟如天地之无不持载，"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第30章",
+    "scripture_content": "无不覆帱，",
+    "note_zhengxuan": "帱，亦覆也。",
+    "note_zhuxi": "○错，犹迭也。此言圣人之德。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第30章",
+    "scripture_content": "辟如四时之错行，"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第30章",
+    "scripture_content": "如日月之代明。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第30章",
+    "scripture_content": "万物并育而不相害，"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第30章",
+    "scripture_content": "道并行而不相悖，",
+    "note_zhuxi": "悖，犹背也。天覆地载，万物并育于其间而不相害；四时日月，错行代明而不相悖。所以不害不悖者，小德之川流；所以并育并行者，大德之敦化。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第30章",
+    "scripture_content": "小德川流，大德敦化，",
+    "note_zhengxuan": "小德川流，浸润萌牙，喻诸侯也。大德敦化，厚生万物，喻天子也。",
+    "note_kongyingda": "言孔子所作《春秋》，若以诸侯\"小德\"言之，如川水之流，浸润萌芽。若以天子\"大德\"言之，则仁爱敦厚，化生万物也。",
+    "note_zhuxi": "小德者，全体之分；川流者，如川之流，脉络分明而往不息也。大德者，万殊之本；敦化者，敦厚其化，根本盛大而出无穷也。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第30章",
+    "scripture_content": "此天地之所以为大也。",
+    "note_kongyingda": "言夫子之德比并天地，所以为大不可测也。",
+    "note_zhuxi": "此言天地之道，以见上文取辟之意也。右第三十章。言天道也。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第31章",
+    "scripture_content": "唯天下至圣，"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第31章",
+    "scripture_content": "为能聪明睿知，",
+    "note_zhengxuan": "言德不如此，不可以君天下也。盖伤孔子有其德而无其命。",
+    "note_zhuxi": "聪明睿知，生知之质。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第31章",
+    "scripture_content": "足以有临也；",
+    "note_zhuxi": "临，谓居上而临下也。其下四者，乃仁义礼知之德。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第31章",
+    "scripture_content": "宽裕温柔，"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第31章",
+    "scripture_content": "足以有容也；"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第31章",
+    "scripture_content": "发强刚毅，"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第31章",
+    "scripture_content": "足以有执也；"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第31章",
+    "scripture_content": "齐庄中正，"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第31章",
+    "scripture_content": "足以有敬也；"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第31章",
+    "scripture_content": "文理密察，"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第31章",
+    "scripture_content": "足以有别也。",
+    "note_zhuxi": "文，文章也。理，条理也。密，详细也。察，明辩也。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第31章",
+    "scripture_content": "溥博渊泉，",
+    "note_zhengxuan": "言其临下普徧，思虑深重，非得其时，不出政教。",
+    "note_kongyingda": "○\"溥博\"至\"配天。○此节更申明夫子蕴蓄圣德，俟时而出，日月所照之处，无不尊仰。○\"溥博渊泉\"者，溥，谓无不周遍；博，谓所及广远。以其浸润之泽，如似渊泉溥大也。既思虑深重，非得其时不出政教，必以俟时而出。",
+    "note_zhuxi": "溥博，周遍而广阔也。渊泉，静深而有本也。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第31章",
+    "scripture_content": "而时出之。",
+    "note_zhuxi": "出，发见也。言五者之德，充积于中，而以时发见于外也。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第31章",
+    "scripture_content": "溥博如天，",
+    "note_zhengxuan": "如天，取其运照不已也。",
+    "note_kongyingda": "言似天\"无不覆帱\"。",
+    "note_zhuxi": "言其充积极其盛，而发见当其可也。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第31章",
+    "scripture_content": "渊泉如渊。",
+    "note_zhengxuan": "如渊，取其清深不测也。",
+    "note_kongyingda": "言润泽深厚，如川水之流。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第31章",
+    "scripture_content": "见而民莫不敬，"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第31章",
+    "scripture_content": "言而民莫不信，"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第31章",
+    "scripture_content": "行而民莫不说。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第31章",
+    "scripture_content": "是以声名洋溢乎中国，"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第31章",
+    "scripture_content": "施及蛮貊；",
+    "note_zhuxi": "施，去声。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第31章",
+    "scripture_content": "舟车所至，"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第31章",
+    "scripture_content": "人力所通，"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第31章",
+    "scripture_content": "天之所覆，"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第31章",
+    "scripture_content": "地之所载，"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第31章",
+    "scripture_content": "日月所照，"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第31章",
+    "scripture_content": "霜露所队；",
+    "note_zhuxi": "队，音坠。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第31章",
+    "scripture_content": "凡有血气者，"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第31章",
+    "scripture_content": "莫不尊亲，故曰配天。",
+    "note_zhengxuan": "尊亲，尊而亲之。",
+    "note_zhuxi": "配天，言其德之所及，广大如天也。右第三十一章。承上章而言小德之川流，亦天道也。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第32章",
+    "scripture_content": "唯天下至诚，为能经纶天下之大经，",
+    "note_zhengxuan": "至诚，性至诚，谓孔子也。大经，谓六艺，而指春秋也。",
+    "note_zhuxi": "经、纶，皆治丝之事。经者，理其绪而分之；纶者，比其类而合之也。经，常也。大经者，五品之人伦。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第32章",
+    "scripture_content": "立天下之大本，",
+    "note_zhengxuan": "大本，孝经也。",
+    "note_zhuxi": "大本者，所性之全体也。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第32章",
+    "scripture_content": "知天地之化育。",
+    "note_zhuxi": "其于天地之化育，则亦其极诚无妄者有默契焉，非但闻见之知而已。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第32章",
+    "scripture_content": "夫焉有所倚？",
+    "note_zhengxuan": "安有所倚，言无所偏倚也。人人自以被德尤厚。",
+    "note_zhuxi": "此皆至诚无妄，自然之功用，夫岂有所倚着于物而后能哉。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第32章",
+    "scripture_content": "肫肫其仁！",
+    "note_zhengxuan": "肫肫，读如「诲尔忳忳」之忳，忳忳，恳诚貌也。肫肫，或为「纯纯」。",
+    "note_zhuxi": "肫肫，恳至貌，以经纶而言也。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第32章",
+    "scripture_content": "渊渊其渊！",
+    "note_zhuxi": "渊渊，静深貌，以立本而言也。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第32章",
+    "scripture_content": "浩浩其天！",
+    "note_zhuxi": "浩浩，广大貌，以知化而言也。其渊其天，则非特如之而已。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第32章",
+    "scripture_content": "苟不固聪明圣知达天德者，其孰能知之？",
+    "note_zhengxuan": "言唯圣人，乃能知圣人也。春秋传曰：「末不亦乐乎？尧、舜之知君子。」明凡人不知。",
+    "note_kongyingda": "上经论夫子之德大如天，此经论唯至圣乃知夫子之德。苟，诚也。固，坚固也。言帝诚不坚固聪明睿圣通知晓达天德者，其谁能识知夫子之德？",
+    "note_zhuxi": "圣知之知，去声。○固，犹实也。郑氏曰：「惟圣人能知圣人也。」右第三十二章。承上章而言大德之敦化，亦天道也。前章言至圣之德，此章言至诚之道。然至诚之道，非至圣不能知；至圣之德，非至诚不能为，则亦非二物矣。此篇言圣人天道之极致，至此而无以加矣。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第33章",
+    "scripture_content": "《诗》曰："
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第33章",
+    "scripture_content": "衣锦尚絅”，恶其文之著也。",
+    "note_zhengxuan": "禅为絅，锦衣之美而君子以絅表之，为其文章露见，似小人也。",
+    "note_kongyingda": "以前经论夫子之德难知，故此经因明君子、小人隐显不同之事。此《诗·卫风·硕人》之篇，美庄姜之诗。言庄姜初嫁在涂，衣着锦衣，为其文之大着，尚着襌絅加于锦衣之上。絅，襌也，以单縠为衣，尚以覆锦衣也。",
+    "note_zhuxi": "衣，去声。絅，口迥反。恶，去声。○诗国风衞硕人、郑之丰，皆作「衣锦褧衣」。褧、絅同。襌衣也。尚，加也。古之学者为己，故其立心如此。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第33章",
+    "scripture_content": "故君子之道，闇然而日章；",
+    "note_zhengxuan": "言君子深远难知，小人浅近易知。人所以不知孔子，以其深远。",
+    "note_kongyingda": "章，明也。言君子以其道德深远谦退，初视未见，故曰\"闇然\"。其后明着，故曰日章明也。",
+    "note_zhuxi": "尚絅故闇然，衣锦故有日章之实。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第33章",
+    "scripture_content": "小人之道，的然而日亡。",
+    "note_kongyingda": "若小人好自矜大，故初视时\"的然\"。以其才艺浅近，后无所取，故曰日益亡。",
+    "note_zhuxi": "小人反是，则暴于外而无实以继之，是以的然而日亡也。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第33章",
+    "scripture_content": "君子之道："
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第33章",
+    "scripture_content": "淡而不厌，",
+    "note_zhengxuan": "淡，其味似薄也。",
+    "note_kongyingda": "言不媚悦于人，初似淡薄，久而愈敬，无恶可厌也。",
+    "note_zhuxi": "淡、简、温，絅之袭于外也；不厌而文且理焉，锦之美在中也。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第33章",
+    "scripture_content": "简而文，",
+    "note_zhengxuan": "简而文，温而理，犹简而辨，直而温也。",
+    "note_kongyingda": "性无嗜欲，故简静，才艺明辨，故有文也。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第33章",
+    "scripture_content": "温而理，",
+    "note_kongyingda": "气性和润，故温也。正直不违，故修理也。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第33章",
+    "scripture_content": "知远之近，",
+    "note_zhengxuan": "三知者，皆言其睹末察本，探端知绪也。",
+    "note_kongyingda": "言欲知远处，必先之适于近，乃后及远。",
+    "note_zhuxi": "远之近，见于彼者由于此也。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第33章",
+    "scripture_content": "知风之自，",
+    "note_kongyingda": "自，谓所从来处，言见目前之风则知之适所从来处。",
+    "note_zhuxi": "风之自，着乎外者本乎内也。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第33章",
+    "scripture_content": "知微之显，",
+    "note_kongyingda": "此初时所微之事，久乃适于显明，微是初端，显是纵绪。",
+    "note_zhuxi": "微之显，有诸内者形诸外也。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第33章",
+    "scripture_content": "可与入德矣。",
+    "note_kongyingda": "言君子或探末以知本，或睹本而知末，察微知着，终始皆知，故可以入圣人之德矣。",
+    "note_zhuxi": "有为己之心，而又知此三者，则知所谨而可入德矣。故下文引诗言谨独之事。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第33章",
+    "scripture_content": "《诗》云："
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第33章",
+    "scripture_content": "潜虽伏矣，亦孔之昭！",
+    "note_zhengxuan": "孔，甚也。昭，明也。言圣人虽隐遁，其德亦甚明矣。",
+    "note_kongyingda": "此明君子其身虽隐，其德昭著。所引者《小雅·正月》之篇，剌幽王之诗。《诗》之本文以幽王无道，喻贤人君子虽隐其身，德亦甚明着，不能免祸害，犹如鱼伏于水，亦甚着见，被人采捕。记者断章取义，言贤人君子身虽藏隐，犹如鱼伏于水，其道德亦甚彰矣。",
+    "note_zhuxi": "《诗·小雅·正月》之篇。承上文言「莫见乎隐、莫显乎微」也。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第33章",
+    "scripture_content": "故君子内省不疚，无恶于志。",
+    "note_zhengxuan": "疚，病也。君子自省，身无愆病，虽不遇世，亦无损害于己志。",
+    "note_kongyingda": "疚，病也。言君子虽不遇世，内自省身，不有愆病，则亦不损害于己志。言守志弥坚固也。",
+    "note_zhuxi": "疚，病也。无恶于志，犹言无愧于心，此君子谨独之事也。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第33章",
+    "scripture_content": "君子所不可及者，其唯人之所不见乎！",
+    "note_zhengxuan": "言君子虽隐居，不失其君子之容德也。",
+    "note_kongyingda": "此明君子之闲居独处，不敢为非。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第33章",
+    "scripture_content": "《诗》云："
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第33章",
+    "scripture_content": "相在尔室，尚不愧于屋漏。",
+    "note_zhengxuan": "相，视也。室西北隅谓之屋漏。视女在室独居耳，犹不愧于屋漏。屋漏非有人也，况有人乎？",
+    "note_kongyingda": "此《大雅·抑》之篇，剌厉王之诗。诗人意称王朝小人不敬鬼神，瞻视女在庙堂之中，犹尚不愧畏于屋漏之神。记者引之断章取义，言君子之人在室之中\"屋漏\"，虽无人之处不敢为非，犹愧惧于屋漏之神，况有人之处君子愧惧可知也。言君子虽独居，常能恭敬。",
+    "note_zhuxi": "《诗·大雅·抑》之篇。相，视也。屋漏，室西北隅也。承上文又言君子之戒谨恐惧，无时不然，不待言动而后敬信，则其为己之功益加密矣。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第33章",
+    "scripture_content": "故君子不动而敬，"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第33章",
+    "scripture_content": "不言而信。",
+    "note_zhuxi": "故下文引诗并言其效。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第33章",
+    "scripture_content": "《诗》曰："
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第33章",
+    "scripture_content": "奏假无言，时靡有争。",
+    "note_zhengxuan": "假，大也。此颂也，言奏大乐于宗庙之中，人皆肃敬，金声玉色，无有言者，以时太平，和合无所争也。",
+    "note_kongyingda": "此《商颂·烈祖》之篇，美成汤之诗。诗本文云\"鬷假无言\"，此云\"奏假\"者，与《诗》反异也。假，大也。言祭成汤之时，奏此大乐于宗庙之中，人皆肃敬，无有喧哗之言。所以然者，时既太平，无有争讼之事，故\"无言\"也。引证君子不言而民信。",
+    "note_zhuxi": "《诗·商颂·烈祖》之篇。奏，进也。承上文而遂及其效，言进而感格于神明之际，极其诚敬，无有言说而人自化之也。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第33章",
+    "scripture_content": "是故君子不赏而民劝，"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第33章",
+    "scripture_content": "不怒而民威于鈇钺。",
+    "note_zhuxi": "威，畏也。鈇，莝斫刀也。钺，斧也。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第33章",
+    "scripture_content": "《诗》曰："
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第33章",
+    "scripture_content": "不显惟德！百辟其刑之。",
+    "note_zhengxuan": "不显，言显也。辟，君也。此颂也，言不显乎文王之德，百君尽刑之，谓诸侯法之也。",
+    "note_kongyingda": "此《周颂·烈文》之篇，美文王之德。不显乎文王之德，言其显矣。以道德显著，故天下百辟诸侯皆刑法之。引之者，证君子之德犹若文王，其德显明在外，明众人皆刑法之。",
+    "note_zhuxi": "《诗·周颂·烈文》之篇。不显，说见二十六章，此借引以为幽深玄远之意。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第33章",
+    "scripture_content": "是故君子笃恭而天下平。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第33章",
+    "scripture_content": "《诗》曰："
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第33章",
+    "scripture_content": "予怀明德，不大声以色。",
+    "note_zhengxuan": "予，我也。怀，归也。言我归有明德者，以其不大声为严厉之色以威我也。",
+    "note_kongyingda": "此《大雅·皇矣》之篇，美文王之诗。予，我也。怀，归也。言天谓文王曰，我归就尔之明德，所以归之者，以文王不大作音声以为严厉之色，故归之。记者引之，证君子亦不作大音声以为严厉之色，与文王同。",
+    "note_zhuxi": "《诗·大雅·皇矣》之篇。引之以明上文所谓不显之德者，正以其不大声与色也。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第33章",
+    "scripture_content": "声色之于以化民，"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第33章",
+    "scripture_content": "末也。",
+    "note_kongyingda": "○\"子曰\"至\"至矣\"。○正义曰：此一节是夫子之言。子思既说君子之德不大声以色，引夫子旧语声色之事以接之，言化民之法当以德为本，不用声色以化民也。若用声色化民，是其末事，故云\"化民末也\"。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第33章",
+    "scripture_content": "《诗》曰："
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第33章",
+    "scripture_content": "德輶如毛。",
+    "note_zhengxuan": "輶，轻也。言化民当以德，德之易举而用，其轻如毛耳。",
+    "note_kongyingda": "此《大雅·烝民》之篇，美宣王之诗。輶，轻也。言用德化民，举行甚易，其轻如毛也。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第33章",
+    "scripture_content": "毛犹有伦。",
+    "note_zhengxuan": "伦，犹比也。言毛虽轻，尚有所比，有所比，则有重。",
+    "note_kongyingda": "伦，比也。既引《诗》文\"德輶如毛\"，又言德之至极本自无体，何直如毛？毛虽细物，犹有形体可比并，故云\"毛犹有伦\"也。"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第33章",
+    "scripture_content": "上天之载，无声无臭”，",
+    "note_zhengxuan": "载，读曰栽，谓生物也。",
+    "note_kongyingda": "载，生也，言天之生物无音声无臭气，寂然无象而物自生。言圣人用德化民，亦无音声，亦无臭气而人自化。是圣人之德至极，与天地同。此二句是《大雅·文王》之诗，美文王之德。",
+    "note_zhuxi": "（无）"
+  },
+  {
+    "classic_title": "中庸",
+    "chapter": "第33章",
+    "scripture_content": "至矣！",
+    "note_zhuxi": "右第三十三章。子思因前章极致之言，反求其本，复自下学为己谨独之事，推而言之，以驯致乎笃恭而天下平之盛。又赞其妙，至于无声无臭而后已焉。盖举一篇之要而约言之，其反复丁宁示人之意，至深切矣，学者其可不尽心乎！"
+  }
 ];
 
