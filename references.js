@@ -10807,17 +10807,6 @@ const CLASSICS_REFERENCES = [
   "source_classic": "礼记",
   "chapter": "大学",
   "verse": null,
-  "scripture_content": "在明明德",
-  "commentator": "孔颖达",
-  "commentary_title": "礼记正义",
-  "dynasty": "唐",
-  "translation": "在於章明己之光明之德。谓身有明德，而更章显之，此其一也。",
-  "note": "谓显明其至德也。"
-},
-  {
-  "source_classic": "礼记",
-  "chapter": "大学",
-  "verse": null,
   "scripture_content": "在亲民",
   "commentator": "孔颖达",
   "commentary_title": "礼记正义",
