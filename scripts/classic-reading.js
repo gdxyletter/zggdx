@@ -243,31 +243,38 @@ function toggleBold() {
                 const para = paragraphs[p];
                 if (!para.trim()) continue;
                 
-                const parts = para.split('，');
+                const sentenceParts = para.split(/(?<=[。？！])/);
                 
-                for (let i = 0; i < parts.length; i++) {
-                    let part = parts[i];
-                    if (!part.trim()) continue;
+                for (let s = 0; s < sentenceParts.length; s++) {
+                    const sentencePart = sentenceParts[s];
+                    if (!sentencePart.trim()) continue;
                     
-                    const dunhaoParts = part.split('、');
-                    for (let j = 0; j < dunhaoParts.length; j++) {
-                        let dp = dunhaoParts[j];
-                        if (!dp.trim()) continue;
+                    const parts = sentencePart.split('，');
+                    
+                    for (let i = 0; i < parts.length; i++) {
+                        let part = parts[i];
+                        if (!part.trim()) continue;
                         
-                        if (j > 0) {
-                            html += '、';
+                        const dunhaoParts = part.split('、');
+                        for (let j = 0; j < dunhaoParts.length; j++) {
+                            let dp = dunhaoParts[j];
+                            if (!dp.trim()) continue;
+                            
+                            if (j > 0) {
+                                html += '、';
+                            }
+                            
+                            const matchText = dp.replace(/[。！？]$/, '').trim();
+                            if (matchText) {
+                                html += renderClassicSentenceSpan(dp, matchText);
+                            } else if (dp) {
+                                html += escapeClassicHtml(dp);
+                            }
                         }
                         
-                        const matchText = dp.replace(/[。？！；：]$/, '').trim();
-                        if (matchText) {
-                            html += renderClassicSentenceSpan(dp, matchText);
-                        } else if (dp) {
-                            html += escapeClassicHtml(dp);
+                        if (i < parts.length - 1) {
+                            html += '，';
                         }
-                    }
-                    
-                    if (i < parts.length - 1) {
-                        html += '，';
                     }
                 }
                 
